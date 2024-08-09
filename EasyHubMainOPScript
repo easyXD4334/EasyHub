@@ -4,38 +4,52 @@ local TextLabel = Instance.new("TextLabel")
 local UIGradient = Instance.new("UIGradient")
 local TextLabel_2 = Instance.new("TextLabel")
 local Frame_2 = Instance.new("Frame")
-local ScrollingFrame = Instance.new("ScrollingFrame")
+local Main = Instance.new("ScrollingFrame")
 local UIListLayout = Instance.new("UIListLayout")
-local Frame_3 = Instance.new("Frame")
-local Main = Instance.new("TextButton")
+local _1 = Instance.new("Frame")
+local Main_2 = Instance.new("TextButton")
 local UIGradient_2 = Instance.new("UIGradient")
 local UICorner = Instance.new("UICorner")
+local _2 = Instance.new("Frame")
+local Main_3 = Instance.new("TextButton")
+local UIGradient_3 = Instance.new("UIGradient")
+local UICorner_2 = Instance.new("UICorner")
+local _3 = Instance.new("Frame")
+local Main_4 = Instance.new("TextButton")
+local UIGradient_4 = Instance.new("UIGradient")
+local UICorner_3 = Instance.new("UICorner")
 local Character = Instance.new("ScrollingFrame")
 local UIListLayout_2 = Instance.new("UIListLayout")
 local B = Instance.new("TextLabel")
 local D = Instance.new("Frame")
-local UIGradient_3 = Instance.new("UIGradient")
-local UICorner_2 = Instance.new("UICorner")
-local TextLabel_3 = Instance.new("TextLabel")
-local Frame_4 = Instance.new("Frame")
-local UICorner_3 = Instance.new("UICorner")
-local Frame_5 = Instance.new("Frame")
+local UIGradient_5 = Instance.new("UIGradient")
 local UICorner_4 = Instance.new("UICorner")
+local TextLabel_3 = Instance.new("TextLabel")
+local Frame_3 = Instance.new("Frame")
+local UICorner_5 = Instance.new("UICorner")
+local Frame_4 = Instance.new("Frame")
+local UICorner_6 = Instance.new("UICorner")
 local TextButton = Instance.new("TextButton")
 local A = Instance.new("TextLabel")
 local C = Instance.new("Frame")
-local UIGradient_4 = Instance.new("UIGradient")
-local UICorner_5 = Instance.new("UICorner")
+local UIGradient_6 = Instance.new("UIGradient")
+local UICorner_7 = Instance.new("UICorner")
 local TextLabel_4 = Instance.new("TextLabel")
 local TextBox = Instance.new("TextBox")
-local UICorner_6 = Instance.new("UICorner")
+local UICorner_8 = Instance.new("UICorner")
+local ScriptHub = Instance.new("ScrollingFrame")
+local UIListLayout_3 = Instance.new("UIListLayout")
+local A_2 = Instance.new("TextLabel")
+local ServerHop = Instance.new("ScrollingFrame")
+local UIListLayout_4 = Instance.new("UIListLayout")
+local A_3 = Instance.new("TextLabel")
 local TextLabel_5 = Instance.new("TextLabel")
-local UIGradient_5 = Instance.new("UIGradient")
+local UIGradient_7 = Instance.new("UIGradient")
 local TextLabel_6 = Instance.new("TextLabel")
 local Message = Instance.new("Frame")
-local UIListLayout_3 = Instance.new("UIListLayout")
+local UIListLayout_5 = Instance.new("UIListLayout")
 local Simple = Instance.new("Frame")
-local Frame_6 = Instance.new("Frame")
+local Frame_5 = Instance.new("Frame")
 local Message_2 = Instance.new("TextLabel")
 local Head = Instance.new("TextLabel")
 
@@ -91,47 +105,104 @@ Frame_2.BorderSizePixel = 0
 Frame_2.Position = UDim2.new(0.21376805, 0, 0.0881543905, 0)
 Frame_2.Size = UDim2.new(0.00700000022, 0, 0.910000026, 0)
 
-ScrollingFrame.Parent = Frame
-ScrollingFrame.Active = true
-ScrollingFrame.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
-ScrollingFrame.BackgroundTransparency = 1.000
-ScrollingFrame.BorderColor3 = Color3.fromRGB(0, 0, 0)
-ScrollingFrame.BorderSizePixel = 0
-ScrollingFrame.Position = UDim2.new(0, 0, 0.13831082, 0)
-ScrollingFrame.Size = UDim2.new(0.220538989, 0, 0.85874325, 0)
-ScrollingFrame.ScrollBarThickness = 0
-ScrollingFrame.VerticalScrollBarPosition = Enum.VerticalScrollBarPosition.Left
-
-UIListLayout.Parent = ScrollingFrame
-UIListLayout.SortOrder = Enum.SortOrder.LayoutOrder
-UIListLayout.Padding = UDim.new(0.00499999989, 0)
-
-Frame_3.Parent = ScrollingFrame
-Frame_3.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
-Frame_3.BorderColor3 = Color3.fromRGB(0, 0, 0)
-Frame_3.BorderSizePixel = 0
-Frame_3.Size = UDim2.new(0.949999988, 0, 0.0500000007, 0)
-
 Main.Name = "Main"
-Main.Parent = Frame_3
-Main.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
+Main.Parent = Frame
+Main.Active = true
+Main.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
 Main.BackgroundTransparency = 1.000
 Main.BorderColor3 = Color3.fromRGB(0, 0, 0)
 Main.BorderSizePixel = 0
-Main.Size = UDim2.new(1, 0, 1, 0)
-Main.ZIndex = 11
-Main.Font = Enum.Font.SourceSansBold
-Main.Text = "Character"
-Main.TextColor3 = Color3.fromRGB(255, 255, 255)
-Main.TextScaled = true
-Main.TextSize = 14.000
-Main.TextWrapped = true
+Main.Position = UDim2.new(0, 0, 0.13831082, 0)
+Main.Size = UDim2.new(0.220538989, 0, 0.85874325, 0)
+Main.ScrollBarThickness = 0
+Main.VerticalScrollBarPosition = Enum.VerticalScrollBarPosition.Left
+
+UIListLayout.Parent = Main
+UIListLayout.Padding = UDim.new(0.00499999989, 0)
+
+_1.Name = "1"
+_1.Parent = Main
+_1.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+_1.BorderColor3 = Color3.fromRGB(0, 0, 0)
+_1.BorderSizePixel = 0
+_1.Size = UDim2.new(0.949999988, 0, 0.0500000007, 0)
+
+Main_2.Name = "Main"
+Main_2.Parent = _1
+Main_2.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
+Main_2.BackgroundTransparency = 1.000
+Main_2.BorderColor3 = Color3.fromRGB(0, 0, 0)
+Main_2.BorderSizePixel = 0
+Main_2.Size = UDim2.new(1, 0, 1, 0)
+Main_2.ZIndex = 11
+Main_2.Font = Enum.Font.SourceSansBold
+Main_2.Text = "Character"
+Main_2.TextColor3 = Color3.fromRGB(255, 255, 255)
+Main_2.TextScaled = true
+Main_2.TextSize = 14.000
+Main_2.TextWrapped = true
 
 UIGradient_2.Color = ColorSequence.new{ColorSequenceKeypoint.new(0.00, Color3.fromRGB(0, 0, 255)), ColorSequenceKeypoint.new(1.00, Color3.fromRGB(0, 0, 100))}
-UIGradient_2.Parent = Frame_3
+UIGradient_2.Parent = _1
 
 UICorner.CornerRadius = UDim.new(0.349999994, 0)
-UICorner.Parent = Frame_3
+UICorner.Parent = _1
+
+_2.Name = "2"
+_2.Parent = Main
+_2.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+_2.BorderColor3 = Color3.fromRGB(0, 0, 0)
+_2.BorderSizePixel = 0
+_2.Size = UDim2.new(0.949999988, 0, 0.0500000007, 0)
+
+Main_3.Name = "Main"
+Main_3.Parent = _2
+Main_3.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
+Main_3.BackgroundTransparency = 1.000
+Main_3.BorderColor3 = Color3.fromRGB(0, 0, 0)
+Main_3.BorderSizePixel = 0
+Main_3.Size = UDim2.new(1, 0, 1, 0)
+Main_3.ZIndex = 11
+Main_3.Font = Enum.Font.SourceSansBold
+Main_3.Text = "ScriptHub"
+Main_3.TextColor3 = Color3.fromRGB(255, 255, 255)
+Main_3.TextScaled = true
+Main_3.TextSize = 14.000
+Main_3.TextWrapped = true
+
+UIGradient_3.Color = ColorSequence.new{ColorSequenceKeypoint.new(0.00, Color3.fromRGB(0, 0, 255)), ColorSequenceKeypoint.new(1.00, Color3.fromRGB(0, 0, 100))}
+UIGradient_3.Parent = _2
+
+UICorner_2.CornerRadius = UDim.new(0.349999994, 0)
+UICorner_2.Parent = _2
+
+_3.Name = "3"
+_3.Parent = Main
+_3.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+_3.BorderColor3 = Color3.fromRGB(0, 0, 0)
+_3.BorderSizePixel = 0
+_3.Size = UDim2.new(0.949999988, 0, 0.0500000007, 0)
+
+Main_4.Name = "Main"
+Main_4.Parent = _3
+Main_4.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
+Main_4.BackgroundTransparency = 1.000
+Main_4.BorderColor3 = Color3.fromRGB(0, 0, 0)
+Main_4.BorderSizePixel = 0
+Main_4.Size = UDim2.new(1, 0, 1, 0)
+Main_4.ZIndex = 11
+Main_4.Font = Enum.Font.SourceSansBold
+Main_4.Text = "ServerHop"
+Main_4.TextColor3 = Color3.fromRGB(255, 255, 255)
+Main_4.TextScaled = true
+Main_4.TextSize = 14.000
+Main_4.TextWrapped = true
+
+UIGradient_4.Color = ColorSequence.new{ColorSequenceKeypoint.new(0.00, Color3.fromRGB(0, 0, 255)), ColorSequenceKeypoint.new(1.00, Color3.fromRGB(0, 0, 100))}
+UIGradient_4.Parent = _3
+
+UICorner_3.CornerRadius = UDim.new(0.349999994, 0)
+UICorner_3.Parent = _3
 
 Character.Name = "Character"
 Character.Parent = Frame
@@ -170,11 +241,11 @@ D.BorderColor3 = Color3.fromRGB(0, 0, 0)
 D.BorderSizePixel = 0
 D.Size = UDim2.new(1, 0, 0.0500000007, 0)
 
-UIGradient_3.Color = ColorSequence.new{ColorSequenceKeypoint.new(0.00, Color3.fromRGB(0, 0, 255)), ColorSequenceKeypoint.new(1.00, Color3.fromRGB(0, 0, 100))}
-UIGradient_3.Parent = D
+UIGradient_5.Color = ColorSequence.new{ColorSequenceKeypoint.new(0.00, Color3.fromRGB(0, 0, 255)), ColorSequenceKeypoint.new(1.00, Color3.fromRGB(0, 0, 100))}
+UIGradient_5.Parent = D
 
-UICorner_2.CornerRadius = UDim.new(0.349999994, 0)
-UICorner_2.Parent = D
+UICorner_4.CornerRadius = UDim.new(0.349999994, 0)
+UICorner_4.Parent = D
 
 TextLabel_3.Parent = D
 TextLabel_3.BackgroundColor3 = Color3.fromRGB(0, 0, 255)
@@ -191,27 +262,27 @@ TextLabel_3.TextSize = 14.000
 TextLabel_3.TextWrapped = true
 TextLabel_3.TextXAlignment = Enum.TextXAlignment.Left
 
-Frame_4.Parent = D
-Frame_4.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+Frame_3.Parent = D
+Frame_3.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+Frame_3.BorderColor3 = Color3.fromRGB(0, 0, 0)
+Frame_3.BorderSizePixel = 0
+Frame_3.Position = UDim2.new(0.812727749, 0, 0.132187024, 0)
+Frame_3.Size = UDim2.new(0.157243714, 0, 0.759033084, 0)
+
+UICorner_5.CornerRadius = UDim.new(0.349999994, 0)
+UICorner_5.Parent = Frame_3
+
+Frame_4.Parent = Frame_3
+Frame_4.BackgroundColor3 = Color3.fromRGB(255, 0, 0)
 Frame_4.BorderColor3 = Color3.fromRGB(0, 0, 0)
 Frame_4.BorderSizePixel = 0
-Frame_4.Position = UDim2.new(0.812727749, 0, 0.132187024, 0)
-Frame_4.Size = UDim2.new(0.157243714, 0, 0.759033084, 0)
+Frame_4.Position = UDim2.new(0.0553692579, 0, 0.0917671472, 0)
+Frame_4.Size = UDim2.new(0.251261771, 0, 0.816465616, 0)
 
-UICorner_3.CornerRadius = UDim.new(0.349999994, 0)
-UICorner_3.Parent = Frame_4
+UICorner_6.CornerRadius = UDim.new(1, 0)
+UICorner_6.Parent = Frame_4
 
-Frame_5.Parent = Frame_4
-Frame_5.BackgroundColor3 = Color3.fromRGB(255, 0, 0)
-Frame_5.BorderColor3 = Color3.fromRGB(0, 0, 0)
-Frame_5.BorderSizePixel = 0
-Frame_5.Position = UDim2.new(0.0553692579, 0, 0.0917671472, 0)
-Frame_5.Size = UDim2.new(0.251261771, 0, 0.816465616, 0)
-
-UICorner_4.CornerRadius = UDim.new(1, 0)
-UICorner_4.Parent = Frame_5
-
-TextButton.Parent = Frame_4
+TextButton.Parent = Frame_3
 TextButton.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
 TextButton.BackgroundTransparency = 1.000
 TextButton.BorderColor3 = Color3.fromRGB(0, 0, 0)
@@ -245,11 +316,11 @@ C.BorderColor3 = Color3.fromRGB(0, 0, 0)
 C.BorderSizePixel = 0
 C.Size = UDim2.new(1, 0, 0.0500000007, 0)
 
-UIGradient_4.Color = ColorSequence.new{ColorSequenceKeypoint.new(0.00, Color3.fromRGB(0, 0, 255)), ColorSequenceKeypoint.new(1.00, Color3.fromRGB(0, 0, 100))}
-UIGradient_4.Parent = C
+UIGradient_6.Color = ColorSequence.new{ColorSequenceKeypoint.new(0.00, Color3.fromRGB(0, 0, 255)), ColorSequenceKeypoint.new(1.00, Color3.fromRGB(0, 0, 100))}
+UIGradient_6.Parent = C
 
-UICorner_5.CornerRadius = UDim.new(0.349999994, 0)
-UICorner_5.Parent = C
+UICorner_7.CornerRadius = UDim.new(0.349999994, 0)
+UICorner_7.Parent = C
 
 TextLabel_4.Parent = C
 TextLabel_4.BackgroundColor3 = Color3.fromRGB(0, 0, 255)
@@ -277,8 +348,70 @@ TextBox.Text = ""
 TextBox.TextColor3 = Color3.fromRGB(0, 0, 0)
 TextBox.TextSize = 14.000
 
-UICorner_6.CornerRadius = UDim.new(0.349999994, 0)
-UICorner_6.Parent = TextBox
+UICorner_8.CornerRadius = UDim.new(0.349999994, 0)
+UICorner_8.Parent = TextBox
+
+ScriptHub.Name = "ScriptHub"
+ScriptHub.Parent = Frame
+ScriptHub.Active = true
+ScriptHub.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+ScriptHub.BackgroundTransparency = 1.000
+ScriptHub.BorderColor3 = Color3.fromRGB(0, 0, 0)
+ScriptHub.BorderSizePixel = 0
+ScriptHub.Position = UDim2.new(0.220768034, 0, 0.13831082, 0)
+ScriptHub.Size = UDim2.new(0.777690113, 0, 0.858743191, 0)
+ScriptHub.Visible = false
+ScriptHub.ScrollBarThickness = 0
+ScriptHub.VerticalScrollBarPosition = Enum.VerticalScrollBarPosition.Left
+
+UIListLayout_3.Parent = ScriptHub
+UIListLayout_3.Padding = UDim.new(0.00499999989, 0)
+
+A_2.Name = "A"
+A_2.Parent = ScriptHub
+A_2.BackgroundColor3 = Color3.fromRGB(0, 0, 255)
+A_2.BackgroundTransparency = 1.000
+A_2.BorderColor3 = Color3.fromRGB(0, 0, 0)
+A_2.BorderSizePixel = 0
+A_2.Size = UDim2.new(1, 0, 0.0500000007, 0)
+A_2.Font = Enum.Font.Unknown
+A_2.Text = "Coming Soon..."
+A_2.TextColor3 = Color3.fromRGB(0, 0, 255)
+A_2.TextScaled = true
+A_2.TextSize = 14.000
+A_2.TextWrapped = true
+A_2.TextXAlignment = Enum.TextXAlignment.Left
+
+ServerHop.Name = "ServerHop"
+ServerHop.Parent = Frame
+ServerHop.Active = true
+ServerHop.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+ServerHop.BackgroundTransparency = 1.000
+ServerHop.BorderColor3 = Color3.fromRGB(0, 0, 0)
+ServerHop.BorderSizePixel = 0
+ServerHop.Position = UDim2.new(0.220768034, 0, 0.13831082, 0)
+ServerHop.Size = UDim2.new(0.777690113, 0, 0.858743191, 0)
+ServerHop.Visible = false
+ServerHop.ScrollBarThickness = 0
+ServerHop.VerticalScrollBarPosition = Enum.VerticalScrollBarPosition.Left
+
+UIListLayout_4.Parent = ServerHop
+UIListLayout_4.Padding = UDim.new(0.00499999989, 0)
+
+A_3.Name = "A"
+A_3.Parent = ServerHop
+A_3.BackgroundColor3 = Color3.fromRGB(0, 0, 255)
+A_3.BackgroundTransparency = 1.000
+A_3.BorderColor3 = Color3.fromRGB(0, 0, 0)
+A_3.BorderSizePixel = 0
+A_3.Size = UDim2.new(1, 0, 0.0500000007, 0)
+A_3.Font = Enum.Font.Unknown
+A_3.Text = "Coming Soon..."
+A_3.TextColor3 = Color3.fromRGB(0, 0, 255)
+A_3.TextScaled = true
+A_3.TextSize = 14.000
+A_3.TextWrapped = true
+A_3.TextXAlignment = Enum.TextXAlignment.Left
 
 TextLabel_5.Parent = EasyHub
 TextLabel_5.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
@@ -293,8 +426,8 @@ TextLabel_5.TextScaled = true
 TextLabel_5.TextSize = 14.000
 TextLabel_5.TextWrapped = true
 
-UIGradient_5.Color = ColorSequence.new{ColorSequenceKeypoint.new(0.00, Color3.fromRGB(0, 0, 255)), ColorSequenceKeypoint.new(1.00, Color3.fromRGB(0, 0, 89))}
-UIGradient_5.Parent = TextLabel_5
+UIGradient_7.Color = ColorSequence.new{ColorSequenceKeypoint.new(0.00, Color3.fromRGB(0, 0, 255)), ColorSequenceKeypoint.new(1.00, Color3.fromRGB(0, 0, 89))}
+UIGradient_7.Parent = TextLabel_5
 
 TextLabel_6.Parent = TextLabel_5
 TextLabel_6.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
@@ -319,9 +452,9 @@ Message.BorderSizePixel = 0
 Message.Position = UDim2.new(0.72969538, 0, 0.0936207697, 0)
 Message.Size = UDim2.new(0, 369, 0, 695)
 
-UIListLayout_3.Parent = Message
-UIListLayout_3.SortOrder = Enum.SortOrder.LayoutOrder
-UIListLayout_3.Padding = UDim.new(0.0199999996, 0)
+UIListLayout_5.Parent = Message
+UIListLayout_5.SortOrder = Enum.SortOrder.LayoutOrder
+UIListLayout_5.Padding = UDim.new(0.0199999996, 0)
 
 Simple.Name = "Simple"
 Simple.Parent = EasyHub
@@ -332,15 +465,16 @@ Simple.BorderSizePixel = 0
 Simple.Size = UDim2.new(1, 0, 0.168345317, 0)
 Simple.Visible = false
 
-Frame_6.Parent = Simple
-Frame_6.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
-Frame_6.BackgroundTransparency = 0.500
-Frame_6.BorderColor3 = Color3.fromRGB(0, 0, 0)
-Frame_6.BorderSizePixel = 0
-Frame_6.Size = UDim2.new(1, 0, 1, 0)
+Frame_5.Parent = Simple
+Frame_5.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
+Frame_5.BackgroundTransparency = 0.500
+Frame_5.BorderColor3 = Color3.fromRGB(0, 0, 0)
+Frame_5.BorderSizePixel = 0
+Frame_5.Position = UDim2.new(1, 0, 0, 0)
+Frame_5.Size = UDim2.new(1, 0, 1, 0)
 
 Message_2.Name = "Message"
-Message_2.Parent = Frame_6
+Message_2.Parent = Frame_5
 Message_2.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
 Message_2.BackgroundTransparency = 1.000
 Message_2.BorderColor3 = Color3.fromRGB(0, 0, 0)
@@ -355,7 +489,7 @@ Message_2.TextSize = 14.000
 Message_2.TextWrapped = true
 
 Head.Name = "Head"
-Head.Parent = Frame_6
+Head.Parent = Frame_5
 Head.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
 Head.BackgroundTransparency = 1.000
 Head.BorderColor3 = Color3.fromRGB(0, 0, 0)
@@ -372,35 +506,58 @@ Head.TextXAlignment = Enum.TextXAlignment.Left
 
 -- Scripts:
 
-local function NOOZR_fake_script() -- EasyHub.LocalScript 
+local function YCIK_fake_script() -- EasyHub.LocalScript 
 	local script = Instance.new('LocalScript', EasyHub)
 
-	wait()
 	local GUI = script.Parent
 	
-	function SendMessage(Head,Message,Color1,Color2)
-		local M = GUI.Simple:Clone()
-		M.Parent = GUI.Message
-		M.Frame.Head.Text = Head
-		M.Frame.Message.Text = Message
-		
+	function SendMessage(Head,Message,Color1,Color2,Time)
+		spawn(function()
+			local M = GUI.Simple:Clone()
+			M.Parent = GUI.Message
+			M.Visible = true
+			M.Frame.Head.Text = Head
+			M.Frame.Message.Text = Message
+			M.Frame.Head.TextColor3 = Color1
+			M.Frame.Message.TextColor3 = Color2
+	
+			M.Frame:TweenPosition(
+				UDim2.new(0,0,0,0),
+				Enum.EasingDirection.Out,Enum.EasingStyle.Back,1
+			)
+			wait(Time)
+			M.Frame:TweenPosition(
+				UDim2.new(1,0,0,0),
+				Enum.EasingDirection.Out,Enum.EasingStyle.Back,1
+			)
+			wait(1)
+			M:Destroy()
+		end)
 	end
 	
 	function PlaySound(ID)
-		local Sound = Instance.new("Sound",game.SoundService)
+		local Sound = Instance.new("Sound",script.Parent)
 		Sound.SoundId = "rbxassetid://"..ID
-		Sound:Play()
 		Sound.Volume = 5
+		Sound:Play()
+		
 		Sound.Ended:Connect(function()
 			Sound:Destroy()
 		end)
 	end
 	
 	--//Start Up\\--
+	
 	GUI.Frame.Visible = false
 	GUI.TextLabel.Size = UDim2.new(0,0,0,0)
 	GUI.TextLabel.Position = UDim2.new(0.482, 0,0.482, 0)
-	
+	SendMessage(
+		"EasyHub",
+		"EasyHub Loadded!",
+		Color3.new(1,1,1),
+		Color3.new(1,1,1),
+		3
+	)
 	wait(1)
 	PlaySound(8503531171)
 	GUI.TextLabel:TweenSizeAndPosition(
@@ -440,10 +597,27 @@ local function NOOZR_fake_script() -- EasyHub.LocalScript
 	game.TweenService:Create(
 		GUI.TextLabel,TweenInfo.new(0.5),{Transparency = 1}
 	):Play()
+	wait(.5)
+	GUI.TextLabel:Destroy()
 	--//Done Loadded\\--
+	for loop,UI in pairs(GUI.Frame.Main:GetChildren()) do
+		if UI:IsA("Frame") then
+			UI.Main.MouseButton1Click:Connect(function()
+				for loop,UI2 in pairs(GUI.Frame:GetChildren()) do
+					if UI2:IsA("ScrollingFrame") and UI2.Name ~= "Main"  then
+						if UI2.Name == UI.Main.Text then
+							UI2.Visible = true
+						else
+							UI2.Visible = false
+						end
+					end
+				end
+			end)
+		end
+	end
 end
-coroutine.wrap(NOOZR_fake_script)()
-local function DBUA_fake_script() -- Frame.DraggableGUI 
+coroutine.wrap(YCIK_fake_script)()
+local function KPGJ_fake_script() -- Frame.DraggableGUI 
 	local script = Instance.new('LocalScript', Frame)
 
 	local UIS = game:GetService('UserInputService')
@@ -481,4 +655,4 @@ local function DBUA_fake_script() -- Frame.DraggableGUI
 		end
 	end)
 end
-coroutine.wrap(DBUA_fake_script)()
+coroutine.wrap(KPGJ_fake_script)()
