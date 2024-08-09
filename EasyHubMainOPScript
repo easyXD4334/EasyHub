@@ -372,19 +372,27 @@ Head.TextXAlignment = Enum.TextXAlignment.Left
 
 -- Scripts:
 
-local function KWMM_fake_script() -- EasyHub.LocalScript 
+local function RYAMFQ_fake_script() -- EasyHub.LocalScript 
 	local script = Instance.new('LocalScript', EasyHub)
 
-	wait(5)
+	wait()
 	local GUI = script.Parent
 	
-	--//Start Up\\--
+	function SendMessage(Head,Message,Color1,Color2)
+		local M = GUI.Simple:Clone()
+		M.Parent = GUI.Message
+		M.Frame.Head.Text = Head
+		M.Frame.Message.Text = Message
+		
+	end
 	
+	--//Start Up\\--
+	GUI.Frame.Visible = false
 	GUI.TextLabel.Size = UDim2.new(0,0,0,0)
 	GUI.TextLabel.Position = UDim2.new(0.482, 0,0.482, 0)
 	
 	wait(1)
-	script.Startup:Play()
+	script.Parent.Startup:Play()
 	GUI.TextLabel:TweenSizeAndPosition(
 		UDim2.new(0.064, 0,0.111, 0),UDim2.new(0.482, 0,0.482, 0),
 		Enum.EasingDirection.Out,Enum.EasingStyle.Quad,1
@@ -392,23 +400,27 @@ local function KWMM_fake_script() -- EasyHub.LocalScript
 	game.TweenService:Create(
 		GUI.TextLabel,TweenInfo.new(1,Enum.EasingStyle.Quad,Enum.EasingDirection.Out),
 		{Rotation = 360}
-	)
+	):Play()
 	wait(1)
 	GUI.TextLabel:TweenPosition(
 		UDim2.new(0.305, 0,0.332, 0),
 		Enum.EasingDirection.Out,Enum.EasingStyle.Quad,1
 	)
+	game.TweenService:Create(
+		GUI.TextLabel,TweenInfo.new(1,Enum.EasingStyle.Quad,Enum.EasingDirection.Out),
+		{Rotation = 0}
+	):Play()
 	wait(1)
 	game.TweenService:Create(
 		GUI.TextLabel.TextLabel,TweenInfo.new(0.5),{TextTransparency = 1}
-	)
-	wait(1)
+	):Play()
+	wait(0.5)
 	GUI.TextLabel:TweenSize(
 		UDim2.new(0.542, 0,0.066, 0),
 		Enum.EasingDirection.Out,Enum.EasingStyle.Quad,0.5
 	)
 	wait(0.5)
-	GUI.Frame.Size = UDim2.new(0,0,0,0)
+	GUI.Frame.Size = UDim2.new(0.542, 0,0.066, 0)
 	GUI.Frame.Visible = true
 	GUI.Frame:TweenSize(
 		UDim2.new(0.542, 0,0.571, 0),
@@ -417,11 +429,11 @@ local function KWMM_fake_script() -- EasyHub.LocalScript
 	wait(0.5)
 	game.TweenService:Create(
 		GUI.TextLabel,TweenInfo.new(0.5),{Transparency = 1}
-	)
-	
+	):Play()
+	--//Done Loadded\\--
 end
-coroutine.wrap(KWMM_fake_script)()
-local function PCNTPU_fake_script() -- Frame.DraggableGUI 
+coroutine.wrap(RYAMFQ_fake_script)()
+local function EOAR_fake_script() -- Frame.DraggableGUI 
 	local script = Instance.new('LocalScript', Frame)
 
 	local UIS = game:GetService('UserInputService')
@@ -459,12 +471,12 @@ local function PCNTPU_fake_script() -- Frame.DraggableGUI
 		end
 	end)
 end
-coroutine.wrap(PCNTPU_fake_script)()
-local function YSAO_fake_script() -- Main.LocalScript 
+coroutine.wrap(EOAR_fake_script)()
+local function ZPXWVH_fake_script() -- Main.LocalScript 
 	local script = Instance.new('LocalScript', Main)
 
 	script.Parent.MouseButton1Click:Connect(function()
 		workspace.Game.Sound.Sound_effect.Click_Sound_Effect:Play()
 	end)
 end
-coroutine.wrap(YSAO_fake_script)()
+coroutine.wrap(ZPXWVH_fake_script)()
