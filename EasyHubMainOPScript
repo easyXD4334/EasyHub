@@ -1,4 +1,3 @@
-
 local EasyHub = Instance.new("ScreenGui")
 local Frame = Instance.new("Frame")
 local TextLabel = Instance.new("TextLabel")
@@ -373,7 +372,7 @@ Head.TextXAlignment = Enum.TextXAlignment.Left
 
 -- Scripts:
 
-local function VVMMJ_fake_script() -- EasyHub.LocalScript 
+local function NOOZR_fake_script() -- EasyHub.LocalScript 
 	local script = Instance.new('LocalScript', EasyHub)
 
 	wait()
@@ -391,6 +390,7 @@ local function VVMMJ_fake_script() -- EasyHub.LocalScript
 		local Sound = Instance.new("Sound",game.SoundService)
 		Sound.SoundId = "rbxassetid://"..ID
 		Sound:Play()
+		Sound.Volume = 5
 		Sound.Ended:Connect(function()
 			Sound:Destroy()
 		end)
@@ -442,8 +442,8 @@ local function VVMMJ_fake_script() -- EasyHub.LocalScript
 	):Play()
 	--//Done Loadded\\--
 end
-coroutine.wrap(VVMMJ_fake_script)()
-local function VWCLWF_fake_script() -- Frame.DraggableGUI 
+coroutine.wrap(NOOZR_fake_script)()
+local function DBUA_fake_script() -- Frame.DraggableGUI 
 	local script = Instance.new('LocalScript', Frame)
 
 	local UIS = game:GetService('UserInputService')
@@ -481,4 +481,4 @@ local function VWCLWF_fake_script() -- Frame.DraggableGUI
 		end
 	end)
 end
-coroutine.wrap(VWCLWF_fake_script)()
+coroutine.wrap(DBUA_fake_script)()
