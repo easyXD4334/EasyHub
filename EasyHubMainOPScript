@@ -1,3 +1,4 @@
+
 local EasyHub = Instance.new("ScreenGui")
 local Frame = Instance.new("Frame")
 local TextLabel = Instance.new("TextLabel")
@@ -372,7 +373,7 @@ Head.TextXAlignment = Enum.TextXAlignment.Left
 
 -- Scripts:
 
-local function RYAMFQ_fake_script() -- EasyHub.LocalScript 
+local function VVMMJ_fake_script() -- EasyHub.LocalScript 
 	local script = Instance.new('LocalScript', EasyHub)
 
 	wait()
@@ -386,13 +387,22 @@ local function RYAMFQ_fake_script() -- EasyHub.LocalScript
 		
 	end
 	
+	function PlaySound(ID)
+		local Sound = Instance.new("Sound",game.SoundService)
+		Sound.SoundId = "rbxassetid://"..ID
+		Sound:Play()
+		Sound.Ended:Connect(function()
+			Sound:Destroy()
+		end)
+	end
+	
 	--//Start Up\\--
 	GUI.Frame.Visible = false
 	GUI.TextLabel.Size = UDim2.new(0,0,0,0)
 	GUI.TextLabel.Position = UDim2.new(0.482, 0,0.482, 0)
 	
 	wait(1)
-	script.Parent.Startup:Play()
+	PlaySound(8503531171)
 	GUI.TextLabel:TweenSizeAndPosition(
 		UDim2.new(0.064, 0,0.111, 0),UDim2.new(0.482, 0,0.482, 0),
 		Enum.EasingDirection.Out,Enum.EasingStyle.Quad,1
@@ -432,8 +442,8 @@ local function RYAMFQ_fake_script() -- EasyHub.LocalScript
 	):Play()
 	--//Done Loadded\\--
 end
-coroutine.wrap(RYAMFQ_fake_script)()
-local function EOAR_fake_script() -- Frame.DraggableGUI 
+coroutine.wrap(VVMMJ_fake_script)()
+local function VWCLWF_fake_script() -- Frame.DraggableGUI 
 	local script = Instance.new('LocalScript', Frame)
 
 	local UIS = game:GetService('UserInputService')
@@ -471,12 +481,4 @@ local function EOAR_fake_script() -- Frame.DraggableGUI
 		end
 	end)
 end
-coroutine.wrap(EOAR_fake_script)()
-local function ZPXWVH_fake_script() -- Main.LocalScript 
-	local script = Instance.new('LocalScript', Main)
-
-	script.Parent.MouseButton1Click:Connect(function()
-		workspace.Game.Sound.Sound_effect.Click_Sound_Effect:Play()
-	end)
-end
-coroutine.wrap(ZPXWVH_fake_script)()
+coroutine.wrap(VWCLWF_fake_script)()
