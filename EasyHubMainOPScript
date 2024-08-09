@@ -1,0 +1,469 @@
+local EasyHub = Instance.new("ScreenGui")
+local Simple = Instance.new("Frame")
+local Frame = Instance.new("Frame")
+local Message = Instance.new("TextLabel")
+local Head = Instance.new("TextLabel")
+local Frame_2 = Instance.new("Frame")
+local TextLabel = Instance.new("TextLabel")
+local UIGradient = Instance.new("UIGradient")
+local TextLabel_2 = Instance.new("TextLabel")
+local Frame_3 = Instance.new("Frame")
+local ScrollingFrame = Instance.new("ScrollingFrame")
+local UIListLayout = Instance.new("UIListLayout")
+local Frame_4 = Instance.new("Frame")
+local Main = Instance.new("TextButton")
+local UIGradient_2 = Instance.new("UIGradient")
+local UICorner = Instance.new("UICorner")
+local Character = Instance.new("ScrollingFrame")
+local UIListLayout_2 = Instance.new("UIListLayout")
+local B = Instance.new("TextLabel")
+local D = Instance.new("Frame")
+local UIGradient_3 = Instance.new("UIGradient")
+local UICorner_2 = Instance.new("UICorner")
+local TextLabel_3 = Instance.new("TextLabel")
+local Frame_5 = Instance.new("Frame")
+local UICorner_3 = Instance.new("UICorner")
+local Frame_6 = Instance.new("Frame")
+local UICorner_4 = Instance.new("UICorner")
+local TextButton = Instance.new("TextButton")
+local A = Instance.new("TextLabel")
+local C = Instance.new("Frame")
+local UIGradient_4 = Instance.new("UIGradient")
+local UICorner_5 = Instance.new("UICorner")
+local TextLabel_4 = Instance.new("TextLabel")
+local TextBox = Instance.new("TextBox")
+local UICorner_6 = Instance.new("UICorner")
+local TextLabel_5 = Instance.new("TextLabel")
+local UIGradient_5 = Instance.new("UIGradient")
+local TextLabel_6 = Instance.new("TextLabel")
+local Message_2 = Instance.new("Frame")
+local UIListLayout_3 = Instance.new("UIListLayout")
+
+--Properties:
+
+EasyHub.Name = "EasyHub"
+EasyHub.Parent = game.Players.LocalPlayer:WaitForChild("PlayerGui")
+EasyHub.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
+
+Simple.Name = "Simple"
+Simple.Parent = game.StarterGui.EasyHub.LocalScript
+Simple.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
+Simple.BackgroundTransparency = 1.000
+Simple.BorderColor3 = Color3.fromRGB(0, 0, 0)
+Simple.BorderSizePixel = 0
+Simple.Size = UDim2.new(1, 0, 0.168345317, 0)
+
+Frame.Parent = Simple
+Frame.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
+Frame.BackgroundTransparency = 0.500
+Frame.BorderColor3 = Color3.fromRGB(0, 0, 0)
+Frame.BorderSizePixel = 0
+Frame.Size = UDim2.new(1, 0, 1, 0)
+
+Message.Name = "Message"
+Message.Parent = Frame
+Message.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+Message.BackgroundTransparency = 1.000
+Message.BorderColor3 = Color3.fromRGB(0, 0, 0)
+Message.BorderSizePixel = 0
+Message.Position = UDim2.new(0, 0, 0.318039864, 0)
+Message.Size = UDim2.new(1, 0, 0.681960166, 0)
+Message.Font = Enum.Font.SourceSans
+Message.Text = "Loading..."
+Message.TextColor3 = Color3.fromRGB(255, 255, 255)
+Message.TextScaled = true
+Message.TextSize = 14.000
+Message.TextWrapped = true
+
+Head.Name = "Head"
+Head.Parent = Frame
+Head.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+Head.BackgroundTransparency = 1.000
+Head.BorderColor3 = Color3.fromRGB(0, 0, 0)
+Head.BorderSizePixel = 0
+Head.Position = UDim2.new(0, 0, -0.00674647139, 0)
+Head.Size = UDim2.new(1, 0, 0.324786335, 0)
+Head.Font = Enum.Font.SourceSans
+Head.Text = "Loading..."
+Head.TextColor3 = Color3.fromRGB(255, 255, 255)
+Head.TextScaled = true
+Head.TextSize = 14.000
+Head.TextWrapped = true
+Head.TextXAlignment = Enum.TextXAlignment.Left
+
+Frame_2.Parent = EasyHub
+Frame_2.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
+Frame_2.BackgroundTransparency = 0.300
+Frame_2.BorderColor3 = Color3.fromRGB(0, 0, 0)
+Frame_2.BorderSizePixel = 0
+Frame_2.Position = UDim2.new(0.303829432, 0, 0.331359863, 0)
+Frame_2.Size = UDim2.new(0.542459726, 0, 0.571056068, 0)
+
+TextLabel.Parent = Frame_2
+TextLabel.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+TextLabel.BorderColor3 = Color3.fromRGB(0, 0, 0)
+TextLabel.BorderSizePixel = 0
+TextLabel.Size = UDim2.new(1, 0, 0.115938507, 0)
+TextLabel.ZIndex = 2
+TextLabel.Font = Enum.Font.FredokaOne
+TextLabel.Text = "EasyHub"
+TextLabel.TextColor3 = Color3.fromRGB(255, 255, 255)
+TextLabel.TextScaled = true
+TextLabel.TextSize = 14.000
+TextLabel.TextWrapped = true
+
+UIGradient.Color = ColorSequence.new{ColorSequenceKeypoint.new(0.00, Color3.fromRGB(0, 0, 255)), ColorSequenceKeypoint.new(1.00, Color3.fromRGB(0, 0, 89))}
+UIGradient.Parent = TextLabel
+
+TextLabel_2.Parent = TextLabel
+TextLabel_2.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+TextLabel_2.BackgroundTransparency = 1.000
+TextLabel_2.BorderColor3 = Color3.fromRGB(0, 0, 0)
+TextLabel_2.BorderSizePixel = 0
+TextLabel_2.Position = UDim2.new(1.40310675e-07, 0, 0, 0)
+TextLabel_2.Size = UDim2.new(1.00000012, 0, 1, 0)
+TextLabel_2.Font = Enum.Font.FredokaOne
+TextLabel_2.Text = "EasyHub:Main"
+TextLabel_2.TextColor3 = Color3.fromRGB(255, 255, 255)
+TextLabel_2.TextScaled = true
+TextLabel_2.TextSize = 14.000
+TextLabel_2.TextWrapped = true
+TextLabel_2.TextXAlignment = Enum.TextXAlignment.Left
+
+Frame_3.Parent = Frame_2
+Frame_3.BackgroundColor3 = Color3.fromRGB(0, 0, 255)
+Frame_3.BorderColor3 = Color3.fromRGB(0, 0, 0)
+Frame_3.BorderSizePixel = 0
+Frame_3.Position = UDim2.new(0.21376805, 0, 0.0881543905, 0)
+Frame_3.Size = UDim2.new(0.00700000022, 0, 0.910000026, 0)
+
+ScrollingFrame.Parent = Frame_2
+ScrollingFrame.Active = true
+ScrollingFrame.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+ScrollingFrame.BackgroundTransparency = 1.000
+ScrollingFrame.BorderColor3 = Color3.fromRGB(0, 0, 0)
+ScrollingFrame.BorderSizePixel = 0
+ScrollingFrame.Position = UDim2.new(0, 0, 0.13831082, 0)
+ScrollingFrame.Size = UDim2.new(0.220538989, 0, 0.85874325, 0)
+ScrollingFrame.ScrollBarThickness = 0
+ScrollingFrame.VerticalScrollBarPosition = Enum.VerticalScrollBarPosition.Left
+
+UIListLayout.Parent = ScrollingFrame
+UIListLayout.SortOrder = Enum.SortOrder.LayoutOrder
+UIListLayout.Padding = UDim.new(0.00499999989, 0)
+
+Frame_4.Parent = ScrollingFrame
+Frame_4.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+Frame_4.BorderColor3 = Color3.fromRGB(0, 0, 0)
+Frame_4.BorderSizePixel = 0
+Frame_4.Size = UDim2.new(0.949999988, 0, 0.0500000007, 0)
+
+Main.Name = "Main"
+Main.Parent = Frame_4
+Main.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
+Main.BackgroundTransparency = 1.000
+Main.BorderColor3 = Color3.fromRGB(0, 0, 0)
+Main.BorderSizePixel = 0
+Main.Size = UDim2.new(1, 0, 1, 0)
+Main.ZIndex = 11
+Main.Font = Enum.Font.SourceSansBold
+Main.Text = "Character"
+Main.TextColor3 = Color3.fromRGB(255, 255, 255)
+Main.TextScaled = true
+Main.TextSize = 14.000
+Main.TextWrapped = true
+
+UIGradient_2.Color = ColorSequence.new{ColorSequenceKeypoint.new(0.00, Color3.fromRGB(0, 0, 255)), ColorSequenceKeypoint.new(1.00, Color3.fromRGB(0, 0, 100))}
+UIGradient_2.Parent = Frame_4
+
+UICorner.CornerRadius = UDim.new(0.349999994, 0)
+UICorner.Parent = Frame_4
+
+Character.Name = "Character"
+Character.Parent = Frame_2
+Character.Active = true
+Character.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+Character.BackgroundTransparency = 1.000
+Character.BorderColor3 = Color3.fromRGB(0, 0, 0)
+Character.BorderSizePixel = 0
+Character.Position = UDim2.new(0.220768034, 0, 0.13831082, 0)
+Character.Size = UDim2.new(0.777690113, 0, 0.858743191, 0)
+Character.ScrollBarThickness = 0
+Character.VerticalScrollBarPosition = Enum.VerticalScrollBarPosition.Left
+
+UIListLayout_2.Parent = Character
+UIListLayout_2.Padding = UDim.new(0.00499999989, 0)
+
+B.Name = "B"
+B.Parent = Character
+B.BackgroundColor3 = Color3.fromRGB(0, 0, 255)
+B.BackgroundTransparency = 1.000
+B.BorderColor3 = Color3.fromRGB(0, 0, 0)
+B.BorderSizePixel = 0
+B.Size = UDim2.new(1, 0, 0.0500000007, 0)
+B.Font = Enum.Font.Unknown
+B.Text = "--Version 1.0.0---------------------------------"
+B.TextColor3 = Color3.fromRGB(0, 0, 255)
+B.TextScaled = true
+B.TextSize = 14.000
+B.TextWrapped = true
+B.TextXAlignment = Enum.TextXAlignment.Left
+
+D.Name = "D"
+D.Parent = Character
+D.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+D.BorderColor3 = Color3.fromRGB(0, 0, 0)
+D.BorderSizePixel = 0
+D.Size = UDim2.new(1, 0, 0.0500000007, 0)
+
+UIGradient_3.Color = ColorSequence.new{ColorSequenceKeypoint.new(0.00, Color3.fromRGB(0, 0, 255)), ColorSequenceKeypoint.new(1.00, Color3.fromRGB(0, 0, 100))}
+UIGradient_3.Parent = D
+
+UICorner_2.CornerRadius = UDim.new(0.349999994, 0)
+UICorner_2.Parent = D
+
+TextLabel_3.Parent = D
+TextLabel_3.BackgroundColor3 = Color3.fromRGB(0, 0, 255)
+TextLabel_3.BackgroundTransparency = 1.000
+TextLabel_3.BorderColor3 = Color3.fromRGB(0, 0, 0)
+TextLabel_3.BorderSizePixel = 0
+TextLabel_3.Position = UDim2.new(-3.79571858e-08, 0, 0, 0)
+TextLabel_3.Size = UDim2.new(0.755760789, 0, 1.00000012, 0)
+TextLabel_3.Font = Enum.Font.Unknown
+TextLabel_3.Text = "Keep Speed"
+TextLabel_3.TextColor3 = Color3.fromRGB(255, 255, 255)
+TextLabel_3.TextScaled = true
+TextLabel_3.TextSize = 14.000
+TextLabel_3.TextWrapped = true
+TextLabel_3.TextXAlignment = Enum.TextXAlignment.Left
+
+Frame_5.Parent = D
+Frame_5.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+Frame_5.BorderColor3 = Color3.fromRGB(0, 0, 0)
+Frame_5.BorderSizePixel = 0
+Frame_5.Position = UDim2.new(0.812727749, 0, 0.132187024, 0)
+Frame_5.Size = UDim2.new(0.157243714, 0, 0.759033084, 0)
+
+UICorner_3.CornerRadius = UDim.new(0.349999994, 0)
+UICorner_3.Parent = Frame_5
+
+Frame_6.Parent = Frame_5
+Frame_6.BackgroundColor3 = Color3.fromRGB(255, 0, 0)
+Frame_6.BorderColor3 = Color3.fromRGB(0, 0, 0)
+Frame_6.BorderSizePixel = 0
+Frame_6.Position = UDim2.new(0.0553692579, 0, 0.0917671472, 0)
+Frame_6.Size = UDim2.new(0.251261771, 0, 0.816465616, 0)
+
+UICorner_4.CornerRadius = UDim.new(1, 0)
+UICorner_4.Parent = Frame_6
+
+TextButton.Parent = Frame_5
+TextButton.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+TextButton.BackgroundTransparency = 1.000
+TextButton.BorderColor3 = Color3.fromRGB(0, 0, 0)
+TextButton.BorderSizePixel = 0
+TextButton.Size = UDim2.new(1, 0, 1, 0)
+TextButton.ZIndex = 2
+TextButton.Font = Enum.Font.SourceSans
+TextButton.Text = ""
+TextButton.TextColor3 = Color3.fromRGB(0, 0, 0)
+TextButton.TextSize = 14.000
+
+A.Name = "A"
+A.Parent = Character
+A.BackgroundColor3 = Color3.fromRGB(0, 0, 255)
+A.BackgroundTransparency = 1.000
+A.BorderColor3 = Color3.fromRGB(0, 0, 0)
+A.BorderSizePixel = 0
+A.Size = UDim2.new(1, 0, 0.0500000007, 0)
+A.Font = Enum.Font.Unknown
+A.Text = "Thank for using my script."
+A.TextColor3 = Color3.fromRGB(0, 0, 255)
+A.TextScaled = true
+A.TextSize = 14.000
+A.TextWrapped = true
+A.TextXAlignment = Enum.TextXAlignment.Left
+
+C.Name = "C"
+C.Parent = Character
+C.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+C.BorderColor3 = Color3.fromRGB(0, 0, 0)
+C.BorderSizePixel = 0
+C.Size = UDim2.new(1, 0, 0.0500000007, 0)
+
+UIGradient_4.Color = ColorSequence.new{ColorSequenceKeypoint.new(0.00, Color3.fromRGB(0, 0, 255)), ColorSequenceKeypoint.new(1.00, Color3.fromRGB(0, 0, 100))}
+UIGradient_4.Parent = C
+
+UICorner_5.CornerRadius = UDim.new(0.349999994, 0)
+UICorner_5.Parent = C
+
+TextLabel_4.Parent = C
+TextLabel_4.BackgroundColor3 = Color3.fromRGB(0, 0, 255)
+TextLabel_4.BackgroundTransparency = 1.000
+TextLabel_4.BorderColor3 = Color3.fromRGB(0, 0, 0)
+TextLabel_4.BorderSizePixel = 0
+TextLabel_4.Position = UDim2.new(-3.79571858e-08, 0, 0, 0)
+TextLabel_4.Size = UDim2.new(0.755760789, 0, 1.00000012, 0)
+TextLabel_4.Font = Enum.Font.Unknown
+TextLabel_4.Text = "Set Speed"
+TextLabel_4.TextColor3 = Color3.fromRGB(255, 255, 255)
+TextLabel_4.TextScaled = true
+TextLabel_4.TextSize = 14.000
+TextLabel_4.TextWrapped = true
+TextLabel_4.TextXAlignment = Enum.TextXAlignment.Left
+
+TextBox.Parent = C
+TextBox.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+TextBox.BorderColor3 = Color3.fromRGB(0, 0, 0)
+TextBox.BorderSizePixel = 0
+TextBox.Position = UDim2.new(0.813000023, 0, 0.131999999, 0)
+TextBox.Size = UDim2.new(0.157000005, 0, 0.759000003, 0)
+TextBox.Font = Enum.Font.SourceSans
+TextBox.Text = ""
+TextBox.TextColor3 = Color3.fromRGB(0, 0, 0)
+TextBox.TextSize = 14.000
+
+UICorner_6.CornerRadius = UDim.new(0.349999994, 0)
+UICorner_6.Parent = TextBox
+
+TextLabel_5.Parent = EasyHub
+TextLabel_5.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+TextLabel_5.BorderColor3 = Color3.fromRGB(0, 0, 0)
+TextLabel_5.BorderSizePixel = 0
+TextLabel_5.Size = UDim2.new(0.064000003, 0, 0.111000001, 0)
+TextLabel_5.ZIndex = 2
+TextLabel_5.Font = Enum.Font.FredokaOne
+TextLabel_5.Text = "EasyHub"
+TextLabel_5.TextColor3 = Color3.fromRGB(255, 255, 255)
+TextLabel_5.TextScaled = true
+TextLabel_5.TextSize = 14.000
+TextLabel_5.TextWrapped = true
+
+UIGradient_5.Color = ColorSequence.new{ColorSequenceKeypoint.new(0.00, Color3.fromRGB(0, 0, 255)), ColorSequenceKeypoint.new(1.00, Color3.fromRGB(0, 0, 89))}
+UIGradient_5.Parent = TextLabel_5
+
+TextLabel_6.Parent = TextLabel_5
+TextLabel_6.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+TextLabel_6.BackgroundTransparency = 1.000
+TextLabel_6.BorderColor3 = Color3.fromRGB(0, 0, 0)
+TextLabel_6.BorderSizePixel = 0
+TextLabel_6.Position = UDim2.new(-0.00134026492, 0, -0.0117647061, 0)
+TextLabel_6.Size = UDim2.new(1.00000012, 0, 1, 0)
+TextLabel_6.Font = Enum.Font.FredokaOne
+TextLabel_6.Text = "E"
+TextLabel_6.TextColor3 = Color3.fromRGB(255, 255, 255)
+TextLabel_6.TextScaled = true
+TextLabel_6.TextSize = 14.000
+TextLabel_6.TextWrapped = true
+
+Message_2.Name = "Message"
+Message_2.Parent = EasyHub
+Message_2.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+Message_2.BackgroundTransparency = 1.000
+Message_2.BorderColor3 = Color3.fromRGB(0, 0, 0)
+Message_2.BorderSizePixel = 0
+Message_2.Position = UDim2.new(0.72969538, 0, 0.0936207697, 0)
+Message_2.Size = UDim2.new(0, 369, 0, 695)
+
+UIListLayout_3.Parent = Message_2
+UIListLayout_3.SortOrder = Enum.SortOrder.LayoutOrder
+UIListLayout_3.Padding = UDim.new(0.0199999996, 0)
+
+-- Scripts:
+
+local function ZCGQN_fake_script() -- EasyHub.LocalScript 
+	local script = Instance.new('LocalScript', EasyHub)
+
+	wait(5)
+	local GUI = script.Parent
+	
+	--//Start Up\\--
+	
+	GUI.TextLabel.Size = UDim2.new(0,0,0,0)
+	GUI.TextLabel.Position = UDim2.new(0.482, 0,0.482, 0)
+	
+	wait(1)
+	script.Startup:Play()
+	GUI.TextLabel:TweenSizeAndPosition(
+		UDim2.new(0.064, 0,0.111, 0),UDim2.new(0.482, 0,0.482, 0),
+		Enum.EasingDirection.Out,Enum.EasingStyle.Quad,1
+	)
+	game.TweenService:Create(
+		GUI.TextLabel,TweenInfo.new(1,Enum.EasingStyle.Quad,Enum.EasingDirection.Out),
+		{Rotation = 360}
+	)
+	wait(1)
+	GUI.TextLabel:TweenPosition(
+		UDim2.new(0.305, 0,0.332, 0),
+		Enum.EasingDirection.Out,Enum.EasingStyle.Quad,1
+	)
+	wait(1)
+	game.TweenService:Create(
+		GUI.TextLabel.TextLabel,TweenInfo.new(0.5),{TextTransparency = 1}
+	)
+	wait(1)
+	GUI.TextLabel:TweenSize(
+		UDim2.new(0.542, 0,0.066, 0),
+		Enum.EasingDirection.Out,Enum.EasingStyle.Quad,0.5
+	)
+	wait(0.5)
+	GUI.Frame.Size = UDim2.new(0,0,0,0)
+	GUI.Frame.Visible = true
+	GUI.Frame:TweenSize(
+		UDim2.new(0.542, 0,0.571, 0),
+		Enum.EasingDirection.Out,Enum.EasingStyle.Quad,0.5
+	)
+	wait(0.5)
+	game.TweenService:Create(
+		GUI.TextLabel,TweenInfo.new(0.5),{Transparency = 1}
+	)
+	
+end
+coroutine.wrap(ZCGQN_fake_script)()
+local function DLFL_fake_script() -- Frame_2.DraggableGUI 
+	local script = Instance.new('LocalScript', Frame_2)
+
+	local UIS = game:GetService('UserInputService')
+	local frame = script.Parent
+	local dragToggle = nil
+	local dragSpeed = 0.25
+	local dragStart = nil
+	local startPos = nil
+	
+	local function updateInput(input)
+		local delta = input.Position - dragStart
+		local position = UDim2.new(startPos.X.Scale, startPos.X.Offset + delta.X,
+			startPos.Y.Scale, startPos.Y.Offset + delta.Y)
+		game:GetService('TweenService'):Create(frame, TweenInfo.new(dragSpeed), {Position = position}):Play()
+	end
+	
+	frame.InputBegan:Connect(function(input)
+		if (input.UserInputType == Enum.UserInputType.MouseButton1 or input.UserInputType == Enum.UserInputType.Touch) then 
+			dragToggle = true
+			dragStart = input.Position
+			startPos = frame.Position
+			input.Changed:Connect(function()
+				if input.UserInputState == Enum.UserInputState.End then
+					dragToggle = false
+				end
+			end)
+		end
+	end)
+	
+	UIS.InputChanged:Connect(function(input)
+		if input.UserInputType == Enum.UserInputType.MouseMovement or input.UserInputType == Enum.UserInputType.Touch then
+			if dragToggle then
+				updateInput(input)
+			end
+		end
+	end)
+end
+coroutine.wrap(DLFL_fake_script)()
+local function IWBKFO_fake_script() -- Main.LocalScript 
+	local script = Instance.new('LocalScript', Main)
+
+	script.Parent.MouseButton1Click:Connect(function()
+		workspace.Game.Sound.Sound_effect.Click_Sound_Effect:Play()
+	end)
+end
+coroutine.wrap(IWBKFO_fake_script)()
