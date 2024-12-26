@@ -5,7 +5,7 @@
 	        4334
 ]]
 
---Script Edit 2/4/2023--
+--Script Edit 26/12/2024--
 
 --Please do not steal my script if you want Ask me first--
 
@@ -116,6 +116,7 @@ local Head = Instance.new("TextLabel")
 
 EasyRoom.Name = "EasyRoom"
 EasyRoom.Parent = game.Players.LocalPlayer:WaitForChild("PlayerGui")
+EasyRoom.Enabled = false
 EasyRoom.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
 
 Frame.Parent = EasyRoom
@@ -911,9 +912,10 @@ Head.TextXAlignment = Enum.TextXAlignment.Left
 
 -- Scripts:
 
-local function QNXSL_fake_script() -- EasyRoom.LocalScript 
+local function LGVTG_fake_script() -- EasyRoom.LocalScript 
 	local script = Instance.new('LocalScript', EasyRoom)
 
+	wait()
 	local GUI = script.Parent
 	local Main = GUI.Frame
 	
@@ -955,6 +957,7 @@ local function QNXSL_fake_script() -- EasyRoom.LocalScript
 	--//Start Up\\--
 	
 	GUI.Frame.Visible = false
+	script.Parent.Enabled = true
 	GUI.TextLabel.Size = UDim2.new(0,0,0,0)
 	GUI.TextLabel.Position = UDim2.new(0.482, 0,0.482, 0)
 	SendMessage(
@@ -1029,8 +1032,9 @@ local function QNXSL_fake_script() -- EasyRoom.LocalScript
 	for loop,UI in pairs(GUI.Frame:GetChildren()) do
 		if UI:IsA("ScrollingFrame") and UI.Name ~= "Main" then
 			for loop,UI in pairs(UI:GetChildren()) do
-				if UI:IsA("Frame") and UI:FindFirstChildOfClass("BoolValue") then
+				if UI:IsA("Frame") and UI:FindFirstChild("Frame") then
 					--local UI = Main.Character.D
+					local Bool = Instance.new("BoolValue",UI)
 					UI.Frame.TextButton.MouseButton1Click:Connect(function()
 						PlaySound(4499400560)
 						if UI.Value.Value == false then
@@ -1200,7 +1204,7 @@ local function QNXSL_fake_script() -- EasyRoom.LocalScript
 		if Main.Visual._6.Value.Value == true then
 			workspace.CurrentCamera.CameraSubject = workspace.monster
 		else
-			workspace.CurrentCamera.CameraSubject = Humanoid)
+			workspace.CurrentCamera.CameraSubject = Humanoid
 		end
 	end)
 	
@@ -1212,8 +1216,8 @@ local function QNXSL_fake_script() -- EasyRoom.LocalScript
 		A200.TextLabel.Text = "A-200 | "..math.floor((HumanoidRootPart.Position - workspace.monster2.Position).Magnitude/1.6).." M."
 	end
 end
-coroutine.wrap(QNXSL_fake_script)()
-local function FWDRX_fake_script() -- Frame.DraggableGUI 
+coroutine.wrap(LGVTG_fake_script)()
+local function ZGARPA_fake_script() -- Frame.DraggableGUI 
 	local script = Instance.new('LocalScript', Frame)
 
 	local UIS = game:GetService('UserInputService')
@@ -1251,4 +1255,4 @@ local function FWDRX_fake_script() -- Frame.DraggableGUI
 		end
 	end)
 end
-coroutine.wrap(FWDRX_fake_script)()
+coroutine.wrap(ZGARPA_fake_script)()
