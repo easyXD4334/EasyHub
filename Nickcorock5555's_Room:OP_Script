@@ -12,6 +12,7 @@
 --[[      
      This script was protected by LuaObfuscator.com   (Alpha 0.10.4) ~  Much Love, Ferib 
 ]]--
+
 -- GUI to Lua
 -----
 -- Version: 2.0.
@@ -533,7 +534,7 @@ _4_2.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
 _4_2.BorderColor3 = Color3.fromRGB(0, 0, 0)
 _4_2.BorderSizePixel = 0
 _4_2.Position = UDim2.new(0, 0, 0.128094152, 0)
-_4_2.Size = UDim2.new(0.999534309, 0, 0.13310647, 0)
+_4_2.Size = UDim2.new(1, 0, 0.0500000007, 0)
 _4_2.Font = Enum.Font.SourceSans
 _4_2.Text = ""
 _4_2.TextColor3 = Color3.fromRGB(0, 0, 0)
@@ -566,7 +567,7 @@ _3_2.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
 _3_2.BorderColor3 = Color3.fromRGB(0, 0, 0)
 _3_2.BorderSizePixel = 0
 _3_2.Position = UDim2.new(0, 0, 0.128094152, 0)
-_3_2.Size = UDim2.new(0.999534309, 0, 0.13310647, 0)
+_3_2.Size = UDim2.new(1, 0, 0.0500000007, 0)
 _3_2.Font = Enum.Font.SourceSans
 _3_2.Text = ""
 _3_2.TextColor3 = Color3.fromRGB(0, 0, 0)
@@ -599,7 +600,7 @@ _2_2.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
 _2_2.BorderColor3 = Color3.fromRGB(0, 0, 0)
 _2_2.BorderSizePixel = 0
 _2_2.Position = UDim2.new(0, 0, 0.128094152, 0)
-_2_2.Size = UDim2.new(0.999534309, 0, 0.13310647, 0)
+_2_2.Size = UDim2.new(1, 0, 0.0500000007, 0)
 _2_2.Font = Enum.Font.SourceSans
 _2_2.Text = ""
 _2_2.TextColor3 = Color3.fromRGB(0, 0, 0)
@@ -838,7 +839,7 @@ Head.TextXAlignment = Enum.TextXAlignment.Left
 
 -- Scripts:
 
-local function ATXSD_fake_script() -- EasyRoom.LocalScript 
+local function NIWW_fake_script() -- EasyRoom.LocalScript 
 	local script = Instance.new('LocalScript', EasyRoom)
 
 	wait()
@@ -872,7 +873,7 @@ local function ATXSD_fake_script() -- EasyRoom.LocalScript
 	local function PlaySound(ID)
 		local Sound = Instance.new("Sound",script.Parent)
 		Sound.SoundId = "rbxassetid://"..ID
-		Sound.Volume = 5
+		Sound.Volume = 0.5
 		Sound:Play()
 		
 		Sound.Ended:Connect(function()
@@ -1141,8 +1142,8 @@ local function ATXSD_fake_script() -- EasyRoom.LocalScript
 		A200.TextLabel.Text = "A-200 | "..math.floor((HumanoidRootPart.Position - workspace.monster2.Position).Magnitude/1.6).." M."
 	end
 end
-coroutine.wrap(ATXSD_fake_script)()
-local function SUGCAQZ_fake_script() -- Frame.DraggableGUI 
+coroutine.wrap(NIWW_fake_script)()
+local function PIHY_fake_script() -- Frame.DraggableGUI 
 	local script = Instance.new('LocalScript', Frame)
 
 	local UIS = game:GetService('UserInputService')
@@ -1180,4 +1181,4 @@ local function SUGCAQZ_fake_script() -- Frame.DraggableGUI
 		end
 	end)
 end
-coroutine.wrap(SUGCAQZ_fake_script)()
+coroutine.wrap(PIHY_fake_script)()
