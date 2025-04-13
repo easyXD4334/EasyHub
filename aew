@@ -1,4 +1,4 @@
-local keys = {enum.keycode.a,enum.keycode.s,enum.keycode.d,enum.keycode.f} -- MAKE THIS YOUR ROBEATS KEYBINDS FROM LEFT TO RIGHT (or let it auto grab)
+local keys = {Enum.KeyCode.a,Enum.KeyCode.s,Enum.KeyCode.d,Enum.KeyCode.f} -- MAKE THIS YOUR ROBEATS KEYBINDS FROM LEFT TO RIGHT (or let it auto grab)
 
 local VirtualInputManager = Instance.new("VirtualInputManager")
 local camera = workspace.CurrentCamera
