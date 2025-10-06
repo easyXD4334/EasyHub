@@ -1,0 +1,792 @@
+-- Gui to Lua
+-- Version: 3.2
+
+-- Instances:
+
+local BloxFruitTest = Instance.new("ScreenGui")
+local Frame = Instance.new("Frame")
+local Main = Instance.new("ScrollingFrame")
+local B = Instance.new("TextButton")
+local UIListLayout = Instance.new("UIListLayout")
+local A = Instance.new("TextButton")
+local MainButton = Instance.new("ScrollingFrame")
+local Main_2 = Instance.new("TextButton")
+local Tp = Instance.new("TextButton")
+local UIListLayout_2 = Instance.new("UIListLayout")
+local TP = Instance.new("ScrollingFrame")
+local A_2 = Instance.new("TextButton")
+local UIListLayout_3 = Instance.new("UIListLayout")
+local A_3 = Instance.new("TextButton")
+local A_4 = Instance.new("TextButton")
+local A_5 = Instance.new("TextButton")
+local A_6 = Instance.new("TextButton")
+local A_7 = Instance.new("TextButton")
+local TextButton = Instance.new("TextButton")
+
+--Properties:
+
+BloxFruitTest.Name = "BloxFruitTest"
+BloxFruitTest.Parent = game.Players.LocalPlayer:WaitForChild("PlayerGui")
+BloxFruitTest.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
+
+Frame.Parent = BloxFruitTest
+Frame.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
+Frame.BackgroundTransparency = 0.500
+Frame.BorderColor3 = Color3.fromRGB(0, 0, 0)
+Frame.BorderSizePixel = 0
+Frame.Position = UDim2.new(0.225641027, 0, 0.19921875, 0)
+Frame.Size = UDim2.new(0.578022003, 0, 0.6015625, 0)
+
+Main.Name = "Main"
+Main.Parent = Frame
+Main.Active = true
+Main.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+Main.BackgroundTransparency = 1.000
+Main.BorderColor3 = Color3.fromRGB(0, 0, 0)
+Main.BorderSizePixel = 0
+Main.Position = UDim2.new(0.288973391, 0, 0, 0)
+Main.Size = UDim2.new(0.711026549, 0, 1, 0)
+Main.Visible = false
+
+B.Name = "B"
+B.Parent = Main
+B.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
+B.BackgroundTransparency = 0.500
+B.BorderColor3 = Color3.fromRGB(0, 0, 0)
+B.BorderSizePixel = 0
+B.Size = UDim2.new(1, 0, 0.0500000007, 0)
+B.Font = Enum.Font.SourceSans
+B.Text = "Noclip"
+B.TextColor3 = Color3.fromRGB(255, 255, 255)
+B.TextScaled = true
+B.TextSize = 14.000
+B.TextWrapped = true
+
+UIListLayout.Parent = Main
+UIListLayout.SortOrder = Enum.SortOrder.LayoutOrder
+UIListLayout.Padding = UDim.new(0.00499999989, 0)
+
+A.Name = "A"
+A.Parent = Main
+A.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
+A.BackgroundTransparency = 0.500
+A.BorderColor3 = Color3.fromRGB(0, 0, 0)
+A.BorderSizePixel = 0
+A.Size = UDim2.new(1, 0, 0.0500000007, 0)
+A.Font = Enum.Font.SourceSans
+A.Text = "Walk speed boost"
+A.TextColor3 = Color3.fromRGB(255, 255, 255)
+A.TextScaled = true
+A.TextSize = 14.000
+A.TextWrapped = true
+
+MainButton.Name = "MainButton"
+MainButton.Parent = Frame
+MainButton.Active = true
+MainButton.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+MainButton.BackgroundTransparency = 1.000
+MainButton.BorderColor3 = Color3.fromRGB(0, 0, 0)
+MainButton.BorderSizePixel = 0
+MainButton.Size = UDim2.new(0.284574687, 0, 1, 0)
+
+Main_2.Name = "Main"
+Main_2.Parent = MainButton
+Main_2.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
+Main_2.BackgroundTransparency = 0.500
+Main_2.BorderColor3 = Color3.fromRGB(0, 0, 0)
+Main_2.BorderSizePixel = 0
+Main_2.Size = UDim2.new(1, 0, 0.0500000007, 0)
+Main_2.Font = Enum.Font.SourceSans
+Main_2.Text = "Main"
+Main_2.TextColor3 = Color3.fromRGB(255, 255, 255)
+Main_2.TextScaled = true
+Main_2.TextSize = 14.000
+Main_2.TextWrapped = true
+
+Tp.Name = "Tp"
+Tp.Parent = MainButton
+Tp.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
+Tp.BackgroundTransparency = 0.500
+Tp.BorderColor3 = Color3.fromRGB(0, 0, 0)
+Tp.BorderSizePixel = 0
+Tp.Size = UDim2.new(1, 0, 0.0500000007, 0)
+Tp.Font = Enum.Font.SourceSans
+Tp.Text = "Teleport"
+Tp.TextColor3 = Color3.fromRGB(255, 255, 255)
+Tp.TextScaled = true
+Tp.TextSize = 14.000
+Tp.TextWrapped = true
+
+UIListLayout_2.Parent = MainButton
+UIListLayout_2.SortOrder = Enum.SortOrder.LayoutOrder
+UIListLayout_2.Padding = UDim.new(0.00499999989, 0)
+
+TP.Name = "TP"
+TP.Parent = Frame
+TP.Active = true
+TP.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+TP.BackgroundTransparency = 1.000
+TP.BorderColor3 = Color3.fromRGB(0, 0, 0)
+TP.BorderSizePixel = 0
+TP.Position = UDim2.new(0.288973391, 0, 0, 0)
+TP.Size = UDim2.new(0.711026549, 0, 1, 0)
+
+A_2.Name = "A"
+A_2.Parent = TP
+A_2.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
+A_2.BackgroundTransparency = 0.500
+A_2.BorderColor3 = Color3.fromRGB(0, 0, 0)
+A_2.BorderSizePixel = 0
+A_2.Size = UDim2.new(1, 0, 0.0500000007, 0)
+A_2.Font = Enum.Font.SourceSans
+A_2.Text = "Port town"
+A_2.TextColor3 = Color3.fromRGB(255, 255, 255)
+A_2.TextScaled = true
+A_2.TextSize = 14.000
+A_2.TextWrapped = true
+
+UIListLayout_3.Parent = TP
+UIListLayout_3.SortOrder = Enum.SortOrder.LayoutOrder
+UIListLayout_3.Padding = UDim.new(0.00499999989, 0)
+
+A_3.Name = "A"
+A_3.Parent = TP
+A_3.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
+A_3.BackgroundTransparency = 0.500
+A_3.BorderColor3 = Color3.fromRGB(0, 0, 0)
+A_3.BorderSizePixel = 0
+A_3.Size = UDim2.new(1, 0, 0.0500000007, 0)
+A_3.Font = Enum.Font.SourceSans
+A_3.Text = "Claste on the sea"
+A_3.TextColor3 = Color3.fromRGB(255, 255, 255)
+A_3.TextScaled = true
+A_3.TextSize = 14.000
+A_3.TextWrapped = true
+
+A_4.Name = "A"
+A_4.Parent = TP
+A_4.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
+A_4.BackgroundTransparency = 0.500
+A_4.BorderColor3 = Color3.fromRGB(0, 0, 0)
+A_4.BorderSizePixel = 0
+A_4.Size = UDim2.new(1, 0, 0.0500000007, 0)
+A_4.Font = Enum.Font.SourceSans
+A_4.Text = "Cake"
+A_4.TextColor3 = Color3.fromRGB(255, 255, 255)
+A_4.TextScaled = true
+A_4.TextSize = 14.000
+A_4.TextWrapped = true
+
+A_5.Name = "A"
+A_5.Parent = TP
+A_5.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
+A_5.BackgroundTransparency = 0.500
+A_5.BorderColor3 = Color3.fromRGB(0, 0, 0)
+A_5.BorderSizePixel = 0
+A_5.Size = UDim2.new(1, 0, 0.0500000007, 0)
+A_5.Font = Enum.Font.SourceSans
+A_5.Text = "Tiki outpost"
+A_5.TextColor3 = Color3.fromRGB(255, 255, 255)
+A_5.TextScaled = true
+A_5.TextSize = 14.000
+A_5.TextWrapped = true
+
+A_6.Name = "A"
+A_6.Parent = TP
+A_6.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
+A_6.BackgroundTransparency = 0.500
+A_6.BorderColor3 = Color3.fromRGB(0, 0, 0)
+A_6.BorderSizePixel = 0
+A_6.Size = UDim2.new(1, 0, 0.0500000007, 0)
+A_6.Font = Enum.Font.SourceSans
+A_6.Text = "Bone"
+A_6.TextColor3 = Color3.fromRGB(255, 255, 255)
+A_6.TextScaled = true
+A_6.TextSize = 14.000
+A_6.TextWrapped = true
+
+A_7.Name = "A"
+A_7.Parent = TP
+A_7.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
+A_7.BackgroundTransparency = 0.500
+A_7.BorderColor3 = Color3.fromRGB(0, 0, 0)
+A_7.BorderSizePixel = 0
+A_7.Size = UDim2.new(1, 0, 0.0500000007, 0)
+A_7.Font = Enum.Font.SourceSans
+A_7.Text = "Stop tween"
+A_7.TextColor3 = Color3.fromRGB(255, 255, 255)
+A_7.TextScaled = true
+A_7.TextSize = 14.000
+A_7.TextWrapped = true
+
+TextButton.Parent = BloxFruitTest
+TextButton.BackgroundColor3 = Color3.fromRGB(255, 0, 0)
+TextButton.BorderColor3 = Color3.fromRGB(0, 0, 0)
+TextButton.BorderSizePixel = 0
+TextButton.Position = UDim2.new(0.760504186, 0, 0.097674422, 0)
+TextButton.Size = UDim2.new(0, 30, 0, 30)
+TextButton.Font = Enum.Font.SourceSans
+TextButton.Text = ""
+TextButton.TextColor3 = Color3.fromRGB(0, 0, 0)
+TextButton.TextSize = 14.000
+
+-- Scripts:
+
+local function PUAUUO_fake_script() -- B.ToggleNoclipButton 
+	local script = Instance.new('LocalScript', B)
+
+	local button = script.Parent
+	local Players = game:GetService("Players")
+	local LocalPlayer = Players.LocalPlayer
+	
+	local noclipEnabled = false
+	local running = false
+	
+	local function setNoclip(enabled)
+	    local character = LocalPlayer.Character or LocalPlayer.CharacterAdded:Wait()
+	    for _, part in character:GetDescendants() do
+	        if part:IsA("BasePart") then
+	            part.CanCollide = not enabled
+	        end
+	    end
+	end
+	
+	local function noclipLoop()
+	    running = true
+	    while noclipEnabled do
+	        setNoclip(true)
+	        task.wait(0.1)
+	    end
+	    setNoclip(false)
+	    running = false
+	end
+	
+	button.MouseButton1Click:Connect(function()
+	    noclipEnabled = not noclipEnabled
+	    if noclipEnabled and not running then
+	        button.Text = "Noclip: ON"
+	        task.spawn(noclipLoop)
+	    else
+	        button.Text = "Noclip: OFF"
+	    end
+	end)
+	
+	LocalPlayer.CharacterAdded:Connect(function(char)
+	    task.wait(0.1)
+	    if noclipEnabled and not running then
+	        task.spawn(noclipLoop)
+	    elseif not noclipEnabled then
+	        setNoclip(false)
+	    end
+	end)
+	
+	-- Set initial button text
+	if noclipEnabled then
+	    button.Text = "Noclip: ON"
+	else
+	    button.Text = "Noclip: OFF"
+	end
+	
+	
+end
+coroutine.wrap(PUAUUO_fake_script)()
+local function MPYMJ_fake_script() -- A.ToggleSpeedButton 
+	local script = Instance.new('LocalScript', A)
+
+	local button = script.Parent
+	local Players = game:GetService("Players")
+	local LocalPlayer = Players.LocalPlayer
+	
+	local speedEnabled = false
+	local running = false
+	local SPEED_ON = 365
+	local SPEED_OFF = 32
+	
+	local function setSpeed(speed)
+	    local character = LocalPlayer.Character or LocalPlayer.CharacterAdded:Wait()
+	    local humanoid = character:FindFirstChildOfClass("Humanoid")
+	    if humanoid then
+	        humanoid.WalkSpeed = speed
+	    end
+	end
+	
+	local function speedLoop()
+	    running = true
+	    while speedEnabled do
+	        setSpeed(SPEED_ON)
+	        task.wait()
+	    end
+	    setSpeed(SPEED_OFF)
+	    running = false
+	end
+	
+	button.MouseButton1Click:Connect(function()
+	    speedEnabled = not speedEnabled
+	    if speedEnabled and not running then
+	        button.Text = "Speed: ON"
+	        speedLoop()
+	    else
+	        button.Text = "Speed: OFF"
+	    end
+	end)
+	
+	LocalPlayer.CharacterAdded:Connect(function(char)
+	    task.wait(0.1)
+	    if speedEnabled then
+	        setSpeed(SPEED_ON)
+	    else
+	        setSpeed(SPEED_OFF)
+	    end
+	end)
+	
+	-- Set initial button text
+	if speedEnabled then
+	    button.Text = "Speed: ON"
+	else
+	    button.Text = "Speed: OFF"
+	end
+	
+	
+end
+coroutine.wrap(MPYMJ_fake_script)()
+local function XDWHLEG_fake_script() -- A_2.TeleportAndSpeedButton 
+	local script = Instance.new('LocalScript', A_2)
+
+	local button = script.Parent
+	local Players = game:GetService("Players")
+	local LocalPlayer = Players.LocalPlayer
+	
+	local MOVE_SPEED = 365
+	local CLOSE_DIST = 3 -- stop moving when within this distance
+	local Pos = Vector3.new(-388, 21, 5535)
+	
+	local function moveToTPPartWithBodyVelocity()
+	    local character = LocalPlayer.Character or LocalPlayer.CharacterAdded:Wait()
+	    local humanoid = character:FindFirstChildOfClass("Humanoid")
+	    local root = character:FindFirstChild("HumanoidRootPart")
+	    local tpPart = Workspace:FindFirstChild("TPPart")
+	    if not (humanoid and root) then return end
+	
+	    -- Remove any existing BodyVelocity
+	    for _, obj in root:GetChildren() do
+	        if obj:IsA("BodyVelocity") then
+	            obj:Destroy()
+	        end
+	    end
+	
+	    local bv = Instance.new("BodyVelocity")
+	    bv.MaxForce = Vector3.new(1e5, 1e5, 1e5)
+	    bv.Parent = root
+	
+	    local targetPos = Pos
+	    local reached = false
+	
+	    while not reached do
+	        root = character:FindFirstChild("HumanoidRootPart")
+	        if not root then break end
+	
+	        targetPos = Pos
+	        local direction = (targetPos - root.Position)
+	        local dist = direction.Magnitude
+	
+	        if dist < CLOSE_DIST then
+	            reached = true
+	            break
+	        end
+	
+	        bv.Velocity = direction.Unit * MOVE_SPEED
+	        task.wait(0.02)
+	    end
+	
+	    bv:Destroy()
+	end
+	
+	button.MouseButton1Click:Connect(function()
+	    moveToTPPartWithBodyVelocity()
+	end)
+	
+	
+	
+end
+coroutine.wrap(XDWHLEG_fake_script)()
+local function DKPOPUB_fake_script() -- A_3.TeleportAndSpeedButton 
+	local script = Instance.new('LocalScript', A_3)
+
+	local button = script.Parent
+	local Players = game:GetService("Players")
+	local LocalPlayer = Players.LocalPlayer
+	
+	local MOVE_SPEED = 365
+	local CLOSE_DIST = 3 -- stop moving when within this distance
+	local Pos = Vector3.new(-5482, 314, -2873)
+	
+	local function moveToTPPartWithBodyVelocity()
+	    local character = LocalPlayer.Character or LocalPlayer.CharacterAdded:Wait()
+	    local humanoid = character:FindFirstChildOfClass("Humanoid")
+	    local root = character:FindFirstChild("HumanoidRootPart")
+	    if not (humanoid and root) then return end
+	
+	    -- Remove any existing BodyVelocity
+	    for _, obj in root:GetChildren() do
+	        if obj:IsA("BodyVelocity") then
+	            obj:Destroy()
+	        end
+	    end
+	
+	    local bv = Instance.new("BodyVelocity")
+	    bv.MaxForce = Vector3.new(1e5, 1e5, 1e5)
+	    bv.Parent = root
+	
+	    local targetPos = Pos
+	    local reached = false
+	
+	    while not reached do
+	        root = character:FindFirstChild("HumanoidRootPart")
+	        if not root then break end
+	
+	        targetPos = Pos
+	        local direction = (targetPos - root.Position)
+	        local dist = direction.Magnitude
+	
+	        if dist < CLOSE_DIST then
+	            reached = true
+	            break
+	        end
+	
+	        bv.Velocity = direction.Unit * MOVE_SPEED
+	        task.wait(0.02)
+	    end
+	
+	    bv:Destroy()
+	    -- Snap to final position
+	    character:PivotTo(tpPart.CFrame)
+	end
+	
+	button.MouseButton1Click:Connect(function()
+	    moveToTPPartWithBodyVelocity()
+	end)
+	
+	
+	
+end
+coroutine.wrap(DKPOPUB_fake_script)()
+local function VEFMF_fake_script() -- A_4.TeleportAndSpeedButton 
+	local script = Instance.new('LocalScript', A_4)
+
+	local button = script.Parent
+	local Players = game:GetService("Players")
+	local LocalPlayer = Players.LocalPlayer
+	
+	local MOVE_SPEED = 365
+	local CLOSE_DIST = 3 -- stop moving when within this distance
+	local Pos = Vector3.new(-2119, 70, -12229)
+	
+	local function moveToTPPartWithBodyVelocity()
+	    local character = LocalPlayer.Character or LocalPlayer.CharacterAdded:Wait()
+	    local humanoid = character:FindFirstChildOfClass("Humanoid")
+	    local root = character:FindFirstChild("HumanoidRootPart")
+	    if not (humanoid and root) then return end
+	
+	    -- Remove any existing BodyVelocity
+	    for _, obj in root:GetChildren() do
+	        if obj:IsA("BodyVelocity") then
+	            obj:Destroy()
+	        end
+	    end
+	
+	    local bv = Instance.new("BodyVelocity")
+	    bv.MaxForce = Vector3.new(1e5, 1e5, 1e5)
+	    bv.Parent = root
+	
+	    local targetPos = Pos
+	    local reached = false
+	
+	    while not reached do
+	        root = character:FindFirstChild("HumanoidRootPart")
+	        if not root then break end
+	
+	        targetPos = Pos
+	        local direction = (targetPos - root.Position)
+	        local dist = direction.Magnitude
+	
+	        if dist < CLOSE_DIST then
+	            reached = true
+	            break
+	        end
+	
+	        bv.Velocity = direction.Unit * MOVE_SPEED
+	        task.wait(0.02)
+	    end
+	
+	    bv:Destroy()
+	end
+	
+	button.MouseButton1Click:Connect(function()
+	    moveToTPPartWithBodyVelocity()
+	end)
+	
+	
+	
+end
+coroutine.wrap(VEFMF_fake_script)()
+local function UAVCNVS_fake_script() -- A_5.TeleportAndSpeedButton 
+	local script = Instance.new('LocalScript', A_5)
+
+	local button = script.Parent
+	local Players = game:GetService("Players")
+	local LocalPlayer = Players.LocalPlayer
+	
+	local MOVE_SPEED = 365
+	local CLOSE_DIST = 3 -- stop moving when within this distance
+	local Pos = Vector3.new(-16455, 528, 449)
+	
+	local function moveToTPPartWithBodyVelocity()
+	    local character = LocalPlayer.Character or LocalPlayer.CharacterAdded:Wait()
+	    local humanoid = character:FindFirstChildOfClass("Humanoid")
+	    local root = character:FindFirstChild("HumanoidRootPart")
+	    if not (humanoid and root ) then return end
+	
+	    -- Remove any existing BodyVelocity
+	    for _, obj in root:GetChildren() do
+	        if obj:IsA("BodyVelocity") then
+	            obj:Destroy()
+	        end
+	    end
+	
+	    local bv = Instance.new("BodyVelocity")
+	    bv.MaxForce = Vector3.new(1e5, 1e5, 1e5)
+	    bv.Parent = root
+	
+	    local targetPos = Pos
+	    local reached = false
+	
+	    while not reached do
+	        root = character:FindFirstChild("HumanoidRootPart")
+	        if not root then break end
+	
+	        targetPos = Pos
+	        local direction = (targetPos - root.Position)
+	        local dist = direction.Magnitude
+	
+	        if dist < CLOSE_DIST then
+	            reached = true
+	            break
+	        end
+	
+	        bv.Velocity = direction.Unit * MOVE_SPEED
+	        task.wait(0.02)
+	    end
+	
+	    bv:Destroy()
+	end
+	
+	button.MouseButton1Click:Connect(function()
+	    moveToTPPartWithBodyVelocity()
+	end)
+	
+	
+	
+end
+coroutine.wrap(UAVCNVS_fake_script)()
+local function LGNEFN_fake_script() -- A_6.TeleportAndSpeedButton 
+	local script = Instance.new('LocalScript', A_6)
+
+	local button = script.Parent
+	local Players = game:GetService("Players")
+	local LocalPlayer = Players.LocalPlayer
+	
+	local MOVE_SPEED = 365
+	local CLOSE_DIST = 3 -- stop moving when within this distance
+	local Pos = Vector3.new(-9513, 142, 5550)
+	
+	local function moveToTPPartWithBodyVelocity()
+	    local character = LocalPlayer.Character or LocalPlayer.CharacterAdded:Wait()
+	    local humanoid = character:FindFirstChildOfClass("Humanoid")
+	    local root = character:FindFirstChild("HumanoidRootPart")
+	    if not (humanoid and root ) then return end
+	
+	    -- Remove any existing BodyVelocity
+	    for _, obj in root:GetChildren() do
+	        if obj:IsA("BodyVelocity") then
+	            obj:Destroy()
+	        end
+	    end
+	
+	    local bv = Instance.new("BodyVelocity")
+	    bv.MaxForce = Vector3.new(1e5, 1e5, 1e5)
+	    bv.Parent = root
+	
+	    local targetPos = Pos
+	    local reached = false
+	
+	    while not reached do
+	        root = character:FindFirstChild("HumanoidRootPart")
+	        if not root then break end
+	
+	        targetPos = Pos
+	        local direction = (targetPos - root.Position)
+	        local dist = direction.Magnitude
+	
+	        if dist < CLOSE_DIST then
+	            reached = true
+	            break
+	        end
+	
+	        bv.Velocity = direction.Unit * MOVE_SPEED
+	        task.wait(0.02)
+	    end
+	
+	    bv:Destroy()
+	end
+	
+	button.MouseButton1Click:Connect(function()
+	    moveToTPPartWithBodyVelocity()
+	end)
+	
+	
+	
+end
+coroutine.wrap(LGNEFN_fake_script)()
+local function KFJRO_fake_script() -- A_7.TeleportAndSpeedButton 
+	local script = Instance.new('LocalScript', A_7)
+
+	local button = script.Parent
+	local Players = game:GetService("Players")
+	local LocalPlayer = Players.LocalPlayer
+	
+	local MOVE_SPEED = 365
+	local CLOSE_DIST = 3 -- stop moving when within this distance
+	local Pos = Vector3.new(-9513, 142, 5550)
+	
+	local function moveToTPPartWithBodyVelocity()
+	    local character = LocalPlayer.Character or LocalPlayer.CharacterAdded:Wait()
+	    local humanoid = character:FindFirstChildOfClass("Humanoid")
+	    local root = character:FindFirstChild("HumanoidRootPart")
+	    if not (humanoid and root ) then return end
+	
+	    -- Remove any existing BodyVelocity
+	    for _, obj in root:GetChildren() do
+	        if obj:IsA("BodyVelocity") then
+	            obj:Destroy()
+	        end
+	    end
+	end
+	
+	button.MouseButton1Click:Connect(function()
+	    moveToTPPartWithBodyVelocity()
+	end)
+	
+	
+	
+end
+coroutine.wrap(KFJRO_fake_script)()
+local function KRIXSPS_fake_script() -- Frame.LocalScript 
+	local script = Instance.new('LocalScript', Frame)
+
+	local UIS = game:GetService('UserInputService')
+	local frame = script.Parent
+	local dragToggle = nil
+	local dragSpeed = 0.25
+	local dragStart = nil
+	local startPos = nil
+	
+	local function updateInput(input)
+		local delta = input.Position - dragStart
+		local position = UDim2.new(startPos.X.Scale, startPos.X.Offset + delta.X,
+			startPos.Y.Scale, startPos.Y.Offset + delta.Y)
+		game:GetService('TweenService'):Create(frame, TweenInfo.new(dragSpeed), {Position = position}):Play()
+	end
+	
+	frame.InputBegan:Connect(function(input)
+		if (input.UserInputType == Enum.UserInputType.MouseButton1 or input.UserInputType == Enum.UserInputType.Touch) then 
+			dragToggle = true
+			dragStart = input.Position
+			startPos = frame.Position
+			input.Changed:Connect(function()
+				if input.UserInputState == Enum.UserInputState.End then
+					dragToggle = false
+				end
+			end)
+		end
+	end)
+	
+	UIS.InputChanged:Connect(function(input)
+		if input.UserInputType == Enum.UserInputType.MouseMovement or input.UserInputType == Enum.UserInputType.Touch then
+			if dragToggle then
+				updateInput(input)
+			end
+		end
+	end)
+end
+coroutine.wrap(KRIXSPS_fake_script)()
+local function UAZT_fake_script() -- Frame.LocalScript 
+	local script = Instance.new('LocalScript', Frame)
+
+	script.Parent.MainButton.Main.MouseButton1Click:Connect(function()
+		script.Parent.Main.Visible = true
+		script.Parent.TP.Visible = false
+	end)
+	
+	script.Parent.MainButton.Tp.MouseButton1Click:Connect(function()
+		script.Parent.Main.Visible = false
+		script.Parent.TP.Visible = true
+	end)
+end
+coroutine.wrap(UAZT_fake_script)()
+local function PEMG_fake_script() -- TextButton.LocalScript 
+	local script = Instance.new('LocalScript', TextButton)
+
+	local UIS = game:GetService('UserInputService')
+	local frame = script.Parent
+	local dragToggle = nil
+	local dragSpeed = 0.25
+	local dragStart = nil
+	local startPos = nil
+	
+	local function updateInput(input)
+		local delta = input.Position - dragStart
+		local position = UDim2.new(startPos.X.Scale, startPos.X.Offset + delta.X,
+			startPos.Y.Scale, startPos.Y.Offset + delta.Y)
+		game:GetService('TweenService'):Create(frame, TweenInfo.new(dragSpeed), {Position = position}):Play()
+	end
+	
+	frame.InputBegan:Connect(function(input)
+		if (input.UserInputType == Enum.UserInputType.MouseButton1 or input.UserInputType == Enum.UserInputType.Touch) then 
+			dragToggle = true
+			dragStart = input.Position
+			startPos = frame.Position
+			input.Changed:Connect(function()
+				if input.UserInputState == Enum.UserInputState.End then
+					dragToggle = false
+				end
+			end)
+		end
+	end)
+	
+	UIS.InputChanged:Connect(function(input)
+		if input.UserInputType == Enum.UserInputType.MouseMovement or input.UserInputType == Enum.UserInputType.Touch then
+			if dragToggle then
+				updateInput(input)
+			end
+		end
+	end)
+end
+coroutine.wrap(PEMG_fake_script)()
+local function TAPYBSB_fake_script() -- TextButton.LocalScript 
+	local script = Instance.new('LocalScript', TextButton)
+
+	local Open = true
+	
+	script.Parent.MouseButton1Down:Connect(function()
+		if Open == true then
+			script.Parent.Parent.Frame.Visible = true
+			script.Parent.BackgroundColor3 = Color3.new(0,1,0)
+			Open = false
+		else
+			script.Parent.Parent.Frame.Visible = false
+			script.Parent.BackgroundColor3 = Color3.new(1,0,0)
+			Open = true
+		end
+	end)
+end
+coroutine.wrap(TAPYBSB_fake_script)()
