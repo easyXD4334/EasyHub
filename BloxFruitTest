@@ -232,7 +232,7 @@ TextButton.TextSize = 14.000
 
 -- Scripts:
 
-local function PUAUUO_fake_script() -- B.ToggleNoclipButton 
+local function QIKGZDA_fake_script() -- B.ToggleNoclipButton 
 	local script = Instance.new('LocalScript', B)
 
 	local button = script.Parent
@@ -289,8 +289,8 @@ local function PUAUUO_fake_script() -- B.ToggleNoclipButton
 	
 	
 end
-coroutine.wrap(PUAUUO_fake_script)()
-local function MPYMJ_fake_script() -- A.ToggleSpeedButton 
+coroutine.wrap(QIKGZDA_fake_script)()
+local function WTLD_fake_script() -- A.ToggleSpeedButton 
 	local script = Instance.new('LocalScript', A)
 
 	local button = script.Parent
@@ -348,8 +348,8 @@ local function MPYMJ_fake_script() -- A.ToggleSpeedButton
 	
 	
 end
-coroutine.wrap(MPYMJ_fake_script)()
-local function XDWHLEG_fake_script() -- A_2.TeleportAndSpeedButton 
+coroutine.wrap(WTLD_fake_script)()
+local function GNLWW_fake_script() -- A_2.TeleportAndSpeedButton 
 	local script = Instance.new('LocalScript', A_2)
 
 	local button = script.Parent
@@ -364,7 +364,6 @@ local function XDWHLEG_fake_script() -- A_2.TeleportAndSpeedButton
 	    local character = LocalPlayer.Character or LocalPlayer.CharacterAdded:Wait()
 	    local humanoid = character:FindFirstChildOfClass("Humanoid")
 	    local root = character:FindFirstChild("HumanoidRootPart")
-	    local tpPart = Workspace:FindFirstChild("TPPart")
 	    if not (humanoid and root) then return end
 	
 	    -- Remove any existing BodyVelocity
@@ -408,8 +407,8 @@ local function XDWHLEG_fake_script() -- A_2.TeleportAndSpeedButton
 	
 	
 end
-coroutine.wrap(XDWHLEG_fake_script)()
-local function DKPOPUB_fake_script() -- A_3.TeleportAndSpeedButton 
+coroutine.wrap(GNLWW_fake_script)()
+local function ZWHHR_fake_script() -- A_3.TeleportAndSpeedButton 
 	local script = Instance.new('LocalScript', A_3)
 
 	local button = script.Parent
@@ -458,8 +457,6 @@ local function DKPOPUB_fake_script() -- A_3.TeleportAndSpeedButton
 	    end
 	
 	    bv:Destroy()
-	    -- Snap to final position
-	    character:PivotTo(tpPart.CFrame)
 	end
 	
 	button.MouseButton1Click:Connect(function()
@@ -469,8 +466,8 @@ local function DKPOPUB_fake_script() -- A_3.TeleportAndSpeedButton
 	
 	
 end
-coroutine.wrap(DKPOPUB_fake_script)()
-local function VEFMF_fake_script() -- A_4.TeleportAndSpeedButton 
+coroutine.wrap(ZWHHR_fake_script)()
+local function IJBVNEC_fake_script() -- A_4.TeleportAndSpeedButton 
 	local script = Instance.new('LocalScript', A_4)
 
 	local button = script.Parent
@@ -528,8 +525,8 @@ local function VEFMF_fake_script() -- A_4.TeleportAndSpeedButton
 	
 	
 end
-coroutine.wrap(VEFMF_fake_script)()
-local function UAVCNVS_fake_script() -- A_5.TeleportAndSpeedButton 
+coroutine.wrap(IJBVNEC_fake_script)()
+local function MDGE_fake_script() -- A_5.TeleportAndSpeedButton 
 	local script = Instance.new('LocalScript', A_5)
 
 	local button = script.Parent
@@ -587,8 +584,8 @@ local function UAVCNVS_fake_script() -- A_5.TeleportAndSpeedButton
 	
 	
 end
-coroutine.wrap(UAVCNVS_fake_script)()
-local function LGNEFN_fake_script() -- A_6.TeleportAndSpeedButton 
+coroutine.wrap(MDGE_fake_script)()
+local function GEJBTX_fake_script() -- A_6.TeleportAndSpeedButton 
 	local script = Instance.new('LocalScript', A_6)
 
 	local button = script.Parent
@@ -646,8 +643,8 @@ local function LGNEFN_fake_script() -- A_6.TeleportAndSpeedButton
 	
 	
 end
-coroutine.wrap(LGNEFN_fake_script)()
-local function KFJRO_fake_script() -- A_7.TeleportAndSpeedButton 
+coroutine.wrap(GEJBTX_fake_script)()
+local function CFFIYIR_fake_script() -- A_7.TeleportAndSpeedButton 
 	local script = Instance.new('LocalScript', A_7)
 
 	local button = script.Parent
@@ -679,8 +676,8 @@ local function KFJRO_fake_script() -- A_7.TeleportAndSpeedButton
 	
 	
 end
-coroutine.wrap(KFJRO_fake_script)()
-local function KRIXSPS_fake_script() -- Frame.LocalScript 
+coroutine.wrap(CFFIYIR_fake_script)()
+local function FJZMQJ_fake_script() -- Frame.LocalScript 
 	local script = Instance.new('LocalScript', Frame)
 
 	local UIS = game:GetService('UserInputService')
@@ -718,8 +715,8 @@ local function KRIXSPS_fake_script() -- Frame.LocalScript
 		end
 	end)
 end
-coroutine.wrap(KRIXSPS_fake_script)()
-local function UAZT_fake_script() -- Frame.LocalScript 
+coroutine.wrap(FJZMQJ_fake_script)()
+local function JLMRVSQ_fake_script() -- Frame.LocalScript 
 	local script = Instance.new('LocalScript', Frame)
 
 	script.Parent.MainButton.Main.MouseButton1Click:Connect(function()
@@ -732,8 +729,8 @@ local function UAZT_fake_script() -- Frame.LocalScript
 		script.Parent.TP.Visible = true
 	end)
 end
-coroutine.wrap(UAZT_fake_script)()
-local function PEMG_fake_script() -- TextButton.LocalScript 
+coroutine.wrap(JLMRVSQ_fake_script)()
+local function XKNOAV_fake_script() -- TextButton.LocalScript 
 	local script = Instance.new('LocalScript', TextButton)
 
 	local UIS = game:GetService('UserInputService')
@@ -771,8 +768,8 @@ local function PEMG_fake_script() -- TextButton.LocalScript
 		end
 	end)
 end
-coroutine.wrap(PEMG_fake_script)()
-local function TAPYBSB_fake_script() -- TextButton.LocalScript 
+coroutine.wrap(XKNOAV_fake_script)()
+local function PUUU_fake_script() -- TextButton.LocalScript 
 	local script = Instance.new('LocalScript', TextButton)
 
 	local Open = true
@@ -789,4 +786,4 @@ local function TAPYBSB_fake_script() -- TextButton.LocalScript
 		end
 	end)
 end
-coroutine.wrap(TAPYBSB_fake_script)()
+coroutine.wrap(PUUU_fake_script)()
