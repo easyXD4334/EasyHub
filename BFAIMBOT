@@ -162,9 +162,11 @@ spawn(function()
 	pcall(function()
 		while wait(0.2) do
 			local nearestPlayer, distance = getNearestPlayer()
+			if getgenv().setting['LockPlayers'] == false then
+				Playersaimbot = nearestPlayer.Name
+				PlayersPosition = nearestPlayer.Character.HumanoidRootPart.Position
+			end
 			
-			Playersaimbot = nearestPlayer.Name
-			PlayersPosition = nearestPlayer.Character.HumanoidRootPart.Position
 			--[[
 			for i, v in pairs(players.GetPlayers(players)) do
 				if game.Workspace.Characters:FindFirstChild(v.Name) or game.Workspace.Characters:FindFirstChild(v.DisplayName) then
