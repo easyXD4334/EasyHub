@@ -1,6 +1,6 @@
-
 -- Generated using RoadToGlory's Converter v1.1 (RoadToGlory#9879)
---Version 25/10/2568 V.1.1
+--Version 1.2
+--25/10/2568
 -- Instances:
 
 local Converted = {
@@ -73,33 +73,53 @@ local Converted = {
 	["_AFrame"] = Instance.new("Frame");
 	["_SelectPlayer1"] = Instance.new("TextButton");
 	["_PlayerSelectDropdown1"] = Instance.new("LocalScript");
-	["_AFrame1"] = Instance.new("Frame");
-	["_TextLabel3"] = Instance.new("TextLabel");
-	["_TextBox1"] = Instance.new("TextBox");
 	["_A2"] = Instance.new("TextLabel");
-	["_B1"] = Instance.new("TextLabel");
+	["_B2Test"] = Instance.new("TextLabel");
 	["_C"] = Instance.new("TextButton");
+	["_ToggleButton"] = Instance.new("LocalScript");
 	["_F"] = Instance.new("TextLabel");
-	["_E"] = Instance.new("TextButton");
-	["_CheckIfSameTeamToggle"] = Instance.new("LocalScript");
+	["_B0"] = Instance.new("TextButton");
 	["_G"] = Instance.new("TextButton");
 	["_ShowOtherPlayerNamesOnClick"] = Instance.new("LocalScript");
+	["_B1Test"] = Instance.new("TextButton");
+	["_ToggleButton1"] = Instance.new("LocalScript");
+	["_LocalScript7"] = Instance.new("LocalScript");
+	["_C1Test"] = Instance.new("TextButton");
+	["_ToggleButton2"] = Instance.new("LocalScript");
+	["_E1"] = Instance.new("TextButton");
+	["_ToggleButton3"] = Instance.new("LocalScript");
+	["_D"] = Instance.new("TextButton");
+	["_ToggleButton4"] = Instance.new("LocalScript");
 	["_Setting"] = Instance.new("ScrollingFrame");
 	["_UIListLayout5"] = Instance.new("UIListLayout");
 	["_Simple2"] = Instance.new("TextButton");
-	["_AFrame2"] = Instance.new("Frame");
-	["_TextLabel4"] = Instance.new("TextLabel");
-	["_TextBox2"] = Instance.new("TextBox");
+	["_AFrame1"] = Instance.new("Frame");
+	["_TextLabel3"] = Instance.new("TextLabel");
+	["_TextBox1"] = Instance.new("TextBox");
 	["_A3"] = Instance.new("TextLabel");
 	["_BFrame"] = Instance.new("Frame");
-	["_TextLabel5"] = Instance.new("TextLabel");
-	["_TextBox3"] = Instance.new("TextBox");
+	["_TextLabel4"] = Instance.new("TextLabel");
+	["_TextBox2"] = Instance.new("TextBox");
+	["_C1"] = Instance.new("TextLabel");
+	["_D1"] = Instance.new("TextButton");
+	["_ConfirmAndRemoveScreenGui"] = Instance.new("LocalScript");
 	["_Icon"] = Instance.new("ImageLabel");
+	["_TextLabel5"] = Instance.new("TextLabel");
 	["_Theme1"] = Instance.new("ImageLabel");
-	["_TextLabel6"] = Instance.new("TextLabel");
-	["_Theme11"] = Instance.new("ImageLabel");
 	["_TextButton5"] = Instance.new("TextButton");
-	["_LocalScript7"] = Instance.new("LocalScript");
+	["_LocalScript8"] = Instance.new("LocalScript");
+	["_Main2"] = Instance.new("Frame");
+	["_MainCorner"] = Instance.new("UICorner");
+	["_Profile"] = Instance.new("Frame");
+	["_ProfileCorner"] = Instance.new("UICorner");
+	["_HealthPlayers"] = Instance.new("TextLabel");
+	["_NamePlayers"] = Instance.new("TextLabel");
+	["_Healthbar"] = Instance.new("Frame");
+	["_HealthbarCorner"] = Instance.new("UICorner");
+	["_Healthgreen"] = Instance.new("Frame");
+	["_HealthgreenCorner"] = Instance.new("UICorner");
+	["_ImageProfile"] = Instance.new("ImageLabel");
+	["_ImageProfileCorner"] = Instance.new("UICorner");
 }
 
 -- Properties:
@@ -444,6 +464,7 @@ Converted["_TpPlr1"].BorderColor3 = Color3.fromRGB(0, 0, 0)
 Converted["_TpPlr1"].BorderSizePixel = 0
 Converted["_TpPlr1"].Position = UDim2.new(0.288973391, 0, 0, 0)
 Converted["_TpPlr1"].Size = UDim2.new(0.711026549, 0, 1, 0)
+Converted["_TpPlr1"].Visible = false
 Converted["_TpPlr1"].Name = "TpPlr"
 Converted["_TpPlr1"].Parent = Converted["_Frame"]
 
@@ -673,7 +694,6 @@ Converted["_PvP1"].BorderColor3 = Color3.fromRGB(0, 0, 0)
 Converted["_PvP1"].BorderSizePixel = 0
 Converted["_PvP1"].Position = UDim2.new(0.288973391, 0, 0, 0)
 Converted["_PvP1"].Size = UDim2.new(0.711026549, 0, 1, 0)
-Converted["_PvP1"].Visible = false
 Converted["_PvP1"].Name = "PvP"
 Converted["_PvP1"].Parent = Converted["_Frame"]
 
@@ -717,43 +737,6 @@ Converted["_SelectPlayer1"].Size = UDim2.new(0.602852821, 0, 1.00000012, 0)
 Converted["_SelectPlayer1"].Name = "SelectPlayer"
 Converted["_SelectPlayer1"].Parent = Converted["_AFrame"]
 
-Converted["_AFrame1"].BackgroundColor3 = Color3.fromRGB(0, 0, 0)
-Converted["_AFrame1"].BackgroundTransparency = 0.5
-Converted["_AFrame1"].BorderColor3 = Color3.fromRGB(0, 0, 0)
-Converted["_AFrame1"].BorderSizePixel = 0
-Converted["_AFrame1"].Size = UDim2.new(1, 0, 0.0500000007, 0)
-Converted["_AFrame1"].Name = "AFrame"
-Converted["_AFrame1"].Parent = Converted["_PvP1"]
-
-Converted["_TextLabel3"].Font = Enum.Font.SourceSans
-Converted["_TextLabel3"].Text = "Keep Distance"
-Converted["_TextLabel3"].TextColor3 = Color3.fromRGB(255, 255, 255)
-Converted["_TextLabel3"].TextScaled = true
-Converted["_TextLabel3"].TextSize = 14
-Converted["_TextLabel3"].TextWrapped = true
-Converted["_TextLabel3"].BackgroundColor3 = Color3.fromRGB(255, 255, 255)
-Converted["_TextLabel3"].BackgroundTransparency = 0.699999988079071
-Converted["_TextLabel3"].BorderColor3 = Color3.fromRGB(0, 0, 0)
-Converted["_TextLabel3"].BorderSizePixel = 0
-Converted["_TextLabel3"].Position = UDim2.new(-7.67086874e-08, 0, 0, 0)
-Converted["_TextLabel3"].Size = UDim2.new(0.529958665, 0, 1.00000012, 0)
-Converted["_TextLabel3"].Parent = Converted["_AFrame1"]
-
-Converted["_TextBox1"].Font = Enum.Font.SourceSans
-Converted["_TextBox1"].PlaceholderText = "Type Here"
-Converted["_TextBox1"].Text = ""
-Converted["_TextBox1"].TextColor3 = Color3.fromRGB(255, 255, 255)
-Converted["_TextBox1"].TextScaled = true
-Converted["_TextBox1"].TextSize = 14
-Converted["_TextBox1"].TextWrapped = true
-Converted["_TextBox1"].BackgroundColor3 = Color3.fromRGB(0, 0, 0)
-Converted["_TextBox1"].BackgroundTransparency = 0.699999988079071
-Converted["_TextBox1"].BorderColor3 = Color3.fromRGB(0, 0, 0)
-Converted["_TextBox1"].BorderSizePixel = 0
-Converted["_TextBox1"].Position = UDim2.new(0.58315295, 0, 0, 0)
-Converted["_TextBox1"].Size = UDim2.new(0.384170413, 0, 1, 0)
-Converted["_TextBox1"].Parent = Converted["_AFrame1"]
-
 Converted["_A2"].Font = Enum.Font.SourceSans
 Converted["_A2"].Text = "Slient Aimbot"
 Converted["_A2"].TextColor3 = Color3.fromRGB(255, 255, 255)
@@ -769,20 +752,20 @@ Converted["_A2"].Size = UDim2.new(1, 0, 0.0500000007, 0)
 Converted["_A2"].Name = "A"
 Converted["_A2"].Parent = Converted["_PvP1"]
 
-Converted["_B1"].Font = Enum.Font.SourceSans
-Converted["_B1"].Text = ""
-Converted["_B1"].TextColor3 = Color3.fromRGB(255, 255, 255)
-Converted["_B1"].TextScaled = true
-Converted["_B1"].TextSize = 14
-Converted["_B1"].TextWrapped = true
-Converted["_B1"].TextXAlignment = Enum.TextXAlignment.Left
-Converted["_B1"].BackgroundColor3 = Color3.fromRGB(255, 255, 255)
-Converted["_B1"].BackgroundTransparency = 1
-Converted["_B1"].BorderColor3 = Color3.fromRGB(0, 0, 0)
-Converted["_B1"].BorderSizePixel = 0
-Converted["_B1"].Size = UDim2.new(1, 0, 0.0500000007, 0)
-Converted["_B1"].Name = "B"
-Converted["_B1"].Parent = Converted["_PvP1"]
+Converted["_B2Test"].Font = Enum.Font.SourceSans
+Converted["_B2Test"].Text = ""
+Converted["_B2Test"].TextColor3 = Color3.fromRGB(255, 255, 255)
+Converted["_B2Test"].TextScaled = true
+Converted["_B2Test"].TextSize = 14
+Converted["_B2Test"].TextWrapped = true
+Converted["_B2Test"].TextXAlignment = Enum.TextXAlignment.Left
+Converted["_B2Test"].BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+Converted["_B2Test"].BackgroundTransparency = 1
+Converted["_B2Test"].BorderColor3 = Color3.fromRGB(0, 0, 0)
+Converted["_B2Test"].BorderSizePixel = 0
+Converted["_B2Test"].Size = UDim2.new(1, 0, 0.0500000007, 0)
+Converted["_B2Test"].Name = "B2Test"
+Converted["_B2Test"].Parent = Converted["_PvP1"]
 
 Converted["_C"].Font = Enum.Font.SourceSans
 Converted["_C"].Text = "Aimbot Nearest:off"
@@ -813,19 +796,19 @@ Converted["_F"].Size = UDim2.new(1, 0, 0.0500000007, 0)
 Converted["_F"].Name = "F"
 Converted["_F"].Parent = Converted["_PvP1"]
 
-Converted["_E"].Font = Enum.Font.SourceSans
-Converted["_E"].Text = "CheckIfSameTeam:off"
-Converted["_E"].TextColor3 = Color3.fromRGB(255, 255, 255)
-Converted["_E"].TextScaled = true
-Converted["_E"].TextSize = 14
-Converted["_E"].TextWrapped = true
-Converted["_E"].BackgroundColor3 = Color3.fromRGB(0, 0, 0)
-Converted["_E"].BackgroundTransparency = 0.699999988079071
-Converted["_E"].BorderColor3 = Color3.fromRGB(0, 0, 0)
-Converted["_E"].BorderSizePixel = 0
-Converted["_E"].Size = UDim2.new(1, 0, 0.0500000007, 0)
-Converted["_E"].Name = "E"
-Converted["_E"].Parent = Converted["_PvP1"]
+Converted["_B0"].Font = Enum.Font.SourceSans
+Converted["_B0"].Text = "Reset Aimbot"
+Converted["_B0"].TextColor3 = Color3.fromRGB(255, 255, 255)
+Converted["_B0"].TextScaled = true
+Converted["_B0"].TextSize = 14
+Converted["_B0"].TextWrapped = true
+Converted["_B0"].BackgroundColor3 = Color3.fromRGB(0, 0, 0)
+Converted["_B0"].BackgroundTransparency = 0.699999988079071
+Converted["_B0"].BorderColor3 = Color3.fromRGB(0, 0, 0)
+Converted["_B0"].BorderSizePixel = 0
+Converted["_B0"].Size = UDim2.new(1, 0, 0.0500000007, 0)
+Converted["_B0"].Name = "B0"
+Converted["_B0"].Parent = Converted["_PvP1"]
 
 Converted["_G"].Font = Enum.Font.SourceSans
 Converted["_G"].Text = "Show Player Name:off"
@@ -840,6 +823,62 @@ Converted["_G"].BorderSizePixel = 0
 Converted["_G"].Size = UDim2.new(1, 0, 0.0500000007, 0)
 Converted["_G"].Name = "G"
 Converted["_G"].Parent = Converted["_PvP1"]
+
+Converted["_B1Test"].Font = Enum.Font.SourceSans
+Converted["_B1Test"].Text = "Aimbot Selected:off"
+Converted["_B1Test"].TextColor3 = Color3.fromRGB(255, 255, 255)
+Converted["_B1Test"].TextScaled = true
+Converted["_B1Test"].TextSize = 14
+Converted["_B1Test"].TextWrapped = true
+Converted["_B1Test"].BackgroundColor3 = Color3.fromRGB(0, 0, 0)
+Converted["_B1Test"].BackgroundTransparency = 0.699999988079071
+Converted["_B1Test"].BorderColor3 = Color3.fromRGB(0, 0, 0)
+Converted["_B1Test"].BorderSizePixel = 0
+Converted["_B1Test"].Size = UDim2.new(1, 0, 0.0500000007, 0)
+Converted["_B1Test"].Name = "B1Test"
+Converted["_B1Test"].Parent = Converted["_PvP1"]
+
+Converted["_C1Test"].Font = Enum.Font.SourceSans
+Converted["_C1Test"].Text = "Ignore Mobs:off"
+Converted["_C1Test"].TextColor3 = Color3.fromRGB(255, 255, 255)
+Converted["_C1Test"].TextScaled = true
+Converted["_C1Test"].TextSize = 14
+Converted["_C1Test"].TextWrapped = true
+Converted["_C1Test"].BackgroundColor3 = Color3.fromRGB(0, 0, 0)
+Converted["_C1Test"].BackgroundTransparency = 0.699999988079071
+Converted["_C1Test"].BorderColor3 = Color3.fromRGB(0, 0, 0)
+Converted["_C1Test"].BorderSizePixel = 0
+Converted["_C1Test"].Size = UDim2.new(1, 0, 0.0500000007, 0)
+Converted["_C1Test"].Name = "C1Test"
+Converted["_C1Test"].Parent = Converted["_PvP1"]
+
+Converted["_E1"].Font = Enum.Font.SourceSans
+Converted["_E1"].Text = "Show Aimbot Info:off"
+Converted["_E1"].TextColor3 = Color3.fromRGB(255, 255, 255)
+Converted["_E1"].TextScaled = true
+Converted["_E1"].TextSize = 14
+Converted["_E1"].TextWrapped = true
+Converted["_E1"].BackgroundColor3 = Color3.fromRGB(0, 0, 0)
+Converted["_E1"].BackgroundTransparency = 0.699999988079071
+Converted["_E1"].BorderColor3 = Color3.fromRGB(0, 0, 0)
+Converted["_E1"].BorderSizePixel = 0
+Converted["_E1"].Size = UDim2.new(1, 0, 0.0500000007, 0)
+Converted["_E1"].Name = "E1"
+Converted["_E1"].Parent = Converted["_PvP1"]
+
+Converted["_D"].Font = Enum.Font.SourceSans
+Converted["_D"].Text = "Lock Aimbot: Off"
+Converted["_D"].TextColor3 = Color3.fromRGB(255, 255, 255)
+Converted["_D"].TextScaled = true
+Converted["_D"].TextSize = 14
+Converted["_D"].TextWrapped = true
+Converted["_D"].BackgroundColor3 = Color3.fromRGB(0, 0, 0)
+Converted["_D"].BackgroundTransparency = 0.699999988079071
+Converted["_D"].BorderColor3 = Color3.fromRGB(0, 0, 0)
+Converted["_D"].BorderSizePixel = 0
+Converted["_D"].Size = UDim2.new(1, 0, 0.0500000007, 0)
+Converted["_D"].Name = "D"
+Converted["_D"].Parent = Converted["_PvP1"]
 
 Converted["_Setting"].ScrollBarImageColor3 = Color3.fromRGB(0, 0, 0)
 Converted["_Setting"].Active = true
@@ -870,42 +909,42 @@ Converted["_Simple2"].Size = UDim2.new(1, 0, 0.0500000007, 0)
 Converted["_Simple2"].Name = "Simple"
 Converted["_Simple2"].Parent = Converted["_UIListLayout5"]
 
-Converted["_AFrame2"].BackgroundColor3 = Color3.fromRGB(0, 0, 0)
-Converted["_AFrame2"].BackgroundTransparency = 0.5
-Converted["_AFrame2"].BorderColor3 = Color3.fromRGB(0, 0, 0)
-Converted["_AFrame2"].BorderSizePixel = 0
-Converted["_AFrame2"].Size = UDim2.new(1, 0, 0.0500000007, 0)
-Converted["_AFrame2"].Name = "AFrame"
-Converted["_AFrame2"].Parent = Converted["_Setting"]
+Converted["_AFrame1"].BackgroundColor3 = Color3.fromRGB(0, 0, 0)
+Converted["_AFrame1"].BackgroundTransparency = 0.5
+Converted["_AFrame1"].BorderColor3 = Color3.fromRGB(0, 0, 0)
+Converted["_AFrame1"].BorderSizePixel = 0
+Converted["_AFrame1"].Size = UDim2.new(1, 0, 0.0500000007, 0)
+Converted["_AFrame1"].Name = "AFrame"
+Converted["_AFrame1"].Parent = Converted["_Setting"]
 
-Converted["_TextLabel4"].Font = Enum.Font.SourceSans
-Converted["_TextLabel4"].Text = "Tween Speed"
-Converted["_TextLabel4"].TextColor3 = Color3.fromRGB(255, 255, 255)
-Converted["_TextLabel4"].TextScaled = true
-Converted["_TextLabel4"].TextSize = 14
-Converted["_TextLabel4"].TextWrapped = true
-Converted["_TextLabel4"].BackgroundColor3 = Color3.fromRGB(255, 255, 255)
-Converted["_TextLabel4"].BackgroundTransparency = 0.699999988079071
-Converted["_TextLabel4"].BorderColor3 = Color3.fromRGB(0, 0, 0)
-Converted["_TextLabel4"].BorderSizePixel = 0
-Converted["_TextLabel4"].Position = UDim2.new(-7.67086874e-08, 0, 0, 0)
-Converted["_TextLabel4"].Size = UDim2.new(0.529958665, 0, 1.00000012, 0)
-Converted["_TextLabel4"].Parent = Converted["_AFrame2"]
+Converted["_TextLabel3"].Font = Enum.Font.SourceSans
+Converted["_TextLabel3"].Text = "Tween Speed"
+Converted["_TextLabel3"].TextColor3 = Color3.fromRGB(255, 255, 255)
+Converted["_TextLabel3"].TextScaled = true
+Converted["_TextLabel3"].TextSize = 14
+Converted["_TextLabel3"].TextWrapped = true
+Converted["_TextLabel3"].BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+Converted["_TextLabel3"].BackgroundTransparency = 0.699999988079071
+Converted["_TextLabel3"].BorderColor3 = Color3.fromRGB(0, 0, 0)
+Converted["_TextLabel3"].BorderSizePixel = 0
+Converted["_TextLabel3"].Position = UDim2.new(-7.67086874e-08, 0, 0, 0)
+Converted["_TextLabel3"].Size = UDim2.new(0.529958665, 0, 1.00000012, 0)
+Converted["_TextLabel3"].Parent = Converted["_AFrame1"]
 
-Converted["_TextBox2"].Font = Enum.Font.SourceSans
-Converted["_TextBox2"].PlaceholderText = "Type Here"
-Converted["_TextBox2"].Text = "365"
-Converted["_TextBox2"].TextColor3 = Color3.fromRGB(255, 255, 255)
-Converted["_TextBox2"].TextScaled = true
-Converted["_TextBox2"].TextSize = 14
-Converted["_TextBox2"].TextWrapped = true
-Converted["_TextBox2"].BackgroundColor3 = Color3.fromRGB(0, 0, 0)
-Converted["_TextBox2"].BackgroundTransparency = 0.699999988079071
-Converted["_TextBox2"].BorderColor3 = Color3.fromRGB(0, 0, 0)
-Converted["_TextBox2"].BorderSizePixel = 0
-Converted["_TextBox2"].Position = UDim2.new(0.58315295, 0, 0, 0)
-Converted["_TextBox2"].Size = UDim2.new(0.384170413, 0, 1, 0)
-Converted["_TextBox2"].Parent = Converted["_AFrame2"]
+Converted["_TextBox1"].Font = Enum.Font.SourceSans
+Converted["_TextBox1"].PlaceholderText = "Type Here"
+Converted["_TextBox1"].Text = "365"
+Converted["_TextBox1"].TextColor3 = Color3.fromRGB(255, 255, 255)
+Converted["_TextBox1"].TextScaled = true
+Converted["_TextBox1"].TextSize = 14
+Converted["_TextBox1"].TextWrapped = true
+Converted["_TextBox1"].BackgroundColor3 = Color3.fromRGB(0, 0, 0)
+Converted["_TextBox1"].BackgroundTransparency = 0.699999988079071
+Converted["_TextBox1"].BorderColor3 = Color3.fromRGB(0, 0, 0)
+Converted["_TextBox1"].BorderSizePixel = 0
+Converted["_TextBox1"].Position = UDim2.new(0.58315295, 0, 0, 0)
+Converted["_TextBox1"].Size = UDim2.new(0.384170413, 0, 1, 0)
+Converted["_TextBox1"].Parent = Converted["_AFrame1"]
 
 Converted["_A3"].Font = Enum.Font.SourceSans
 Converted["_A3"].Text = "Setting"
@@ -930,34 +969,63 @@ Converted["_BFrame"].Size = UDim2.new(1, 0, 0.0500000007, 0)
 Converted["_BFrame"].Name = "BFrame"
 Converted["_BFrame"].Parent = Converted["_Setting"]
 
-Converted["_TextLabel5"].Font = Enum.Font.SourceSans
-Converted["_TextLabel5"].Text = "Tween Boost Distance"
-Converted["_TextLabel5"].TextColor3 = Color3.fromRGB(255, 255, 255)
-Converted["_TextLabel5"].TextScaled = true
-Converted["_TextLabel5"].TextSize = 14
-Converted["_TextLabel5"].TextWrapped = true
-Converted["_TextLabel5"].BackgroundColor3 = Color3.fromRGB(255, 255, 255)
-Converted["_TextLabel5"].BackgroundTransparency = 0.699999988079071
-Converted["_TextLabel5"].BorderColor3 = Color3.fromRGB(0, 0, 0)
-Converted["_TextLabel5"].BorderSizePixel = 0
-Converted["_TextLabel5"].Position = UDim2.new(-7.67086874e-08, 0, 0, 0)
-Converted["_TextLabel5"].Size = UDim2.new(0.529958665, 0, 1.00000012, 0)
-Converted["_TextLabel5"].Parent = Converted["_BFrame"]
+Converted["_TextLabel4"].Font = Enum.Font.SourceSans
+Converted["_TextLabel4"].Text = "Tween Boost Distance"
+Converted["_TextLabel4"].TextColor3 = Color3.fromRGB(255, 255, 255)
+Converted["_TextLabel4"].TextScaled = true
+Converted["_TextLabel4"].TextSize = 14
+Converted["_TextLabel4"].TextWrapped = true
+Converted["_TextLabel4"].BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+Converted["_TextLabel4"].BackgroundTransparency = 0.699999988079071
+Converted["_TextLabel4"].BorderColor3 = Color3.fromRGB(0, 0, 0)
+Converted["_TextLabel4"].BorderSizePixel = 0
+Converted["_TextLabel4"].Position = UDim2.new(-7.67086874e-08, 0, 0, 0)
+Converted["_TextLabel4"].Size = UDim2.new(0.529958665, 0, 1.00000012, 0)
+Converted["_TextLabel4"].Parent = Converted["_BFrame"]
 
-Converted["_TextBox3"].Font = Enum.Font.SourceSans
-Converted["_TextBox3"].PlaceholderText = "Type Here"
-Converted["_TextBox3"].Text = "400"
-Converted["_TextBox3"].TextColor3 = Color3.fromRGB(255, 255, 255)
-Converted["_TextBox3"].TextScaled = true
-Converted["_TextBox3"].TextSize = 14
-Converted["_TextBox3"].TextWrapped = true
-Converted["_TextBox3"].BackgroundColor3 = Color3.fromRGB(0, 0, 0)
-Converted["_TextBox3"].BackgroundTransparency = 0.699999988079071
-Converted["_TextBox3"].BorderColor3 = Color3.fromRGB(0, 0, 0)
-Converted["_TextBox3"].BorderSizePixel = 0
-Converted["_TextBox3"].Position = UDim2.new(0.58315295, 0, 0, 0)
-Converted["_TextBox3"].Size = UDim2.new(0.384170413, 0, 1, 0)
-Converted["_TextBox3"].Parent = Converted["_BFrame"]
+Converted["_TextBox2"].Font = Enum.Font.SourceSans
+Converted["_TextBox2"].PlaceholderText = "Type Here"
+Converted["_TextBox2"].Text = "400"
+Converted["_TextBox2"].TextColor3 = Color3.fromRGB(255, 255, 255)
+Converted["_TextBox2"].TextScaled = true
+Converted["_TextBox2"].TextSize = 14
+Converted["_TextBox2"].TextWrapped = true
+Converted["_TextBox2"].BackgroundColor3 = Color3.fromRGB(0, 0, 0)
+Converted["_TextBox2"].BackgroundTransparency = 0.699999988079071
+Converted["_TextBox2"].BorderColor3 = Color3.fromRGB(0, 0, 0)
+Converted["_TextBox2"].BorderSizePixel = 0
+Converted["_TextBox2"].Position = UDim2.new(0.58315295, 0, 0, 0)
+Converted["_TextBox2"].Size = UDim2.new(0.384170413, 0, 1, 0)
+Converted["_TextBox2"].Parent = Converted["_BFrame"]
+
+Converted["_C1"].Font = Enum.Font.SourceSans
+Converted["_C1"].Text = "Fix"
+Converted["_C1"].TextColor3 = Color3.fromRGB(255, 255, 255)
+Converted["_C1"].TextScaled = true
+Converted["_C1"].TextSize = 14
+Converted["_C1"].TextWrapped = true
+Converted["_C1"].TextXAlignment = Enum.TextXAlignment.Left
+Converted["_C1"].BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+Converted["_C1"].BackgroundTransparency = 1
+Converted["_C1"].BorderColor3 = Color3.fromRGB(0, 0, 0)
+Converted["_C1"].BorderSizePixel = 0
+Converted["_C1"].Size = UDim2.new(1, 0, 0.0500000007, 0)
+Converted["_C1"].Name = "C"
+Converted["_C1"].Parent = Converted["_Setting"]
+
+Converted["_D1"].Font = Enum.Font.SourceSans
+Converted["_D1"].Text = "Unload User Interface"
+Converted["_D1"].TextColor3 = Color3.fromRGB(255, 255, 255)
+Converted["_D1"].TextScaled = true
+Converted["_D1"].TextSize = 14
+Converted["_D1"].TextWrapped = true
+Converted["_D1"].BackgroundColor3 = Color3.fromRGB(255, 0, 0)
+Converted["_D1"].BackgroundTransparency = 0.699999988079071
+Converted["_D1"].BorderColor3 = Color3.fromRGB(0, 0, 0)
+Converted["_D1"].BorderSizePixel = 0
+Converted["_D1"].Size = UDim2.new(1, 0, 0.0500000007, 0)
+Converted["_D1"].Name = "D"
+Converted["_D1"].Parent = Converted["_Setting"]
 
 Converted["_Icon"].Image = "rbxassetid://9242918215"
 Converted["_Icon"].BackgroundColor3 = Color3.fromRGB(255, 255, 255)
@@ -968,32 +1036,32 @@ Converted["_Icon"].Size = UDim2.new(0.0665714741, 0, 0.112710647, 0)
 Converted["_Icon"].Name = "Icon"
 Converted["_Icon"].Parent = Converted["_Frame"]
 
-Converted["_TextLabel6"].Font = Enum.Font.SourceSansBold
-Converted["_TextLabel6"].Text = "Script By Nani_57"
-Converted["_TextLabel6"].TextColor3 = Color3.fromRGB(255, 255, 255)
-Converted["_TextLabel6"].TextScaled = true
-Converted["_TextLabel6"].TextSize = 14
-Converted["_TextLabel6"].TextTransparency = 0.5
-Converted["_TextLabel6"].TextWrapped = true
-Converted["_TextLabel6"].BackgroundColor3 = Color3.fromRGB(255, 255, 255)
-Converted["_TextLabel6"].BackgroundTransparency = 1
-Converted["_TextLabel6"].BorderColor3 = Color3.fromRGB(0, 0, 0)
-Converted["_TextLabel6"].BorderSizePixel = 0
-Converted["_TextLabel6"].Position = UDim2.new(0.772602916, 0, 0.841157436, 0)
-Converted["_TextLabel6"].Size = UDim2.new(0.226978138, 0, 0.0780304521, 0)
-Converted["_TextLabel6"].Parent = Converted["_Frame"]
+Converted["_TextLabel5"].Font = Enum.Font.SourceSansBold
+Converted["_TextLabel5"].Text = "Script By Nani_57"
+Converted["_TextLabel5"].TextColor3 = Color3.fromRGB(255, 255, 255)
+Converted["_TextLabel5"].TextScaled = true
+Converted["_TextLabel5"].TextSize = 14
+Converted["_TextLabel5"].TextTransparency = 0.5
+Converted["_TextLabel5"].TextWrapped = true
+Converted["_TextLabel5"].BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+Converted["_TextLabel5"].BackgroundTransparency = 1
+Converted["_TextLabel5"].BorderColor3 = Color3.fromRGB(0, 0, 0)
+Converted["_TextLabel5"].BorderSizePixel = 0
+Converted["_TextLabel5"].Position = UDim2.new(0.772602916, 0, 0.841157436, 0)
+Converted["_TextLabel5"].Size = UDim2.new(0.226978138, 0, 0.0780304521, 0)
+Converted["_TextLabel5"].Parent = Converted["_Frame"]
 
-Converted["_Theme11"].Image = "rbxassetid://6892903164"
-Converted["_Theme11"].ImageTransparency = 0.5
-Converted["_Theme11"].BackgroundColor3 = Color3.fromRGB(255, 255, 255)
-Converted["_Theme11"].BackgroundTransparency = 1
-Converted["_Theme11"].BorderColor3 = Color3.fromRGB(0, 0, 0)
-Converted["_Theme11"].BorderSizePixel = 0
-Converted["_Theme11"].Position = UDim2.new(-0.000559102104, 0, -0.400835961, 0)
-Converted["_Theme11"].Size = UDim2.new(1.01394165, 0, 1.73160172, 0)
-Converted["_Theme11"].ZIndex = 0
-Converted["_Theme11"].Name = "Theme1"
-Converted["_Theme11"].Parent = Converted["_Frame"]
+Converted["_Theme1"].Image = "rbxassetid://6892903164"
+Converted["_Theme1"].ImageTransparency = 0.5
+Converted["_Theme1"].BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+Converted["_Theme1"].BackgroundTransparency = 1
+Converted["_Theme1"].BorderColor3 = Color3.fromRGB(0, 0, 0)
+Converted["_Theme1"].BorderSizePixel = 0
+Converted["_Theme1"].Position = UDim2.new(-0.000559102104, 0, -0.400835961, 0)
+Converted["_Theme1"].Size = UDim2.new(1.01394165, 0, 1.73160172, 0)
+Converted["_Theme1"].ZIndex = 0
+Converted["_Theme1"].Name = "Theme1"
+Converted["_Theme1"].Parent = Converted["_Frame"]
 
 Converted["_TextButton5"].Font = Enum.Font.SourceSans
 Converted["_TextButton5"].Text = ""
@@ -1007,6 +1075,83 @@ Converted["_TextButton5"].Position = UDim2.new(0.037363667, 0, 0.127229363, 0)
 Converted["_TextButton5"].Size = UDim2.new(0, 30, 0, 30)
 Converted["_TextButton5"].Parent = Converted["_BloxFruitTest"]
 
+Converted["_Main2"].BackgroundColor3 = Color3.fromRGB(30.00000011175871, 30.00000011175871, 30.00000011175871)
+Converted["_Main2"].BackgroundTransparency = 1
+Converted["_Main2"].Position = UDim2.new(0.00999999978, 0, 0.300000012, 0)
+Converted["_Main2"].Size = UDim2.new(0.192673996, 0, 0.15625, 0)
+Converted["_Main2"].Name = "Main"
+Converted["_Main2"].Parent = Converted["_BloxFruitTest"]
+
+Converted["_MainCorner"].Name = "MainCorner"
+Converted["_MainCorner"].Parent = Converted["_Main2"]
+
+Converted["_Profile"].BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+Converted["_Profile"].BackgroundTransparency = 0.5
+Converted["_Profile"].Position = UDim2.new(0.0570342205, 0, 0.149425298, 0)
+Converted["_Profile"].Size = UDim2.new(0.228136882, 0, 0.5, 0)
+Converted["_Profile"].Name = "Profile"
+Converted["_Profile"].Parent = Converted["_Main2"]
+
+Converted["_ProfileCorner"].CornerRadius = UDim.new(0, 100)
+Converted["_ProfileCorner"].Name = "ProfileCorner"
+Converted["_ProfileCorner"].Parent = Converted["_Profile"]
+
+Converted["_HealthPlayers"].Font = Enum.Font.FredokaOne
+Converted["_HealthPlayers"].Text = "Health | N/A"
+Converted["_HealthPlayers"].TextColor3 = Color3.fromRGB(255, 255, 255)
+Converted["_HealthPlayers"].TextSize = 19
+Converted["_HealthPlayers"].TextXAlignment = Enum.TextXAlignment.Left
+Converted["_HealthPlayers"].TextYAlignment = Enum.TextYAlignment.Bottom
+Converted["_HealthPlayers"].BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+Converted["_HealthPlayers"].BackgroundTransparency = 1
+Converted["_HealthPlayers"].Position = UDim2.new(1.24220526, 0, 0.377586216, 0)
+Converted["_HealthPlayers"].Size = UDim2.new(2.88333344, 0, 0.366666675, 0)
+Converted["_HealthPlayers"].Name = "HealthPlayers"
+Converted["_HealthPlayers"].Parent = Converted["_Profile"]
+
+Converted["_NamePlayers"].Font = Enum.Font.FredokaOne
+Converted["_NamePlayers"].Text = "Name | N/A"
+Converted["_NamePlayers"].TextColor3 = Color3.fromRGB(255, 255, 255)
+Converted["_NamePlayers"].TextScaled = true
+Converted["_NamePlayers"].TextSize = 19
+Converted["_NamePlayers"].TextWrapped = true
+Converted["_NamePlayers"].TextXAlignment = Enum.TextXAlignment.Left
+Converted["_NamePlayers"].TextYAlignment = Enum.TextYAlignment.Bottom
+Converted["_NamePlayers"].BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+Converted["_NamePlayers"].BackgroundTransparency = 1
+Converted["_NamePlayers"].Position = UDim2.new(1.24220526, 0, 0.0109195411, 0)
+Converted["_NamePlayers"].Size = UDim2.new(2.88333344, 0, 0.366666675, 0)
+Converted["_NamePlayers"].Name = "NamePlayers"
+Converted["_NamePlayers"].Parent = Converted["_Profile"]
+
+Converted["_Healthbar"].BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+Converted["_Healthbar"].Position = UDim2.new(1.23333335, 0, 0.850000024, 0)
+Converted["_Healthbar"].Size = UDim2.new(2.58333325, 0, 0.13333334, 0)
+Converted["_Healthbar"].Name = "Healthbar"
+Converted["_Healthbar"].Parent = Converted["_Profile"]
+
+Converted["_HealthbarCorner"].Name = "HealthbarCorner"
+Converted["_HealthbarCorner"].Parent = Converted["_Healthbar"]
+
+Converted["_Healthgreen"].BackgroundColor3 = Color3.fromRGB(0, 227.00000166893005, 110.00000104308128)
+Converted["_Healthgreen"].Size = UDim2.new(1, 0, 1, 0)
+Converted["_Healthgreen"].Name = "Healthgreen"
+Converted["_Healthgreen"].Parent = Converted["_Healthbar"]
+
+Converted["_HealthgreenCorner"].Name = "HealthgreenCorner"
+Converted["_HealthgreenCorner"].Parent = Converted["_Healthgreen"]
+
+Converted["_ImageProfile"].BackgroundColor3 = Color3.fromRGB(30.00000011175871, 30.00000011175871, 30.00000011175871)
+Converted["_ImageProfile"].BackgroundTransparency = 1
+Converted["_ImageProfile"].Position = UDim2.new(0.0166666675, 0, 0.0166666675, 0)
+Converted["_ImageProfile"].Size = UDim2.new(0.966666639, 0, 0.966666639, 0)
+Converted["_ImageProfile"].Name = "ImageProfile"
+Converted["_ImageProfile"].Parent = Converted["_Profile"]
+
+Converted["_ImageProfileCorner"].CornerRadius = UDim.new(0, 100)
+Converted["_ImageProfileCorner"].Name = "ImageProfileCorner"
+Converted["_ImageProfileCorner"].Parent = Converted["_ImageProfile"]
+
 -- Fake Module Scripts:
 
 local fake_module_scripts = {}
@@ -1014,7 +1159,7 @@ local fake_module_scripts = {}
 
 -- Fake Local Scripts:
 
-local function KVJBM_fake_script() -- Fake Script: StarterGui.BloxFruitTest.Frame.LocalScript
+local function WOLALZ_fake_script() -- Fake Script: StarterGui.BloxFruitTest.Frame.LocalScript
 	local script = Instance.new("LocalScript")
 	script.Name = "LocalScript"
 	script.Parent = Converted["_Frame"]
@@ -1062,7 +1207,7 @@ local function KVJBM_fake_script() -- Fake Script: StarterGui.BloxFruitTest.Fram
 		end
 	end)
 end
-local function QVWS_fake_script() -- Fake Script: StarterGui.BloxFruitTest.Frame.LocalScript
+local function XLNVC_fake_script() -- Fake Script: StarterGui.BloxFruitTest.Frame.LocalScript
 	local script = Instance.new("LocalScript")
 	script.Name = "LocalScript"
 	script.Parent = Converted["_Frame"]
@@ -1075,7 +1220,7 @@ local function QVWS_fake_script() -- Fake Script: StarterGui.BloxFruitTest.Frame
 		return req(obj)
 	end
 
-	function CloseUI()
+	local function CloseUI()
 		script.Parent.Main.Visible = false
 		script.Parent.TP.Visible = false
 		script.Parent.TpPlr.Visible = false
@@ -1108,7 +1253,7 @@ local function QVWS_fake_script() -- Fake Script: StarterGui.BloxFruitTest.Frame
 		script.Parent.Setting.Visible = true
 	end)
 end
-local function NSPEENH_fake_script() -- Fake Script: StarterGui.BloxFruitTest.Frame.Main.B.ToggleNoclipButton
+local function QKBWSTC_fake_script() -- Fake Script: StarterGui.BloxFruitTest.Frame.Main.B.ToggleNoclipButton
 	local script = Instance.new("LocalScript")
 	script.Name = "ToggleNoclipButton"
 	script.Parent = Converted["_B"]
@@ -1199,7 +1344,7 @@ local function NSPEENH_fake_script() -- Fake Script: StarterGui.BloxFruitTest.Fr
 
 
 end
-local function CWEMCYS_fake_script() -- Fake Script: StarterGui.BloxFruitTest.Frame.Main.A.ToggleSpeedButton
+local function DHDE_fake_script() -- Fake Script: StarterGui.BloxFruitTest.Frame.Main.A.ToggleSpeedButton
 	local script = Instance.new("LocalScript")
 	script.Name = "ToggleSpeedButton"
 	script.Parent = Converted["_A"]
@@ -1229,12 +1374,12 @@ local function CWEMCYS_fake_script() -- Fake Script: StarterGui.BloxFruitTest.Fr
 	local speedEnabled = false
 	local running = false
 	local SPEED_ON = 365
-	local SPEED_OFF = 32
+	local SPEED_OFF = 365
 
 	local function setSpeed(speed)
 		local character = LocalPlayer.Character
 		local humanoid = character:FindFirstChildOfClass("Humanoid")
-		if humanoid and humanoid.WalkSpeed ~= speed then
+		if humanoid then
 			humanoid.WalkSpeed = speed
 		end
 	end
@@ -1283,7 +1428,7 @@ local function CWEMCYS_fake_script() -- Fake Script: StarterGui.BloxFruitTest.Fr
 
 
 end
-local function ZXFOIZ_fake_script() -- Fake Script: StarterGui.BloxFruitTest.Frame.Main.Fly.ToggleFlyButton
+local function EVKX_fake_script() -- Fake Script: StarterGui.BloxFruitTest.Frame.Main.Fly.ToggleFlyButton
 	local script = Instance.new("LocalScript")
 	script.Name = "ToggleFlyButton"
 	script.Parent = Converted["_Fly"]
@@ -1396,7 +1541,7 @@ local function ZXFOIZ_fake_script() -- Fake Script: StarterGui.BloxFruitTest.Fra
 
 
 end
-local function UXMD_fake_script() -- Fake Script: StarterGui.BloxFruitTest.Frame.TP.TPTweeningHandle
+local function SYQRT_fake_script() -- Fake Script: StarterGui.BloxFruitTest.Frame.TP.TPTweeningHandle
 	local script = Instance.new("LocalScript")
 	script.Name = "TPTweeningHandle"
 	script.Parent = Converted["_TP"]
@@ -1553,7 +1698,7 @@ local function UXMD_fake_script() -- Fake Script: StarterGui.BloxFruitTest.Frame
 
 
 end
-local function LKINDG_fake_script() -- Fake Script: StarterGui.BloxFruitTest.Frame.TP.Claste on the sea.TeleportOnClickLocalOnly
+local function RBILHUL_fake_script() -- Fake Script: StarterGui.BloxFruitTest.Frame.TP.Claste on the sea.TeleportOnClickLocalOnly
 	local script = Instance.new("LocalScript")
 	script.Name = "TeleportOnClickLocalOnly"
 	script.Parent = Converted["_Claste on the sea"]
@@ -1581,7 +1726,7 @@ local function LKINDG_fake_script() -- Fake Script: StarterGui.BloxFruitTest.Fra
 
 
 end
-local function CAAUCP_fake_script() -- Fake Script: StarterGui.BloxFruitTest.Frame.TpPlr.Frame.SelectPlayer.PlayerSelectDropdown
+local function GHWE_fake_script() -- Fake Script: StarterGui.BloxFruitTest.Frame.TpPlr.Frame.SelectPlayer.PlayerSelectDropdown
 	local script = Instance.new("LocalScript")
 	script.Name = "PlayerSelectDropdown"
 	script.Parent = Converted["_SelectPlayer"]
@@ -1659,7 +1804,7 @@ local function CAAUCP_fake_script() -- Fake Script: StarterGui.BloxFruitTest.Fra
 
 
 end
-local function WIRZ_fake_script() -- Fake Script: StarterGui.BloxFruitTest.Frame.TpPlr.Frame.Tween.TweenToPlayerButton
+local function LBRRU_fake_script() -- Fake Script: StarterGui.BloxFruitTest.Frame.TpPlr.Frame.Tween.TweenToPlayerButton
 	local script = Instance.new("LocalScript")
 	script.Name = "TweenToPlayerButton"
 	script.Parent = Converted["_Tween"]
@@ -1869,7 +2014,7 @@ local function WIRZ_fake_script() -- Fake Script: StarterGui.BloxFruitTest.Frame
 
 
 end
-local function VPAMOZ_fake_script() -- Fake Script: StarterGui.BloxFruitTest.Frame.TpPlr.SafeMode.ToggleSafeModeButton
+local function SYBZNJ_fake_script() -- Fake Script: StarterGui.BloxFruitTest.Frame.TpPlr.SafeMode.ToggleSafeModeButton
 	local script = Instance.new("LocalScript")
 	script.Name = "ToggleSafeModeButton"
 	script.Parent = Converted["_SafeMode"]
@@ -1906,7 +2051,7 @@ local function VPAMOZ_fake_script() -- Fake Script: StarterGui.BloxFruitTest.Fra
 
 
 end
-local function UPSZQI_fake_script() -- Fake Script: StarterGui.BloxFruitTest.Frame.TpPlr.Frame3.TextButton.LocalScript
+local function TAHZPZ_fake_script() -- Fake Script: StarterGui.BloxFruitTest.Frame.TpPlr.Frame3.TextButton.LocalScript
 	local script = Instance.new("LocalScript")
 	script.Name = "LocalScript"
 	script.Parent = Converted["_TextButton"]
@@ -1923,7 +2068,7 @@ local function UPSZQI_fake_script() -- Fake Script: StarterGui.BloxFruitTest.Fra
 		script.Parent.Parent.Parent.Frame2.TextBox.Text = script.Parent.Text
 	end)
 end
-local function CGCVDSQ_fake_script() -- Fake Script: StarterGui.BloxFruitTest.Frame.TpPlr.Frame3.TextButton.LocalScript
+local function BXTIY_fake_script() -- Fake Script: StarterGui.BloxFruitTest.Frame.TpPlr.Frame3.TextButton.LocalScript
 	local script = Instance.new("LocalScript")
 	script.Name = "LocalScript"
 	script.Parent = Converted["_TextButton1"]
@@ -1940,7 +2085,7 @@ local function CGCVDSQ_fake_script() -- Fake Script: StarterGui.BloxFruitTest.Fr
 		script.Parent.Parent.Parent.Frame2.TextBox.Text = script.Parent.Text
 	end)
 end
-local function XJWTD_fake_script() -- Fake Script: StarterGui.BloxFruitTest.Frame.TpPlr.Frame3.TextButton.LocalScript
+local function LGYMLM_fake_script() -- Fake Script: StarterGui.BloxFruitTest.Frame.TpPlr.Frame3.TextButton.LocalScript
 	local script = Instance.new("LocalScript")
 	script.Name = "LocalScript"
 	script.Parent = Converted["_TextButton2"]
@@ -1957,7 +2102,7 @@ local function XJWTD_fake_script() -- Fake Script: StarterGui.BloxFruitTest.Fram
 		script.Parent.Parent.Parent.Frame2.TextBox.Text = script.Parent.Text
 	end)
 end
-local function QIHULV_fake_script() -- Fake Script: StarterGui.BloxFruitTest.Frame.TpPlr.Frame3.TextButton.LocalScript
+local function PHYIHJ_fake_script() -- Fake Script: StarterGui.BloxFruitTest.Frame.TpPlr.Frame3.TextButton.LocalScript
 	local script = Instance.new("LocalScript")
 	script.Name = "LocalScript"
 	script.Parent = Converted["_TextButton3"]
@@ -1974,7 +2119,7 @@ local function QIHULV_fake_script() -- Fake Script: StarterGui.BloxFruitTest.Fra
 		script.Parent.Parent.Parent.Frame2.TextBox.Text = script.Parent.Text
 	end)
 end
-local function QUSYWF_fake_script() -- Fake Script: StarterGui.BloxFruitTest.Frame.TpPlr.Frame3.TextButton.LocalScript
+local function VDUZK_fake_script() -- Fake Script: StarterGui.BloxFruitTest.Frame.TpPlr.Frame3.TextButton.LocalScript
 	local script = Instance.new("LocalScript")
 	script.Name = "LocalScript"
 	script.Parent = Converted["_TextButton4"]
@@ -1991,7 +2136,7 @@ local function QUSYWF_fake_script() -- Fake Script: StarterGui.BloxFruitTest.Fra
 		script.Parent.Parent.Parent.Frame2.TextBox.Text = script.Parent.Text
 	end)
 end
-local function RYTF_fake_script() -- Fake Script: StarterGui.BloxFruitTest.Frame.PvP.AFrame.SelectPlayer.PlayerSelectDropdown
+local function XOTPXY_fake_script() -- Fake Script: StarterGui.BloxFruitTest.Frame.PvP.AFrame.SelectPlayer.PlayerSelectDropdown
 	local script = Instance.new("LocalScript")
 	script.Name = "PlayerSelectDropdown"
 	script.Parent = Converted["_SelectPlayer1"]
@@ -2024,11 +2169,13 @@ local function RYTF_fake_script() -- Fake Script: StarterGui.BloxFruitTest.Frame
 		scroll.Name = SCROLL_NAME
 		scroll.Size = UDim2.new(0, 150, 0, 200)
 		scroll.Position = UDim2.new(0, selectButton.Position.X.Scale, 0, selectButton.Position.Y.Offset + selectButton.Size.Y.Offset + 5)
-		scroll.BackgroundColor3 = Color3.fromRGB(40, 40, 40)
+		scroll.BackgroundColor3 = Color3.fromRGB(0,0,0)
 		scroll.BorderSizePixel = 1
 		scroll.CanvasSize = UDim2.new(0, 0, 0, 0)
 		scroll.ScrollBarThickness = 6
 		scroll.Parent = parentFrame
+		scroll.BackgroundTransparency = 0.7
+		scroll.ZIndex = 999
 
 		local players = Players:GetPlayers()
 		local y = 0
@@ -2038,10 +2185,11 @@ local function RYTF_fake_script() -- Fake Script: StarterGui.BloxFruitTest.Frame
 				local plrBtn = Instance.new("TextButton")
 				plrBtn.Size = UDim2.new(1, -8, 0, buttonHeight)
 				plrBtn.Position = UDim2.new(0, 4, 0, y)
-				plrBtn.BackgroundColor3 = Color3.fromRGB(70, 70, 70)
+				plrBtn.BackgroundColor3 = Color3.fromRGB(0,0,0)
 				plrBtn.TextColor3 = Color3.new(1, 1, 1)
 				plrBtn.Font = Enum.Font.SourceSans
-				plrBtn.TextSize = 18
+				plrBtn.TextScaled = true
+				plrBtn.BackgroundTransparency = 0.7
 				plrBtn.Text = player.Name
 				plrBtn.Parent = scroll
 
@@ -2066,10 +2214,10 @@ local function RYTF_fake_script() -- Fake Script: StarterGui.BloxFruitTest.Frame
 
 
 end
-local function COYTOJ_fake_script() -- Fake Script: StarterGui.BloxFruitTest.Frame.PvP.E.CheckIfSameTeamToggle
+local function RPOMWE_fake_script() -- Fake Script: StarterGui.BloxFruitTest.Frame.PvP.C.ToggleButton
 	local script = Instance.new("LocalScript")
-	script.Name = "CheckIfSameTeamToggle"
-	script.Parent = Converted["_E"]
+	script.Name = "ToggleButton"
+	script.Parent = Converted["_C"]
 	local req = require
 	local require = function(obj)
 		local fake = fake_module_scripts[obj]
@@ -2079,25 +2227,29 @@ local function COYTOJ_fake_script() -- Fake Script: StarterGui.BloxFruitTest.Fra
 		return req(obj)
 	end
 
-	local Players = game:GetService("Players")
-	local localPlayer = Players.LocalPlayer
 	local button = script.Parent
 
-	local CheckIfSameTeam = getfenv().CheckIfSameTeam
+	local safeModeOn = true
+
+	local function updateButton()
+		if safeModeOn then
+			button.Text = "Aimbot Nearest: ON"
+		else
+			button.Text = "Aimbot Nearest: OFF"
+		end
+	end
 
 	button.MouseButton1Click:Connect(function()
-		if CheckIfSameTeam == false then
-			CheckIfSameTeam = true
-			button.Text = "CheckIfSameTeam:On"
-		else
-			CheckIfSameTeam = false
-			button.Text = "CheckIfSameTeam:Off"
-		end
+		safeModeOn = not safeModeOn
+		updateButton()
 	end)
+
+	-- Initialize button state on script start
+	updateButton()
 
 
 end
-local function RQGESNU_fake_script() -- Fake Script: StarterGui.BloxFruitTest.Frame.PvP.G.ShowOtherPlayerNamesOnClick
+local function TBWW_fake_script() -- Fake Script: StarterGui.BloxFruitTest.Frame.PvP.G.ShowOtherPlayerNamesOnClick
 	local script = Instance.new("LocalScript")
 	script.Name = "ShowOtherPlayerNamesOnClick"
 	script.Parent = Converted["_G"]
@@ -2165,7 +2317,7 @@ local function RQGESNU_fake_script() -- Fake Script: StarterGui.BloxFruitTest.Fr
 		label.BackgroundTransparency = 1
 		label.BackgroundColor3 = Color3.fromRGB(30,30,30)
 		label.TextColor3 = getTeamColor(player)
-		label.TextStrokeTransparency = 1
+		label.TextStrokeTransparency = 0
 		label.Font = Enum.Font.SourceSansBold
 		label.TextScaled = true
 		label.Parent = billboard
@@ -2301,7 +2453,390 @@ local function RQGESNU_fake_script() -- Fake Script: StarterGui.BloxFruitTest.Fr
 
 
 end
-local function FJFZZPR_fake_script() -- Fake Script: StarterGui.BloxFruitTest.TextButton.LocalScript
+local function VQVROD_fake_script() -- Fake Script: StarterGui.BloxFruitTest.Frame.PvP.B1Test.ToggleButton
+	local script = Instance.new("LocalScript")
+	script.Name = "ToggleButton"
+	script.Parent = Converted["_B1Test"]
+	local req = require
+	local require = function(obj)
+		local fake = fake_module_scripts[obj]
+		if fake then
+			return fake()
+		end
+		return req(obj)
+	end
+
+	local button = script.Parent
+
+	local safeModeOn = false
+
+	local function updateButton()
+		if safeModeOn then
+			button.Text = "Aimbot Selected: ON"
+		else
+			button.Text = "Aimbot Selected: OFF"
+		end
+	end
+
+	button.MouseButton1Click:Connect(function()
+		safeModeOn = not safeModeOn
+		updateButton()
+	end)
+
+	-- Initialize button state on script start
+	updateButton()
+
+
+end
+local function QBTLNN_fake_script() -- Fake Script: StarterGui.BloxFruitTest.Frame.PvP.LocalScript
+	local script = Instance.new("LocalScript")
+	script.Name = "LocalScript"
+	script.Parent = Converted["_PvP1"]
+	local req = require
+	local require = function(obj)
+		local fake = fake_module_scripts[obj]
+		if fake then
+			return fake()
+		end
+		return req(obj)
+	end
+
+	local Playersaimbot = nil
+	local PlayersPosition = nil
+	local mouse = game.Players.LocalPlayer:GetMouse()
+	local localPlayer = game.Players.LocalPlayer
+	local players = game:GetService("Players")
+
+	local Main = script.Parent.Parent.Parent.Main
+	local ImageProfile = Main.Profile.ImageProfile
+	local HealthPlayers = Main.Profile.HealthPlayers
+	local NamePlayers = Main.Profile.NamePlayers
+	local Healthbar = Main.Profile.Healthbar
+	local Healthgreen = Healthbar.Healthgreen
+
+	spawn(function()
+		while wait(1) do
+			if script.Parent.B1Test.Text == "Aimbot Selected: ON" then
+				if game.Players:FindFirstChild(script.Parent.AFrame.SelectPlayer.Text) then
+					Playersaimbot = script.Parent.AFrame.SelectPlayer.Text
+					wait(1)
+					print(Playersaimbot)
+					print(PlayersPosition)
+				end
+			end
+		end
+	end)
+
+	local function CheckIfSameTeam(localPlayer, otherPlayer)
+		if not localPlayer or not otherPlayer then
+			return nil
+		end
+		if localPlayer.Team == otherPlayer.Team then
+			return false
+		else
+			return true
+		end
+	end
+
+	local CheckSameTeam = getfenv().CheckIfSameTeam == false
+
+	local function getNearestPlayer()
+		local nearestPlayer = nil
+		local nearestDistance = math.huge
+
+		for _, player in pairs(players:GetPlayers()) do
+			if player.Character and player ~= localPlayer then
+				if CheckSameTeam == true then if CheckIfSameTeam(localPlayer,player) == false then return end end
+				local distance = (localPlayer.Character.HumanoidRootPart.Position - player.Character.HumanoidRootPart.Position).Magnitude
+				if distance < nearestDistance then
+					nearestDistance = distance
+					nearestPlayer = player
+				end
+			end
+		end
+
+		return nearestPlayer, nearestDistance
+	end
+
+	local function getNearestEnemies()
+		local nearestEnemies = nil
+		local nearestDistance = math.huge
+
+		for _, Enemies in pairs(workspace.Enemies:GetChildren()) do
+			if Enemies then
+				local distance = (localPlayer.Character.HumanoidRootPart.Position - Enemies.HumanoidRootPart.Position).Magnitude
+				if distance < nearestDistance then
+					nearestDistance = distance
+					nearestEnemies = Enemies
+				end
+			end
+		end
+
+		return nearestEnemies, nearestDistance
+	end
+
+	spawn(function()
+		pcall(function()
+			while wait(0.2) do
+				spawn(function()
+					if script.Parent.D.Text == "Lock Aimbot: OFF" and script.Parent.C.Text == "Aimbot Nearest: ON" then
+						if script.Parent.C1Test.Text == "Lock Mobs: ON" then
+							local nearestPlayer = getNearestEnemies()
+							if nearestPlayer then
+								Playersaimbot = nearestPlayer.Name
+								PlayersPosition = nearestPlayer.HumanoidRootPart.Position
+							end
+						else
+							local nearestPlayer = getNearestPlayer()
+							if nearestPlayer then
+								Playersaimbot = nearestPlayer.Name
+								PlayersPosition = nearestPlayer.Character.HumanoidRootPart.Position
+							end
+						end
+					end
+				end)
+			end
+		end)
+	end)
+
+	script.Parent.B0.MouseButton1Down:Connect(function()
+		Playersaimbot = nil
+		PlayersPosition = nil
+		ImageProfile.Image = ''
+		NamePlayers.Text = "Name | N/A"
+		HealthPlayers.Text = "Health | N/A"
+	end)
+
+	spawn(function()
+		while wait() do
+			for i,v in pairs(game.Players:GetChildren()) do
+				if v.Name == Playersaimbot then
+					PlayersPosition = v.Character.HumanoidRootPart.Position
+				end
+			end
+		end
+	end)
+
+
+	spawn(function()
+		while wait(.2) do
+			if Playersaimbot ~= nil then 
+				for i,v in pairs(game.Players:GetChildren()) do
+					if v.Name == Playersaimbot then 
+						if game.Workspace.Characters:FindFirstChild(v.Name) then
+							NamePlayers.Text = "Name | "..v.Name
+							HealthPlayers.Text = "Health | "..math.floor(v.Character.Humanoid.Health).."/"..v.Character.Humanoid.MaxHealth
+							local hp = v.Character.Humanoid.Health/v.Character.Humanoid.MaxHealth
+							pcall(function()
+								Healthgreen:TweenSize(UDim2.new(hp,0,0,8),Enum.EasingDirection.Out,Enum.EasingStyle.Quad,0.3)
+							end)
+							ImageProfile.Image = game:GetService("Players"):GetUserThumbnailAsync(v.UserId, Enum.ThumbnailType.HeadShot, Enum.ThumbnailSize.Size420x420)
+						end
+					end
+				end
+				-----Enemies
+				for i,v in pairs(workspace.Enemies:GetChildren()) do
+					if v.Name == Playersaimbot then 
+						if game.Workspace.Enemies:FindFirstChild(v.Name) then
+							local Mob = game.Workspace.Enemies:FindFirstChild(v.Name)
+							NamePlayers.Text = "Name | "..v.Name
+							HealthPlayers.Text = "Health | "..math.floor(Mob.Humanoid.Health).."/"..Mob.Humanoid.MaxHealth
+							local hp = Mob.Humanoid.Health/Mob.Humanoid.MaxHealth
+							pcall(function()
+								Healthgreen:TweenSize(UDim2.new(hp,0,0,8),Enum.EasingDirection.Out,Enum.EasingStyle.Quad,0.3)
+							end)
+						end
+					end
+				end
+			end
+		end
+	end)
+
+
+	spawn(function()
+		local gg = getrawmetatable(game)
+		local old = gg.__namecall
+		setreadonly(gg,false)
+		gg.__namecall = newcclosure(function(...)
+			local method = getnamecallmethod()
+			local args = {...}
+			if tostring(method) == "FireServer" then
+				if tostring(args[1]) == "RemoteEvent" then
+					if tostring(args[2]) ~= "true" and tostring(args[2]) ~= "false" then
+						if Playersaimbot ~= nil then
+							args[2] = PlayersPosition
+							return old(unpack(args))
+						end
+					end
+				end
+			end
+			return old(...)
+		end)
+	end)
+	mouse.Button1Down:Connect(function()
+		pcall(function()
+			if Playersaimbot ~= nil then
+				local args = {
+					[1] = PlayersPosition,
+					[2] = game:GetService("Players"):FindFirstChild(Playersaimbot).Character.HumanoidRootPart
+				}
+				game:GetService("Players").LocalPlayer.Character[game.Players.LocalPlayer.Character:FindFirstChildOfClass("Tool").Name].RemoteFunctionShoot:InvokeServer(unpack(args))
+			end
+		end)
+	end)
+end
+local function JXUIY_fake_script() -- Fake Script: StarterGui.BloxFruitTest.Frame.PvP.C1Test.ToggleButton
+	local script = Instance.new("LocalScript")
+	script.Name = "ToggleButton"
+	script.Parent = Converted["_C1Test"]
+	local req = require
+	local require = function(obj)
+		local fake = fake_module_scripts[obj]
+		if fake then
+			return fake()
+		end
+		return req(obj)
+	end
+
+	local button = script.Parent
+
+	local safeModeOn = false
+
+	local function updateButton()
+		if safeModeOn then
+			button.Text = "Lock Mobs: ON"
+		else
+			button.Text = "Lock Mobs: OFF"
+		end
+	end
+
+	button.MouseButton1Click:Connect(function()
+		safeModeOn = not safeModeOn
+		updateButton()
+	end)
+
+	-- Initialize button state on script start
+	updateButton()
+
+
+end
+local function ALWYWRY_fake_script() -- Fake Script: StarterGui.BloxFruitTest.Frame.PvP.E1.ToggleButton
+	local script = Instance.new("LocalScript")
+	script.Name = "ToggleButton"
+	script.Parent = Converted["_E1"]
+	local req = require
+	local require = function(obj)
+		local fake = fake_module_scripts[obj]
+		if fake then
+			return fake()
+		end
+		return req(obj)
+	end
+
+	local button = script.Parent
+
+	local safeModeOn = true
+
+	local function updateButton()
+		if safeModeOn then
+			button.Text = "Show Aimbot Info: ON"
+			script.Parent.Parent.Parent.Parent.Main.Visible = true
+		else
+			button.Text = "Show Aimbot Info: OFF"
+			script.Parent.Parent.Parent.Parent.Main.Visible = false
+		end
+	end
+
+	button.MouseButton1Click:Connect(function()
+		safeModeOn = not safeModeOn
+		updateButton()
+	end)
+
+	-- Initialize button state on script start
+	updateButton()
+
+
+end
+local function LPEPS_fake_script() -- Fake Script: StarterGui.BloxFruitTest.Frame.PvP.D.ToggleButton
+	local script = Instance.new("LocalScript")
+	script.Name = "ToggleButton"
+	script.Parent = Converted["_D"]
+	local req = require
+	local require = function(obj)
+		local fake = fake_module_scripts[obj]
+		if fake then
+			return fake()
+		end
+		return req(obj)
+	end
+
+	local button = script.Parent
+
+	local safeModeOn = false
+
+	local function updateButton()
+		if safeModeOn then
+			button.Text = "Lock Aimbot: ON"
+		else
+			button.Text = "Lock Aimbot: OFF"
+		end
+	end
+
+	button.MouseButton1Click:Connect(function()
+		safeModeOn = not safeModeOn
+		updateButton()
+	end)
+
+	-- Initialize button state on script start
+	updateButton()
+
+
+end
+local function ELBVBFM_fake_script() -- Fake Script: StarterGui.BloxFruitTest.Frame.Setting.D.ConfirmAndRemoveScreenGui
+	local script = Instance.new("LocalScript")
+	script.Name = "ConfirmAndRemoveScreenGui"
+	script.Parent = Converted["_D1"]
+	local req = require
+	local require = function(obj)
+		local fake = fake_module_scripts[obj]
+		if fake then
+			return fake()
+		end
+		return req(obj)
+	end
+
+	local button = script.Parent
+	local clickedOnce = false
+	local timerRunning = false
+	local originalText = button.Text
+
+	button.MouseButton1Click:Connect(function()
+		if not clickedOnce then
+			button.Text = "Are you sure?"
+			clickedOnce = true
+			timerRunning = true
+
+			-- Start timer to revert text if not clicked again
+			task.spawn(function()
+				task.wait(3)
+				if timerRunning and clickedOnce then
+					button.Text = originalText
+					clickedOnce = false
+					timerRunning = false
+				end
+			end)
+		else
+			timerRunning = false
+			local screenGui = button.Parent.Parent.Parent
+			if screenGui then
+				screenGui:Destroy()
+			end
+		end
+	end)
+
+
+end
+local function KCKRM_fake_script() -- Fake Script: StarterGui.BloxFruitTest.TextButton.LocalScript
 	local script = Instance.new("LocalScript")
 	script.Name = "LocalScript"
 	script.Parent = Converted["_TextButton5"]
@@ -2354,22 +2889,28 @@ local function FJFZZPR_fake_script() -- Fake Script: StarterGui.BloxFruitTest.Te
 
 end
 
-coroutine.wrap(KVJBM_fake_script)()
-coroutine.wrap(QVWS_fake_script)()
-coroutine.wrap(NSPEENH_fake_script)()
-coroutine.wrap(CWEMCYS_fake_script)()
-coroutine.wrap(ZXFOIZ_fake_script)()
-coroutine.wrap(UXMD_fake_script)()
-coroutine.wrap(LKINDG_fake_script)()
-coroutine.wrap(CAAUCP_fake_script)()
-coroutine.wrap(WIRZ_fake_script)()
-coroutine.wrap(VPAMOZ_fake_script)()
-coroutine.wrap(UPSZQI_fake_script)()
-coroutine.wrap(CGCVDSQ_fake_script)()
-coroutine.wrap(XJWTD_fake_script)()
-coroutine.wrap(QIHULV_fake_script)()
-coroutine.wrap(QUSYWF_fake_script)()
-coroutine.wrap(RYTF_fake_script)()
-coroutine.wrap(COYTOJ_fake_script)()
-coroutine.wrap(RQGESNU_fake_script)()
-coroutine.wrap(FJFZZPR_fake_script)()
+coroutine.wrap(WOLALZ_fake_script)()
+coroutine.wrap(XLNVC_fake_script)()
+coroutine.wrap(QKBWSTC_fake_script)()
+coroutine.wrap(DHDE_fake_script)()
+coroutine.wrap(EVKX_fake_script)()
+coroutine.wrap(SYQRT_fake_script)()
+coroutine.wrap(RBILHUL_fake_script)()
+coroutine.wrap(GHWE_fake_script)()
+coroutine.wrap(LBRRU_fake_script)()
+coroutine.wrap(SYBZNJ_fake_script)()
+coroutine.wrap(TAHZPZ_fake_script)()
+coroutine.wrap(BXTIY_fake_script)()
+coroutine.wrap(LGYMLM_fake_script)()
+coroutine.wrap(PHYIHJ_fake_script)()
+coroutine.wrap(VDUZK_fake_script)()
+coroutine.wrap(XOTPXY_fake_script)()
+coroutine.wrap(RPOMWE_fake_script)()
+coroutine.wrap(TBWW_fake_script)()
+coroutine.wrap(VQVROD_fake_script)()
+coroutine.wrap(QBTLNN_fake_script)()
+coroutine.wrap(JXUIY_fake_script)()
+coroutine.wrap(ALWYWRY_fake_script)()
+coroutine.wrap(LPEPS_fake_script)()
+coroutine.wrap(ELBVBFM_fake_script)()
+coroutine.wrap(KCKRM_fake_script)()
