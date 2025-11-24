@@ -1,5 +1,5 @@
 -- Generated using RoadToGlory's Converter v1.1 (RoadToGlory#9879)
---Version 27/10/2568 V.1.3
+
 -- Instances:
 
 local Converted = {
@@ -44,6 +44,14 @@ local Converted = {
 	["_TeleportOnClickLocalOnly1"] = Instance.new("LocalScript");
 	["_ZTest2"] = Instance.new("TextButton");
 	["_TeleportOnClickLocalOnly2"] = Instance.new("LocalScript");
+	["_ManTP"] = Instance.new("TextButton");
+	["_TeleportOnClickLocalOnly3"] = Instance.new("LocalScript");
+	["_Value5"] = Instance.new("TextLabel");
+	["_Mansion"] = Instance.new("TextButton");
+	["_TeleportOnClickLocalOnly4"] = Instance.new("LocalScript");
+	["_ZTest3"] = Instance.new("TextButton");
+	["_TeleportOnClickLocalOnly5"] = Instance.new("LocalScript");
+	["_Value6"] = Instance.new("TextLabel");
 	["_TpPlr1"] = Instance.new("ScrollingFrame");
 	["_UIListLayout3"] = Instance.new("UIListLayout");
 	["_Simple"] = Instance.new("TextButton");
@@ -58,10 +66,10 @@ local Converted = {
 	["_SafeMode"] = Instance.new("TextButton");
 	["_ToggleSafeModeButton"] = Instance.new("LocalScript");
 	["_Frame3"] = Instance.new("Frame");
+	["_NearestPlayerGuiUpdater"] = Instance.new("LocalScript");
 	["_TextButton"] = Instance.new("TextButton");
 	["_TextLabel1"] = Instance.new("TextLabel");
 	["_ImageLabel"] = Instance.new("ImageLabel");
-	["_NearestPlayerGuiUpdater"] = Instance.new("LocalScript");
 	["_Frame4"] = Instance.new("Frame");
 	["_TextButton1"] = Instance.new("TextButton");
 	["_LocalScript2"] = Instance.new("LocalScript");
@@ -297,7 +305,6 @@ Converted["_TP"].BorderColor3 = Color3.fromRGB(0, 0, 0)
 Converted["_TP"].BorderSizePixel = 0
 Converted["_TP"].Position = UDim2.new(0.288973391, 0, 0, 0)
 Converted["_TP"].Size = UDim2.new(0.711026549, 0, 1, 0)
-Converted["_TP"].Visible = false
 Converted["_TP"].Name = "TP"
 Converted["_TP"].Parent = Converted["_Frame"]
 
@@ -508,6 +515,72 @@ Converted["_ZTest2"].Size = UDim2.new(1, 0, 0.0500000007, 0)
 Converted["_ZTest2"].Name = "ZTest2"
 Converted["_ZTest2"].Parent = Converted["_TP"]
 
+Converted["_ManTP"].Font = Enum.Font.SourceSans
+Converted["_ManTP"].Text = "Halloween Teleporter"
+Converted["_ManTP"].TextColor3 = Color3.fromRGB(255, 255, 255)
+Converted["_ManTP"].TextScaled = true
+Converted["_ManTP"].TextSize = 14
+Converted["_ManTP"].TextWrapped = true
+Converted["_ManTP"].BackgroundColor3 = Color3.fromRGB(0, 0, 0)
+Converted["_ManTP"].BackgroundTransparency = 0.699999988079071
+Converted["_ManTP"].BorderColor3 = Color3.fromRGB(0, 0, 0)
+Converted["_ManTP"].BorderSizePixel = 0
+Converted["_ManTP"].Size = UDim2.new(1, 0, 0.0500000007, 0)
+Converted["_ManTP"].Name = "ManTP"
+Converted["_ManTP"].Parent = Converted["_TP"]
+
+Converted["_Value5"].Font = Enum.Font.SourceSans
+Converted["_Value5"].Text = "-12608, 339, -7457"
+Converted["_Value5"].TextColor3 = Color3.fromRGB(0, 0, 0)
+Converted["_Value5"].TextSize = 14
+Converted["_Value5"].BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+Converted["_Value5"].BorderColor3 = Color3.fromRGB(0, 0, 0)
+Converted["_Value5"].BorderSizePixel = 0
+Converted["_Value5"].Size = UDim2.new(0, 200, 0, 50)
+Converted["_Value5"].Visible = false
+Converted["_Value5"].Name = "Value"
+Converted["_Value5"].Parent = Converted["_ManTP"]
+
+Converted["_Mansion"].Font = Enum.Font.SourceSans
+Converted["_Mansion"].Text = "Mansion"
+Converted["_Mansion"].TextColor3 = Color3.fromRGB(255, 255, 255)
+Converted["_Mansion"].TextScaled = true
+Converted["_Mansion"].TextSize = 14
+Converted["_Mansion"].TextWrapped = true
+Converted["_Mansion"].BackgroundColor3 = Color3.fromRGB(0, 0, 0)
+Converted["_Mansion"].BackgroundTransparency = 0.699999988079071
+Converted["_Mansion"].BorderColor3 = Color3.fromRGB(0, 0, 0)
+Converted["_Mansion"].BorderSizePixel = 0
+Converted["_Mansion"].Size = UDim2.new(1, 0, 0.0500000007, 0)
+Converted["_Mansion"].Name = "Mansion"
+Converted["_Mansion"].Parent = Converted["_TP"]
+
+Converted["_ZTest3"].Font = Enum.Font.SourceSans
+Converted["_ZTest3"].Text = "Cafe"
+Converted["_ZTest3"].TextColor3 = Color3.fromRGB(255, 255, 255)
+Converted["_ZTest3"].TextScaled = true
+Converted["_ZTest3"].TextSize = 14
+Converted["_ZTest3"].TextWrapped = true
+Converted["_ZTest3"].BackgroundColor3 = Color3.fromRGB(0, 0, 0)
+Converted["_ZTest3"].BackgroundTransparency = 0.699999988079071
+Converted["_ZTest3"].BorderColor3 = Color3.fromRGB(0, 0, 0)
+Converted["_ZTest3"].BorderSizePixel = 0
+Converted["_ZTest3"].Size = UDim2.new(1, 0, 0.0500000007, 0)
+Converted["_ZTest3"].Name = "ZTest3"
+Converted["_ZTest3"].Parent = Converted["_TP"]
+
+Converted["_Value6"].Font = Enum.Font.SourceSans
+Converted["_Value6"].Text = "-382, 73, 355"
+Converted["_Value6"].TextColor3 = Color3.fromRGB(0, 0, 0)
+Converted["_Value6"].TextSize = 14
+Converted["_Value6"].BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+Converted["_Value6"].BorderColor3 = Color3.fromRGB(0, 0, 0)
+Converted["_Value6"].BorderSizePixel = 0
+Converted["_Value6"].Size = UDim2.new(0, 200, 0, 50)
+Converted["_Value6"].Visible = false
+Converted["_Value6"].Name = "Value"
+Converted["_Value6"].Parent = Converted["_ZTest3"]
+
 Converted["_TpPlr1"].ScrollBarImageColor3 = Color3.fromRGB(0, 0, 0)
 Converted["_TpPlr1"].Active = true
 Converted["_TpPlr1"].BackgroundColor3 = Color3.fromRGB(255, 255, 255)
@@ -516,6 +589,7 @@ Converted["_TpPlr1"].BorderColor3 = Color3.fromRGB(0, 0, 0)
 Converted["_TpPlr1"].BorderSizePixel = 0
 Converted["_TpPlr1"].Position = UDim2.new(0.288973391, 0, 0, 0)
 Converted["_TpPlr1"].Size = UDim2.new(0.711026549, 0, 1, 0)
+Converted["_TpPlr1"].Visible = false
 Converted["_TpPlr1"].Name = "TpPlr"
 Converted["_TpPlr1"].Parent = Converted["_Frame"]
 
@@ -661,7 +735,6 @@ Converted["_TextLabel1"].Position = UDim2.new(-1.08717423e-07, 0, 0, 0)
 Converted["_TextLabel1"].Size = UDim2.new(0.447705299, 0, 1.00000012, 0)
 Converted["_TextLabel1"].Parent = Converted["_Frame3"]
 
-Converted["_ImageLabel"].Image = "rbxasset://textures/ui/GuiImagePlaceholder.png"
 Converted["_ImageLabel"].BackgroundColor3 = Color3.fromRGB(255, 255, 255)
 Converted["_ImageLabel"].BackgroundTransparency = 1
 Converted["_ImageLabel"].BorderColor3 = Color3.fromRGB(0, 0, 0)
@@ -1256,7 +1329,7 @@ local fake_module_scripts = {}
 
 -- Fake Local Scripts:
 
-local function NIDXFU_fake_script() -- Fake Script: StarterGui.BloxFruitTest.Frame.LocalScript
+local function FDXPIZ_fake_script() -- Fake Script: StarterGui.BloxFruitTest.Frame.LocalScript
 	local script = Instance.new("LocalScript")
 	script.Name = "LocalScript"
 	script.Parent = Converted["_Frame"]
@@ -1301,10 +1374,10 @@ local function NIDXFU_fake_script() -- Fake Script: StarterGui.BloxFruitTest.Fra
 			if dragToggle then
 				updateInput(input)
 			end
-		end
-	end)
+			end
+		end)
 end
-local function PTJXF_fake_script() -- Fake Script: StarterGui.BloxFruitTest.Frame.LocalScript
+local function WRECU_fake_script() -- Fake Script: StarterGui.BloxFruitTest.Frame.LocalScript
 	local script = Instance.new("LocalScript")
 	script.Name = "LocalScript"
 	script.Parent = Converted["_Frame"]
@@ -1350,7 +1423,7 @@ local function PTJXF_fake_script() -- Fake Script: StarterGui.BloxFruitTest.Fram
 		script.Parent.Setting.Visible = true
 	end)
 end
-local function BJSGQGG_fake_script() -- Fake Script: StarterGui.BloxFruitTest.Frame.Main.B.ToggleNoclipButton
+local function FZZMGWS_fake_script() -- Fake Script: StarterGui.BloxFruitTest.Frame.Main.B.ToggleNoclipButton
 	local script = Instance.new("LocalScript")
 	script.Name = "ToggleNoclipButton"
 	script.Parent = Converted["_B"]
@@ -1441,7 +1514,7 @@ local function BJSGQGG_fake_script() -- Fake Script: StarterGui.BloxFruitTest.Fr
 
 
 end
-local function RBGL_fake_script() -- Fake Script: StarterGui.BloxFruitTest.Frame.Main.A.ToggleSpeedButton
+local function VXWY_fake_script() -- Fake Script: StarterGui.BloxFruitTest.Frame.Main.A.ToggleSpeedButton
 	local script = Instance.new("LocalScript")
 	script.Name = "ToggleSpeedButton"
 	script.Parent = Converted["_A"]
@@ -1525,7 +1598,7 @@ local function RBGL_fake_script() -- Fake Script: StarterGui.BloxFruitTest.Frame
 
 
 end
-local function THFYHAY_fake_script() -- Fake Script: StarterGui.BloxFruitTest.Frame.Main.Fly.ToggleFlyButton
+local function XLIJILQ_fake_script() -- Fake Script: StarterGui.BloxFruitTest.Frame.Main.Fly.ToggleFlyButton
 	local script = Instance.new("LocalScript")
 	script.Name = "ToggleFlyButton"
 	script.Parent = Converted["_Fly"]
@@ -1551,6 +1624,9 @@ local function THFYHAY_fake_script() -- Fake Script: StarterGui.BloxFruitTest.Fr
 	local flyLoopRunning = false
 	local upPressed = false
 	local downPressed = false
+
+	local flyUpButton
+	local flyDownButton
 
 	local function setNormalMovement()
 		local character = LocalPlayer.Character or LocalPlayer.CharacterAdded:Wait()
@@ -1593,7 +1669,7 @@ local function THFYHAY_fake_script() -- Fake Script: StarterGui.BloxFruitTest.Fr
 		end
 	end
 
-	-- Input listeners for vertical movement
+	-- Input listeners for vertical movement (keyboard)
 	UserInputService.InputBegan:Connect(function(input, processed)
 		if processed then return end
 		if not flyingEnabled then return end
@@ -1613,15 +1689,32 @@ local function THFYHAY_fake_script() -- Fake Script: StarterGui.BloxFruitTest.Fr
 		end
 	end)
 
+	-- Mobile support: Add fly up/down buttons if on mobile
+	if UserInputService.TouchEnabled then
+		script.Parent.Parent.Parent.Parent.Parent.TouchGui.TouchControlFrame.JumpButton.MouseButton1Down:Connect(function()
+			if flyingEnabled then
+				upPressed = true
+			end
+		end)
+
+		script.Parent.Parent.Parent.Parent.Parent.TouchGui.TouchControlFrame.JumpButton.MouseButton1Up:Connect(function()
+			upPressed = false
+		end)
+	end
+
 	button.MouseButton1Click:Connect(function()
 		flyingEnabled = not flyingEnabled
 		if flyingEnabled then
 			button.Text = "Fly: ON"
 			flyLoop()
+			if flyUpButton then flyUpButton.Visible = true end
+			if flyDownButton then flyDownButton.Visible = true end
 		else
 			button.Text = "Fly: OFF"
 			flyLoopRunning = false
 			setNormalMovement()
+			if flyUpButton then flyUpButton.Visible = false end
+			if flyDownButton then flyDownButton.Visible = false end
 		end
 	end)
 
@@ -1630,15 +1723,19 @@ local function THFYHAY_fake_script() -- Fake Script: StarterGui.BloxFruitTest.Fr
 		if not flyingEnabled then
 			setNormalMovement()
 			button.Text = "Fly: OFF"
+			if flyUpButton then flyUpButton.Visible = false end
+			if flyDownButton then flyDownButton.Visible = false end
 		end
 	end)
 
 	-- Set initial button text
 	button.Text = "Fly: OFF"
+	if flyUpButton then flyUpButton.Visible = false end
+	if flyDownButton then flyDownButton.Visible = false end
 
 
 end
-local function DVICS_fake_script() -- Fake Script: StarterGui.BloxFruitTest.Frame.TP.TPTweeningHandle
+local function XHUPJJ_fake_script() -- Fake Script: StarterGui.BloxFruitTest.Frame.TP.TPTweeningHandle
 	local script = Instance.new("LocalScript")
 	script.Name = "TPTweeningHandle"
 	script.Parent = Converted["_TP"]
@@ -1778,6 +1875,7 @@ local function DVICS_fake_script() -- Fake Script: StarterGui.BloxFruitTest.Fram
 			if valueObj then
 				child.MouseButton1Click:Connect(function()
 					if LocalPlayer and LocalPlayer.Character then
+						wait(.1)
 						moveCharacterTo(LocalPlayer.Character, TextLabelToVector3(valueObj))
 					end
 				end)
@@ -1795,7 +1893,7 @@ local function DVICS_fake_script() -- Fake Script: StarterGui.BloxFruitTest.Fram
 
 
 end
-local function WPYGJV_fake_script() -- Fake Script: StarterGui.BloxFruitTest.Frame.TP.Claste on the sea.TeleportOnClickLocalOnly
+local function RFFZU_fake_script() -- Fake Script: StarterGui.BloxFruitTest.Frame.TP.Claste on the sea.TeleportOnClickLocalOnly
 	local script = Instance.new("LocalScript")
 	script.Name = "TeleportOnClickLocalOnly"
 	script.Parent = Converted["_Claste on the sea"]
@@ -1823,7 +1921,7 @@ local function WPYGJV_fake_script() -- Fake Script: StarterGui.BloxFruitTest.Fra
 
 
 end
-local function FTBM_fake_script() -- Fake Script: StarterGui.BloxFruitTest.Frame.TP.ZTest1.TeleportOnClickLocalOnly
+local function ASSZKK_fake_script() -- Fake Script: StarterGui.BloxFruitTest.Frame.TP.ZTest1.TeleportOnClickLocalOnly
 	local script = Instance.new("LocalScript")
 	script.Name = "TeleportOnClickLocalOnly"
 	script.Parent = Converted["_ZTest1"]
@@ -1851,7 +1949,7 @@ local function FTBM_fake_script() -- Fake Script: StarterGui.BloxFruitTest.Frame
 
 
 end
-local function IKVWBC_fake_script() -- Fake Script: StarterGui.BloxFruitTest.Frame.TP.ZTest2.TeleportOnClickLocalOnly
+local function WKWT_fake_script() -- Fake Script: StarterGui.BloxFruitTest.Frame.TP.ZTest2.TeleportOnClickLocalOnly
 	local script = Instance.new("LocalScript")
 	script.Name = "TeleportOnClickLocalOnly"
 	script.Parent = Converted["_ZTest2"]
@@ -1879,7 +1977,91 @@ local function IKVWBC_fake_script() -- Fake Script: StarterGui.BloxFruitTest.Fra
 
 
 end
-local function ZOSCZQP_fake_script() -- Fake Script: StarterGui.BloxFruitTest.Frame.TpPlr.Frame.SelectPlayer.PlayerSelectDropdown
+local function DYFI_fake_script() -- Fake Script: StarterGui.BloxFruitTest.Frame.TP.ManTP.TeleportOnClickLocalOnly
+	local script = Instance.new("LocalScript")
+	script.Name = "TeleportOnClickLocalOnly"
+	script.Parent = Converted["_ManTP"]
+	local req = require
+	local require = function(obj)
+		local fake = fake_module_scripts[obj]
+		if fake then
+			return fake()
+		end
+		return req(obj)
+	end
+
+	local button = script.Parent
+	local targetPosition = Vector3.new(-12466, 376, -7542)
+
+	button.MouseButton1Click:Connect(function()
+		local Players = game:GetService("Players")
+		local LocalPlayer = Players.LocalPlayer
+		if LocalPlayer and LocalPlayer.Character then
+			local character = LocalPlayer.Character
+			-- Move the character to the target position using PivotTo
+			character:PivotTo(CFrame.new(targetPosition))
+		end
+	end)
+
+
+end
+local function GQGZAGU_fake_script() -- Fake Script: StarterGui.BloxFruitTest.Frame.TP.Mansion.TeleportOnClickLocalOnly
+	local script = Instance.new("LocalScript")
+	script.Name = "TeleportOnClickLocalOnly"
+	script.Parent = Converted["_Mansion"]
+	local req = require
+	local require = function(obj)
+		local fake = fake_module_scripts[obj]
+		if fake then
+			return fake()
+		end
+		return req(obj)
+	end
+
+	local button = script.Parent
+	local targetPosition = Vector3.new(-12466, 376, -7542)
+
+	button.MouseButton1Click:Connect(function()
+		local Players = game:GetService("Players")
+		local LocalPlayer = Players.LocalPlayer
+		if LocalPlayer and LocalPlayer.Character then
+			local character = LocalPlayer.Character
+			-- Move the character to the target position using PivotTo
+			character:PivotTo(CFrame.new(targetPosition))
+		end
+	end)
+
+
+end
+local function RJIZWJT_fake_script() -- Fake Script: StarterGui.BloxFruitTest.Frame.TP.ZTest3.TeleportOnClickLocalOnly
+	local script = Instance.new("LocalScript")
+	script.Name = "TeleportOnClickLocalOnly"
+	script.Parent = Converted["_ZTest3"]
+	local req = require
+	local require = function(obj)
+		local fake = fake_module_scripts[obj]
+		if fake then
+			return fake()
+		end
+		return req(obj)
+	end
+
+	local button = script.Parent
+	local targetPosition = Vector3.new(-288, 306, 601)
+
+	button.MouseButton1Click:Connect(function()
+		local Players = game:GetService("Players")
+		local LocalPlayer = Players.LocalPlayer
+		if LocalPlayer and LocalPlayer.Character then
+			local character = LocalPlayer.Character
+			-- Move the character to the target position using PivotTo
+			character:PivotTo(CFrame.new(targetPosition))
+		end
+	end)
+
+
+end
+local function NJEX_fake_script() -- Fake Script: StarterGui.BloxFruitTest.Frame.TpPlr.Frame.SelectPlayer.PlayerSelectDropdown
 	local script = Instance.new("LocalScript")
 	script.Name = "PlayerSelectDropdown"
 	script.Parent = Converted["_SelectPlayer"]
@@ -1957,7 +2139,7 @@ local function ZOSCZQP_fake_script() -- Fake Script: StarterGui.BloxFruitTest.Fr
 
 
 end
-local function VJCRV_fake_script() -- Fake Script: StarterGui.BloxFruitTest.Frame.TpPlr.Frame.Tween.TweenToPlayerButton
+local function GFZTDR_fake_script() -- Fake Script: StarterGui.BloxFruitTest.Frame.TpPlr.Frame.Tween.TweenToPlayerButton
 	local script = Instance.new("LocalScript")
 	script.Name = "TweenToPlayerButton"
 	script.Parent = Converted["_Tween"]
@@ -2167,7 +2349,7 @@ local function VJCRV_fake_script() -- Fake Script: StarterGui.BloxFruitTest.Fram
 
 
 end
-local function YMIKYFM_fake_script() -- Fake Script: StarterGui.BloxFruitTest.Frame.TpPlr.SafeMode.ToggleSafeModeButton
+local function NWVWAL_fake_script() -- Fake Script: StarterGui.BloxFruitTest.Frame.TpPlr.SafeMode.ToggleSafeModeButton
 	local script = Instance.new("LocalScript")
 	script.Name = "ToggleSafeModeButton"
 	script.Parent = Converted["_SafeMode"]
@@ -2204,7 +2386,7 @@ local function YMIKYFM_fake_script() -- Fake Script: StarterGui.BloxFruitTest.Fr
 
 
 end
-local function KHPBK_fake_script() -- Fake Script: StarterGui.BloxFruitTest.Frame.TpPlr.Frame3.NearestPlayerGuiUpdater
+local function STZLO_fake_script() -- Fake Script: StarterGui.BloxFruitTest.Frame.TpPlr.Frame3.NearestPlayerGuiUpdater
 	local script = Instance.new("LocalScript")
 	script.Name = "NearestPlayerGuiUpdater"
 	script.Parent = Converted["_Frame3"]
@@ -2301,7 +2483,7 @@ local function KHPBK_fake_script() -- Fake Script: StarterGui.BloxFruitTest.Fram
 
 
 end
-local function XWAJN_fake_script() -- Fake Script: StarterGui.BloxFruitTest.Frame.TpPlr.Frame4.TextButton.LocalScript
+local function RWFI_fake_script() -- Fake Script: StarterGui.BloxFruitTest.Frame.TpPlr.Frame4.TextButton.LocalScript
 	local script = Instance.new("LocalScript")
 	script.Name = "LocalScript"
 	script.Parent = Converted["_TextButton1"]
@@ -2318,7 +2500,7 @@ local function XWAJN_fake_script() -- Fake Script: StarterGui.BloxFruitTest.Fram
 		script.Parent.Parent.Parent.Frame2.TextBox.Text = script.Parent.Text
 	end)
 end
-local function XUWDHTY_fake_script() -- Fake Script: StarterGui.BloxFruitTest.Frame.TpPlr.Frame4.TextButton.LocalScript
+local function POXF_fake_script() -- Fake Script: StarterGui.BloxFruitTest.Frame.TpPlr.Frame4.TextButton.LocalScript
 	local script = Instance.new("LocalScript")
 	script.Name = "LocalScript"
 	script.Parent = Converted["_TextButton2"]
@@ -2335,7 +2517,7 @@ local function XUWDHTY_fake_script() -- Fake Script: StarterGui.BloxFruitTest.Fr
 		script.Parent.Parent.Parent.Frame2.TextBox.Text = script.Parent.Text
 	end)
 end
-local function ASNNO_fake_script() -- Fake Script: StarterGui.BloxFruitTest.Frame.TpPlr.Frame4.TextButton.LocalScript
+local function MOYWLUU_fake_script() -- Fake Script: StarterGui.BloxFruitTest.Frame.TpPlr.Frame4.TextButton.LocalScript
 	local script = Instance.new("LocalScript")
 	script.Name = "LocalScript"
 	script.Parent = Converted["_TextButton3"]
@@ -2352,7 +2534,7 @@ local function ASNNO_fake_script() -- Fake Script: StarterGui.BloxFruitTest.Fram
 		script.Parent.Parent.Parent.Frame2.TextBox.Text = script.Parent.Text
 	end)
 end
-local function GOKYI_fake_script() -- Fake Script: StarterGui.BloxFruitTest.Frame.TpPlr.Frame4.TextButton.LocalScript
+local function THARZTO_fake_script() -- Fake Script: StarterGui.BloxFruitTest.Frame.TpPlr.Frame4.TextButton.LocalScript
 	local script = Instance.new("LocalScript")
 	script.Name = "LocalScript"
 	script.Parent = Converted["_TextButton4"]
@@ -2369,7 +2551,7 @@ local function GOKYI_fake_script() -- Fake Script: StarterGui.BloxFruitTest.Fram
 		script.Parent.Parent.Parent.Frame2.TextBox.Text = script.Parent.Text
 	end)
 end
-local function EURMJW_fake_script() -- Fake Script: StarterGui.BloxFruitTest.Frame.TpPlr.Frame4.TextButton.LocalScript
+local function LZHNRY_fake_script() -- Fake Script: StarterGui.BloxFruitTest.Frame.TpPlr.Frame4.TextButton.LocalScript
 	local script = Instance.new("LocalScript")
 	script.Name = "LocalScript"
 	script.Parent = Converted["_TextButton5"]
@@ -2386,7 +2568,7 @@ local function EURMJW_fake_script() -- Fake Script: StarterGui.BloxFruitTest.Fra
 		script.Parent.Parent.Parent.Frame2.TextBox.Text = script.Parent.Text
 	end)
 end
-local function ELIQY_fake_script() -- Fake Script: StarterGui.BloxFruitTest.Frame.PvP.LocalScript
+local function PURPMJT_fake_script() -- Fake Script: StarterGui.BloxFruitTest.Frame.PvP.LocalScript
 	local script = Instance.new("LocalScript")
 	script.Name = "LocalScript"
 	script.Parent = Converted["_PvP1"]
@@ -2518,35 +2700,37 @@ local function ELIQY_fake_script() -- Fake Script: StarterGui.BloxFruitTest.Fram
 
 	spawn(function()
 		while wait(.2) do
-			if Playersaimbot ~= nil then 
-				for i,v in pairs(game.Players:GetChildren()) do
-					if v.Name == Playersaimbot then 
-						if game.Workspace.Characters:FindFirstChild(v.Name) then
-							NamePlayers.Text = "Name | "..v.Name
-							HealthPlayers.Text = "Health | "..math.floor(v.Character.Humanoid.Health).."/"..v.Character.Humanoid.MaxHealth
-							local hp = v.Character.Humanoid.Health/v.Character.Humanoid.MaxHealth
-							pcall(function()
-								Healthgreen:TweenSize(UDim2.new(hp,0,0,8),Enum.EasingDirection.Out,Enum.EasingStyle.Quad,0.3)
-							end)
-							ImageProfile.Image = game:GetService("Players"):GetUserThumbnailAsync(v.UserId, Enum.ThumbnailType.HeadShot, Enum.ThumbnailSize.Size420x420)
+			spawn(function()
+				if Playersaimbot ~= nil then 
+					for i,v in pairs(game.Players:GetChildren()) do
+						if v.Name == Playersaimbot then 
+							if game.Workspace.Characters:FindFirstChild(v.Name) then
+								NamePlayers.Text = "Name | "..v.Name
+								HealthPlayers.Text = "Health | "..math.floor(v.Character.Humanoid.Health).."/"..v.Character.Humanoid.MaxHealth
+								local hp = v.Character.Humanoid.Health/v.Character.Humanoid.MaxHealth
+								pcall(function()
+									Healthgreen:TweenSize(UDim2.new(hp,0,0,8),Enum.EasingDirection.Out,Enum.EasingStyle.Quad,0.3)
+								end)
+								ImageProfile.Image = game:GetService("Players"):GetUserThumbnailAsync(v.UserId, Enum.ThumbnailType.HeadShot, Enum.ThumbnailSize.Size420x420)
+							end
+						end
+					end
+					-----Enemies
+					for i,v in pairs(workspace.Enemies:GetChildren()) do
+						if v.Name == Playersaimbot then 
+							if game.Workspace.Enemies:FindFirstChild(v.Name) then
+								local Mob = game.Workspace.Enemies:FindFirstChild(v.Name)
+								NamePlayers.Text = "Name | "..v.Name
+								HealthPlayers.Text = "Health | "..math.floor(Mob.Humanoid.Health).."/"..Mob.Humanoid.MaxHealth
+								local hp = Mob.Humanoid.Health/Mob.Humanoid.MaxHealth
+								pcall(function()
+									Healthgreen:TweenSize(UDim2.new(hp,0,0,8),Enum.EasingDirection.Out,Enum.EasingStyle.Quad,0.3)
+								end)
+							end
 						end
 					end
 				end
-				-----Enemies
-				for i,v in pairs(workspace.Enemies:GetChildren()) do
-					if v.Name == Playersaimbot then 
-						if game.Workspace.Enemies:FindFirstChild(v.Name) then
-							local Mob = game.Workspace.Enemies:FindFirstChild(v.Name)
-							NamePlayers.Text = "Name | "..v.Name
-							HealthPlayers.Text = "Health | "..math.floor(Mob.Humanoid.Health).."/"..Mob.Humanoid.MaxHealth
-							local hp = Mob.Humanoid.Health/Mob.Humanoid.MaxHealth
-							pcall(function()
-								Healthgreen:TweenSize(UDim2.new(hp,0,0,8),Enum.EasingDirection.Out,Enum.EasingStyle.Quad,0.3)
-							end)
-						end
-					end
-				end
-			end
+			end)
 		end
 	end)
 
@@ -2583,7 +2767,7 @@ local function ELIQY_fake_script() -- Fake Script: StarterGui.BloxFruitTest.Fram
 		end)
 	end)
 end
-local function IILH_fake_script() -- Fake Script: StarterGui.BloxFruitTest.Frame.PvP.AFrame.SelectPlayer.PlayerSelectDropdown
+local function OUEDML_fake_script() -- Fake Script: StarterGui.BloxFruitTest.Frame.PvP.AFrame.SelectPlayer.PlayerSelectDropdown
 	local script = Instance.new("LocalScript")
 	script.Name = "PlayerSelectDropdown"
 	script.Parent = Converted["_SelectPlayer1"]
@@ -2658,7 +2842,7 @@ local function IILH_fake_script() -- Fake Script: StarterGui.BloxFruitTest.Frame
 
 
 end
-local function JLMFDUZ_fake_script() -- Fake Script: StarterGui.BloxFruitTest.Frame.PvP.C.ToggleButton
+local function GVFYCS_fake_script() -- Fake Script: StarterGui.BloxFruitTest.Frame.PvP.C.ToggleButton
 	local script = Instance.new("LocalScript")
 	script.Name = "ToggleButton"
 	script.Parent = Converted["_C"]
@@ -2693,7 +2877,7 @@ local function JLMFDUZ_fake_script() -- Fake Script: StarterGui.BloxFruitTest.Fr
 
 
 end
-local function RYHZUBL_fake_script() -- Fake Script: StarterGui.BloxFruitTest.Frame.PvP.G.ShowOtherPlayerNamesOnClick
+local function DURD_fake_script() -- Fake Script: StarterGui.BloxFruitTest.Frame.PvP.G.ShowOtherPlayerNamesOnClick
 	local script = Instance.new("LocalScript")
 	script.Name = "ShowOtherPlayerNamesOnClick"
 	script.Parent = Converted["_G"]
@@ -2897,7 +3081,7 @@ local function RYHZUBL_fake_script() -- Fake Script: StarterGui.BloxFruitTest.Fr
 
 
 end
-local function FDDKEKW_fake_script() -- Fake Script: StarterGui.BloxFruitTest.Frame.PvP.B1Test.ToggleButton
+local function RGQA_fake_script() -- Fake Script: StarterGui.BloxFruitTest.Frame.PvP.B1Test.ToggleButton
 	local script = Instance.new("LocalScript")
 	script.Name = "ToggleButton"
 	script.Parent = Converted["_B1Test"]
@@ -2932,7 +3116,7 @@ local function FDDKEKW_fake_script() -- Fake Script: StarterGui.BloxFruitTest.Fr
 
 
 end
-local function OPQMUQE_fake_script() -- Fake Script: StarterGui.BloxFruitTest.Frame.PvP.C1Test.ToggleButton
+local function RBNKCSF_fake_script() -- Fake Script: StarterGui.BloxFruitTest.Frame.PvP.C1Test.ToggleButton
 	local script = Instance.new("LocalScript")
 	script.Name = "ToggleButton"
 	script.Parent = Converted["_C1Test"]
@@ -2967,7 +3151,7 @@ local function OPQMUQE_fake_script() -- Fake Script: StarterGui.BloxFruitTest.Fr
 
 
 end
-local function SBJQD_fake_script() -- Fake Script: StarterGui.BloxFruitTest.Frame.PvP.E1.ToggleButton
+local function KUTQXMS_fake_script() -- Fake Script: StarterGui.BloxFruitTest.Frame.PvP.E1.ToggleButton
 	local script = Instance.new("LocalScript")
 	script.Name = "ToggleButton"
 	script.Parent = Converted["_E1"]
@@ -3004,7 +3188,7 @@ local function SBJQD_fake_script() -- Fake Script: StarterGui.BloxFruitTest.Fram
 
 
 end
-local function CUUKF_fake_script() -- Fake Script: StarterGui.BloxFruitTest.Frame.PvP.D.ToggleButton
+local function IADPLAG_fake_script() -- Fake Script: StarterGui.BloxFruitTest.Frame.PvP.D.ToggleButton
 	local script = Instance.new("LocalScript")
 	script.Name = "ToggleButton"
 	script.Parent = Converted["_D"]
@@ -3039,7 +3223,7 @@ local function CUUKF_fake_script() -- Fake Script: StarterGui.BloxFruitTest.Fram
 
 
 end
-local function DPZH_fake_script() -- Fake Script: StarterGui.BloxFruitTest.Frame.Setting.D.ConfirmAndRemoveScreenGui
+local function LUGMVH_fake_script() -- Fake Script: StarterGui.BloxFruitTest.Frame.Setting.D.ConfirmAndRemoveScreenGui
 	local script = Instance.new("LocalScript")
 	script.Name = "ConfirmAndRemoveScreenGui"
 	script.Parent = Converted["_D1"]
@@ -3083,7 +3267,7 @@ local function DPZH_fake_script() -- Fake Script: StarterGui.BloxFruitTest.Frame
 
 
 end
-local function OMIDUGY_fake_script() -- Fake Script: StarterGui.BloxFruitTest.TextButton.LocalScript
+local function NGKDIO_fake_script() -- Fake Script: StarterGui.BloxFruitTest.TextButton.LocalScript
 	local script = Instance.new("LocalScript")
 	script.Name = "LocalScript"
 	script.Parent = Converted["_TextButton6"]
@@ -3136,31 +3320,34 @@ local function OMIDUGY_fake_script() -- Fake Script: StarterGui.BloxFruitTest.Te
 
 end
 
-coroutine.wrap(NIDXFU_fake_script)()
-coroutine.wrap(PTJXF_fake_script)()
-coroutine.wrap(BJSGQGG_fake_script)()
-coroutine.wrap(RBGL_fake_script)()
-coroutine.wrap(THFYHAY_fake_script)()
-coroutine.wrap(DVICS_fake_script)()
-coroutine.wrap(WPYGJV_fake_script)()
-coroutine.wrap(FTBM_fake_script)()
-coroutine.wrap(IKVWBC_fake_script)()
-coroutine.wrap(ZOSCZQP_fake_script)()
-coroutine.wrap(VJCRV_fake_script)()
-coroutine.wrap(YMIKYFM_fake_script)()
-coroutine.wrap(KHPBK_fake_script)()
-coroutine.wrap(XWAJN_fake_script)()
-coroutine.wrap(XUWDHTY_fake_script)()
-coroutine.wrap(ASNNO_fake_script)()
-coroutine.wrap(GOKYI_fake_script)()
-coroutine.wrap(EURMJW_fake_script)()
-coroutine.wrap(ELIQY_fake_script)()
-coroutine.wrap(IILH_fake_script)()
-coroutine.wrap(JLMFDUZ_fake_script)()
-coroutine.wrap(RYHZUBL_fake_script)()
-coroutine.wrap(FDDKEKW_fake_script)()
-coroutine.wrap(OPQMUQE_fake_script)()
-coroutine.wrap(SBJQD_fake_script)()
-coroutine.wrap(CUUKF_fake_script)()
-coroutine.wrap(DPZH_fake_script)()
-coroutine.wrap(OMIDUGY_fake_script)()
+coroutine.wrap(FDXPIZ_fake_script)()
+coroutine.wrap(WRECU_fake_script)()
+coroutine.wrap(FZZMGWS_fake_script)()
+coroutine.wrap(VXWY_fake_script)()
+coroutine.wrap(XLIJILQ_fake_script)()
+coroutine.wrap(XHUPJJ_fake_script)()
+coroutine.wrap(RFFZU_fake_script)()
+coroutine.wrap(ASSZKK_fake_script)()
+coroutine.wrap(WKWT_fake_script)()
+coroutine.wrap(DYFI_fake_script)()
+coroutine.wrap(GQGZAGU_fake_script)()
+coroutine.wrap(RJIZWJT_fake_script)()
+coroutine.wrap(NJEX_fake_script)()
+coroutine.wrap(GFZTDR_fake_script)()
+coroutine.wrap(NWVWAL_fake_script)()
+coroutine.wrap(STZLO_fake_script)()
+coroutine.wrap(RWFI_fake_script)()
+coroutine.wrap(POXF_fake_script)()
+coroutine.wrap(MOYWLUU_fake_script)()
+coroutine.wrap(THARZTO_fake_script)()
+coroutine.wrap(LZHNRY_fake_script)()
+coroutine.wrap(PURPMJT_fake_script)()
+coroutine.wrap(OUEDML_fake_script)()
+coroutine.wrap(GVFYCS_fake_script)()
+coroutine.wrap(DURD_fake_script)()
+coroutine.wrap(RGQA_fake_script)()
+coroutine.wrap(RBNKCSF_fake_script)()
+coroutine.wrap(KUTQXMS_fake_script)()
+coroutine.wrap(IADPLAG_fake_script)()
+coroutine.wrap(LUGMVH_fake_script)()
+coroutine.wrap(NGKDIO_fake_script)()
