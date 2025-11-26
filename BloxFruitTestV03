@@ -1690,17 +1690,19 @@ local function XLIJILQ_fake_script() -- Fake Script: StarterGui.BloxFruitTest.Fr
 	end)
 
 	-- Mobile support: Add fly up/down buttons if on mobile
-	if UserInputService.TouchEnabled then
-		script.Parent.Parent.Parent.Parent.Parent.TouchGui.TouchControlFrame.JumpButton.MouseButton1Down:Connect(function()
-			if flyingEnabled then
-				upPressed = true
-			end
-		end)
+	spawn(function()
+		if UserInputService.TouchEnabled then
+			script.Parent.Parent.Parent.Parent.Parent.TouchGui.TouchControlFrame.JumpButton.MouseButton1Down:Connect(function()
+				if flyingEnabled then
+					upPressed = true
+				end
+			end)
 
-		script.Parent.Parent.Parent.Parent.Parent.TouchGui.TouchControlFrame.JumpButton.MouseButton1Up:Connect(function()
-			upPressed = false
-		end)
-	end
+			script.Parent.Parent.Parent.Parent.Parent.TouchGui.TouchControlFrame.JumpButton.MouseButton1Up:Connect(function()
+				upPressed = false
+			end)
+		end
+	end)
 
 	button.MouseButton1Click:Connect(function()
 		flyingEnabled = not flyingEnabled
@@ -3324,7 +3326,7 @@ coroutine.wrap(FDXPIZ_fake_script)()
 coroutine.wrap(WRECU_fake_script)()
 coroutine.wrap(FZZMGWS_fake_script)()
 coroutine.wrap(VXWY_fake_script)()
-coroutine.wrap(XLIJILQ_fake_script)()
+
 coroutine.wrap(XHUPJJ_fake_script)()
 coroutine.wrap(RFFZU_fake_script)()
 coroutine.wrap(ASSZKK_fake_script)()
@@ -3351,3 +3353,4 @@ coroutine.wrap(KUTQXMS_fake_script)()
 coroutine.wrap(IADPLAG_fake_script)()
 coroutine.wrap(LUGMVH_fake_script)()
 coroutine.wrap(NGKDIO_fake_script)()
+coroutine.wrap(XLIJILQ_fake_script)()
