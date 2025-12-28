@@ -1,4 +1,4 @@
--- Generated using RoadToGlory's Converter v1.1 (RoadToGlory#9879)
+-- Version 28/15/25
 
 -- Instances:
 
@@ -6,7 +6,6 @@ local Converted = {
 	["_BloxFruitTest"] = Instance.new("ScreenGui");
 	["_Frame"] = Instance.new("Frame");
 	["_LocalScript"] = Instance.new("LocalScript");
-	["_LocalScript1"] = Instance.new("LocalScript");
 	["_Main"] = Instance.new("ScrollingFrame");
 	["_B"] = Instance.new("TextButton");
 	["_ToggleNoclipButton"] = Instance.new("LocalScript");
@@ -21,37 +20,27 @@ local Converted = {
 	["_UIListLayout1"] = Instance.new("UIListLayout");
 	["_TpPlr"] = Instance.new("TextButton");
 	["_PvP"] = Instance.new("TextButton");
+	["_NPC"] = Instance.new("TextButton");
 	["_Set"] = Instance.new("TextButton");
-	["_TP"] = Instance.new("ScrollingFrame");
+	["_NPC1"] = Instance.new("ScrollingFrame");
 	["_TPTweeningHandle"] = Instance.new("LocalScript");
-	["_Porttown"] = Instance.new("TextButton");
-	["_Value"] = Instance.new("TextLabel");
 	["_UIListLayout2"] = Instance.new("UIListLayout");
-	["_Claste on the sea"] = Instance.new("TextButton");
-	["_TeleportOnClickLocalOnly"] = Instance.new("LocalScript");
-	["_Cake"] = Instance.new("TextButton");
-	["_Value1"] = Instance.new("TextLabel");
-	["_Tiki outpost"] = Instance.new("TextButton");
-	["_Value2"] = Instance.new("TextLabel");
-	["_Bone"] = Instance.new("TextButton");
-	["_Value3"] = Instance.new("TextLabel");
-	["_A1"] = Instance.new("TextButton");
-	["_GreatTree"] = Instance.new("TextButton");
-	["_Value4"] = Instance.new("TextLabel");
 	["_Event"] = Instance.new("BindableEvent");
+	["_Sanguine"] = Instance.new("TextButton");
+	["_Value"] = Instance.new("TextLabel");
 	["_Z"] = Instance.new("TextLabel");
-	["_ZTest1"] = Instance.new("TextButton");
-	["_TeleportOnClickLocalOnly1"] = Instance.new("LocalScript");
-	["_ZTest2"] = Instance.new("TextButton");
-	["_TeleportOnClickLocalOnly2"] = Instance.new("LocalScript");
-	["_ManTP"] = Instance.new("TextButton");
-	["_TeleportOnClickLocalOnly3"] = Instance.new("LocalScript");
-	["_Value5"] = Instance.new("TextLabel");
-	["_Mansion"] = Instance.new("TextButton");
-	["_TeleportOnClickLocalOnly4"] = Instance.new("LocalScript");
 	["_ZTest3"] = Instance.new("TextButton");
-	["_TeleportOnClickLocalOnly5"] = Instance.new("LocalScript");
-	["_Value6"] = Instance.new("TextLabel");
+	["_Value1"] = Instance.new("TextLabel");
+	["_God"] = Instance.new("TextButton");
+	["_TeleportOnClickLocalOnly"] = Instance.new("LocalScript");
+	["_Value2"] = Instance.new("TextLabel");
+	["_Elec"] = Instance.new("TextButton");
+	["_TeleportOnClickLocalOnly1"] = Instance.new("LocalScript");
+	["_Value3"] = Instance.new("TextLabel");
+	["_Dragon"] = Instance.new("TextButton");
+	["_TeleportOnClickLocalOnly2"] = Instance.new("LocalScript");
+	["_Value4"] = Instance.new("TextLabel");
+	["_A1"] = Instance.new("TextButton");
 	["_TpPlr1"] = Instance.new("ScrollingFrame");
 	["_UIListLayout3"] = Instance.new("UIListLayout");
 	["_Simple"] = Instance.new("TextButton");
@@ -72,20 +61,20 @@ local Converted = {
 	["_ImageLabel"] = Instance.new("ImageLabel");
 	["_Frame4"] = Instance.new("Frame");
 	["_TextButton1"] = Instance.new("TextButton");
-	["_LocalScript2"] = Instance.new("LocalScript");
+	["_LocalScript1"] = Instance.new("LocalScript");
 	["_UIGridLayout"] = Instance.new("UIGridLayout");
 	["_TextButton2"] = Instance.new("TextButton");
-	["_LocalScript3"] = Instance.new("LocalScript");
+	["_LocalScript2"] = Instance.new("LocalScript");
 	["_TextButton3"] = Instance.new("TextButton");
-	["_LocalScript4"] = Instance.new("LocalScript");
+	["_LocalScript3"] = Instance.new("LocalScript");
 	["_TextButton4"] = Instance.new("TextButton");
-	["_LocalScript5"] = Instance.new("LocalScript");
+	["_LocalScript4"] = Instance.new("LocalScript");
 	["_TextButton5"] = Instance.new("TextButton");
-	["_LocalScript6"] = Instance.new("LocalScript");
+	["_LocalScript5"] = Instance.new("LocalScript");
 	["_TextLabel2"] = Instance.new("TextLabel");
 	["_TextLabel3"] = Instance.new("TextLabel");
 	["_PvP1"] = Instance.new("ScrollingFrame");
-	["_LocalScript7"] = Instance.new("LocalScript");
+	["_LocalScript6"] = Instance.new("LocalScript");
 	["_UIListLayout4"] = Instance.new("UIListLayout");
 	["_Simple1"] = Instance.new("TextButton");
 	["_AFrame"] = Instance.new("Frame");
@@ -123,8 +112,44 @@ local Converted = {
 	["_Icon"] = Instance.new("ImageLabel");
 	["_TextLabel6"] = Instance.new("TextLabel");
 	["_Theme1"] = Instance.new("ImageLabel");
+	["_TP"] = Instance.new("ScrollingFrame");
+	["_TPTweeningHandle1"] = Instance.new("LocalScript");
+	["_Porttown"] = Instance.new("TextButton");
+	["_Value5"] = Instance.new("TextLabel");
+	["_UIListLayout6"] = Instance.new("UIListLayout");
+	["_Claste on the sea"] = Instance.new("TextButton");
+	["_TeleportOnClickLocalOnly3"] = Instance.new("LocalScript");
+	["_Cake"] = Instance.new("TextButton");
+	["_Value6"] = Instance.new("TextLabel");
+	["_Tiki outpost"] = Instance.new("TextButton");
+	["_Value7"] = Instance.new("TextLabel");
+	["_Bone"] = Instance.new("TextButton");
+	["_Value8"] = Instance.new("TextLabel");
+	["_A4"] = Instance.new("TextButton");
+	["_GreatTree"] = Instance.new("TextButton");
+	["_Value9"] = Instance.new("TextLabel");
+	["_Event1"] = Instance.new("BindableEvent");
+	["_Z1"] = Instance.new("TextLabel");
+	["_ZTest1"] = Instance.new("TextButton");
+	["_TeleportOnClickLocalOnly4"] = Instance.new("LocalScript");
+	["_ZTest2"] = Instance.new("TextButton");
+	["_TeleportOnClickLocalOnly5"] = Instance.new("LocalScript");
+	["_ManTP"] = Instance.new("TextButton");
+	["_TeleportOnClickLocalOnly6"] = Instance.new("LocalScript");
+	["_Value10"] = Instance.new("TextLabel");
+	["_Mansion"] = Instance.new("TextButton");
+	["_TeleportOnClickLocalOnly7"] = Instance.new("LocalScript");
+	["_ZTest31"] = Instance.new("TextButton");
+	["_TeleportOnClickLocalOnly8"] = Instance.new("LocalScript");
+	["_Value11"] = Instance.new("TextLabel");
+	["_Top Tiki outpost"] = Instance.new("TextButton");
+	["_Value12"] = Instance.new("TextLabel");
+	["_Chris"] = Instance.new("TextButton");
+	["_Value13"] = Instance.new("TextLabel");
+	["_Hydra"] = Instance.new("TextButton");
+	["_TeleportOnClickLocalOnly9"] = Instance.new("LocalScript");
 	["_TextButton6"] = Instance.new("TextButton");
-	["_LocalScript8"] = Instance.new("LocalScript");
+	["_LocalScript7"] = Instance.new("LocalScript");
 	["_Main2"] = Instance.new("Frame");
 	["_MainCorner"] = Instance.new("UICorner");
 	["_Profile"] = Instance.new("Frame");
@@ -137,6 +162,8 @@ local Converted = {
 	["_HealthgreenCorner"] = Instance.new("UICorner");
 	["_ImageProfile"] = Instance.new("ImageLabel");
 	["_ImageProfileCorner"] = Instance.new("UICorner");
+	["_Run"] = Instance.new("TextButton");
+	["_TeleportScript"] = Instance.new("LocalScript");
 }
 
 -- Properties:
@@ -283,6 +310,20 @@ Converted["_PvP"].Size = UDim2.new(1, 0, 0.0500000007, 0)
 Converted["_PvP"].Name = "PvP"
 Converted["_PvP"].Parent = Converted["_MainButton"]
 
+Converted["_NPC"].Font = Enum.Font.SourceSans
+Converted["_NPC"].Text = "NPC"
+Converted["_NPC"].TextColor3 = Color3.fromRGB(255, 255, 255)
+Converted["_NPC"].TextScaled = true
+Converted["_NPC"].TextSize = 14
+Converted["_NPC"].TextWrapped = true
+Converted["_NPC"].BackgroundColor3 = Color3.fromRGB(0, 0, 0)
+Converted["_NPC"].BackgroundTransparency = 0.699999988079071
+Converted["_NPC"].BorderColor3 = Color3.fromRGB(0, 0, 0)
+Converted["_NPC"].BorderSizePixel = 0
+Converted["_NPC"].Size = UDim2.new(1, 0, 0.0500000007, 0)
+Converted["_NPC"].Name = "NPC"
+Converted["_NPC"].Parent = Converted["_MainButton"]
+
 Converted["_Set"].Font = Enum.Font.SourceSans
 Converted["_Set"].Text = "Setting"
 Converted["_Set"].TextColor3 = Color3.fromRGB(255, 255, 255)
@@ -297,33 +338,39 @@ Converted["_Set"].Size = UDim2.new(1, 0, 0.0500000007, 0)
 Converted["_Set"].Name = "Set"
 Converted["_Set"].Parent = Converted["_MainButton"]
 
-Converted["_TP"].ScrollBarImageColor3 = Color3.fromRGB(0, 0, 0)
-Converted["_TP"].Active = true
-Converted["_TP"].BackgroundColor3 = Color3.fromRGB(255, 255, 255)
-Converted["_TP"].BackgroundTransparency = 1
-Converted["_TP"].BorderColor3 = Color3.fromRGB(0, 0, 0)
-Converted["_TP"].BorderSizePixel = 0
-Converted["_TP"].Position = UDim2.new(0.288973391, 0, 0, 0)
-Converted["_TP"].Size = UDim2.new(0.711026549, 0, 1, 0)
-Converted["_TP"].Name = "TP"
-Converted["_TP"].Parent = Converted["_Frame"]
+Converted["_NPC1"].ScrollBarImageColor3 = Color3.fromRGB(0, 0, 0)
+Converted["_NPC1"].Active = true
+Converted["_NPC1"].BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+Converted["_NPC1"].BackgroundTransparency = 1
+Converted["_NPC1"].BorderColor3 = Color3.fromRGB(0, 0, 0)
+Converted["_NPC1"].BorderSizePixel = 0
+Converted["_NPC1"].Position = UDim2.new(0.288973391, 0, 0, 0)
+Converted["_NPC1"].Size = UDim2.new(0.711026549, 0, 1, 0)
+Converted["_NPC1"].Visible = false
+Converted["_NPC1"].Name = "NPC"
+Converted["_NPC1"].Parent = Converted["_Frame"]
 
-Converted["_Porttown"].Font = Enum.Font.SourceSans
-Converted["_Porttown"].Text = "Port town"
-Converted["_Porttown"].TextColor3 = Color3.fromRGB(255, 255, 255)
-Converted["_Porttown"].TextScaled = true
-Converted["_Porttown"].TextSize = 14
-Converted["_Porttown"].TextWrapped = true
-Converted["_Porttown"].BackgroundColor3 = Color3.fromRGB(0, 0, 0)
-Converted["_Porttown"].BackgroundTransparency = 0.699999988079071
-Converted["_Porttown"].BorderColor3 = Color3.fromRGB(0, 0, 0)
-Converted["_Porttown"].BorderSizePixel = 0
-Converted["_Porttown"].Size = UDim2.new(1, 0, 0.0500000007, 0)
-Converted["_Porttown"].Name = "Porttown"
-Converted["_Porttown"].Parent = Converted["_TP"]
+Converted["_UIListLayout2"].Padding = UDim.new(0.00499999989, 0)
+Converted["_UIListLayout2"].Parent = Converted["_NPC1"]
+
+Converted["_Event"].Parent = Converted["_NPC1"]
+
+Converted["_Sanguine"].Font = Enum.Font.SourceSans
+Converted["_Sanguine"].Text = "Sanguine"
+Converted["_Sanguine"].TextColor3 = Color3.fromRGB(255, 255, 255)
+Converted["_Sanguine"].TextScaled = true
+Converted["_Sanguine"].TextSize = 14
+Converted["_Sanguine"].TextWrapped = true
+Converted["_Sanguine"].BackgroundColor3 = Color3.fromRGB(0, 0, 0)
+Converted["_Sanguine"].BackgroundTransparency = 0.699999988079071
+Converted["_Sanguine"].BorderColor3 = Color3.fromRGB(0, 0, 0)
+Converted["_Sanguine"].BorderSizePixel = 0
+Converted["_Sanguine"].Size = UDim2.new(1, 0, 0.0500000007, 0)
+Converted["_Sanguine"].Name = "Sanguine"
+Converted["_Sanguine"].Parent = Converted["_NPC1"]
 
 Converted["_Value"].Font = Enum.Font.SourceSans
-Converted["_Value"].Text = "-388, 21, 5535"
+Converted["_Value"].Text = "-16517, 23, -188"
 Converted["_Value"].TextColor3 = Color3.fromRGB(0, 0, 0)
 Converted["_Value"].TextSize = 14
 Converted["_Value"].BackgroundColor3 = Color3.fromRGB(255, 255, 255)
@@ -332,145 +379,7 @@ Converted["_Value"].BorderSizePixel = 0
 Converted["_Value"].Size = UDim2.new(0, 200, 0, 50)
 Converted["_Value"].Visible = false
 Converted["_Value"].Name = "Value"
-Converted["_Value"].Parent = Converted["_Porttown"]
-
-Converted["_UIListLayout2"].Padding = UDim.new(0.00499999989, 0)
-Converted["_UIListLayout2"].Parent = Converted["_TP"]
-
-Converted["_Claste on the sea"].Font = Enum.Font.SourceSans
-Converted["_Claste on the sea"].Text = "Claste on the sea"
-Converted["_Claste on the sea"].TextColor3 = Color3.fromRGB(255, 255, 255)
-Converted["_Claste on the sea"].TextScaled = true
-Converted["_Claste on the sea"].TextSize = 14
-Converted["_Claste on the sea"].TextWrapped = true
-Converted["_Claste on the sea"].BackgroundColor3 = Color3.fromRGB(0, 0, 0)
-Converted["_Claste on the sea"].BackgroundTransparency = 0.699999988079071
-Converted["_Claste on the sea"].BorderColor3 = Color3.fromRGB(0, 0, 0)
-Converted["_Claste on the sea"].BorderSizePixel = 0
-Converted["_Claste on the sea"].Size = UDim2.new(1, 0, 0.0500000007, 0)
-Converted["_Claste on the sea"].Name = "Claste on the sea"
-Converted["_Claste on the sea"].Parent = Converted["_TP"]
-
-Converted["_Cake"].Font = Enum.Font.SourceSans
-Converted["_Cake"].Text = "Cake"
-Converted["_Cake"].TextColor3 = Color3.fromRGB(255, 255, 255)
-Converted["_Cake"].TextScaled = true
-Converted["_Cake"].TextSize = 14
-Converted["_Cake"].TextWrapped = true
-Converted["_Cake"].BackgroundColor3 = Color3.fromRGB(0, 0, 0)
-Converted["_Cake"].BackgroundTransparency = 0.699999988079071
-Converted["_Cake"].BorderColor3 = Color3.fromRGB(0, 0, 0)
-Converted["_Cake"].BorderSizePixel = 0
-Converted["_Cake"].Size = UDim2.new(1, 0, 0.0500000007, 0)
-Converted["_Cake"].Name = "Cake"
-Converted["_Cake"].Parent = Converted["_TP"]
-
-Converted["_Value1"].Font = Enum.Font.SourceSans
-Converted["_Value1"].Text = "-2119, 70, -12229"
-Converted["_Value1"].TextColor3 = Color3.fromRGB(0, 0, 0)
-Converted["_Value1"].TextSize = 14
-Converted["_Value1"].BackgroundColor3 = Color3.fromRGB(255, 255, 255)
-Converted["_Value1"].BorderColor3 = Color3.fromRGB(0, 0, 0)
-Converted["_Value1"].BorderSizePixel = 0
-Converted["_Value1"].Size = UDim2.new(0, 200, 0, 50)
-Converted["_Value1"].Visible = false
-Converted["_Value1"].Name = "Value"
-Converted["_Value1"].Parent = Converted["_Cake"]
-
-Converted["_Tiki outpost"].Font = Enum.Font.SourceSans
-Converted["_Tiki outpost"].Text = "Tiki outpost"
-Converted["_Tiki outpost"].TextColor3 = Color3.fromRGB(255, 255, 255)
-Converted["_Tiki outpost"].TextScaled = true
-Converted["_Tiki outpost"].TextSize = 14
-Converted["_Tiki outpost"].TextWrapped = true
-Converted["_Tiki outpost"].BackgroundColor3 = Color3.fromRGB(0, 0, 0)
-Converted["_Tiki outpost"].BackgroundTransparency = 0.699999988079071
-Converted["_Tiki outpost"].BorderColor3 = Color3.fromRGB(0, 0, 0)
-Converted["_Tiki outpost"].BorderSizePixel = 0
-Converted["_Tiki outpost"].Size = UDim2.new(1, 0, 0.0500000007, 0)
-Converted["_Tiki outpost"].Name = "Tiki outpost"
-Converted["_Tiki outpost"].Parent = Converted["_TP"]
-
-Converted["_Value2"].Font = Enum.Font.SourceSans
-Converted["_Value2"].Text = "-16455, 528, 449"
-Converted["_Value2"].TextColor3 = Color3.fromRGB(0, 0, 0)
-Converted["_Value2"].TextSize = 14
-Converted["_Value2"].BackgroundColor3 = Color3.fromRGB(255, 255, 255)
-Converted["_Value2"].BorderColor3 = Color3.fromRGB(0, 0, 0)
-Converted["_Value2"].BorderSizePixel = 0
-Converted["_Value2"].Size = UDim2.new(0, 200, 0, 50)
-Converted["_Value2"].Visible = false
-Converted["_Value2"].Name = "Value"
-Converted["_Value2"].Parent = Converted["_Tiki outpost"]
-
-Converted["_Bone"].Font = Enum.Font.SourceSans
-Converted["_Bone"].Text = "Bone"
-Converted["_Bone"].TextColor3 = Color3.fromRGB(255, 255, 255)
-Converted["_Bone"].TextScaled = true
-Converted["_Bone"].TextSize = 14
-Converted["_Bone"].TextWrapped = true
-Converted["_Bone"].BackgroundColor3 = Color3.fromRGB(0, 0, 0)
-Converted["_Bone"].BackgroundTransparency = 0.699999988079071
-Converted["_Bone"].BorderColor3 = Color3.fromRGB(0, 0, 0)
-Converted["_Bone"].BorderSizePixel = 0
-Converted["_Bone"].Size = UDim2.new(1, 0, 0.0500000007, 0)
-Converted["_Bone"].Name = "Bone"
-Converted["_Bone"].Parent = Converted["_TP"]
-
-Converted["_Value3"].Font = Enum.Font.SourceSans
-Converted["_Value3"].Text = "-9513, 142, 5550"
-Converted["_Value3"].TextColor3 = Color3.fromRGB(0, 0, 0)
-Converted["_Value3"].TextSize = 14
-Converted["_Value3"].BackgroundColor3 = Color3.fromRGB(255, 255, 255)
-Converted["_Value3"].BorderColor3 = Color3.fromRGB(0, 0, 0)
-Converted["_Value3"].BorderSizePixel = 0
-Converted["_Value3"].Size = UDim2.new(0, 200, 0, 50)
-Converted["_Value3"].Visible = false
-Converted["_Value3"].Name = "Value"
-Converted["_Value3"].Parent = Converted["_Bone"]
-
-Converted["_A1"].Font = Enum.Font.SourceSans
-Converted["_A1"].Text = "Stop tween"
-Converted["_A1"].TextColor3 = Color3.fromRGB(255, 255, 255)
-Converted["_A1"].TextScaled = true
-Converted["_A1"].TextSize = 14
-Converted["_A1"].TextWrapped = true
-Converted["_A1"].BackgroundColor3 = Color3.fromRGB(0, 0, 0)
-Converted["_A1"].BackgroundTransparency = 0.699999988079071
-Converted["_A1"].BorderColor3 = Color3.fromRGB(0, 0, 0)
-Converted["_A1"].BorderSizePixel = 0
-Converted["_A1"].Size = UDim2.new(1, 0, 0.0500000007, 0)
-Converted["_A1"].Name = "A"
-Converted["_A1"].Parent = Converted["_TP"]
-
-Converted["_GreatTree"].Font = Enum.Font.SourceSans
-Converted["_GreatTree"].Text = "Great Tree"
-Converted["_GreatTree"].TextColor3 = Color3.fromRGB(255, 255, 255)
-Converted["_GreatTree"].TextScaled = true
-Converted["_GreatTree"].TextSize = 14
-Converted["_GreatTree"].TextWrapped = true
-Converted["_GreatTree"].BackgroundColor3 = Color3.fromRGB(0, 0, 0)
-Converted["_GreatTree"].BackgroundTransparency = 0.699999988079071
-Converted["_GreatTree"].BorderColor3 = Color3.fromRGB(0, 0, 0)
-Converted["_GreatTree"].BorderSizePixel = 0
-Converted["_GreatTree"].Position = UDim2.new(-0.00754077081, 0, 0.648423791, 0)
-Converted["_GreatTree"].Size = UDim2.new(1, 0, 0.0500000007, 0)
-Converted["_GreatTree"].Name = "GreatTree"
-Converted["_GreatTree"].Parent = Converted["_TP"]
-
-Converted["_Value4"].Font = Enum.Font.SourceSans
-Converted["_Value4"].Text = "3013, 2280, -7352"
-Converted["_Value4"].TextColor3 = Color3.fromRGB(0, 0, 0)
-Converted["_Value4"].TextSize = 14
-Converted["_Value4"].BackgroundColor3 = Color3.fromRGB(255, 255, 255)
-Converted["_Value4"].BorderColor3 = Color3.fromRGB(0, 0, 0)
-Converted["_Value4"].BorderSizePixel = 0
-Converted["_Value4"].Size = UDim2.new(0, 200, 0, 50)
-Converted["_Value4"].Visible = false
-Converted["_Value4"].Name = "Value"
-Converted["_Value4"].Parent = Converted["_GreatTree"]
-
-Converted["_Event"].Parent = Converted["_TP"]
+Converted["_Value"].Parent = Converted["_Sanguine"]
 
 Converted["_Z"].Font = Enum.Font.SourceSans
 Converted["_Z"].Text = "Sea2"
@@ -485,75 +394,7 @@ Converted["_Z"].BorderColor3 = Color3.fromRGB(0, 0, 0)
 Converted["_Z"].BorderSizePixel = 0
 Converted["_Z"].Size = UDim2.new(1, 0, 0.0500000007, 0)
 Converted["_Z"].Name = "Z"
-Converted["_Z"].Parent = Converted["_TP"]
-
-Converted["_ZTest1"].Font = Enum.Font.SourceSans
-Converted["_ZTest1"].Text = "Cruse Ship"
-Converted["_ZTest1"].TextColor3 = Color3.fromRGB(255, 255, 255)
-Converted["_ZTest1"].TextScaled = true
-Converted["_ZTest1"].TextSize = 14
-Converted["_ZTest1"].TextWrapped = true
-Converted["_ZTest1"].BackgroundColor3 = Color3.fromRGB(0, 0, 0)
-Converted["_ZTest1"].BackgroundTransparency = 0.699999988079071
-Converted["_ZTest1"].BorderColor3 = Color3.fromRGB(0, 0, 0)
-Converted["_ZTest1"].BorderSizePixel = 0
-Converted["_ZTest1"].Size = UDim2.new(1, 0, 0.0500000007, 0)
-Converted["_ZTest1"].Name = "ZTest1"
-Converted["_ZTest1"].Parent = Converted["_TP"]
-
-Converted["_ZTest2"].Font = Enum.Font.SourceSans
-Converted["_ZTest2"].Text = "Dofa Mansion"
-Converted["_ZTest2"].TextColor3 = Color3.fromRGB(255, 255, 255)
-Converted["_ZTest2"].TextScaled = true
-Converted["_ZTest2"].TextSize = 14
-Converted["_ZTest2"].TextWrapped = true
-Converted["_ZTest2"].BackgroundColor3 = Color3.fromRGB(0, 0, 0)
-Converted["_ZTest2"].BackgroundTransparency = 0.699999988079071
-Converted["_ZTest2"].BorderColor3 = Color3.fromRGB(0, 0, 0)
-Converted["_ZTest2"].BorderSizePixel = 0
-Converted["_ZTest2"].Size = UDim2.new(1, 0, 0.0500000007, 0)
-Converted["_ZTest2"].Name = "ZTest2"
-Converted["_ZTest2"].Parent = Converted["_TP"]
-
-Converted["_ManTP"].Font = Enum.Font.SourceSans
-Converted["_ManTP"].Text = "Halloween Teleporter"
-Converted["_ManTP"].TextColor3 = Color3.fromRGB(255, 255, 255)
-Converted["_ManTP"].TextScaled = true
-Converted["_ManTP"].TextSize = 14
-Converted["_ManTP"].TextWrapped = true
-Converted["_ManTP"].BackgroundColor3 = Color3.fromRGB(0, 0, 0)
-Converted["_ManTP"].BackgroundTransparency = 0.699999988079071
-Converted["_ManTP"].BorderColor3 = Color3.fromRGB(0, 0, 0)
-Converted["_ManTP"].BorderSizePixel = 0
-Converted["_ManTP"].Size = UDim2.new(1, 0, 0.0500000007, 0)
-Converted["_ManTP"].Name = "ManTP"
-Converted["_ManTP"].Parent = Converted["_TP"]
-
-Converted["_Value5"].Font = Enum.Font.SourceSans
-Converted["_Value5"].Text = "-12608, 339, -7457"
-Converted["_Value5"].TextColor3 = Color3.fromRGB(0, 0, 0)
-Converted["_Value5"].TextSize = 14
-Converted["_Value5"].BackgroundColor3 = Color3.fromRGB(255, 255, 255)
-Converted["_Value5"].BorderColor3 = Color3.fromRGB(0, 0, 0)
-Converted["_Value5"].BorderSizePixel = 0
-Converted["_Value5"].Size = UDim2.new(0, 200, 0, 50)
-Converted["_Value5"].Visible = false
-Converted["_Value5"].Name = "Value"
-Converted["_Value5"].Parent = Converted["_ManTP"]
-
-Converted["_Mansion"].Font = Enum.Font.SourceSans
-Converted["_Mansion"].Text = "Mansion"
-Converted["_Mansion"].TextColor3 = Color3.fromRGB(255, 255, 255)
-Converted["_Mansion"].TextScaled = true
-Converted["_Mansion"].TextSize = 14
-Converted["_Mansion"].TextWrapped = true
-Converted["_Mansion"].BackgroundColor3 = Color3.fromRGB(0, 0, 0)
-Converted["_Mansion"].BackgroundTransparency = 0.699999988079071
-Converted["_Mansion"].BorderColor3 = Color3.fromRGB(0, 0, 0)
-Converted["_Mansion"].BorderSizePixel = 0
-Converted["_Mansion"].Size = UDim2.new(1, 0, 0.0500000007, 0)
-Converted["_Mansion"].Name = "Mansion"
-Converted["_Mansion"].Parent = Converted["_TP"]
+Converted["_Z"].Parent = Converted["_NPC1"]
 
 Converted["_ZTest3"].Font = Enum.Font.SourceSans
 Converted["_ZTest3"].Text = "Cafe"
@@ -567,19 +408,111 @@ Converted["_ZTest3"].BorderColor3 = Color3.fromRGB(0, 0, 0)
 Converted["_ZTest3"].BorderSizePixel = 0
 Converted["_ZTest3"].Size = UDim2.new(1, 0, 0.0500000007, 0)
 Converted["_ZTest3"].Name = "ZTest3"
-Converted["_ZTest3"].Parent = Converted["_TP"]
+Converted["_ZTest3"].Parent = Converted["_NPC1"]
 
-Converted["_Value6"].Font = Enum.Font.SourceSans
-Converted["_Value6"].Text = "-382, 73, 355"
-Converted["_Value6"].TextColor3 = Color3.fromRGB(0, 0, 0)
-Converted["_Value6"].TextSize = 14
-Converted["_Value6"].BackgroundColor3 = Color3.fromRGB(255, 255, 255)
-Converted["_Value6"].BorderColor3 = Color3.fromRGB(0, 0, 0)
-Converted["_Value6"].BorderSizePixel = 0
-Converted["_Value6"].Size = UDim2.new(0, 200, 0, 50)
-Converted["_Value6"].Visible = false
-Converted["_Value6"].Name = "Value"
-Converted["_Value6"].Parent = Converted["_ZTest3"]
+Converted["_Value1"].Font = Enum.Font.SourceSans
+Converted["_Value1"].Text = "-382, 73, 355"
+Converted["_Value1"].TextColor3 = Color3.fromRGB(0, 0, 0)
+Converted["_Value1"].TextSize = 14
+Converted["_Value1"].BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+Converted["_Value1"].BorderColor3 = Color3.fromRGB(0, 0, 0)
+Converted["_Value1"].BorderSizePixel = 0
+Converted["_Value1"].Size = UDim2.new(0, 200, 0, 50)
+Converted["_Value1"].Visible = false
+Converted["_Value1"].Name = "Value"
+Converted["_Value1"].Parent = Converted["_ZTest3"]
+
+Converted["_God"].Font = Enum.Font.SourceSans
+Converted["_God"].Text = "GodHuman"
+Converted["_God"].TextColor3 = Color3.fromRGB(255, 255, 255)
+Converted["_God"].TextScaled = true
+Converted["_God"].TextSize = 14
+Converted["_God"].TextWrapped = true
+Converted["_God"].BackgroundColor3 = Color3.fromRGB(0, 0, 0)
+Converted["_God"].BackgroundTransparency = 0.699999988079071
+Converted["_God"].BorderColor3 = Color3.fromRGB(0, 0, 0)
+Converted["_God"].BorderSizePixel = 0
+Converted["_God"].Size = UDim2.new(1, 0, 0.0500000007, 0)
+Converted["_God"].Name = "God"
+Converted["_God"].Parent = Converted["_NPC1"]
+
+Converted["_Value2"].Font = Enum.Font.SourceSans
+Converted["_Value2"].Text = "-13775, 339, -9880"
+Converted["_Value2"].TextColor3 = Color3.fromRGB(0, 0, 0)
+Converted["_Value2"].TextSize = 14
+Converted["_Value2"].BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+Converted["_Value2"].BorderColor3 = Color3.fromRGB(0, 0, 0)
+Converted["_Value2"].BorderSizePixel = 0
+Converted["_Value2"].Size = UDim2.new(0, 200, 0, 50)
+Converted["_Value2"].Visible = false
+Converted["_Value2"].Name = "Value"
+Converted["_Value2"].Parent = Converted["_God"]
+
+Converted["_Elec"].Font = Enum.Font.SourceSans
+Converted["_Elec"].Text = "Electric Claw"
+Converted["_Elec"].TextColor3 = Color3.fromRGB(255, 255, 255)
+Converted["_Elec"].TextScaled = true
+Converted["_Elec"].TextSize = 14
+Converted["_Elec"].TextWrapped = true
+Converted["_Elec"].BackgroundColor3 = Color3.fromRGB(0, 0, 0)
+Converted["_Elec"].BackgroundTransparency = 0.699999988079071
+Converted["_Elec"].BorderColor3 = Color3.fromRGB(0, 0, 0)
+Converted["_Elec"].BorderSizePixel = 0
+Converted["_Elec"].Size = UDim2.new(1, 0, 0.0500000007, 0)
+Converted["_Elec"].Name = "Elec"
+Converted["_Elec"].Parent = Converted["_NPC1"]
+
+Converted["_Value3"].Font = Enum.Font.SourceSans
+Converted["_Value3"].Text = "-10371, 332, -10127"
+Converted["_Value3"].TextColor3 = Color3.fromRGB(0, 0, 0)
+Converted["_Value3"].TextSize = 14
+Converted["_Value3"].BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+Converted["_Value3"].BorderColor3 = Color3.fromRGB(0, 0, 0)
+Converted["_Value3"].BorderSizePixel = 0
+Converted["_Value3"].Size = UDim2.new(0, 200, 0, 50)
+Converted["_Value3"].Visible = false
+Converted["_Value3"].Name = "Value"
+Converted["_Value3"].Parent = Converted["_Elec"]
+
+Converted["_Dragon"].Font = Enum.Font.SourceSans
+Converted["_Dragon"].Text = "Dragon Talon"
+Converted["_Dragon"].TextColor3 = Color3.fromRGB(255, 255, 255)
+Converted["_Dragon"].TextScaled = true
+Converted["_Dragon"].TextSize = 14
+Converted["_Dragon"].TextWrapped = true
+Converted["_Dragon"].BackgroundColor3 = Color3.fromRGB(0, 0, 0)
+Converted["_Dragon"].BackgroundTransparency = 0.699999988079071
+Converted["_Dragon"].BorderColor3 = Color3.fromRGB(0, 0, 0)
+Converted["_Dragon"].BorderSizePixel = 0
+Converted["_Dragon"].Size = UDim2.new(1, 0, 0.0500000007, 0)
+Converted["_Dragon"].Name = "Dragon"
+Converted["_Dragon"].Parent = Converted["_NPC1"]
+
+Converted["_Value4"].Font = Enum.Font.SourceSans
+Converted["_Value4"].Text = "5663, 1211, 862"
+Converted["_Value4"].TextColor3 = Color3.fromRGB(0, 0, 0)
+Converted["_Value4"].TextSize = 14
+Converted["_Value4"].BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+Converted["_Value4"].BorderColor3 = Color3.fromRGB(0, 0, 0)
+Converted["_Value4"].BorderSizePixel = 0
+Converted["_Value4"].Size = UDim2.new(0, 200, 0, 50)
+Converted["_Value4"].Visible = false
+Converted["_Value4"].Name = "Value"
+Converted["_Value4"].Parent = Converted["_Dragon"]
+
+Converted["_A1"].Font = Enum.Font.SourceSans
+Converted["_A1"].Text = "Stop tween"
+Converted["_A1"].TextColor3 = Color3.fromRGB(255, 255, 255)
+Converted["_A1"].TextScaled = true
+Converted["_A1"].TextSize = 14
+Converted["_A1"].TextWrapped = true
+Converted["_A1"].BackgroundColor3 = Color3.fromRGB(0, 0, 0)
+Converted["_A1"].BackgroundTransparency = 0.699999988079071
+Converted["_A1"].BorderColor3 = Color3.fromRGB(0, 0, 0)
+Converted["_A1"].BorderSizePixel = 0
+Converted["_A1"].Size = UDim2.new(1, 0, 0.0500000007, 0)
+Converted["_A1"].Name = "A"
+Converted["_A1"].Parent = Converted["_NPC1"]
 
 Converted["_TpPlr1"].ScrollBarImageColor3 = Color3.fromRGB(0, 0, 0)
 Converted["_TpPlr1"].Active = true
@@ -863,7 +796,6 @@ Converted["_PvP1"].BorderColor3 = Color3.fromRGB(0, 0, 0)
 Converted["_PvP1"].BorderSizePixel = 0
 Converted["_PvP1"].Position = UDim2.new(0.288973391, 0, 0, 0)
 Converted["_PvP1"].Size = UDim2.new(0.711026549, 0, 1, 0)
-Converted["_PvP1"].Visible = false
 Converted["_PvP1"].Name = "PvP"
 Converted["_PvP1"].Parent = Converted["_Frame"]
 
@@ -1233,6 +1165,357 @@ Converted["_Theme1"].ZIndex = 0
 Converted["_Theme1"].Name = "Theme1"
 Converted["_Theme1"].Parent = Converted["_Frame"]
 
+Converted["_TP"].ScrollBarImageColor3 = Color3.fromRGB(0, 0, 0)
+Converted["_TP"].Active = true
+Converted["_TP"].BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+Converted["_TP"].BackgroundTransparency = 1
+Converted["_TP"].BorderColor3 = Color3.fromRGB(0, 0, 0)
+Converted["_TP"].BorderSizePixel = 0
+Converted["_TP"].Position = UDim2.new(0.288973391, 0, 0, 0)
+Converted["_TP"].Size = UDim2.new(0.711026549, 0, 1, 0)
+Converted["_TP"].Visible = false
+Converted["_TP"].Name = "TP"
+Converted["_TP"].Parent = Converted["_Frame"]
+
+Converted["_Porttown"].Font = Enum.Font.SourceSans
+Converted["_Porttown"].Text = "Port town"
+Converted["_Porttown"].TextColor3 = Color3.fromRGB(255, 255, 255)
+Converted["_Porttown"].TextScaled = true
+Converted["_Porttown"].TextSize = 14
+Converted["_Porttown"].TextWrapped = true
+Converted["_Porttown"].BackgroundColor3 = Color3.fromRGB(0, 0, 0)
+Converted["_Porttown"].BackgroundTransparency = 0.699999988079071
+Converted["_Porttown"].BorderColor3 = Color3.fromRGB(0, 0, 0)
+Converted["_Porttown"].BorderSizePixel = 0
+Converted["_Porttown"].Size = UDim2.new(1, 0, 0.0500000007, 0)
+Converted["_Porttown"].Name = "Porttown"
+Converted["_Porttown"].Parent = Converted["_TP"]
+
+Converted["_Value5"].Font = Enum.Font.SourceSans
+Converted["_Value5"].Text = "-388, 21, 5535"
+Converted["_Value5"].TextColor3 = Color3.fromRGB(0, 0, 0)
+Converted["_Value5"].TextSize = 14
+Converted["_Value5"].BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+Converted["_Value5"].BorderColor3 = Color3.fromRGB(0, 0, 0)
+Converted["_Value5"].BorderSizePixel = 0
+Converted["_Value5"].Size = UDim2.new(0, 200, 0, 50)
+Converted["_Value5"].Visible = false
+Converted["_Value5"].Name = "Value"
+Converted["_Value5"].Parent = Converted["_Porttown"]
+
+Converted["_UIListLayout6"].Padding = UDim.new(0.00499999989, 0)
+Converted["_UIListLayout6"].Parent = Converted["_TP"]
+
+Converted["_Claste on the sea"].Font = Enum.Font.SourceSans
+Converted["_Claste on the sea"].Text = "Claste on the sea"
+Converted["_Claste on the sea"].TextColor3 = Color3.fromRGB(255, 255, 255)
+Converted["_Claste on the sea"].TextScaled = true
+Converted["_Claste on the sea"].TextSize = 14
+Converted["_Claste on the sea"].TextWrapped = true
+Converted["_Claste on the sea"].BackgroundColor3 = Color3.fromRGB(0, 0, 0)
+Converted["_Claste on the sea"].BackgroundTransparency = 0.699999988079071
+Converted["_Claste on the sea"].BorderColor3 = Color3.fromRGB(0, 0, 0)
+Converted["_Claste on the sea"].BorderSizePixel = 0
+Converted["_Claste on the sea"].Size = UDim2.new(1, 0, 0.0500000007, 0)
+Converted["_Claste on the sea"].Name = "Claste on the sea"
+Converted["_Claste on the sea"].Parent = Converted["_TP"]
+
+Converted["_Cake"].Font = Enum.Font.SourceSans
+Converted["_Cake"].Text = "Cake"
+Converted["_Cake"].TextColor3 = Color3.fromRGB(255, 255, 255)
+Converted["_Cake"].TextScaled = true
+Converted["_Cake"].TextSize = 14
+Converted["_Cake"].TextWrapped = true
+Converted["_Cake"].BackgroundColor3 = Color3.fromRGB(0, 0, 0)
+Converted["_Cake"].BackgroundTransparency = 0.699999988079071
+Converted["_Cake"].BorderColor3 = Color3.fromRGB(0, 0, 0)
+Converted["_Cake"].BorderSizePixel = 0
+Converted["_Cake"].Size = UDim2.new(1, 0, 0.0500000007, 0)
+Converted["_Cake"].Name = "Cake"
+Converted["_Cake"].Parent = Converted["_TP"]
+
+Converted["_Value6"].Font = Enum.Font.SourceSans
+Converted["_Value6"].Text = "-2119, 70, -12229"
+Converted["_Value6"].TextColor3 = Color3.fromRGB(0, 0, 0)
+Converted["_Value6"].TextSize = 14
+Converted["_Value6"].BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+Converted["_Value6"].BorderColor3 = Color3.fromRGB(0, 0, 0)
+Converted["_Value6"].BorderSizePixel = 0
+Converted["_Value6"].Size = UDim2.new(0, 200, 0, 50)
+Converted["_Value6"].Visible = false
+Converted["_Value6"].Name = "Value"
+Converted["_Value6"].Parent = Converted["_Cake"]
+
+Converted["_Tiki outpost"].Font = Enum.Font.SourceSans
+Converted["_Tiki outpost"].Text = "Tiki outpost"
+Converted["_Tiki outpost"].TextColor3 = Color3.fromRGB(255, 255, 255)
+Converted["_Tiki outpost"].TextScaled = true
+Converted["_Tiki outpost"].TextSize = 14
+Converted["_Tiki outpost"].TextWrapped = true
+Converted["_Tiki outpost"].BackgroundColor3 = Color3.fromRGB(0, 0, 0)
+Converted["_Tiki outpost"].BackgroundTransparency = 0.699999988079071
+Converted["_Tiki outpost"].BorderColor3 = Color3.fromRGB(0, 0, 0)
+Converted["_Tiki outpost"].BorderSizePixel = 0
+Converted["_Tiki outpost"].Size = UDim2.new(1, 0, 0.0500000007, 0)
+Converted["_Tiki outpost"].Name = "Tiki outpost"
+Converted["_Tiki outpost"].Parent = Converted["_TP"]
+
+Converted["_Value7"].Font = Enum.Font.SourceSans
+Converted["_Value7"].Text = "-16455, 528, 449"
+Converted["_Value7"].TextColor3 = Color3.fromRGB(0, 0, 0)
+Converted["_Value7"].TextSize = 14
+Converted["_Value7"].BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+Converted["_Value7"].BorderColor3 = Color3.fromRGB(0, 0, 0)
+Converted["_Value7"].BorderSizePixel = 0
+Converted["_Value7"].Size = UDim2.new(0, 200, 0, 50)
+Converted["_Value7"].Visible = false
+Converted["_Value7"].Name = "Value"
+Converted["_Value7"].Parent = Converted["_Tiki outpost"]
+
+Converted["_Bone"].Font = Enum.Font.SourceSans
+Converted["_Bone"].Text = "Bone"
+Converted["_Bone"].TextColor3 = Color3.fromRGB(255, 255, 255)
+Converted["_Bone"].TextScaled = true
+Converted["_Bone"].TextSize = 14
+Converted["_Bone"].TextWrapped = true
+Converted["_Bone"].BackgroundColor3 = Color3.fromRGB(0, 0, 0)
+Converted["_Bone"].BackgroundTransparency = 0.699999988079071
+Converted["_Bone"].BorderColor3 = Color3.fromRGB(0, 0, 0)
+Converted["_Bone"].BorderSizePixel = 0
+Converted["_Bone"].Size = UDim2.new(1, 0, 0.0500000007, 0)
+Converted["_Bone"].Name = "Bone"
+Converted["_Bone"].Parent = Converted["_TP"]
+
+Converted["_Value8"].Font = Enum.Font.SourceSans
+Converted["_Value8"].Text = "-9513, 142, 5550"
+Converted["_Value8"].TextColor3 = Color3.fromRGB(0, 0, 0)
+Converted["_Value8"].TextSize = 14
+Converted["_Value8"].BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+Converted["_Value8"].BorderColor3 = Color3.fromRGB(0, 0, 0)
+Converted["_Value8"].BorderSizePixel = 0
+Converted["_Value8"].Size = UDim2.new(0, 200, 0, 50)
+Converted["_Value8"].Visible = false
+Converted["_Value8"].Name = "Value"
+Converted["_Value8"].Parent = Converted["_Bone"]
+
+Converted["_A4"].Font = Enum.Font.SourceSans
+Converted["_A4"].Text = "Stop tween"
+Converted["_A4"].TextColor3 = Color3.fromRGB(255, 255, 255)
+Converted["_A4"].TextScaled = true
+Converted["_A4"].TextSize = 14
+Converted["_A4"].TextWrapped = true
+Converted["_A4"].BackgroundColor3 = Color3.fromRGB(0, 0, 0)
+Converted["_A4"].BackgroundTransparency = 0.699999988079071
+Converted["_A4"].BorderColor3 = Color3.fromRGB(0, 0, 0)
+Converted["_A4"].BorderSizePixel = 0
+Converted["_A4"].Size = UDim2.new(1, 0, 0.0500000007, 0)
+Converted["_A4"].Name = "A"
+Converted["_A4"].Parent = Converted["_TP"]
+
+Converted["_GreatTree"].Font = Enum.Font.SourceSans
+Converted["_GreatTree"].Text = "Great Tree"
+Converted["_GreatTree"].TextColor3 = Color3.fromRGB(255, 255, 255)
+Converted["_GreatTree"].TextScaled = true
+Converted["_GreatTree"].TextSize = 14
+Converted["_GreatTree"].TextWrapped = true
+Converted["_GreatTree"].BackgroundColor3 = Color3.fromRGB(0, 0, 0)
+Converted["_GreatTree"].BackgroundTransparency = 0.699999988079071
+Converted["_GreatTree"].BorderColor3 = Color3.fromRGB(0, 0, 0)
+Converted["_GreatTree"].BorderSizePixel = 0
+Converted["_GreatTree"].Position = UDim2.new(-0.00754077081, 0, 0.648423791, 0)
+Converted["_GreatTree"].Size = UDim2.new(1, 0, 0.0500000007, 0)
+Converted["_GreatTree"].Name = "GreatTree"
+Converted["_GreatTree"].Parent = Converted["_TP"]
+
+Converted["_Value9"].Font = Enum.Font.SourceSans
+Converted["_Value9"].Text = "3013, 2280, -7352"
+Converted["_Value9"].TextColor3 = Color3.fromRGB(0, 0, 0)
+Converted["_Value9"].TextSize = 14
+Converted["_Value9"].BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+Converted["_Value9"].BorderColor3 = Color3.fromRGB(0, 0, 0)
+Converted["_Value9"].BorderSizePixel = 0
+Converted["_Value9"].Size = UDim2.new(0, 200, 0, 50)
+Converted["_Value9"].Visible = false
+Converted["_Value9"].Name = "Value"
+Converted["_Value9"].Parent = Converted["_GreatTree"]
+
+Converted["_Event1"].Parent = Converted["_TP"]
+
+Converted["_Z1"].Font = Enum.Font.SourceSans
+Converted["_Z1"].Text = "Sea2"
+Converted["_Z1"].TextColor3 = Color3.fromRGB(255, 255, 255)
+Converted["_Z1"].TextScaled = true
+Converted["_Z1"].TextSize = 14
+Converted["_Z1"].TextWrapped = true
+Converted["_Z1"].TextXAlignment = Enum.TextXAlignment.Left
+Converted["_Z1"].BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+Converted["_Z1"].BackgroundTransparency = 1
+Converted["_Z1"].BorderColor3 = Color3.fromRGB(0, 0, 0)
+Converted["_Z1"].BorderSizePixel = 0
+Converted["_Z1"].Size = UDim2.new(1, 0, 0.0500000007, 0)
+Converted["_Z1"].Name = "Z"
+Converted["_Z1"].Parent = Converted["_TP"]
+
+Converted["_ZTest1"].Font = Enum.Font.SourceSans
+Converted["_ZTest1"].Text = "Cruse Ship"
+Converted["_ZTest1"].TextColor3 = Color3.fromRGB(255, 255, 255)
+Converted["_ZTest1"].TextScaled = true
+Converted["_ZTest1"].TextSize = 14
+Converted["_ZTest1"].TextWrapped = true
+Converted["_ZTest1"].BackgroundColor3 = Color3.fromRGB(0, 0, 0)
+Converted["_ZTest1"].BackgroundTransparency = 0.699999988079071
+Converted["_ZTest1"].BorderColor3 = Color3.fromRGB(0, 0, 0)
+Converted["_ZTest1"].BorderSizePixel = 0
+Converted["_ZTest1"].Size = UDim2.new(1, 0, 0.0500000007, 0)
+Converted["_ZTest1"].Name = "ZTest1"
+Converted["_ZTest1"].Parent = Converted["_TP"]
+
+Converted["_ZTest2"].Font = Enum.Font.SourceSans
+Converted["_ZTest2"].Text = "Dofa Mansion"
+Converted["_ZTest2"].TextColor3 = Color3.fromRGB(255, 255, 255)
+Converted["_ZTest2"].TextScaled = true
+Converted["_ZTest2"].TextSize = 14
+Converted["_ZTest2"].TextWrapped = true
+Converted["_ZTest2"].BackgroundColor3 = Color3.fromRGB(0, 0, 0)
+Converted["_ZTest2"].BackgroundTransparency = 0.699999988079071
+Converted["_ZTest2"].BorderColor3 = Color3.fromRGB(0, 0, 0)
+Converted["_ZTest2"].BorderSizePixel = 0
+Converted["_ZTest2"].Size = UDim2.new(1, 0, 0.0500000007, 0)
+Converted["_ZTest2"].Name = "ZTest2"
+Converted["_ZTest2"].Parent = Converted["_TP"]
+
+Converted["_ManTP"].Font = Enum.Font.SourceSans
+Converted["_ManTP"].Text = "Halloween Teleporter"
+Converted["_ManTP"].TextColor3 = Color3.fromRGB(255, 255, 255)
+Converted["_ManTP"].TextScaled = true
+Converted["_ManTP"].TextSize = 14
+Converted["_ManTP"].TextWrapped = true
+Converted["_ManTP"].BackgroundColor3 = Color3.fromRGB(0, 0, 0)
+Converted["_ManTP"].BackgroundTransparency = 0.699999988079071
+Converted["_ManTP"].BorderColor3 = Color3.fromRGB(0, 0, 0)
+Converted["_ManTP"].BorderSizePixel = 0
+Converted["_ManTP"].Size = UDim2.new(1, 0, 0.0500000007, 0)
+Converted["_ManTP"].Name = "ManTP"
+Converted["_ManTP"].Parent = Converted["_TP"]
+
+Converted["_Value10"].Font = Enum.Font.SourceSans
+Converted["_Value10"].Text = "-12608, 339, -7457"
+Converted["_Value10"].TextColor3 = Color3.fromRGB(0, 0, 0)
+Converted["_Value10"].TextSize = 14
+Converted["_Value10"].BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+Converted["_Value10"].BorderColor3 = Color3.fromRGB(0, 0, 0)
+Converted["_Value10"].BorderSizePixel = 0
+Converted["_Value10"].Size = UDim2.new(0, 200, 0, 50)
+Converted["_Value10"].Visible = false
+Converted["_Value10"].Name = "Value"
+Converted["_Value10"].Parent = Converted["_ManTP"]
+
+Converted["_Mansion"].Font = Enum.Font.SourceSans
+Converted["_Mansion"].Text = "Mansion"
+Converted["_Mansion"].TextColor3 = Color3.fromRGB(255, 255, 255)
+Converted["_Mansion"].TextScaled = true
+Converted["_Mansion"].TextSize = 14
+Converted["_Mansion"].TextWrapped = true
+Converted["_Mansion"].BackgroundColor3 = Color3.fromRGB(0, 0, 0)
+Converted["_Mansion"].BackgroundTransparency = 0.699999988079071
+Converted["_Mansion"].BorderColor3 = Color3.fromRGB(0, 0, 0)
+Converted["_Mansion"].BorderSizePixel = 0
+Converted["_Mansion"].Size = UDim2.new(1, 0, 0.0500000007, 0)
+Converted["_Mansion"].Name = "Mansion"
+Converted["_Mansion"].Parent = Converted["_TP"]
+
+Converted["_ZTest31"].Font = Enum.Font.SourceSans
+Converted["_ZTest31"].Text = "Cafe"
+Converted["_ZTest31"].TextColor3 = Color3.fromRGB(255, 255, 255)
+Converted["_ZTest31"].TextScaled = true
+Converted["_ZTest31"].TextSize = 14
+Converted["_ZTest31"].TextWrapped = true
+Converted["_ZTest31"].BackgroundColor3 = Color3.fromRGB(0, 0, 0)
+Converted["_ZTest31"].BackgroundTransparency = 0.699999988079071
+Converted["_ZTest31"].BorderColor3 = Color3.fromRGB(0, 0, 0)
+Converted["_ZTest31"].BorderSizePixel = 0
+Converted["_ZTest31"].Size = UDim2.new(1, 0, 0.0500000007, 0)
+Converted["_ZTest31"].Name = "ZTest3"
+Converted["_ZTest31"].Parent = Converted["_TP"]
+
+Converted["_Value11"].Font = Enum.Font.SourceSans
+Converted["_Value11"].Text = "-382, 73, 355"
+Converted["_Value11"].TextColor3 = Color3.fromRGB(0, 0, 0)
+Converted["_Value11"].TextSize = 14
+Converted["_Value11"].BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+Converted["_Value11"].BorderColor3 = Color3.fromRGB(0, 0, 0)
+Converted["_Value11"].BorderSizePixel = 0
+Converted["_Value11"].Size = UDim2.new(0, 200, 0, 50)
+Converted["_Value11"].Visible = false
+Converted["_Value11"].Name = "Value"
+Converted["_Value11"].Parent = Converted["_ZTest31"]
+
+Converted["_Top Tiki outpost"].Font = Enum.Font.SourceSans
+Converted["_Top Tiki outpost"].Text = "Sub Island"
+Converted["_Top Tiki outpost"].TextColor3 = Color3.fromRGB(255, 255, 255)
+Converted["_Top Tiki outpost"].TextScaled = true
+Converted["_Top Tiki outpost"].TextSize = 14
+Converted["_Top Tiki outpost"].TextWrapped = true
+Converted["_Top Tiki outpost"].BackgroundColor3 = Color3.fromRGB(0, 0, 0)
+Converted["_Top Tiki outpost"].BackgroundTransparency = 0.699999988079071
+Converted["_Top Tiki outpost"].BorderColor3 = Color3.fromRGB(0, 0, 0)
+Converted["_Top Tiki outpost"].BorderSizePixel = 0
+Converted["_Top Tiki outpost"].Size = UDim2.new(1, 0, 0.0500000007, 0)
+Converted["_Top Tiki outpost"].Name = "Top Tiki outpost"
+Converted["_Top Tiki outpost"].Parent = Converted["_TP"]
+
+Converted["_Value12"].Font = Enum.Font.SourceSans
+Converted["_Value12"].Text = "-16268, 25, 1373"
+Converted["_Value12"].TextColor3 = Color3.fromRGB(0, 0, 0)
+Converted["_Value12"].TextSize = 14
+Converted["_Value12"].BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+Converted["_Value12"].BorderColor3 = Color3.fromRGB(0, 0, 0)
+Converted["_Value12"].BorderSizePixel = 0
+Converted["_Value12"].Size = UDim2.new(0, 200, 0, 50)
+Converted["_Value12"].Visible = false
+Converted["_Value12"].Name = "Value"
+Converted["_Value12"].Parent = Converted["_Top Tiki outpost"]
+
+Converted["_Chris"].Font = Enum.Font.SourceSans
+Converted["_Chris"].Text = "Chrismas Event"
+Converted["_Chris"].TextColor3 = Color3.fromRGB(255, 255, 255)
+Converted["_Chris"].TextScaled = true
+Converted["_Chris"].TextSize = 14
+Converted["_Chris"].TextWrapped = true
+Converted["_Chris"].BackgroundColor3 = Color3.fromRGB(0, 0, 0)
+Converted["_Chris"].BackgroundTransparency = 0.699999988079071
+Converted["_Chris"].BorderColor3 = Color3.fromRGB(0, 0, 0)
+Converted["_Chris"].BorderSizePixel = 0
+Converted["_Chris"].Size = UDim2.new(1, 0, 0.0500000007, 0)
+Converted["_Chris"].Name = "Chris"
+Converted["_Chris"].Parent = Converted["_TP"]
+
+Converted["_Value13"].Font = Enum.Font.SourceSans
+Converted["_Value13"].Text = "-1091, 64, -14521"
+Converted["_Value13"].TextColor3 = Color3.fromRGB(0, 0, 0)
+Converted["_Value13"].TextSize = 14
+Converted["_Value13"].BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+Converted["_Value13"].BorderColor3 = Color3.fromRGB(0, 0, 0)
+Converted["_Value13"].BorderSizePixel = 0
+Converted["_Value13"].Size = UDim2.new(0, 200, 0, 50)
+Converted["_Value13"].Visible = false
+Converted["_Value13"].Name = "Value"
+Converted["_Value13"].Parent = Converted["_Chris"]
+
+Converted["_Hydra"].Font = Enum.Font.SourceSans
+Converted["_Hydra"].Text = "Hydra"
+Converted["_Hydra"].TextColor3 = Color3.fromRGB(255, 255, 255)
+Converted["_Hydra"].TextScaled = true
+Converted["_Hydra"].TextSize = 14
+Converted["_Hydra"].TextWrapped = true
+Converted["_Hydra"].BackgroundColor3 = Color3.fromRGB(0, 0, 0)
+Converted["_Hydra"].BackgroundTransparency = 0.699999988079071
+Converted["_Hydra"].BorderColor3 = Color3.fromRGB(0, 0, 0)
+Converted["_Hydra"].BorderSizePixel = 0
+Converted["_Hydra"].Size = UDim2.new(1, 0, 0.0500000007, 0)
+Converted["_Hydra"].Name = "Hydra"
+Converted["_Hydra"].Parent = Converted["_TP"]
+
 Converted["_TextButton6"].Font = Enum.Font.SourceSans
 Converted["_TextButton6"].Text = ""
 Converted["_TextButton6"].TextColor3 = Color3.fromRGB(0, 0, 0)
@@ -1241,8 +1524,8 @@ Converted["_TextButton6"].BackgroundColor3 = Color3.fromRGB(255, 0, 0)
 Converted["_TextButton6"].BackgroundTransparency = 0.6000000238418579
 Converted["_TextButton6"].BorderColor3 = Color3.fromRGB(0, 0, 0)
 Converted["_TextButton6"].BorderSizePixel = 0
-Converted["_TextButton6"].Position = UDim2.new(0.037363667, 0, 0.127229363, 0)
-Converted["_TextButton6"].Size = UDim2.new(0, 30, 0, 30)
+Converted["_TextButton6"].Position = UDim2.new(0.100321211, 0, 0.122014239, 0)
+Converted["_TextButton6"].Size = UDim2.new(0.0366032198, 0, 0.0651890486, 0)
 Converted["_TextButton6"].Parent = Converted["_BloxFruitTest"]
 
 Converted["_Main2"].BackgroundColor3 = Color3.fromRGB(30.00000011175871, 30.00000011175871, 30.00000011175871)
@@ -1322,6 +1605,21 @@ Converted["_ImageProfileCorner"].CornerRadius = UDim.new(0, 100)
 Converted["_ImageProfileCorner"].Name = "ImageProfileCorner"
 Converted["_ImageProfileCorner"].Parent = Converted["_ImageProfile"]
 
+Converted["_Run"].Font = Enum.Font.SourceSans
+Converted["_Run"].Text = "Run"
+Converted["_Run"].TextColor3 = Color3.fromRGB(255, 255, 255)
+Converted["_Run"].TextScaled = true
+Converted["_Run"].TextSize = 14
+Converted["_Run"].TextWrapped = true
+Converted["_Run"].BackgroundColor3 = Color3.fromRGB(0, 0, 0)
+Converted["_Run"].BackgroundTransparency = 0.6000000238418579
+Converted["_Run"].BorderColor3 = Color3.fromRGB(0, 0, 0)
+Converted["_Run"].BorderSizePixel = 0
+Converted["_Run"].Position = UDim2.new(0.915840983, 0, 0.643526614, 0)
+Converted["_Run"].Size = UDim2.new(0.0366032198, 0, 0.0651890486, 0)
+Converted["_Run"].Name = "Run"
+Converted["_Run"].Parent = Converted["_BloxFruitTest"]
+
 -- Fake Module Scripts:
 
 local fake_module_scripts = {}
@@ -1329,55 +1627,7 @@ local fake_module_scripts = {}
 
 -- Fake Local Scripts:
 
-local function FDXPIZ_fake_script() -- Fake Script: StarterGui.BloxFruitTest.Frame.LocalScript
-	local script = Instance.new("LocalScript")
-	script.Name = "LocalScript"
-	script.Parent = Converted["_Frame"]
-	local req = require
-	local require = function(obj)
-		local fake = fake_module_scripts[obj]
-		if fake then
-			return fake()
-		end
-		return req(obj)
-	end
-
-	local UIS = game:GetService('UserInputService')
-	local frame = script.Parent
-	local dragToggle = nil
-	local dragSpeed = 0.25
-	local dragStart = nil
-	local startPos = nil
-
-	local function updateInput(input)
-		local delta = input.Position - dragStart
-		local position = UDim2.new(startPos.X.Scale, startPos.X.Offset + delta.X,
-			startPos.Y.Scale, startPos.Y.Offset + delta.Y)
-		game:GetService('TweenService'):Create(frame, TweenInfo.new(dragSpeed), {Position = position}):Play()
-	end
-
-	frame.InputBegan:Connect(function(input)
-		if (input.UserInputType == Enum.UserInputType.MouseButton1 or input.UserInputType == Enum.UserInputType.Touch) then 
-			dragToggle = true
-			dragStart = input.Position
-			startPos = frame.Position
-			input.Changed:Connect(function()
-				if input.UserInputState == Enum.UserInputState.End then
-					dragToggle = false
-				end
-			end)
-		end
-	end)
-
-	UIS.InputChanged:Connect(function(input)
-		if input.UserInputType == Enum.UserInputType.MouseMovement or input.UserInputType == Enum.UserInputType.Touch then
-			if dragToggle then
-				updateInput(input)
-			end
-			end
-		end)
-end
-local function WRECU_fake_script() -- Fake Script: StarterGui.BloxFruitTest.Frame.LocalScript
+local function ISYR_fake_script() -- Fake Script: StarterGui.BloxFruitTest.Frame.LocalScript
 	local script = Instance.new("LocalScript")
 	script.Name = "LocalScript"
 	script.Parent = Converted["_Frame"]
@@ -1396,6 +1646,7 @@ local function WRECU_fake_script() -- Fake Script: StarterGui.BloxFruitTest.Fram
 		script.Parent.TpPlr.Visible = false
 		script.Parent.PvP.Visible = false
 		script.Parent.Setting.Visible = false
+		script.Parent.NPC.Visible = false
 	end
 
 	script.Parent.MainButton.Main.MouseButton1Click:Connect(function()
@@ -1422,8 +1673,13 @@ local function WRECU_fake_script() -- Fake Script: StarterGui.BloxFruitTest.Fram
 		CloseUI()
 		script.Parent.Setting.Visible = true
 	end)
+
+	script.Parent.MainButton.NPC.MouseButton1Down:Connect(function()
+		CloseUI()
+		script.Parent.NPC.Visible = true
+	end)
 end
-local function FZZMGWS_fake_script() -- Fake Script: StarterGui.BloxFruitTest.Frame.Main.B.ToggleNoclipButton
+local function MVZVU_fake_script() -- Fake Script: StarterGui.BloxFruitTest.Frame.Main.B.ToggleNoclipButton
 	local script = Instance.new("LocalScript")
 	script.Name = "ToggleNoclipButton"
 	script.Parent = Converted["_B"]
@@ -1514,7 +1770,7 @@ local function FZZMGWS_fake_script() -- Fake Script: StarterGui.BloxFruitTest.Fr
 
 
 end
-local function VXWY_fake_script() -- Fake Script: StarterGui.BloxFruitTest.Frame.Main.A.ToggleSpeedButton
+local function ESJIYJ_fake_script() -- Fake Script: StarterGui.BloxFruitTest.Frame.Main.A.ToggleSpeedButton
 	local script = Instance.new("LocalScript")
 	script.Name = "ToggleSpeedButton"
 	script.Parent = Converted["_A"]
@@ -1598,7 +1854,7 @@ local function VXWY_fake_script() -- Fake Script: StarterGui.BloxFruitTest.Frame
 
 
 end
-local function XLIJILQ_fake_script() -- Fake Script: StarterGui.BloxFruitTest.Frame.Main.Fly.ToggleFlyButton
+local function OGDHU_fake_script() -- Fake Script: StarterGui.BloxFruitTest.Frame.Main.Fly.ToggleFlyButton
 	local script = Instance.new("LocalScript")
 	script.Name = "ToggleFlyButton"
 	script.Parent = Converted["_Fly"]
@@ -1616,9 +1872,16 @@ local function XLIJILQ_fake_script() -- Fake Script: StarterGui.BloxFruitTest.Fr
 	local UserInputService = game:GetService("UserInputService")
 	local LocalPlayer = Players.LocalPlayer
 
+	local tpFrame = script.Parent
+
 	local FLY_SPEED = 365
 	local NORMAL_WALK_SPEED = 32
 	local VERTICAL_SPEED = 365
+
+	tpFrame.Parent.Parent.Setting.AFrame.TextBox.Changed:Connect(function()
+		FLY_SPEED = tonumber(tpFrame.Parent.Parent.Setting.AFrame.TextBox.Text) or 10
+		VERTICAL_SPEED = FLY_SPEED
+	end)
 
 	local flyingEnabled = false
 	local flyLoopRunning = false
@@ -1690,19 +1953,17 @@ local function XLIJILQ_fake_script() -- Fake Script: StarterGui.BloxFruitTest.Fr
 	end)
 
 	-- Mobile support: Add fly up/down buttons if on mobile
-	spawn(function()
-		if UserInputService.TouchEnabled then
-			script.Parent.Parent.Parent.Parent.Parent.TouchGui.TouchControlFrame.JumpButton.MouseButton1Down:Connect(function()
-				if flyingEnabled then
-					upPressed = true
-				end
-			end)
+	if UserInputService.TouchEnabled then
+		script.Parent.Parent.Parent.Parent.Parent.TouchGui.TouchControlFrame.JumpButton.MouseButton1Down:Connect(function()
+			if flyingEnabled then
+				upPressed = true
+			end
+		end)
 
-			script.Parent.Parent.Parent.Parent.Parent.TouchGui.TouchControlFrame.JumpButton.MouseButton1Up:Connect(function()
-				upPressed = false
-			end)
-		end
-	end)
+		script.Parent.Parent.Parent.Parent.Parent.TouchGui.TouchControlFrame.JumpButton.MouseButton1Up:Connect(function()
+			upPressed = false
+		end)
+	end
 
 	button.MouseButton1Click:Connect(function()
 		flyingEnabled = not flyingEnabled
@@ -1737,10 +1998,10 @@ local function XLIJILQ_fake_script() -- Fake Script: StarterGui.BloxFruitTest.Fr
 
 
 end
-local function XHUPJJ_fake_script() -- Fake Script: StarterGui.BloxFruitTest.Frame.TP.TPTweeningHandle
+local function JMBD_fake_script() -- Fake Script: StarterGui.BloxFruitTest.Frame.NPC.TPTweeningHandle
 	local script = Instance.new("LocalScript")
 	script.Name = "TPTweeningHandle"
-	script.Parent = Converted["_TP"]
+	script.Parent = Converted["_NPC1"]
 	local req = require
 	local require = function(obj)
 		local fake = fake_module_scripts[obj]
@@ -1895,94 +2156,10 @@ local function XHUPJJ_fake_script() -- Fake Script: StarterGui.BloxFruitTest.Fra
 
 
 end
-local function RFFZU_fake_script() -- Fake Script: StarterGui.BloxFruitTest.Frame.TP.Claste on the sea.TeleportOnClickLocalOnly
+local function PAFKX_fake_script() -- Fake Script: StarterGui.BloxFruitTest.Frame.NPC.God.TeleportOnClickLocalOnly
 	local script = Instance.new("LocalScript")
 	script.Name = "TeleportOnClickLocalOnly"
-	script.Parent = Converted["_Claste on the sea"]
-	local req = require
-	local require = function(obj)
-		local fake = fake_module_scripts[obj]
-		if fake then
-			return fake()
-		end
-		return req(obj)
-	end
-
-	local button = script.Parent
-	local targetPosition = Vector3.new(-5086, 315, -3159)
-
-	button.MouseButton1Click:Connect(function()
-		local Players = game:GetService("Players")
-		local LocalPlayer = Players.LocalPlayer
-		if LocalPlayer and LocalPlayer.Character then
-			local character = LocalPlayer.Character
-			-- Move the character to the target position using PivotTo
-			character:PivotTo(CFrame.new(targetPosition))
-		end
-	end)
-
-
-end
-local function ASSZKK_fake_script() -- Fake Script: StarterGui.BloxFruitTest.Frame.TP.ZTest1.TeleportOnClickLocalOnly
-	local script = Instance.new("LocalScript")
-	script.Name = "TeleportOnClickLocalOnly"
-	script.Parent = Converted["_ZTest1"]
-	local req = require
-	local require = function(obj)
-		local fake = fake_module_scripts[obj]
-		if fake then
-			return fake()
-		end
-		return req(obj)
-	end
-
-	local button = script.Parent
-	local targetPosition = Vector3.new(919, 125, 32946)
-
-	button.MouseButton1Click:Connect(function()
-		local Players = game:GetService("Players")
-		local LocalPlayer = Players.LocalPlayer
-		if LocalPlayer and LocalPlayer.Character then
-			local character = LocalPlayer.Character
-			-- Move the character to the target position using PivotTo
-			character:PivotTo(CFrame.new(targetPosition))
-		end
-	end)
-
-
-end
-local function WKWT_fake_script() -- Fake Script: StarterGui.BloxFruitTest.Frame.TP.ZTest2.TeleportOnClickLocalOnly
-	local script = Instance.new("LocalScript")
-	script.Name = "TeleportOnClickLocalOnly"
-	script.Parent = Converted["_ZTest2"]
-	local req = require
-	local require = function(obj)
-		local fake = fake_module_scripts[obj]
-		if fake then
-			return fake()
-		end
-		return req(obj)
-	end
-
-	local button = script.Parent
-	local targetPosition = Vector3.new(-288, 306, 601)
-
-	button.MouseButton1Click:Connect(function()
-		local Players = game:GetService("Players")
-		local LocalPlayer = Players.LocalPlayer
-		if LocalPlayer and LocalPlayer.Character then
-			local character = LocalPlayer.Character
-			-- Move the character to the target position using PivotTo
-			character:PivotTo(CFrame.new(targetPosition))
-		end
-	end)
-
-
-end
-local function DYFI_fake_script() -- Fake Script: StarterGui.BloxFruitTest.Frame.TP.ManTP.TeleportOnClickLocalOnly
-	local script = Instance.new("LocalScript")
-	script.Name = "TeleportOnClickLocalOnly"
-	script.Parent = Converted["_ManTP"]
+	script.Parent = Converted["_God"]
 	local req = require
 	local require = function(obj)
 		local fake = fake_module_scripts[obj]
@@ -2007,10 +2184,10 @@ local function DYFI_fake_script() -- Fake Script: StarterGui.BloxFruitTest.Frame
 
 
 end
-local function GQGZAGU_fake_script() -- Fake Script: StarterGui.BloxFruitTest.Frame.TP.Mansion.TeleportOnClickLocalOnly
+local function ILUBWTN_fake_script() -- Fake Script: StarterGui.BloxFruitTest.Frame.NPC.Elec.TeleportOnClickLocalOnly
 	local script = Instance.new("LocalScript")
 	script.Name = "TeleportOnClickLocalOnly"
-	script.Parent = Converted["_Mansion"]
+	script.Parent = Converted["_Elec"]
 	local req = require
 	local require = function(obj)
 		local fake = fake_module_scripts[obj]
@@ -2035,10 +2212,10 @@ local function GQGZAGU_fake_script() -- Fake Script: StarterGui.BloxFruitTest.Fr
 
 
 end
-local function RJIZWJT_fake_script() -- Fake Script: StarterGui.BloxFruitTest.Frame.TP.ZTest3.TeleportOnClickLocalOnly
+local function EDVQG_fake_script() -- Fake Script: StarterGui.BloxFruitTest.Frame.NPC.Dragon.TeleportOnClickLocalOnly
 	local script = Instance.new("LocalScript")
 	script.Name = "TeleportOnClickLocalOnly"
-	script.Parent = Converted["_ZTest3"]
+	script.Parent = Converted["_Dragon"]
 	local req = require
 	local require = function(obj)
 		local fake = fake_module_scripts[obj]
@@ -2049,7 +2226,7 @@ local function RJIZWJT_fake_script() -- Fake Script: StarterGui.BloxFruitTest.Fr
 	end
 
 	local button = script.Parent
-	local targetPosition = Vector3.new(-288, 306, 601)
+	local targetPosition = Vector3.new(5663, 1013, -336)
 
 	button.MouseButton1Click:Connect(function()
 		local Players = game:GetService("Players")
@@ -2063,7 +2240,7 @@ local function RJIZWJT_fake_script() -- Fake Script: StarterGui.BloxFruitTest.Fr
 
 
 end
-local function NJEX_fake_script() -- Fake Script: StarterGui.BloxFruitTest.Frame.TpPlr.Frame.SelectPlayer.PlayerSelectDropdown
+local function TJDTC_fake_script() -- Fake Script: StarterGui.BloxFruitTest.Frame.TpPlr.Frame.SelectPlayer.PlayerSelectDropdown
 	local script = Instance.new("LocalScript")
 	script.Name = "PlayerSelectDropdown"
 	script.Parent = Converted["_SelectPlayer"]
@@ -2141,7 +2318,7 @@ local function NJEX_fake_script() -- Fake Script: StarterGui.BloxFruitTest.Frame
 
 
 end
-local function GFZTDR_fake_script() -- Fake Script: StarterGui.BloxFruitTest.Frame.TpPlr.Frame.Tween.TweenToPlayerButton
+local function HNYEPPZ_fake_script() -- Fake Script: StarterGui.BloxFruitTest.Frame.TpPlr.Frame.Tween.TweenToPlayerButton
 	local script = Instance.new("LocalScript")
 	script.Name = "TweenToPlayerButton"
 	script.Parent = Converted["_Tween"]
@@ -2351,7 +2528,7 @@ local function GFZTDR_fake_script() -- Fake Script: StarterGui.BloxFruitTest.Fra
 
 
 end
-local function NWVWAL_fake_script() -- Fake Script: StarterGui.BloxFruitTest.Frame.TpPlr.SafeMode.ToggleSafeModeButton
+local function MHVUWN_fake_script() -- Fake Script: StarterGui.BloxFruitTest.Frame.TpPlr.SafeMode.ToggleSafeModeButton
 	local script = Instance.new("LocalScript")
 	script.Name = "ToggleSafeModeButton"
 	script.Parent = Converted["_SafeMode"]
@@ -2388,7 +2565,7 @@ local function NWVWAL_fake_script() -- Fake Script: StarterGui.BloxFruitTest.Fra
 
 
 end
-local function STZLO_fake_script() -- Fake Script: StarterGui.BloxFruitTest.Frame.TpPlr.Frame3.NearestPlayerGuiUpdater
+local function DJOUKRZ_fake_script() -- Fake Script: StarterGui.BloxFruitTest.Frame.TpPlr.Frame3.NearestPlayerGuiUpdater
 	local script = Instance.new("LocalScript")
 	script.Name = "NearestPlayerGuiUpdater"
 	script.Parent = Converted["_Frame3"]
@@ -2485,7 +2662,7 @@ local function STZLO_fake_script() -- Fake Script: StarterGui.BloxFruitTest.Fram
 
 
 end
-local function RWFI_fake_script() -- Fake Script: StarterGui.BloxFruitTest.Frame.TpPlr.Frame4.TextButton.LocalScript
+local function WQAC_fake_script() -- Fake Script: StarterGui.BloxFruitTest.Frame.TpPlr.Frame4.TextButton.LocalScript
 	local script = Instance.new("LocalScript")
 	script.Name = "LocalScript"
 	script.Parent = Converted["_TextButton1"]
@@ -2502,7 +2679,7 @@ local function RWFI_fake_script() -- Fake Script: StarterGui.BloxFruitTest.Frame
 		script.Parent.Parent.Parent.Frame2.TextBox.Text = script.Parent.Text
 	end)
 end
-local function POXF_fake_script() -- Fake Script: StarterGui.BloxFruitTest.Frame.TpPlr.Frame4.TextButton.LocalScript
+local function SZFFD_fake_script() -- Fake Script: StarterGui.BloxFruitTest.Frame.TpPlr.Frame4.TextButton.LocalScript
 	local script = Instance.new("LocalScript")
 	script.Name = "LocalScript"
 	script.Parent = Converted["_TextButton2"]
@@ -2519,7 +2696,7 @@ local function POXF_fake_script() -- Fake Script: StarterGui.BloxFruitTest.Frame
 		script.Parent.Parent.Parent.Frame2.TextBox.Text = script.Parent.Text
 	end)
 end
-local function MOYWLUU_fake_script() -- Fake Script: StarterGui.BloxFruitTest.Frame.TpPlr.Frame4.TextButton.LocalScript
+local function COIXWZ_fake_script() -- Fake Script: StarterGui.BloxFruitTest.Frame.TpPlr.Frame4.TextButton.LocalScript
 	local script = Instance.new("LocalScript")
 	script.Name = "LocalScript"
 	script.Parent = Converted["_TextButton3"]
@@ -2536,7 +2713,7 @@ local function MOYWLUU_fake_script() -- Fake Script: StarterGui.BloxFruitTest.Fr
 		script.Parent.Parent.Parent.Frame2.TextBox.Text = script.Parent.Text
 	end)
 end
-local function THARZTO_fake_script() -- Fake Script: StarterGui.BloxFruitTest.Frame.TpPlr.Frame4.TextButton.LocalScript
+local function VQKBKO_fake_script() -- Fake Script: StarterGui.BloxFruitTest.Frame.TpPlr.Frame4.TextButton.LocalScript
 	local script = Instance.new("LocalScript")
 	script.Name = "LocalScript"
 	script.Parent = Converted["_TextButton4"]
@@ -2553,7 +2730,7 @@ local function THARZTO_fake_script() -- Fake Script: StarterGui.BloxFruitTest.Fr
 		script.Parent.Parent.Parent.Frame2.TextBox.Text = script.Parent.Text
 	end)
 end
-local function LZHNRY_fake_script() -- Fake Script: StarterGui.BloxFruitTest.Frame.TpPlr.Frame4.TextButton.LocalScript
+local function BNMYVAQ_fake_script() -- Fake Script: StarterGui.BloxFruitTest.Frame.TpPlr.Frame4.TextButton.LocalScript
 	local script = Instance.new("LocalScript")
 	script.Name = "LocalScript"
 	script.Parent = Converted["_TextButton5"]
@@ -2570,7 +2747,7 @@ local function LZHNRY_fake_script() -- Fake Script: StarterGui.BloxFruitTest.Fra
 		script.Parent.Parent.Parent.Frame2.TextBox.Text = script.Parent.Text
 	end)
 end
-local function PURPMJT_fake_script() -- Fake Script: StarterGui.BloxFruitTest.Frame.PvP.LocalScript
+local function OYYASW_fake_script() -- Fake Script: StarterGui.BloxFruitTest.Frame.PvP.LocalScript
 	local script = Instance.new("LocalScript")
 	script.Name = "LocalScript"
 	script.Parent = Converted["_PvP1"]
@@ -2769,7 +2946,7 @@ local function PURPMJT_fake_script() -- Fake Script: StarterGui.BloxFruitTest.Fr
 		end)
 	end)
 end
-local function OUEDML_fake_script() -- Fake Script: StarterGui.BloxFruitTest.Frame.PvP.AFrame.SelectPlayer.PlayerSelectDropdown
+local function ATQEOU_fake_script() -- Fake Script: StarterGui.BloxFruitTest.Frame.PvP.AFrame.SelectPlayer.PlayerSelectDropdown
 	local script = Instance.new("LocalScript")
 	script.Name = "PlayerSelectDropdown"
 	script.Parent = Converted["_SelectPlayer1"]
@@ -2802,11 +2979,13 @@ local function OUEDML_fake_script() -- Fake Script: StarterGui.BloxFruitTest.Fra
 		scroll.Name = SCROLL_NAME
 		scroll.Size = UDim2.new(0, 150, 0, 200)
 		scroll.Position = UDim2.new(0, selectButton.Position.X.Scale, 0, selectButton.Position.Y.Offset + selectButton.Size.Y.Offset + 5)
-		scroll.BackgroundColor3 = Color3.fromRGB(40, 40, 40)
-		scroll.BorderSizePixel = 1
+		scroll.BackgroundColor3 = Color3.fromRGB(0,0,0)
+		scroll.BorderSizePixel = 0
 		scroll.CanvasSize = UDim2.new(0, 0, 0, 0)
 		scroll.ScrollBarThickness = 6
+		scroll.BackgroundTransparency = 0.7
 		scroll.Parent = parentFrame
+		scroll.ZIndex = 999
 
 		local players = Players:GetPlayers()
 		local y = 0
@@ -2816,11 +2995,12 @@ local function OUEDML_fake_script() -- Fake Script: StarterGui.BloxFruitTest.Fra
 				local plrBtn = Instance.new("TextButton")
 				plrBtn.Size = UDim2.new(1, -8, 0, buttonHeight)
 				plrBtn.Position = UDim2.new(0, 4, 0, y)
-				plrBtn.BackgroundColor3 = Color3.fromRGB(70, 70, 70)
+				plrBtn.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
 				plrBtn.TextColor3 = Color3.new(1, 1, 1)
 				plrBtn.Font = Enum.Font.SourceSans
-				plrBtn.TextSize = 18
+				plrBtn.TextScaled = true
 				plrBtn.Text = player.Name
+				plrBtn.BackgroundTransparency = 0.7
 				plrBtn.Parent = scroll
 
 				plrBtn.MouseButton1Click:Connect(function()
@@ -2844,7 +3024,7 @@ local function OUEDML_fake_script() -- Fake Script: StarterGui.BloxFruitTest.Fra
 
 
 end
-local function GVFYCS_fake_script() -- Fake Script: StarterGui.BloxFruitTest.Frame.PvP.C.ToggleButton
+local function IQLY_fake_script() -- Fake Script: StarterGui.BloxFruitTest.Frame.PvP.C.ToggleButton
 	local script = Instance.new("LocalScript")
 	script.Name = "ToggleButton"
 	script.Parent = Converted["_C"]
@@ -2879,7 +3059,7 @@ local function GVFYCS_fake_script() -- Fake Script: StarterGui.BloxFruitTest.Fra
 
 
 end
-local function DURD_fake_script() -- Fake Script: StarterGui.BloxFruitTest.Frame.PvP.G.ShowOtherPlayerNamesOnClick
+local function IPDLLK_fake_script() -- Fake Script: StarterGui.BloxFruitTest.Frame.PvP.G.ShowOtherPlayerNamesOnClick
 	local script = Instance.new("LocalScript")
 	script.Name = "ShowOtherPlayerNamesOnClick"
 	script.Parent = Converted["_G"]
@@ -2900,7 +3080,7 @@ local function DURD_fake_script() -- Fake Script: StarterGui.BloxFruitTest.Frame
 	local billboardGuis = {}
 	local updateConnections = {}
 	local teamConnections = {}
-	local namesVisible = false
+	local namesVisible = true
 
 	-- Helper to get distance between LocalPlayer and another player's HumanoidRootPart
 	local function getDistanceToPlayer(targetPlayer)
@@ -3083,7 +3263,7 @@ local function DURD_fake_script() -- Fake Script: StarterGui.BloxFruitTest.Frame
 
 
 end
-local function RGQA_fake_script() -- Fake Script: StarterGui.BloxFruitTest.Frame.PvP.B1Test.ToggleButton
+local function MGSAJAB_fake_script() -- Fake Script: StarterGui.BloxFruitTest.Frame.PvP.B1Test.ToggleButton
 	local script = Instance.new("LocalScript")
 	script.Name = "ToggleButton"
 	script.Parent = Converted["_B1Test"]
@@ -3118,7 +3298,7 @@ local function RGQA_fake_script() -- Fake Script: StarterGui.BloxFruitTest.Frame
 
 
 end
-local function RBNKCSF_fake_script() -- Fake Script: StarterGui.BloxFruitTest.Frame.PvP.C1Test.ToggleButton
+local function JPPTJQP_fake_script() -- Fake Script: StarterGui.BloxFruitTest.Frame.PvP.C1Test.ToggleButton
 	local script = Instance.new("LocalScript")
 	script.Name = "ToggleButton"
 	script.Parent = Converted["_C1Test"]
@@ -3153,7 +3333,7 @@ local function RBNKCSF_fake_script() -- Fake Script: StarterGui.BloxFruitTest.Fr
 
 
 end
-local function KUTQXMS_fake_script() -- Fake Script: StarterGui.BloxFruitTest.Frame.PvP.E1.ToggleButton
+local function QZVHHRB_fake_script() -- Fake Script: StarterGui.BloxFruitTest.Frame.PvP.E1.ToggleButton
 	local script = Instance.new("LocalScript")
 	script.Name = "ToggleButton"
 	script.Parent = Converted["_E1"]
@@ -3190,7 +3370,7 @@ local function KUTQXMS_fake_script() -- Fake Script: StarterGui.BloxFruitTest.Fr
 
 
 end
-local function IADPLAG_fake_script() -- Fake Script: StarterGui.BloxFruitTest.Frame.PvP.D.ToggleButton
+local function WGHIZC_fake_script() -- Fake Script: StarterGui.BloxFruitTest.Frame.PvP.D.ToggleButton
 	local script = Instance.new("LocalScript")
 	script.Name = "ToggleButton"
 	script.Parent = Converted["_D"]
@@ -3225,7 +3405,7 @@ local function IADPLAG_fake_script() -- Fake Script: StarterGui.BloxFruitTest.Fr
 
 
 end
-local function LUGMVH_fake_script() -- Fake Script: StarterGui.BloxFruitTest.Frame.Setting.D.ConfirmAndRemoveScreenGui
+local function WMQA_fake_script() -- Fake Script: StarterGui.BloxFruitTest.Frame.Setting.D.ConfirmAndRemoveScreenGui
 	local script = Instance.new("LocalScript")
 	script.Name = "ConfirmAndRemoveScreenGui"
 	script.Parent = Converted["_D1"]
@@ -3269,7 +3449,361 @@ local function LUGMVH_fake_script() -- Fake Script: StarterGui.BloxFruitTest.Fra
 
 
 end
-local function NGKDIO_fake_script() -- Fake Script: StarterGui.BloxFruitTest.TextButton.LocalScript
+local function HXZUPXV_fake_script() -- Fake Script: StarterGui.BloxFruitTest.Frame.TP.TPTweeningHandle
+	local script = Instance.new("LocalScript")
+	script.Name = "TPTweeningHandle"
+	script.Parent = Converted["_TP"]
+	local req = require
+	local require = function(obj)
+		local fake = fake_module_scripts[obj]
+		if fake then
+			return fake()
+		end
+		return req(obj)
+	end
+
+	local tpFrame = script.Parent
+
+	local Players = game:GetService("Players")
+	local LocalPlayer = Players.LocalPlayer
+
+	local INITIAL_MOVE_SPEED = 365 -- studs per second
+	local BOOSTED_MOVE_SPEED = INITIAL_MOVE_SPEED * 1.5 -- studs per second
+	local BOOST_DISTANCE = 400 -- studs
+
+	tpFrame.Parent.Setting.AFrame.TextBox.Changed:Connect(function()
+		INITIAL_MOVE_SPEED = tonumber(tpFrame.Parent.Setting.AFrame.TextBox.Text) or 10
+		BOOSTED_MOVE_SPEED = INITIAL_MOVE_SPEED * 1.5 
+	end)
+
+	tpFrame.Parent.Setting.BFrame.TextBox.Changed:Connect(function()
+		BOOST_DISTANCE = tonumber(tpFrame.Parent.Setting.BFrame.TextBox.Text) or 0
+	end)
+
+	local currentTweenCoroutine = nil
+	local tweenCancelFlag = false
+
+	-- Function to stop current tween
+	local function StopTween()
+		tweenCancelFlag = true
+		if currentTweenCoroutine then
+			-- Coroutine will exit on next loop
+			currentTweenCoroutine = nil
+		end
+	end
+
+	-- Function to smoothly move character to target position, with speed boost when close
+	local function moveCharacterTo(character, targetPosition)
+		StopTween() -- Cancel any previous tween
+		tweenCancelFlag = false
+
+		local function tweenFunc()
+			local rootPart = character:FindFirstChild("HumanoidRootPart")
+			if not rootPart then return end
+
+			local startPos = rootPart.Position
+
+			local currentSpeed = INITIAL_MOVE_SPEED
+
+			while true do
+				if tweenCancelFlag then break end
+				if not character.Parent then break end
+				local rootPart = character:FindFirstChild("HumanoidRootPart")
+				if not rootPart then break end
+
+				local currentPos = rootPart.Position
+				local distanceToTarget = (targetPosition - currentPos).Magnitude
+
+				-- Check for speed boost
+				if distanceToTarget < BOOST_DISTANCE then
+					currentSpeed = BOOSTED_MOVE_SPEED
+				else
+					currentSpeed = INITIAL_MOVE_SPEED
+				end
+
+				-- If close enough, snap to target and break
+				local dt = task.wait()
+				if distanceToTarget < currentSpeed * dt then
+					character:PivotTo(CFrame.new(targetPosition))
+					break
+				end
+
+				-- Move towards target
+				local step = currentSpeed * dt
+				local moveVec = (targetPosition - currentPos).Unit * step
+				local newPos = currentPos + moveVec
+				character:PivotTo(CFrame.new(newPos))
+			end
+			currentTweenCoroutine = nil
+		end
+
+		currentTweenCoroutine = coroutine.create(tweenFunc)
+		coroutine.resume(currentTweenCoroutine)
+	end
+
+	-- Listen for Event fired from TpPlr buttons
+	local TPEvent = tpFrame.Event
+	TPEvent.Event:Connect(function(targetPosition)
+		-- Loop through all players and tween the one whose root part matches the position
+		for _, player in Players:GetPlayers() do
+			if player.Character then
+				local rootPart = player.Character:FindFirstChild("HumanoidRootPart")
+				if rootPart and rootPart.Position == targetPosition then
+					moveCharacterTo(player.Character, targetPosition)
+				end
+			end
+		end
+	end)
+
+	local function TextLabelToVector3(textLabel)
+		if not textLabel or not textLabel.Text then
+			warn("Invalid TextLabel")
+			return Vector3.new()
+		end
+
+		-- Split the text by commas
+		local parts = string.split(textLabel.Text, ",")
+		if #parts < 3 then
+			warn("Text must be in format: X, Y, Z")
+			return Vector3.new()
+		end
+
+		-- Convert parts to numbers
+		local x = tonumber(parts[1])
+		local y = tonumber(parts[2])
+		local z = tonumber(parts[3])
+
+		if not (x and y and z) then
+			warn("Text must contain valid numbers")
+			return Vector3.new()
+		end
+
+		return Vector3.new(x, y, z)
+	end
+
+
+	-- Connect all TPTweening buttons
+	for _, child in tpFrame:GetChildren() do
+		if child:IsA("TextButton") then
+			local valueObj = child:FindFirstChildWhichIsA("TextLabel")
+			if valueObj then
+				child.MouseButton1Click:Connect(function()
+					if LocalPlayer and LocalPlayer.Character then
+						wait(.1)
+						moveCharacterTo(LocalPlayer.Character, TextLabelToVector3(valueObj))
+					end
+				end)
+			end
+		end
+	end
+
+	-- Connect StopTween button
+	local stopButton = tpFrame.A
+	if stopButton and stopButton:IsA("TextButton") then
+		stopButton.MouseButton1Click:Connect(function()
+			StopTween()
+		end)
+	end
+
+
+end
+local function RGKMS_fake_script() -- Fake Script: StarterGui.BloxFruitTest.Frame.TP.Claste on the sea.TeleportOnClickLocalOnly
+	local script = Instance.new("LocalScript")
+	script.Name = "TeleportOnClickLocalOnly"
+	script.Parent = Converted["_Claste on the sea"]
+	local req = require
+	local require = function(obj)
+		local fake = fake_module_scripts[obj]
+		if fake then
+			return fake()
+		end
+		return req(obj)
+	end
+
+	local button = script.Parent
+	local targetPosition = Vector3.new(-5086, 315, -3159)
+
+	button.MouseButton1Click:Connect(function()
+		local Players = game:GetService("Players")
+		local LocalPlayer = Players.LocalPlayer
+		if LocalPlayer and LocalPlayer.Character then
+			local character = LocalPlayer.Character
+			-- Move the character to the target position using PivotTo
+			character:PivotTo(CFrame.new(targetPosition))
+		end
+	end)
+
+
+end
+local function NJDTJ_fake_script() -- Fake Script: StarterGui.BloxFruitTest.Frame.TP.ZTest1.TeleportOnClickLocalOnly
+	local script = Instance.new("LocalScript")
+	script.Name = "TeleportOnClickLocalOnly"
+	script.Parent = Converted["_ZTest1"]
+	local req = require
+	local require = function(obj)
+		local fake = fake_module_scripts[obj]
+		if fake then
+			return fake()
+		end
+		return req(obj)
+	end
+
+	local button = script.Parent
+	local targetPosition = Vector3.new(919, 125, 32946)
+
+	button.MouseButton1Click:Connect(function()
+		local Players = game:GetService("Players")
+		local LocalPlayer = Players.LocalPlayer
+		if LocalPlayer and LocalPlayer.Character then
+			local character = LocalPlayer.Character
+			-- Move the character to the target position using PivotTo
+			character:PivotTo(CFrame.new(targetPosition))
+		end
+	end)
+
+
+end
+local function HEENVS_fake_script() -- Fake Script: StarterGui.BloxFruitTest.Frame.TP.ZTest2.TeleportOnClickLocalOnly
+	local script = Instance.new("LocalScript")
+	script.Name = "TeleportOnClickLocalOnly"
+	script.Parent = Converted["_ZTest2"]
+	local req = require
+	local require = function(obj)
+		local fake = fake_module_scripts[obj]
+		if fake then
+			return fake()
+		end
+		return req(obj)
+	end
+
+	local button = script.Parent
+	local targetPosition = Vector3.new(-288, 306, 601)
+
+	button.MouseButton1Click:Connect(function()
+		local Players = game:GetService("Players")
+		local LocalPlayer = Players.LocalPlayer
+		if LocalPlayer and LocalPlayer.Character then
+			local character = LocalPlayer.Character
+			-- Move the character to the target position using PivotTo
+			character:PivotTo(CFrame.new(targetPosition))
+		end
+	end)
+
+
+end
+local function ZSLPT_fake_script() -- Fake Script: StarterGui.BloxFruitTest.Frame.TP.ManTP.TeleportOnClickLocalOnly
+	local script = Instance.new("LocalScript")
+	script.Name = "TeleportOnClickLocalOnly"
+	script.Parent = Converted["_ManTP"]
+	local req = require
+	local require = function(obj)
+		local fake = fake_module_scripts[obj]
+		if fake then
+			return fake()
+		end
+		return req(obj)
+	end
+
+	local button = script.Parent
+	local targetPosition = Vector3.new(-12466, 376, -7542)
+
+	button.MouseButton1Click:Connect(function()
+		local Players = game:GetService("Players")
+		local LocalPlayer = Players.LocalPlayer
+		if LocalPlayer and LocalPlayer.Character then
+			local character = LocalPlayer.Character
+			-- Move the character to the target position using PivotTo
+			character:PivotTo(CFrame.new(targetPosition))
+		end
+	end)
+
+
+end
+local function ZOLAW_fake_script() -- Fake Script: StarterGui.BloxFruitTest.Frame.TP.Mansion.TeleportOnClickLocalOnly
+	local script = Instance.new("LocalScript")
+	script.Name = "TeleportOnClickLocalOnly"
+	script.Parent = Converted["_Mansion"]
+	local req = require
+	local require = function(obj)
+		local fake = fake_module_scripts[obj]
+		if fake then
+			return fake()
+		end
+		return req(obj)
+	end
+
+	local button = script.Parent
+	local targetPosition = Vector3.new(-12466, 376, -7542)
+
+	button.MouseButton1Click:Connect(function()
+		local Players = game:GetService("Players")
+		local LocalPlayer = Players.LocalPlayer
+		if LocalPlayer and LocalPlayer.Character then
+			local character = LocalPlayer.Character
+			-- Move the character to the target position using PivotTo
+			character:PivotTo(CFrame.new(targetPosition))
+		end
+	end)
+
+
+end
+local function UGMGFD_fake_script() -- Fake Script: StarterGui.BloxFruitTest.Frame.TP.ZTest3.TeleportOnClickLocalOnly
+	local script = Instance.new("LocalScript")
+	script.Name = "TeleportOnClickLocalOnly"
+	script.Parent = Converted["_ZTest31"]
+	local req = require
+	local require = function(obj)
+		local fake = fake_module_scripts[obj]
+		if fake then
+			return fake()
+		end
+		return req(obj)
+	end
+
+	local button = script.Parent
+	local targetPosition = Vector3.new(-288, 306, 601)
+
+	button.MouseButton1Click:Connect(function()
+		local Players = game:GetService("Players")
+		local LocalPlayer = Players.LocalPlayer
+		if LocalPlayer and LocalPlayer.Character then
+			local character = LocalPlayer.Character
+			-- Move the character to the target position using PivotTo
+			character:PivotTo(CFrame.new(targetPosition))
+		end
+	end)
+
+
+end
+local function ELTT_fake_script() -- Fake Script: StarterGui.BloxFruitTest.Frame.TP.Hydra.TeleportOnClickLocalOnly
+	local script = Instance.new("LocalScript")
+	script.Name = "TeleportOnClickLocalOnly"
+	script.Parent = Converted["_Hydra"]
+	local req = require
+	local require = function(obj)
+		local fake = fake_module_scripts[obj]
+		if fake then
+			return fake()
+		end
+		return req(obj)
+	end
+
+	local button = script.Parent
+	local targetPosition = Vector3.new(5663, 1013, -336)
+
+	button.MouseButton1Click:Connect(function()
+		local Players = game:GetService("Players")
+		local LocalPlayer = Players.LocalPlayer
+		if LocalPlayer and LocalPlayer.Character then
+			local character = LocalPlayer.Character
+			-- Move the character to the target position using PivotTo
+			character:PivotTo(CFrame.new(targetPosition))
+		end
+	end)
+
+
+end
+local function ZNDTT_fake_script() -- Fake Script: StarterGui.BloxFruitTest.TextButton.LocalScript
 	local script = Instance.new("LocalScript")
 	script.Name = "LocalScript"
 	script.Parent = Converted["_TextButton6"]
@@ -3321,36 +3855,70 @@ local function NGKDIO_fake_script() -- Fake Script: StarterGui.BloxFruitTest.Tex
 
 
 end
+local function QOLX_fake_script() -- Fake Script: StarterGui.BloxFruitTest.Run.TeleportScript
+	local script = Instance.new("LocalScript")
+	script.Name = "TeleportScript"
+	script.Parent = Converted["_Run"]
+	local req = require
+	local require = function(obj)
+		local fake = fake_module_scripts[obj]
+		if fake then
+			return fake()
+		end
+		return req(obj)
+	end
 
-coroutine.wrap(FDXPIZ_fake_script)()
-coroutine.wrap(WRECU_fake_script)()
-coroutine.wrap(FZZMGWS_fake_script)()
-coroutine.wrap(VXWY_fake_script)()
+	local button = script.Parent
+	local Players = game:GetService("Players")
+	local localPlayer = Players.LocalPlayer
 
-coroutine.wrap(XHUPJJ_fake_script)()
-coroutine.wrap(RFFZU_fake_script)()
-coroutine.wrap(ASSZKK_fake_script)()
-coroutine.wrap(WKWT_fake_script)()
-coroutine.wrap(DYFI_fake_script)()
-coroutine.wrap(GQGZAGU_fake_script)()
-coroutine.wrap(RJIZWJT_fake_script)()
-coroutine.wrap(NJEX_fake_script)()
-coroutine.wrap(GFZTDR_fake_script)()
-coroutine.wrap(NWVWAL_fake_script)()
-coroutine.wrap(STZLO_fake_script)()
-coroutine.wrap(RWFI_fake_script)()
-coroutine.wrap(POXF_fake_script)()
-coroutine.wrap(MOYWLUU_fake_script)()
-coroutine.wrap(THARZTO_fake_script)()
-coroutine.wrap(LZHNRY_fake_script)()
-coroutine.wrap(PURPMJT_fake_script)()
-coroutine.wrap(OUEDML_fake_script)()
-coroutine.wrap(GVFYCS_fake_script)()
-coroutine.wrap(DURD_fake_script)()
-coroutine.wrap(RGQA_fake_script)()
-coroutine.wrap(RBNKCSF_fake_script)()
-coroutine.wrap(KUTQXMS_fake_script)()
-coroutine.wrap(IADPLAG_fake_script)()
-coroutine.wrap(LUGMVH_fake_script)()
-coroutine.wrap(NGKDIO_fake_script)()
-coroutine.wrap(XLIJILQ_fake_script)()
+	local function onButtonClicked()
+		local character = localPlayer.Character
+		if character then
+			local humanoidRootPart = character:FindFirstChild("HumanoidRootPart")
+			if humanoidRootPart then
+				local currentPos = humanoidRootPart.Position
+				humanoidRootPart.Position = Vector3.new(currentPos.X, 300000, currentPos.Z)
+			end
+		end
+	end
+
+	button.MouseButton1Click:Connect(onButtonClicked)
+end
+
+coroutine.wrap(ISYR_fake_script)()
+coroutine.wrap(MVZVU_fake_script)()
+coroutine.wrap(ESJIYJ_fake_script)()
+coroutine.wrap(OGDHU_fake_script)()
+coroutine.wrap(JMBD_fake_script)()
+coroutine.wrap(PAFKX_fake_script)()
+coroutine.wrap(ILUBWTN_fake_script)()
+coroutine.wrap(EDVQG_fake_script)()
+coroutine.wrap(TJDTC_fake_script)()
+coroutine.wrap(HNYEPPZ_fake_script)()
+coroutine.wrap(MHVUWN_fake_script)()
+coroutine.wrap(DJOUKRZ_fake_script)()
+coroutine.wrap(WQAC_fake_script)()
+coroutine.wrap(SZFFD_fake_script)()
+coroutine.wrap(COIXWZ_fake_script)()
+coroutine.wrap(VQKBKO_fake_script)()
+coroutine.wrap(BNMYVAQ_fake_script)()
+coroutine.wrap(OYYASW_fake_script)()
+coroutine.wrap(ATQEOU_fake_script)()
+coroutine.wrap(IQLY_fake_script)()
+coroutine.wrap(IPDLLK_fake_script)()
+coroutine.wrap(MGSAJAB_fake_script)()
+coroutine.wrap(JPPTJQP_fake_script)()
+coroutine.wrap(QZVHHRB_fake_script)()
+coroutine.wrap(WGHIZC_fake_script)()
+coroutine.wrap(WMQA_fake_script)()
+coroutine.wrap(HXZUPXV_fake_script)()
+coroutine.wrap(RGKMS_fake_script)()
+coroutine.wrap(NJDTJ_fake_script)()
+coroutine.wrap(HEENVS_fake_script)()
+coroutine.wrap(ZSLPT_fake_script)()
+coroutine.wrap(ZOLAW_fake_script)()
+coroutine.wrap(UGMGFD_fake_script)()
+coroutine.wrap(ELTT_fake_script)()
+coroutine.wrap(ZNDTT_fake_script)()
+coroutine.wrap(QOLX_fake_script)()
