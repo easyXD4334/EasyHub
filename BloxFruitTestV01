@@ -1953,7 +1953,8 @@ local function OGDHU_fake_script() -- Fake Script: StarterGui.BloxFruitTest.Fram
 	end)
 
 	-- Mobile support: Add fly up/down buttons if on mobile
-	if UserInputService.TouchEnabled then
+	spawn(function()
+		if UserInputService.TouchEnabled then
 		script.Parent.Parent.Parent.Parent.Parent.TouchGui.TouchControlFrame.JumpButton.MouseButton1Down:Connect(function()
 			if flyingEnabled then
 				upPressed = true
@@ -1963,7 +1964,7 @@ local function OGDHU_fake_script() -- Fake Script: StarterGui.BloxFruitTest.Fram
 		script.Parent.Parent.Parent.Parent.Parent.TouchGui.TouchControlFrame.JumpButton.MouseButton1Up:Connect(function()
 			upPressed = false
 		end)
-	end
+	end)
 
 	button.MouseButton1Click:Connect(function()
 		flyingEnabled = not flyingEnabled
