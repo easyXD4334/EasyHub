@@ -1,4 +1,4 @@
--- Version 28/15/25
+-- Version 0.3.2 30/12/2025 12:17
 
 -- Instances:
 
@@ -162,7 +162,6 @@ local Converted = {
 	["_HealthgreenCorner"] = Instance.new("UICorner");
 	["_ImageProfile"] = Instance.new("ImageLabel");
 	["_ImageProfileCorner"] = Instance.new("UICorner");
-	["_Run"] = Instance.new("TextButton");
 	["_TeleportScript"] = Instance.new("LocalScript");
 }
 
@@ -1605,21 +1604,6 @@ Converted["_ImageProfileCorner"].CornerRadius = UDim.new(0, 100)
 Converted["_ImageProfileCorner"].Name = "ImageProfileCorner"
 Converted["_ImageProfileCorner"].Parent = Converted["_ImageProfile"]
 
-Converted["_Run"].Font = Enum.Font.SourceSans
-Converted["_Run"].Text = "Run"
-Converted["_Run"].TextColor3 = Color3.fromRGB(255, 255, 255)
-Converted["_Run"].TextScaled = true
-Converted["_Run"].TextSize = 14
-Converted["_Run"].TextWrapped = true
-Converted["_Run"].BackgroundColor3 = Color3.fromRGB(0, 0, 0)
-Converted["_Run"].BackgroundTransparency = 0.6000000238418579
-Converted["_Run"].BorderColor3 = Color3.fromRGB(0, 0, 0)
-Converted["_Run"].BorderSizePixel = 0
-Converted["_Run"].Position = UDim2.new(0.915840983, 0, 0.643526614, 0)
-Converted["_Run"].Size = UDim2.new(0.0366032198, 0, 0.0651890486, 0)
-Converted["_Run"].Name = "Run"
-Converted["_Run"].Parent = Converted["_BloxFruitTest"]
-
 -- Fake Module Scripts:
 
 local fake_module_scripts = {}
@@ -1953,17 +1937,21 @@ local function OGDHU_fake_script() -- Fake Script: StarterGui.BloxFruitTest.Fram
 	end)
 
 	-- Mobile support: Add fly up/down buttons if on mobile
-	if UserInputService.TouchEnabled then
-		script.Parent.Parent.Parent.Parent.Parent.TouchGui.TouchControlFrame.JumpButton.MouseButton1Down:Connect(function()
-			if flyingEnabled then
-				upPressed = true
-			end
-		end)
+	spawn(
+		function()
+			if UserInputService.TouchEnabled then
+				script.Parent.Parent.Parent.Parent.Parent.TouchGui.TouchControlFrame.JumpButton.MouseButton1Down:Connect(function()
+					if flyingEnabled then
+						upPressed = true
+					end
+				end)
 
-		script.Parent.Parent.Parent.Parent.Parent.TouchGui.TouchControlFrame.JumpButton.MouseButton1Up:Connect(function()
-			upPressed = false
-		end)
-	end
+				script.Parent.Parent.Parent.Parent.Parent.TouchGui.TouchControlFrame.JumpButton.MouseButton1Up:Connect(function()
+					upPressed = false
+				end)
+			end
+		end
+	)
 
 	button.MouseButton1Click:Connect(function()
 		flyingEnabled = not flyingEnabled
@@ -3855,36 +3843,6 @@ local function ZNDTT_fake_script() -- Fake Script: StarterGui.BloxFruitTest.Text
 
 
 end
-local function QOLX_fake_script() -- Fake Script: StarterGui.BloxFruitTest.Run.TeleportScript
-	local script = Instance.new("LocalScript")
-	script.Name = "TeleportScript"
-	script.Parent = Converted["_Run"]
-	local req = require
-	local require = function(obj)
-		local fake = fake_module_scripts[obj]
-		if fake then
-			return fake()
-		end
-		return req(obj)
-	end
-
-	local button = script.Parent
-	local Players = game:GetService("Players")
-	local localPlayer = Players.LocalPlayer
-
-	local function onButtonClicked()
-		local character = localPlayer.Character
-		if character then
-			local humanoidRootPart = character:FindFirstChild("HumanoidRootPart")
-			if humanoidRootPart then
-				local currentPos = humanoidRootPart.Position
-				humanoidRootPart.Position = Vector3.new(currentPos.X, 300000, currentPos.Z)
-			end
-		end
-	end
-
-	button.MouseButton1Click:Connect(onButtonClicked)
-end
 
 coroutine.wrap(ISYR_fake_script)()
 coroutine.wrap(MVZVU_fake_script)()
@@ -3921,4 +3879,3 @@ coroutine.wrap(ZOLAW_fake_script)()
 coroutine.wrap(UGMGFD_fake_script)()
 coroutine.wrap(ELTT_fake_script)()
 coroutine.wrap(ZNDTT_fake_script)()
-coroutine.wrap(QOLX_fake_script)()
