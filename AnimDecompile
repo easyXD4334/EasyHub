@@ -1,3 +1,4 @@
+--vers.1.1
 
 -- Instances:
 
@@ -92,65 +93,71 @@ local function KROGTJ_fake_script() -- Fake Script: StarterGui.ScreenGui.Frame.T
         return req(obj)
     end
 
-	script.Parent.MouseButton1Down:Connect(function()
-		local provider = game:GetService("KeyframeSequenceProvider")
+script.Parent.MouseButton1Down:Connect(function()
+	local provider = game:GetService("KeyframeSequenceProvider")
+
+	local keyframeSequence = provider:GetKeyframeSequenceAsync(tostring(script.Parent.Parent.ID.Text))
 	
-		local keyframeSequence = provider:GetKeyframeSequenceAsync(tostring(script.Parent.Parent.ID.Text))
-		
-	
-		local function indent(level)
-			return string.rep("    ", level)
+	local function indent(level)
+		return string.rep("    ", level)
+	end
+
+	local function serializeCFrame(cf)
+		local c = {cf:GetComponents()}
+		return "CFrame.new(" .. table.concat(c, ", ") .. ")"
+	end
+
+	local function processPose(pose, parentName, level)
+		local code = ""
+
+		code ..= indent(level) .. "do\n"
+		code ..= indent(level+1) .. "local p = Instance.new(\"Pose\")\n"
+		code ..= indent(level+1) .. "p.Name = \"" .. pose.Name .. "\"\n"
+		code ..= indent(level+1) .. "p.CFrame = " .. serializeCFrame(pose.CFrame) .. "\n"
+		code ..= indent(level+1) .. "p.Weight = " .. pose.Weight .. "\n"
+		code ..= indent(level+1) .. "p.Parent = " .. parentName .. "\n"
+
+		for _, child in ipairs(pose:GetChildren()) do
+			if child:IsA("Pose") then
+				code ..= processPose(child, "p", level + 1)
+			end
 		end
-	
-		local function serializeCFrame(cf)
-			local components = {cf:GetComponents()}
-			return "CFrame.new(" .. table.concat(components, ", ") .. ")"
-		end
-	
-		local function processPose(pose, parentName, level)
-			local code = ""
-	
-			local varName = pose.Name .. "_Pose"
-	
-			code ..= indent(level) .. "local " .. varName .. " = Instance.new(\"Pose\")\n"
-			code ..= indent(level) .. varName .. ".Name = \"" .. pose.Name .. "\"\n"
-			code ..= indent(level) .. varName .. ".CFrame = " .. serializeCFrame(pose.CFrame) .. "\n"
-			code ..= indent(level) .. varName .. ".Weight = " .. pose.Weight .. "\n"
-			code ..= indent(level) .. varName .. ".Parent = " .. parentName .. "\n\n"
-	
-			for _, child in ipairs(pose:GetChildren()) do
-				if child:IsA("Pose") then
-					code ..= processPose(child, varName, level)
+
+		code ..= indent(level) .. "end\n\n"
+
+		return code
+	end
+
+	local function convert()
+		local code = ""
+
+		code ..= "local keyframeSequence = Instance.new(\"KeyframeSequence\")\n"
+		code ..= "keyframeSequence.Name = \"" .. keyframeSequence.Name .. "\"\n\n"
+
+		for _, keyframe in ipairs(keyframeSequence:GetKeyframes()) do
+			local kfName = "kf"
+
+			code ..= "do\n"
+			code ..= indent(1) .. "local " .. kfName .. " = Instance.new(\"Keyframe\")\n"
+			code ..= indent(1) .. kfName .. ".Time = " .. keyframe.Time .. "\n"
+			code ..= indent(1) .. kfName .. ".Parent = keyframeSequence\n\n"
+
+			for _, pose in ipairs(keyframe:GetChildren()) do
+				if pose:IsA("Pose") then
+					code ..= processPose(pose, kfName, 2)
 				end
 			end
-	
-			return code
+
+			code ..= "end\n\n"
 		end
-	
-		local function convert()
-			local code = ""
-			code ..= "local keyframeSequence = Instance.new(\"KeyframeSequence\")\n"
-			code ..= "keyframeSequence.Name = \"" .. keyframeSequence.Name .. "\"\n\n"
-	
-			for _, keyframe in ipairs(keyframeSequence:GetKeyframes()) do
-				local kfVar = "keyframe_" .. tostring(math.floor(keyframe.Time * 1000))
-	
-				code ..= "local " .. kfVar .. " = Instance.new(\"Keyframe\")\n"
-				code ..= kfVar .. ".Time = " .. keyframe.Time .. "\n"
-				code ..= kfVar .. ".Parent = keyframeSequence\n\n"
-	
-				for _, pose in ipairs(keyframe:GetChildren()) do
-					if pose:IsA("Pose") then
-						code ..= processPose(pose, kfVar, 1)
-					end
-				end
-			end
-	
-	script.Parent.Parent.OutPut.Text = code
-		end
-	
-		convert()
-	end)
+
+		script.Parent.Parent.OutPut.Text = code
+
+	end
+
+	convert()
+
+end)
 end
 
 coroutine.wrap(KROGTJ_fake_script)()
