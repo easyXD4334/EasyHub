@@ -1,144 +1,156 @@
---Ver.1.0
-local G2L = {};
 
--- StarterGui.ScreenGui
-G2L["1"] = Instance.new("ScreenGui", game:GetService("Players").LocalPlayer:WaitForChild("PlayerGui"));
-G2L["1"]["ZIndexBehavior"] = Enum.ZIndexBehavior.Sibling;
+-- Instances:
+
+local Converted = {
+	["_ScreenGui"] = Instance.new("ScreenGui");
+	["_Frame"] = Instance.new("Frame");
+	["_OutPut"] = Instance.new("TextBox");
+	["_ID"] = Instance.new("TextBox");
+	["_TextButton"] = Instance.new("TextButton");
+	["_LocalScript"] = Instance.new("LocalScript");
+}
+
+-- Properties:
+
+Converted["_ScreenGui"].ZIndexBehavior = Enum.ZIndexBehavior.Sibling
+Converted["_ScreenGui"].Parent = game:GetService("CoreGui")
+
+Converted["_Frame"].BackgroundColor3 = Color3.fromRGB(0, 0, 0)
+Converted["_Frame"].BackgroundTransparency = 0.5
+Converted["_Frame"].BorderColor3 = Color3.fromRGB(0, 0, 0)
+Converted["_Frame"].BorderSizePixel = 0
+Converted["_Frame"].Position = UDim2.new(0.0970873833, 0, 0.168711647, 0)
+Converted["_Frame"].Size = UDim2.new(0, 230, 0, 188)
+Converted["_Frame"].Parent = Converted["_ScreenGui"]
+
+Converted["_OutPut"].ClearTextOnFocus = false
+Converted["_OutPut"].CursorPosition = -1
+Converted["_OutPut"].Font = Enum.Font.SourceSans
+Converted["_OutPut"].PlaceholderText = "Out put"
+Converted["_OutPut"].Text = ""
+Converted["_OutPut"].TextColor3 = Color3.fromRGB(255, 255, 255)
+Converted["_OutPut"].TextScaled = true
+Converted["_OutPut"].TextSize = 14
+Converted["_OutPut"].TextWrapped = true
+Converted["_OutPut"].BackgroundColor3 = Color3.fromRGB(0, 0, 0)
+Converted["_OutPut"].BackgroundTransparency = 0.5
+Converted["_OutPut"].BorderColor3 = Color3.fromRGB(0, 0, 0)
+Converted["_OutPut"].BorderSizePixel = 0
+Converted["_OutPut"].Position = UDim2.new(0.0643362328, 0, 0.364637822, 0)
+Converted["_OutPut"].Size = UDim2.new(0, 200, 0, 50)
+Converted["_OutPut"].Name = "OutPut"
+Converted["_OutPut"].Parent = Converted["_Frame"]
+
+Converted["_ID"].CursorPosition = -1
+Converted["_ID"].Font = Enum.Font.SourceSans
+Converted["_ID"].PlaceholderText = "Anim Id Here"
+Converted["_ID"].Text = ""
+Converted["_ID"].TextColor3 = Color3.fromRGB(255, 255, 255)
+Converted["_ID"].TextScaled = true
+Converted["_ID"].TextSize = 14
+Converted["_ID"].TextWrapped = true
+Converted["_ID"].BackgroundColor3 = Color3.fromRGB(0, 0, 0)
+Converted["_ID"].BackgroundTransparency = 0.5
+Converted["_ID"].BorderColor3 = Color3.fromRGB(0, 0, 0)
+Converted["_ID"].BorderSizePixel = 0
+Converted["_ID"].Position = UDim2.new(0.0643362328, 0, 0.0864245221, 0)
+Converted["_ID"].Size = UDim2.new(0, 200, 0, 50)
+Converted["_ID"].Name = "ID"
+Converted["_ID"].Parent = Converted["_Frame"]
+
+Converted["_TextButton"].Font = Enum.Font.SourceSans
+Converted["_TextButton"].Text = "Decompile"
+Converted["_TextButton"].TextColor3 = Color3.fromRGB(255, 255, 255)
+Converted["_TextButton"].TextScaled = true
+Converted["_TextButton"].TextSize = 14
+Converted["_TextButton"].TextWrapped = true
+Converted["_TextButton"].BackgroundColor3 = Color3.fromRGB(0, 0, 0)
+Converted["_TextButton"].BackgroundTransparency = 0.5
+Converted["_TextButton"].BorderColor3 = Color3.fromRGB(0, 0, 0)
+Converted["_TextButton"].BorderSizePixel = 0
+Converted["_TextButton"].Position = UDim2.new(0.0643362328, 0, 0.669020951, 0)
+Converted["_TextButton"].Size = UDim2.new(0, 200, 0, 50)
+Converted["_TextButton"].Parent = Converted["_Frame"]
+
+-- Fake Module Scripts:
+
+local fake_module_scripts = {}
 
 
--- StarterGui.ScreenGui.Frame
-G2L["2"] = Instance.new("Frame", G2L["1"]);
-G2L["2"]["BorderSizePixel"] = 0;
-G2L["2"]["BackgroundColor3"] = Color3.fromRGB(0, 0, 0);
-G2L["2"]["Size"] = UDim2.new(0, 230, 0, 188);
-G2L["2"]["Position"] = UDim2.new(0.09709, 0, 0.16871, 0);
-G2L["2"]["BorderColor3"] = Color3.fromRGB(0, 0, 0);
-G2L["2"]["BackgroundTransparency"] = 0.5;
+-- Fake Local Scripts:
 
+local function KROGTJ_fake_script() -- Fake Script: StarterGui.ScreenGui.Frame.TextButton.LocalScript
+    local script = Instance.new("LocalScript")
+    script.Name = "LocalScript"
+    script.Parent = Converted["_TextButton"]
+    local req = require
+    local require = function(obj)
+        local fake = fake_module_scripts[obj]
+        if fake then
+            return fake()
+        end
+        return req(obj)
+    end
 
--- StarterGui.ScreenGui.Frame.ID
-G2L["3"] = Instance.new("TextBox", G2L["2"]);
-G2L["3"]["CursorPosition"] = -1;
-G2L["3"]["Name"] = [[ID]];
-G2L["3"]["BorderSizePixel"] = 0;
-G2L["3"]["TextWrapped"] = true;
-G2L["3"]["TextSize"] = 14;
-G2L["3"]["TextColor3"] = Color3.fromRGB(255, 255, 255);
-G2L["3"]["TextScaled"] = true;
-G2L["3"]["BackgroundColor3"] = Color3.fromRGB(0, 0, 0);
-G2L["3"]["FontFace"] = Font.new([[rbxasset://fonts/families/SourceSansPro.json]], Enum.FontWeight.Regular, Enum.FontStyle.Normal);
-G2L["3"]["PlaceholderText"] = [[Anim Id Here]];
-G2L["3"]["Size"] = UDim2.new(0, 200, 0, 50);
-G2L["3"]["Position"] = UDim2.new(0.06434, 0, 0.36464, 0);
-G2L["3"]["BorderColor3"] = Color3.fromRGB(0, 0, 0);
-G2L["3"]["Text"] = [[]];
-G2L["3"]["BackgroundTransparency"] = 0.5;
-
-
--- StarterGui.ScreenGui.Frame.NName
-G2L["4"] = Instance.new("TextBox", G2L["2"]);
-G2L["4"]["CursorPosition"] = -1;
-G2L["4"]["Name"] = [[NName]];
-G2L["4"]["BorderSizePixel"] = 0;
-G2L["4"]["TextWrapped"] = true;
-G2L["4"]["TextSize"] = 14;
-G2L["4"]["TextColor3"] = Color3.fromRGB(255, 255, 255);
-G2L["4"]["TextScaled"] = true;
-G2L["4"]["BackgroundColor3"] = Color3.fromRGB(0, 0, 0);
-G2L["4"]["FontFace"] = Font.new([[rbxasset://fonts/families/SourceSansPro.json]], Enum.FontWeight.Regular, Enum.FontStyle.Normal);
-G2L["4"]["PlaceholderText"] = [[Name Here]];
-G2L["4"]["Size"] = UDim2.new(0, 200, 0, 50);
-G2L["4"]["Position"] = UDim2.new(0.06434, 0, 0.08642, 0);
-G2L["4"]["BorderColor3"] = Color3.fromRGB(0, 0, 0);
-G2L["4"]["Text"] = [[]];
-G2L["4"]["BackgroundTransparency"] = 0.5;
-
-
--- StarterGui.ScreenGui.Frame.TextButton
-G2L["5"] = Instance.new("TextButton", G2L["2"]);
-G2L["5"]["TextWrapped"] = true;
-G2L["5"]["BorderSizePixel"] = 0;
-G2L["5"]["TextSize"] = 14;
-G2L["5"]["TextScaled"] = true;
-G2L["5"]["TextColor3"] = Color3.fromRGB(255, 255, 255);
-G2L["5"]["BackgroundColor3"] = Color3.fromRGB(0, 0, 0);
-G2L["5"]["FontFace"] = Font.new([[rbxasset://fonts/families/SourceSansPro.json]], Enum.FontWeight.Regular, Enum.FontStyle.Normal);
-G2L["5"]["BackgroundTransparency"] = 0.5;
-G2L["5"]["Size"] = UDim2.new(0, 200, 0, 50);
-G2L["5"]["BorderColor3"] = Color3.fromRGB(0, 0, 0);
-G2L["5"]["Text"] = [[Decompile]];
-G2L["5"]["Position"] = UDim2.new(0.06434, 0, 0.66902, 0);
-
-
--- StarterGui.ScreenGui.Frame.TextButton.LocalScript
-G2L["6"] = Instance.new("LocalScript", G2L["5"]);
-
-
-
--- StarterGui.ScreenGui.Frame.TextButton.LocalScript
-local function C_6()
-local script = G2L["6"];
 	script.Parent.MouseButton1Down:Connect(function()
-	local provider = game:GetService("KeyframeSequenceProvider")
-
-	local keyframeSequence = provider:GetKeyframeSequenceAsync(tostring(script.Parent.Parent.ID.Text))
-	keyframeSequence.Name = tostring(script.Parent.Parent.NName.Text)
+		local provider = game:GetService("KeyframeSequenceProvider")
 	
-
-	local function indent(level)
-		return string.rep("    ", level)
-	end
-
-	local function serializeCFrame(cf)
-		local components = {cf:GetComponents()}
-		return "CFrame.new(" .. table.concat(components, ", ") .. ")"
-	end
-
-	local function processPose(pose, parentName, level)
-		local code = ""
-
-		local varName = pose.Name .. "_Pose"
-
-		code ..= indent(level) .. "local " .. varName .. " = Instance.new(\"Pose\")\n"
-		code ..= indent(level) .. varName .. ".Name = \"" .. pose.Name .. "\"\n"
-		code ..= indent(level) .. varName .. ".CFrame = " .. serializeCFrame(pose.CFrame) .. "\n"
-		code ..= indent(level) .. varName .. ".Weight = " .. pose.Weight .. "\n"
-		code ..= indent(level) .. varName .. ".Parent = " .. parentName .. "\n\n"
-
-		for _, child in ipairs(pose:GetChildren()) do
-			if child:IsA("Pose") then
-				code ..= processPose(child, varName, level)
-			end
+		local keyframeSequence = provider:GetKeyframeSequenceAsync(tostring(script.Parent.Parent.ID.Text))
+		
+	
+		local function indent(level)
+			return string.rep("    ", level)
 		end
-
-		return code
-	end
-
-	local function convert()
-		local code = ""
-		code ..= "local keyframeSequence = Instance.new(\"KeyframeSequence\")\n"
-		code ..= "keyframeSequence.Name = \"" .. keyframeSequence.Name .. "\"\n\n"
-
-		for _, keyframe in ipairs(keyframeSequence:GetKeyframes()) do
-			local kfVar = "keyframe_" .. tostring(math.floor(keyframe.Time * 1000))
-
-			code ..= "local " .. kfVar .. " = Instance.new(\"Keyframe\")\n"
-			code ..= kfVar .. ".Time = " .. keyframe.Time .. "\n"
-			code ..= kfVar .. ".Parent = keyframeSequence\n\n"
-
-			for _, pose in ipairs(keyframe:GetChildren()) do
-				if pose:IsA("Pose") then
-					code ..= processPose(pose, kfVar, 1)
+	
+		local function serializeCFrame(cf)
+			local components = {cf:GetComponents()}
+			return "CFrame.new(" .. table.concat(components, ", ") .. ")"
+		end
+	
+		local function processPose(pose, parentName, level)
+			local code = ""
+	
+			local varName = pose.Name .. "_Pose"
+	
+			code ..= indent(level) .. "local " .. varName .. " = Instance.new(\"Pose\")\n"
+			code ..= indent(level) .. varName .. ".Name = \"" .. pose.Name .. "\"\n"
+			code ..= indent(level) .. varName .. ".CFrame = " .. serializeCFrame(pose.CFrame) .. "\n"
+			code ..= indent(level) .. varName .. ".Weight = " .. pose.Weight .. "\n"
+			code ..= indent(level) .. varName .. ".Parent = " .. parentName .. "\n\n"
+	
+			for _, child in ipairs(pose:GetChildren()) do
+				if child:IsA("Pose") then
+					code ..= processPose(child, varName, level)
 				end
 			end
+	
+			return code
 		end
+	
+		local function convert()
+			local code = ""
+			code ..= "local keyframeSequence = Instance.new(\"KeyframeSequence\")\n"
+			code ..= "keyframeSequence.Name = \"" .. keyframeSequence.Name .. "\"\n\n"
+	
+			for _, keyframe in ipairs(keyframeSequence:GetKeyframes()) do
+				local kfVar = "keyframe_" .. tostring(math.floor(keyframe.Time * 1000))
+	
+				code ..= "local " .. kfVar .. " = Instance.new(\"Keyframe\")\n"
+				code ..= kfVar .. ".Time = " .. keyframe.Time .. "\n"
+				code ..= kfVar .. ".Parent = keyframeSequence\n\n"
+	
+				for _, pose in ipairs(keyframe:GetChildren()) do
+					if pose:IsA("Pose") then
+						code ..= processPose(pose, kfVar, 1)
+					end
+				end
+			end
+	
+	script.Parent.Parent.OutPut.Text = code
+		end
+	
+		convert()
+	end)
+end
 
-		setclipboard(code)
-	end
-
-	convert()
-end)
-end;
-task.spawn(C_6);
-
-return G2L["1"], require;
+coroutine.wrap(KROGTJ_fake_script)()
