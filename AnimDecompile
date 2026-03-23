@@ -1,3 +1,4 @@
+--Ver.1.0
 local G2L = {};
 
 -- StarterGui.ScreenGui
@@ -78,12 +79,65 @@ G2L["6"] = Instance.new("LocalScript", G2L["5"]);
 local function C_6()
 local script = G2L["6"];
 	script.Parent.MouseButton1Down:Connect(function()
-		local provider = game:GetService("KeyframeSequenceProvider")
+	local provider = game:GetService("KeyframeSequenceProvider")
+
+	local keyframeSequence = provider:GetKeyframeSequenceAsync(tostring(script.Parent.Parent.ID.Text))
+	keyframeSequence.Name = tostring(script.Parent.Parent.NName.Text)
 	
-		local keyframeSequence = provider:GetKeyframeSequenceAsync(tostring(script.Parent.Parent.ID.Text))
-		keyframeSequence.Parent = workspace
-		keyframeSequence.Name = tostring(script.Parent.Parent.NName.Text)
-	end)
+
+	local function indent(level)
+		return string.rep("    ", level)
+	end
+
+	local function serializeCFrame(cf)
+		local components = {cf:GetComponents()}
+		return "CFrame.new(" .. table.concat(components, ", ") .. ")"
+	end
+
+	local function processPose(pose, parentName, level)
+		local code = ""
+
+		local varName = pose.Name .. "_Pose"
+
+		code ..= indent(level) .. "local " .. varName .. " = Instance.new(\"Pose\")\n"
+		code ..= indent(level) .. varName .. ".Name = \"" .. pose.Name .. "\"\n"
+		code ..= indent(level) .. varName .. ".CFrame = " .. serializeCFrame(pose.CFrame) .. "\n"
+		code ..= indent(level) .. varName .. ".Weight = " .. pose.Weight .. "\n"
+		code ..= indent(level) .. varName .. ".Parent = " .. parentName .. "\n\n"
+
+		for _, child in ipairs(pose:GetChildren()) do
+			if child:IsA("Pose") then
+				code ..= processPose(child, varName, level)
+			end
+		end
+
+		return code
+	end
+
+	local function convert()
+		local code = ""
+		code ..= "local keyframeSequence = Instance.new(\"KeyframeSequence\")\n"
+		code ..= "keyframeSequence.Name = \"" .. keyframeSequence.Name .. "\"\n\n"
+
+		for _, keyframe in ipairs(keyframeSequence:GetKeyframes()) do
+			local kfVar = "keyframe_" .. tostring(math.floor(keyframe.Time * 1000))
+
+			code ..= "local " .. kfVar .. " = Instance.new(\"Keyframe\")\n"
+			code ..= kfVar .. ".Time = " .. keyframe.Time .. "\n"
+			code ..= kfVar .. ".Parent = keyframeSequence\n\n"
+
+			for _, pose in ipairs(keyframe:GetChildren()) do
+				if pose:IsA("Pose") then
+					code ..= processPose(pose, kfVar, 1)
+				end
+			end
+		end
+
+		setclipboard(code)
+	end
+
+	convert()
+end)
 end;
 task.spawn(C_6);
 
