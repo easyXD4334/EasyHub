@@ -1,4 +1,4 @@
---vers.1.2
+--vers.1.3
 
 -- Instances:
 
@@ -98,94 +98,106 @@ script.Parent.MouseButton1Down:Connect(function()
 
 	local keyframeSequence = provider:GetKeyframeSequenceAsync(tostring(script.Parent.Parent.ID.Text))
 	
-	local MAX_LENGTH = 180000 -- safe limit
-
-	local function outputToTextBoxes(bigString)
-		local playerGui = game.Players.LocalPlayer:WaitForChild("PlayerGui")
-		local screenGui = Instance.new("ScreenGui")
-		screenGui.Parent = playerGui
-
-		local start = 1
-		local index = 1
-
-		while start <= #bigString do
-			local chunk = string.sub(bigString, start, start + MAX_LENGTH)
-
-			local box = Instance.new("TextBox")
-			box.Size = UDim2.new(0, 500, 0, 300)
-			box.Position = UDim2.new(0, 0, 0, (index - 1) * 310)
-			box.TextWrapped = false
-			box.TextXAlignment = Enum.TextXAlignment.Left
-			box.TextYAlignment = Enum.TextYAlignment.Top
-			box.ClearTextOnFocus = false
-			box.MultiLine = true
-			box.TextEditable = true
-			box.Text = chunk
-			box.Parent = screenGui
-
-			start += MAX_LENGTH
-			index += 1
-		end
-	end
 	
-	local function indent(level)
-		return string.rep("    ", level)
+local function indent(level)
+	return string.rep("    ", level)
+end
+
+local function serializeCFrame(cf)
+	local c = {cf:GetComponents()}
+	return "CFrame.new(" .. table.concat(c, ", ") .. ")"
+end
+
+-- unique ID for pose variables
+local poseId = 0
+
+local function processPose(pose, parentVar, level)
+	local code = ""
+
+	poseId += 1
+	local varName = "p" .. poseId
+
+	code ..= indent(level) .. "do\n"
+	code ..= indent(level+1) .. "local " .. varName .. " = Instance.new(\"Pose\")\n"
+	code ..= indent(level+1) .. varName .. ".Name = \"" .. pose.Name .. "\"\n"
+	code ..= indent(level+1) .. varName .. ".CFrame = " .. serializeCFrame(pose.CFrame) .. "\n"
+	code ..= indent(level+1) .. varName .. ".Weight = " .. pose.Weight .. "\n"
+	code ..= indent(level+1) .. varName .. ".Parent = " .. parentVar .. "\n"
+
+	for _, child in ipairs(pose:GetChildren()) do
+		if child:IsA("Pose") then
+			code ..= processPose(child, varName, level + 1)
+		end
 	end
 
-	local function serializeCFrame(cf)
-		local c = {cf:GetComponents()}
-		return "CFrame.new(" .. table.concat(c, ", ") .. ")"
+	code ..= indent(level) .. "end\n\n"
+
+	return code
+end
+
+-- split output (fix TextBox / print limit)
+local MAX_LENGTH = 180000
+
+local function outputChunks(bigString)
+	local chunks = {}
+	local start = 1
+
+	while start <= #bigString do
+		table.insert(chunks, string.sub(bigString, start, start + MAX_LENGTH))
+		start += MAX_LENGTH
 	end
 
-	local function processPose(pose, parentName, level)
-		local code = ""
+	return chunks
+end
 
-		code ..= indent(level) .. "do\n"
-		code ..= indent(level+1) .. "local p = Instance.new(\"Pose\")\n"
-		code ..= indent(level+1) .. "p.Name = \"" .. pose.Name .. "\"\n"
-		code ..= indent(level+1) .. "p.CFrame = " .. serializeCFrame(pose.CFrame) .. "\n"
-		code ..= indent(level+1) .. "p.Weight = " .. pose.Weight .. "\n"
-		code ..= indent(level+1) .. "p.Parent = " .. parentName .. "\n"
+local function convert()
+	poseId = 0 -- reset counter
 
-		for _, child in ipairs(pose:GetChildren()) do
-			if child:IsA("Pose") then
-				code ..= processPose(child, "p", level + 1)
+	local code = ""
+
+	code ..= "local keyframeSequence = Instance.new(\"KeyframeSequence\")\n"
+	code ..= "keyframeSequence.Name = \"" .. keyframeSequence.Name .. "\"\n"
+	code ..= "keyframeSequence.Parent = workspace\n\n"
+
+	for _, keyframe in ipairs(keyframeSequence:GetKeyframes()) do
+		code ..= "do\n"
+		code ..= indent(1) .. "local kf = Instance.new(\"Keyframe\")\n"
+		code ..= indent(1) .. "kf.Time = " .. keyframe.Time .. "\n"
+		code ..= indent(1) .. "kf.Parent = keyframeSequence\n\n"
+
+		for _, pose in ipairs(keyframe:GetChildren()) do
+			if pose:IsA("Pose") then
+				code ..= processPose(pose, "kf", 2)
 			end
 		end
 
-		code ..= indent(level) .. "end\n\n"
-
-		return code
+		code ..= "end\n\n"
 	end
 
-	local function convert()
-		local code = ""
+	return outputChunks(code)
+end
 
-		code ..= "local keyframeSequence = Instance.new(\"KeyframeSequence\")\n"
-		code ..= "keyframeSequence.Name = \"" .. keyframeSequence.Name .. "\"\n\n"
+-- 🔥 HOW TO USE OUTPUT
+local chunks = convert()
 
-		for _, keyframe in ipairs(keyframeSequence:GetKeyframes()) do
-			local kfName = "kf"
 
-			code ..= "do\n"
-			code ..= indent(1) .. "local " .. kfName .. " = Instance.new(\"Keyframe\")\n"
-			code ..= indent(1) .. kfName .. ".Time = " .. keyframe.Time .. "\n"
-			code ..= indent(1) .. kfName .. ".Parent = keyframeSequence\n\n"
+local playerGui = game.Players.LocalPlayer:WaitForChild("PlayerGui")
+local screenGui = Instance.new("ScreenGui", playerGui)
 
-			for _, pose in ipairs(keyframe:GetChildren()) do
-				if pose:IsA("Pose") then
-					code ..= processPose(pose, kfName, 2)
-				end
-			end
+for i, chunk in ipairs(chunks) do
+	local box = Instance.new("TextBox")
+	box.Size = UDim2.new(0, 500, 0, 300)
+	box.Position = UDim2.new(0, 0, 0, (i - 1) * 310)
+	box.TextWrapped = false
+	box.TextXAlignment = Enum.TextXAlignment.Left
+	box.TextYAlignment = Enum.TextYAlignment.Top
+	box.ClearTextOnFocus = false
+	box.MultiLine = true
+	box.TextEditable = true
+	box.Text = chunk
+	box.Parent = screenGui
+end
 
-			code ..= "end\n\n"
-		end
-
-		outputToTextBoxes(code)
-
-	end
-
-	convert()
 
 end)
 end
