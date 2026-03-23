@@ -1,4 +1,4 @@
---vers.1.1
+--vers.1.2
 
 -- Instances:
 
@@ -98,6 +98,36 @@ script.Parent.MouseButton1Down:Connect(function()
 
 	local keyframeSequence = provider:GetKeyframeSequenceAsync(tostring(script.Parent.Parent.ID.Text))
 	
+	local MAX_LENGTH = 180000 -- safe limit
+
+	local function outputToTextBoxes(bigString)
+		local playerGui = game.Players.LocalPlayer:WaitForChild("PlayerGui")
+		local screenGui = Instance.new("ScreenGui")
+		screenGui.Parent = playerGui
+
+		local start = 1
+		local index = 1
+
+		while start <= #bigString do
+			local chunk = string.sub(bigString, start, start + MAX_LENGTH)
+
+			local box = Instance.new("TextBox")
+			box.Size = UDim2.new(0, 500, 0, 300)
+			box.Position = UDim2.new(0, 0, 0, (index - 1) * 310)
+			box.TextWrapped = false
+			box.TextXAlignment = Enum.TextXAlignment.Left
+			box.TextYAlignment = Enum.TextYAlignment.Top
+			box.ClearTextOnFocus = false
+			box.MultiLine = true
+			box.TextEditable = true
+			box.Text = chunk
+			box.Parent = screenGui
+
+			start += MAX_LENGTH
+			index += 1
+		end
+	end
+	
 	local function indent(level)
 		return string.rep("    ", level)
 	end
@@ -151,7 +181,7 @@ script.Parent.MouseButton1Down:Connect(function()
 			code ..= "end\n\n"
 		end
 
-		script.Parent.Parent.OutPut.Text = code
+		outputToTextBoxes(code)
 
 	end
 
