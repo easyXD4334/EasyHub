@@ -1,0 +1,515 @@
+-- Auto Trailer Farm Script (Fully Integrated Edition)
+-- Features: Auto-Start, GUI Toggle, Money Tracker, Avg Cash/s, Silent Anti-AFK, Auto-Rejoin on Error
+
+local UserInputService = game:GetService("UserInputService")
+local Players = game:GetService("Players")
+local ReplicatedStorage = game:GetService("ReplicatedStorage")
+local Workspace = game:GetService("Workspace")
+local VirtualUser = game:GetService("VirtualUser")
+local StarterGui = game:GetService("StarterGui")
+local GuiService = game:GetService("GuiService")
+local TeleportService = game:GetService("TeleportService")
+
+local LP = Players.LocalPlayer
+
+local DRIVE_SPEED = 350  -- studs per second
+local MAX_DISTANCE = 50  -- for nearest check after TP
+
+-- RemoteEvents
+local trailerJobs = ReplicatedStorage:WaitForChild("Systems"):WaitForChild("TrailerJobs")
+local attachEvent = trailerJobs:WaitForChild("AttachTrailerToPlayer")
+local startEvent = trailerJobs:WaitForChild("StartTrailerJob")
+local completeEvent = trailerJobs:WaitForChild("JobCompleted")
+
+-- GUI system (for NPC dialog)
+local Gui = require(ReplicatedStorage:WaitForChild("Systems"):WaitForChild("Gui"))
+local jobTrailersFolder = Workspace:WaitForChild("JobTrailers")
+
+local AUTO_RUNNING = false
+local autoTask = nil
+
+-- Money tracking
+local sessionStartTime = os.clock()
+local totalSessionGain = 0
+local lastJobGain = 0
+local jobsCompleted = 0
+
+local function getCurrentCash()
+    local leaderstats = LP:FindFirstChild("leaderstats")
+    local cash = leaderstats and leaderstats:FindFirstChild("Cash")
+    return (cash and (cash:IsA("IntValue") or cash:IsA("NumberValue"))) and cash.Value or 0
+end
+
+-- Format numbers with commas (e.g., 1000000 -> 1,000,000)
+local function formatNumber(value)
+    local left, num, right = string.match(tostring(value), '^([^%d]*%d+)(%d*)(.-)$')
+    return left .. (num:reverse():gsub('(%d%d%d)', '%1,'):reverse()) .. right
+end
+
+-- ───────────────────────────────────────────────
+--          Auto-Rejoin on Error / Disconnect
+-- ───────────────────────────────────────────────
+local function onErrorMessageChanged(errorMessage)
+    if errorMessage and errorMessage ~= "" then
+        print("Error detected: " .. errorMessage)
+        if LP then
+            task.wait(1) -- Short buffer to prevent execution crashes during a hard crash
+            TeleportService:Teleport(game.PlaceId, LP)
+        end
+    end
+end
+GuiService.ErrorMessageChanged:Connect(onErrorMessageChanged)
+
+-- ───────────────────────────────────────────────
+--          Silent Anti-AFK
+-- ───────────────────────────────────────────────
+do
+    LP.Idled:Connect(function()
+        VirtualUser:CaptureController()
+        VirtualUser:ClickButton2(Vector2.new())
+    end)
+
+    task.spawn(function()
+        while true do
+            task.wait(math.random(240, 360))
+            VirtualUser:CaptureController()
+            VirtualUser:Button2Down(Vector2.new(0,0), Workspace.CurrentCamera.CFrame)
+            task.wait(0.08)
+            VirtualUser:Button2Up(Vector2.new(0,0), Workspace.CurrentCamera.CFrame)
+        end
+    end)
+end
+
+-- Helper Functions
+local function notify(title, text, duration)
+    pcall(function()
+        StarterGui:SetCore("SendNotification", {
+            Title = title,
+            Text = text,
+            Duration = duration or 4
+        })
+    end)
+end
+
+local function getCharacter() return LP.Character or LP.CharacterAdded:Wait() end
+local function getHumanoid() return getCharacter():WaitForChild("Humanoid") end
+local function getRoot() return getCharacter():WaitForChild("HumanoidRootPart") end
+
+local function getVehicle()
+    local char = LP.Character
+    local hum = char and char:FindFirstChildOfClass("Humanoid")
+    if not hum or not hum.SeatPart or not hum.SeatPart:IsA("VehicleSeat") then return nil end
+    return hum.SeatPart:FindFirstAncestorWhichIsA("Model")
+end
+
+local function getCurrentCarModel()
+    local humanoid = getHumanoid()
+    local carsFolder = Workspace:FindFirstChild("Cars")
+    if not carsFolder then return nil end
+    for _, seat in ipairs(carsFolder:GetDescendants()) do
+        if seat:IsA("VehicleSeat") and seat.Occupant == humanoid then
+            return seat:FindFirstAncestorOfClass("Model")
+        end
+    end
+    return nil
+end
+
+local function anchorVehicle(veh, anchored)
+    for _, part in ipairs(veh:GetDescendants()) do
+        if part:IsA("BasePart") then
+            part.Anchored = anchored
+        end
+    end
+end
+
+local function teleportVehicleOrCharacter(destinationCFrame)
+    local veh = getVehicle()
+    if veh and veh.PrimaryPart then
+        local partsToUnanchor = {}
+        for _, obj in ipairs(veh:GetDescendants()) do
+            if obj:IsA("BasePart") and not obj.Anchored then
+                table.insert(partsToUnanchor, obj)
+                obj.Anchored = true
+            end
+        end
+        
+        veh:PivotTo(destinationCFrame)
+        task.wait(0.1)
+        
+        for _, part in ipairs(partsToUnanchor) do
+            if part and part.Parent then part.Anchored = false end
+        end
+    else
+        local root = getRoot()
+        if root then root.CFrame = destinationCFrame end
+    end
+end
+
+local function findBillboard(model)
+    return model:FindFirstChild("TrailerDeliveryCashBillboard", true)
+end
+
+local function findCashLabel(billboard)
+    for _, d in ipairs(billboard:GetDescendants()) do
+        if d:IsA("TextLabel") and d.Text:find("%$") then return d end
+    end
+end
+
+local function anyPart(model)
+    return model:FindFirstChildWhichIsA("BasePart", true)
+end
+
+local function parseMoney(txt)
+    return tonumber((tostring(txt or ""):gsub("%$", ""):gsub(",", ""))) or 0
+end
+
+local function getBestTrailer()
+    local root = getRoot()
+    if not root then return nil end
+    
+    local bestTrailer, bestDist, bestAmount = nil, math.huge, -1
+    
+    for _, model in ipairs(jobTrailersFolder:GetChildren()) do
+        if model:IsA("Model") then
+            local bb = findBillboard(model)
+            local lbl = bb and findCashLabel(bb)
+            if lbl then
+                local amount = parseMoney(lbl.Text)
+                if amount > 0 then
+                    local part = anyPart(model)
+                    if part then
+                        local dist = (part.Position - root.Position).Magnitude
+                        if amount > bestAmount or (amount == bestAmount and dist < bestDist) then
+                            bestAmount = amount
+                            bestDist = dist
+                            bestTrailer = model
+                        end
+                    end
+                end
+            end
+        end
+    end
+    return bestTrailer, bestDist, bestAmount
+end
+
+local function getDeliveryCFrame()
+    local countdown = Workspace:FindFirstChild("DestinationCountdown", true)
+    if not countdown then return nil end
+    local primary = countdown.Parent
+    if not primary or primary.Name ~= "Primary" then return nil end
+    
+    if primary:IsA("BasePart") then return primary.CFrame end
+    local altPart = primary:FindFirstChildWhichIsA("BasePart", true)
+    return altPart and altPart.CFrame
+end
+
+local function getTrailerAnchor(trailerModel)
+    if not trailerModel or not trailerModel:IsA("Model") then return nil end
+    return trailerModel:FindFirstChild("HoldPart", true) or trailerModel:FindFirstChild("TrailerMain", true)
+end
+
+local function isValidJobTrailer(trailerModel)
+    return trailerModel and trailerModel:IsA("Model") 
+        and trailerModel:FindFirstChild("TrailerMain", true) 
+        and trailerModel:FindFirstChild("HoldPart", true)
+end
+
+local function findNearestJobTrailer(maxDistance)
+    local root = getRoot()
+    local bestTrailer, bestDist = nil, math.huge
+    for _, inst in ipairs(jobTrailersFolder:GetChildren()) do
+        if isValidJobTrailer(inst) then
+            local anchor = getTrailerAnchor(inst)
+            if anchor then
+                local dist = (anchor.Position - root.Position).Magnitude
+                if dist <= maxDistance and dist < bestDist then
+                    bestDist = dist
+                    bestTrailer = inst
+                end
+            end
+        end
+    end
+    return bestTrailer, bestDist
+end
+
+local function waitForCarTrailer(car, timeoutSeconds)
+    local t0 = os.clock()
+    while os.clock() - t0 < timeoutSeconds do
+        local tr = car:FindFirstChild("Trailer")
+        if tr then return tr end
+        task.wait(0.05)
+    end
+    return nil
+end
+
+-- =========================
+-- GUI Creation
+-- =========================
+local function createGui()
+    local gui = Instance.new("ScreenGui", LP:WaitForChild("PlayerGui"))
+    gui.Name = "AutoTrailerFarmGui"
+    gui.ResetOnSpawn = false
+    gui.IgnoreGuiInset = true
+    
+    local panel = Instance.new("Frame", gui)
+    panel.Name = "Panel"
+    panel.AnchorPoint = Vector2.new(0.5, 1)
+    panel.Position = UDim2.new(0.5, 0, 1, -120)
+    panel.Size = UDim2.new(0, 440, 0, 160)
+    panel.BackgroundColor3 = Color3.fromRGB(25, 25, 25)
+    panel.BackgroundTransparency = 0.15
+    
+    Instance.new("UICorner", panel).CornerRadius = UDim.new(0, 14)
+    local stroke = Instance.new("UIStroke", panel)
+    stroke.Thickness = 2
+    stroke.Transparency = 0.35
+    
+    local title = Instance.new("TextLabel", panel)
+    title.BackgroundTransparency = 1
+    title.Position = UDim2.new(0, 14, 0, 8)
+    title.Size = UDim2.new(1, -28, 0, 20)
+    title.Font = Enum.Font.GothamBold
+    title.TextSize = 14
+    title.TextXAlignment = Enum.TextXAlignment.Left
+    title.TextColor3 = Color3.fromRGB(255, 255, 255)
+    title.Text = "Auto Trailer Farm + Money Tracker"
+    
+    local status = Instance.new("TextLabel", panel)
+    status.Name = "Status"
+    status.BackgroundTransparency = 1
+    status.Position = UDim2.new(0, 14, 0, 35)
+    status.Size = UDim2.new(1, -28, 0, 18)
+    status.Font = Enum.Font.Gotham
+    status.TextSize = 12
+    status.TextXAlignment = Enum.TextXAlignment.Left
+    status.TextColor3 = Color3.fromRGB(210, 210, 210)
+    status.Text = "Ready."
+    
+    local moneyInfo = Instance.new("TextLabel", panel)
+    moneyInfo.Name = "MoneyInfo"
+    moneyInfo.BackgroundTransparency = 1
+    moneyInfo.Position = UDim2.new(0, 14, 0, 55)
+    moneyInfo.Size = UDim2.new(1, -28, 0, 80)
+    moneyInfo.Font = Enum.Font.Gotham
+    moneyInfo.TextSize = 13
+    moneyInfo.TextXAlignment = Enum.TextXAlignment.Left
+    moneyInfo.TextYAlignment = Enum.TextYAlignment.Top
+    moneyInfo.TextColor3 = Color3.fromRGB(100, 255, 150)
+    
+    local button = Instance.new("TextButton", panel)
+    button.Name = "AutoToggleButton"
+    button.AnchorPoint = Vector2.new(1, 0.5)
+    button.Position = UDim2.new(1, -14, 1, -20)
+    button.Size = UDim2.new(0, 190, 0, 46)
+    button.Font = Enum.Font.GothamBold
+    button.TextSize = 14
+    button.TextColor3 = Color3.fromRGB(255, 255, 255)
+    button.Text = "START AUTO"
+    button.BackgroundColor3 = Color3.fromRGB(60, 120, 255)
+    
+    Instance.new("UICorner", button).CornerRadius = UDim.new(0, 10)
+    local btnStroke = Instance.new("UIStroke", button)
+    btnStroke.Transparency = 0.5
+    btnStroke.Thickness = 1
+    
+    return gui, status, moneyInfo, button
+end
+
+local gui, statusLabel, moneyLabel, autoToggleButton = createGui()
+
+local function updateMoneyDisplay()
+    local current = getCurrentCash()
+    local sessionTime = os.clock() - sessionStartTime
+    local avgPerSec = sessionTime > 0 and (totalSessionGain / sessionTime) or 0
+    
+    moneyLabel.Text = string.format(
+        "Current Cash: $%s\nLast Job Gain: $%s\nTotal Session Gain: $%s\nJobs Completed: %d\nAverage Cash/s: $%.2f",
+        formatNumber(current),
+        formatNumber(lastJobGain),
+        formatNumber(totalSessionGain),
+        jobsCompleted,
+        avgPerSec
+    )
+end
+
+task.spawn(function()
+    while gui.Parent do
+        updateMoneyDisplay()
+        task.wait(1)
+    end
+end)
+
+-- UI Visibility Toggle
+local guiVisible = true
+UserInputService.InputBegan:Connect(function(input, gameProcessed)
+    if gameProcessed then return end
+    if input.KeyCode == Enum.KeyCode.Zero or input.KeyCode == Enum.KeyCode.KeypadZero then
+        guiVisible = not guiVisible
+        gui.Enabled = guiVisible
+        notify("GUI", guiVisible and "GUI Shown" or "GUI Hidden (press 0 to show)", 3)
+    end
+end)
+
+-- =========================
+-- Main Farm Loop
+-- =========================
+local function autoLoop()
+    while AUTO_RUNNING do
+        local veh = getVehicle()
+        local car = getCurrentCarModel()
+        
+        if not veh or not veh.PrimaryPart or not car then
+            statusLabel.Text = "Sit in a vehicle to start auto."
+            task.wait(1)
+            continue
+        end
+        
+        local cashBefore = getCurrentCash()
+        
+        -- Step 1: Find & TP to best trailer
+        statusLabel.Text = "Finding best trailer..."
+        local trailer, dist, amount = getBestTrailer()
+        if not trailer then
+            statusLabel.Text = "No valid trailer found. Waiting..."
+            task.wait(3)
+            continue
+        end
+        
+        local part = anyPart(trailer)
+        if not part then continue end
+        
+        statusLabel.Text = string.format("TP to trailer ($%d, ~%d studs)", amount, math.floor(dist))
+        teleportVehicleOrCharacter(part.CFrame * CFrame.new(0, 27, 15) * CFrame.Angles(0, math.pi, 0))
+        task.wait(0.6)
+        
+        -- Step 2: Attach
+        statusLabel.Text = "Attaching trailer..."
+        local nearestTrailer, nearestDist = findNearestJobTrailer(MAX_DISTANCE)
+        if not nearestTrailer or nearestDist > MAX_DISTANCE then
+            statusLabel.Text = "No trailer nearby after TP."
+            task.wait(2)
+            continue
+        end
+        
+        attachEvent:FireServer(nearestTrailer)
+        
+        task.delay(0.05, function()
+            local npc = Gui:Get("NPCDialog")
+            if npc then npc:Open("Hi, that's my trailer!", "TrailerPrompt", nil, nearestTrailer) end
+        end)
+        task.wait(1)
+        
+        -- Step 3: Start job
+        statusLabel.Text = "Starting job..."
+        local carTrailer = waitForCarTrailer(car, 2.5)
+        if not carTrailer then
+            statusLabel.Text = "Trailer attach timeout."
+            task.wait(2)
+            continue
+        end
+        startEvent:FireServer(carTrailer)
+        task.wait(0.6)
+        
+        -- Step 4: Drive
+        statusLabel.Text = "Driving to delivery..."
+        local targetCF = getDeliveryCFrame()
+        if not targetCF then
+            statusLabel.Text = "No delivery zone found."
+            task.wait(2)
+            continue
+        end
+        
+        local targetPos = targetCF.Position + Vector3.new(0, 5, 0)
+        local startPos = veh.PrimaryPart.Position
+        local totalDist = (targetPos - startPos).Magnitude
+        
+        if totalDist > 1 then
+            local startTime = os.clock()
+            anchorVehicle(veh, true) -- Anchor once before starting interpolation
+            
+            while AUTO_RUNNING do
+                local timePassed = os.clock() - startTime
+                local distTraveled = timePassed * DRIVE_SPEED
+                
+                if distTraveled >= totalDist then break end
+                
+                local direction = (targetPos - startPos).Magnitude > 0.1 and (targetPos - startPos).Unit or Vector3.new(0,0,1)
+                local newPos = startPos + direction * distTraveled
+                
+                veh:PivotTo(CFrame.new(newPos, newPos + direction))
+                task.wait(0.01)
+            end
+            
+            anchorVehicle(veh, false) -- Always unanchor upon stop or arrival
+            
+            if not AUTO_RUNNING then break end
+            teleportVehicleOrCharacter(CFrame.new(targetPos, targetPos + targetCF.LookVector))
+        end
+        
+        -- Step 5: Complete job
+        statusLabel.Text = "Completing job..."
+        task.wait(1)
+        completeEvent:FireServer()
+        task.wait(1.2)
+        
+        local cashAfter = getCurrentCash()
+        lastJobGain = cashAfter - cashBefore
+        if lastJobGain > 0 then
+            totalSessionGain += lastJobGain
+            jobsCompleted += 1
+            notify("Job Complete", "Gained $" .. lastJobGain, 4)
+        end
+    end
+    statusLabel.Text = "Auto stopped."
+end
+
+-- Toggle Button Functionality
+local function toggleAuto(forceState)
+    if forceState ~= nil then
+        AUTO_RUNNING = forceState
+    else
+        AUTO_RUNNING = not AUTO_RUNNING
+    end
+    
+    if AUTO_RUNNING then
+        autoToggleButton.Text = "STOP AUTO"
+        autoToggleButton.BackgroundColor3 = Color3.fromRGB(255, 60, 60)
+        autoTask = task.spawn(autoLoop)
+    else
+        autoToggleButton.Text = "START AUTO"
+        autoToggleButton.BackgroundColor3 = Color3.fromRGB(60, 120, 255)
+        if autoTask then
+            autoTask = nil
+        end
+    end
+end
+
+autoToggleButton.MouseButton1Click:Connect(function()
+    toggleAuto()
+end)
+
+-- Background Status Handler
+task.spawn(function()
+    while gui.Parent do
+        if not AUTO_RUNNING then
+            local car = getCurrentCarModel()
+            if not car then
+                statusLabel.Text = "Not seated in a car."
+            else
+                local tr, dist, amount = getBestTrailer()
+                statusLabel.Text = tr and string.format("Car: %s | Best: $%d (~%d studs)", car.Name, amount, dist) or "Car found. No trailers available."
+            end
+        end
+        task.wait(0.5)
+    end
+end)
+
+-- ───────────────────────────────────────────────
+--          Execution Auto-Start Trigger
+-- ───────────────────────────────────────────────
+task.spawn(function()
+    task.wait(0.5) -- Small delay to ensure everything initialized perfectly
+    toggleAuto(true)
+end)
+
+notify("Script Loaded", "Auto-Start & Error Rejoin Active! Menu key: 0", 6)
