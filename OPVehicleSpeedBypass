@@ -1,5 +1,4 @@
 --[[
-	v.0.1.0
 	PhysicsSpeedBoostUI
 	-------------------
 	A physics-based walkspeed boost (uses BodyVelocity, NOT Humanoid.WalkSpeed)
@@ -138,10 +137,12 @@ end)
 
 local frame = Instance.new("Frame")
 frame.Name = "Panel"
-frame.Size = UDim2.new(0, 300, 0, 210)
-frame.Position = UDim2.new(0, 20, 0.5, -105)
+frame.Size = UDim2.new(0, 300, 0, 224)
+frame.Position = UDim2.new(0, 20, 0.5, -112)
 frame.BackgroundColor3 = Color3.fromRGB(30, 30, 30)
 frame.BorderSizePixel = 0
+frame.Active = true -- ensures reliable input hit-testing for this panel and its children
+frame.ClipsDescendants = true -- keeps the title bar's corners visually clean against the panel edges
 frame.Parent = screenGui
 
 local frameCorner = Instance.new("UICorner")
@@ -150,54 +151,76 @@ frameCorner.Parent = frame
 
 local title = Instance.new("TextLabel")
 title.Name = "DragHandle"
-title.Size = UDim2.new(1, 0, 0, 30)
-title.BackgroundTransparency = 1
-title.Text = "≡  Physics Speed Boost"
+title.Size = UDim2.new(1, 0, 0, 44) -- 44px = standard minimum comfortable touch target
+-- Solid (not transparent) background so the whole bar is a real, reliable
+-- click/touch target - a fully transparent TextLabel can be inconsistent
+-- to hit-test in some Studio/client versions.
+title.BackgroundColor3 = Color3.fromRGB(22, 22, 22)
+title.BackgroundTransparency = 0
+title.Text = "≡  Physics Speed Boost  ≡"
 title.TextColor3 = Color3.new(1, 1, 1)
 title.Font = Enum.Font.GothamBold
 title.TextSize = 16
-title.Active = true -- needed so InputBegan fires on a TextLabel
+title.Active = true -- needed so InputBegan fires reliably on this label
+title.ZIndex = 10 -- guarantees this is the topmost hit target for touch/click
 title.Parent = frame
 
+local titleCorner = Instance.new("UICorner")
+titleCorner.CornerRadius = UDim.new(0, 8)
+titleCorner.Parent = title
+
 -- ---- drag-to-move support (grab the title bar) ----
+-- Standard Roblox drag pattern: track the offset between where the pointer
+-- went down and the frame's position, then re-apply that offset every time
+-- the pointer moves, for as long as the same input is held down.
 do
 	local dragging = false
-	local dragInputId = nil
-	local startFramePos = nil
-	local startInputPos = nil
+	local dragStart = nil   -- Vector3/Vector2 input position when drag began
+	local startPos = nil    -- frame.Position when drag began
 
-	local function isPointer(input)
-		return input.UserInputType == Enum.UserInputType.MouseButton1
-			or input.UserInputType == Enum.UserInputType.Touch
+	local function update(input)
+		local delta = input.Position - dragStart
+		startPos = startPos or frame.Position
+		frame.Position = UDim2.new(
+			startPos.X.Scale,
+			startPos.X.Offset + delta.X,
+			startPos.Y.Scale,
+			startPos.Y.Offset + delta.Y
+		)
 	end
 
 	title.InputBegan:Connect(function(input)
-		if not isPointer(input) then return end
-		dragging = true
-		dragInputId = input.UserInputType == Enum.UserInputType.Touch and input.UserInputId or "Mouse"
-		startFramePos = frame.Position
-		startInputPos = input.Position
-	end)
-
-	UserInputService.InputChanged:Connect(function(input)
-		if not dragging then return end
-		local matches = (input.UserInputType == Enum.UserInputType.MouseMovement)
-			or (input.UserInputType == Enum.UserInputType.Touch and (dragInputId == input.UserInputId))
-		if not matches then return end
-
-		local delta = input.Position - startInputPos
-		frame.Position = UDim2.new(
-			startFramePos.X.Scale, startFramePos.X.Offset + delta.X,
-			startFramePos.Y.Scale, startFramePos.Y.Offset + delta.Y
-		)
-	end)
-
-	UserInputService.InputEnded:Connect(function(input)
-		if not dragging then return end
 		if input.UserInputType == Enum.UserInputType.MouseButton1
 			or input.UserInputType == Enum.UserInputType.Touch then
-			dragging = false
-			dragInputId = nil
+			dragging = true
+			dragStart = input.Position
+			startPos = frame.Position
+
+			-- if the input ends (mouse released / touch lifted) anywhere,
+			-- even outside the title label, stop dragging
+			input.Changed:Connect(function()
+				if input.UserInputState == Enum.UserInputState.End then
+					dragging = false
+				end
+			end)
+		end
+	end)
+
+	title.InputChanged:Connect(function(input)
+		if dragging
+			and (input.UserInputType == Enum.UserInputType.MouseMovement
+				or input.UserInputType == Enum.UserInputType.Touch) then
+			update(input)
+		end
+	end)
+
+	-- also listen globally so dragging keeps tracking even if the pointer
+	-- moves off the title label while still held down
+	UserInputService.InputChanged:Connect(function(input)
+		if dragging
+			and (input.UserInputType == Enum.UserInputType.MouseMovement
+				or input.UserInputType == Enum.UserInputType.Touch) then
+			update(input)
 		end
 	end)
 end
@@ -341,12 +364,12 @@ local function createSlider(yPos, labelText, minVal, maxVal, defaultVal)
 	return container
 end
 
-local speedSlider = createSlider(40, "Speed", 0, SPEED_SLIDER_MAX, DEFAULT_SPEED)
-local forceSlider = createSlider(95, "Max Force", 0, FORCE_SLIDER_MAX, DEFAULT_MAXFORCE)
+local speedSlider = createSlider(54, "Speed", 0, SPEED_SLIDER_MAX, DEFAULT_SPEED)
+local forceSlider = createSlider(109, "Max Force", 0, FORCE_SLIDER_MAX, DEFAULT_MAXFORCE)
 
 local toggleButton = Instance.new("TextButton")
 toggleButton.Size = UDim2.new(1, -20, 0, 36)
-toggleButton.Position = UDim2.new(0, 10, 0, 155)
+toggleButton.Position = UDim2.new(0, 10, 0, 169)
 toggleButton.BackgroundColor3 = Color3.fromRGB(0, 170, 90)
 toggleButton.Text = "Enable Boost"
 toggleButton.TextColor3 = Color3.new(1, 1, 1)
