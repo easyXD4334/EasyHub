@@ -1,4 +1,5 @@
 --[[
+	v.0.1.0
 	PhysicsSpeedBoostUI
 	-------------------
 	A physics-based walkspeed boost (uses BodyVelocity, NOT Humanoid.WalkSpeed)
@@ -13,7 +14,9 @@
 	   the box next to each label (press Enter or click away to apply it -
 	   no upper limit, type anything), then press "Enable Boost"
 	5. Move with W/A/S/D on PC, or the on-screen D-pad on mobile (auto-shown
-	   on touch devices, bottom-right corner)
+	   on touch devices, bottom-LEFT corner)
+	6. Drag the panel by its title bar ("≡ Physics Speed Boost") to reposition
+	   it anywhere on screen, on both PC and mobile
 
 	MOVEMENT INPUT:
 	- W/A/S/D key state is tracked directly via UserInputService, not
@@ -24,7 +27,7 @@
 	  never gets a vertical component and W always means "the way the
 	  camera is pointed, along the ground," exactly like normal Roblox
 	  movement. If no WASD/D-pad key is held, velocity is zero (no movement).
-	- On touch devices, a 4-button D-pad (W/A/S/D labels) appears bottom-right
+	- On touch devices, a 4-button D-pad (W/A/S/D labels) appears bottom-left
 	  and feeds the exact same movement state as the keyboard.
 
 	VEHICLESEAT BEHAVIOR:
@@ -65,7 +68,7 @@ local UserInputService = game:GetService("UserInputService")
 local player = Players.LocalPlayer
 
 -- ===================== CONFIG =====================
-local DEFAULT_SPEED = 450        -- studs/second
+local DEFAULT_SPEED = 450          -- studs/second
 local DEFAULT_MAXFORCE = 100000     -- how strongly velocity is enforced
 -- No upper/lower limit is enforced anymore - type any number you want.
 -- These two are only used to size the slider bar's visual range; typing
@@ -146,13 +149,58 @@ frameCorner.CornerRadius = UDim.new(0, 8)
 frameCorner.Parent = frame
 
 local title = Instance.new("TextLabel")
+title.Name = "DragHandle"
 title.Size = UDim2.new(1, 0, 0, 30)
 title.BackgroundTransparency = 1
-title.Text = "Physics Speed Boost"
+title.Text = "≡  Physics Speed Boost"
 title.TextColor3 = Color3.new(1, 1, 1)
 title.Font = Enum.Font.GothamBold
 title.TextSize = 16
+title.Active = true -- needed so InputBegan fires on a TextLabel
 title.Parent = frame
+
+-- ---- drag-to-move support (grab the title bar) ----
+do
+	local dragging = false
+	local dragInputId = nil
+	local startFramePos = nil
+	local startInputPos = nil
+
+	local function isPointer(input)
+		return input.UserInputType == Enum.UserInputType.MouseButton1
+			or input.UserInputType == Enum.UserInputType.Touch
+	end
+
+	title.InputBegan:Connect(function(input)
+		if not isPointer(input) then return end
+		dragging = true
+		dragInputId = input.UserInputType == Enum.UserInputType.Touch and input.UserInputId or "Mouse"
+		startFramePos = frame.Position
+		startInputPos = input.Position
+	end)
+
+	UserInputService.InputChanged:Connect(function(input)
+		if not dragging then return end
+		local matches = (input.UserInputType == Enum.UserInputType.MouseMovement)
+			or (input.UserInputType == Enum.UserInputType.Touch and (dragInputId == input.UserInputId))
+		if not matches then return end
+
+		local delta = input.Position - startInputPos
+		frame.Position = UDim2.new(
+			startFramePos.X.Scale, startFramePos.X.Offset + delta.X,
+			startFramePos.Y.Scale, startFramePos.Y.Offset + delta.Y
+		)
+	end)
+
+	UserInputService.InputEnded:Connect(function(input)
+		if not dragging then return end
+		if input.UserInputType == Enum.UserInputType.MouseButton1
+			or input.UserInputType == Enum.UserInputType.Touch then
+			dragging = false
+			dragInputId = nil
+		end
+	end)
+end
 
 -- ---- reusable slider builder (slider + synced typeable textbox) ----
 local function createSlider(yPos, labelText, minVal, maxVal, defaultVal)
@@ -316,7 +364,7 @@ if UserInputService.TouchEnabled then
 	local dpad = Instance.new("Frame")
 	dpad.Name = "MobileDPad"
 	dpad.Size = UDim2.new(0, 170, 0, 170)
-	dpad.Position = UDim2.new(1, -190, 1, -190)
+	dpad.Position = UDim2.new(0, 20, 1, -190)
 	dpad.AnchorPoint = Vector2.new(0, 0)
 	dpad.BackgroundTransparency = 1
 	dpad.Parent = screenGui
