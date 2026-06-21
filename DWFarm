@@ -1,5 +1,5 @@
 -- Auto Trailer Farm Script (Fully Integrated Edition)
--- Features: Auto-Start, GUI Toggle, Money Tracker, Avg Cash/s, Silent Anti-AFK, Auto-Rejoin on Error
+-- Features: Auto-Start, GUI Toggle, Money Tracker, Avg Cash/s, Silent Anti-AFK, Auto-Rejoin on Error, Speed Changer, Close UI, Fixed Y Tween, Smooth Draggable UI
 
 local UserInputService = game:GetService("UserInputService")
 local Players = game:GetService("Players")
@@ -9,10 +9,11 @@ local VirtualUser = game:GetService("VirtualUser")
 local StarterGui = game:GetService("StarterGui")
 local GuiService = game:GetService("GuiService")
 local TeleportService = game:GetService("TeleportService")
+local RunService = game:GetService("RunService")
 
 local LP = Players.LocalPlayer
 
-local DRIVE_SPEED = 350  -- studs per second
+local DRIVE_SPEED = 350  -- studs per second (Can be changed via UI)
 local MAX_DISTANCE = 50  -- for nearest check after TP
 
 -- RemoteEvents
@@ -53,7 +54,7 @@ local function onErrorMessageChanged(errorMessage)
     if errorMessage and errorMessage ~= "" then
         print("Error detected: " .. errorMessage)
         if LP then
-            task.wait(1) -- Short buffer to prevent execution crashes during a hard crash
+            task.wait(1) 
             TeleportService:Teleport(game.PlaceId, LP)
         end
     end
@@ -255,24 +256,84 @@ local function createGui()
     panel.Name = "Panel"
     panel.AnchorPoint = Vector2.new(0.5, 1)
     panel.Position = UDim2.new(0.5, 0, 1, -120)
-    panel.Size = UDim2.new(0, 440, 0, 160)
+    panel.Size = UDim2.new(0, 440, 0, 240) 
     panel.BackgroundColor3 = Color3.fromRGB(25, 25, 25)
     panel.BackgroundTransparency = 0.15
+    panel.Active = true
     
     Instance.new("UICorner", panel).CornerRadius = UDim.new(0, 14)
     local stroke = Instance.new("UIStroke", panel)
     stroke.Thickness = 2
     stroke.Transparency = 0.35
     
+    -- =========================
+    -- Smooth Dragging Logic
+    -- =========================
+    local targetPosition = panel.Position
+    local dragging = false
+    local dragInput, dragStart, startPos
+
+    panel.InputBegan:Connect(function(input)
+        if input.UserInputType == Enum.UserInputType.MouseButton1 or input.UserInputType == Enum.UserInputType.Touch then
+            dragging = true
+            dragStart = input.Position
+            startPos = panel.Position
+
+            input.Changed:Connect(function()
+                if input.UserInputState == Enum.UserInputState.End then
+                    dragging = false
+                end
+            end)
+        end
+    end)
+
+    panel.InputChanged:Connect(function(input)
+        if input.UserInputType == Enum.UserInputType.MouseMovement or input.UserInputType == Enum.UserInputType.Touch then
+            dragInput = input
+        end
+    end)
+
+    UserInputService.InputChanged:Connect(function(input)
+        if input == dragInput and dragging then
+            local delta = input.Position - dragStart
+            targetPosition = UDim2.new(
+                startPos.X.Scale, startPos.X.Offset + delta.X,
+                startPos.Y.Scale, startPos.Y.Offset + delta.Y
+            )
+        end
+    end)
+
+    RunService.RenderStepped:Connect(function()
+        if dragging then
+            panel.Position = panel.Position:Lerp(targetPosition, 0.25)
+        else
+            if panel.Position ~= targetPosition then
+                panel.Position = panel.Position:Lerp(targetPosition, 0.5)
+            end
+        end
+    end)
+    
     local title = Instance.new("TextLabel", panel)
     title.BackgroundTransparency = 1
     title.Position = UDim2.new(0, 14, 0, 8)
-    title.Size = UDim2.new(1, -28, 0, 20)
+    title.Size = UDim2.new(1, -50, 0, 20)
     title.Font = Enum.Font.GothamBold
     title.TextSize = 14
     title.TextXAlignment = Enum.TextXAlignment.Left
     title.TextColor3 = Color3.fromRGB(255, 255, 255)
     title.Text = "Auto Trailer Farm + Money Tracker"
+    
+    local closeBtn = Instance.new("TextButton", panel)
+    closeBtn.Name = "CloseButton"
+    closeBtn.AnchorPoint = Vector2.new(1, 0)
+    closeBtn.Position = UDim2.new(1, -10, 0, 10)
+    closeBtn.Size = UDim2.new(0, 24, 0, 24)
+    closeBtn.Font = Enum.Font.GothamBold
+    closeBtn.TextSize = 16
+    closeBtn.TextColor3 = Color3.fromRGB(255, 255, 255)
+    closeBtn.Text = "X"
+    closeBtn.BackgroundColor3 = Color3.fromRGB(200, 50, 50)
+    Instance.new("UICorner", closeBtn).CornerRadius = UDim.new(0, 6)
     
     local status = Instance.new("TextLabel", panel)
     status.Name = "Status"
@@ -296,10 +357,46 @@ local function createGui()
     moneyInfo.TextYAlignment = Enum.TextYAlignment.Top
     moneyInfo.TextColor3 = Color3.fromRGB(100, 255, 150)
     
+    local speedLabel = Instance.new("TextLabel", panel)
+    speedLabel.BackgroundTransparency = 1
+    speedLabel.Position = UDim2.new(0, 14, 0, 150)
+    speedLabel.Size = UDim2.new(0, 100, 0, 30)
+    speedLabel.Font = Enum.Font.Gotham
+    speedLabel.TextSize = 13
+    speedLabel.TextXAlignment = Enum.TextXAlignment.Left
+    speedLabel.TextColor3 = Color3.fromRGB(210, 210, 210)
+    speedLabel.Text = "Drive Speed:"
+
+    local speedBox = Instance.new("TextBox", panel)
+    speedBox.Name = "SpeedBox"
+    speedBox.Position = UDim2.new(0, 115, 0, 150)
+    speedBox.Size = UDim2.new(0, 80, 0, 30)
+    speedBox.Font = Enum.Font.Gotham
+    speedBox.TextSize = 14
+    speedBox.TextColor3 = Color3.fromRGB(255, 255, 255)
+    speedBox.BackgroundColor3 = Color3.fromRGB(40, 40, 40)
+    speedBox.Text = tostring(DRIVE_SPEED)
+    speedBox.ClearTextOnFocus = false
+    Instance.new("UICorner", speedBox).CornerRadius = UDim.new(0, 6)
+    local boxStroke = Instance.new("UIStroke", speedBox)
+    boxStroke.Thickness = 1
+    boxStroke.Transparency = 0.5
+
+    speedBox.FocusLost:Connect(function(enterPressed)
+        local newSpeed = tonumber(speedBox.Text)
+        if newSpeed and newSpeed > 0 then
+            DRIVE_SPEED = newSpeed
+            notify("Speed Updated", "Drive speed set to " .. newSpeed, 3)
+        else
+            speedBox.Text = tostring(DRIVE_SPEED)
+            notify("Invalid Speed", "Please enter a valid number > 0", 3)
+        end
+    end)
+    
     local button = Instance.new("TextButton", panel)
     button.Name = "AutoToggleButton"
-    button.AnchorPoint = Vector2.new(1, 0.5)
-    button.Position = UDim2.new(1, -14, 1, -20)
+    button.AnchorPoint = Vector2.new(1, 1)
+    button.Position = UDim2.new(1, -14, 1, -14)
     button.Size = UDim2.new(0, 190, 0, 46)
     button.Font = Enum.Font.GothamBold
     button.TextSize = 14
@@ -312,10 +409,16 @@ local function createGui()
     btnStroke.Transparency = 0.5
     btnStroke.Thickness = 1
     
-    return gui, status, moneyInfo, button
+    return gui, status, moneyInfo, button, closeBtn
 end
 
-local gui, statusLabel, moneyLabel, autoToggleButton = createGui()
+local gui, statusLabel, moneyLabel, autoToggleButton, closeButton = createGui()
+
+closeButton.MouseButton1Click:Connect(function()
+    guiVisible = false
+    gui.Enabled = false
+    notify("GUI", "GUI Hidden (press 0 to show)", 3)
+end)
 
 local function updateMoneyDisplay()
     local current = getCurrentCash()
@@ -339,7 +442,6 @@ task.spawn(function()
     end
 end)
 
--- UI Visibility Toggle
 local guiVisible = true
 UserInputService.InputBegan:Connect(function(input, gameProcessed)
     if gameProcessed then return end
@@ -366,7 +468,6 @@ local function autoLoop()
         
         local cashBefore = getCurrentCash()
         
-        -- Step 1: Find & TP to best trailer
         statusLabel.Text = "Finding best trailer..."
         local trailer, dist, amount = getBestTrailer()
         if not trailer then
@@ -382,7 +483,6 @@ local function autoLoop()
         teleportVehicleOrCharacter(part.CFrame * CFrame.new(0, 27, 15) * CFrame.Angles(0, math.pi, 0))
         task.wait(0.6)
         
-        -- Step 2: Attach
         statusLabel.Text = "Attaching trailer..."
         local nearestTrailer, nearestDist = findNearestJobTrailer(MAX_DISTANCE)
         if not nearestTrailer or nearestDist > MAX_DISTANCE then
@@ -399,7 +499,6 @@ local function autoLoop()
         end)
         task.wait(1)
         
-        -- Step 3: Start job
         statusLabel.Text = "Starting job..."
         local carTrailer = waitForCarTrailer(car, 2.5)
         if not carTrailer then
@@ -410,7 +509,7 @@ local function autoLoop()
         startEvent:FireServer(carTrailer)
         task.wait(0.6)
         
-        -- Step 4: Drive
+        -- Step 4: Drive at Y=500, then drop to delivery zone
         statusLabel.Text = "Driving to delivery..."
         local targetCF = getDeliveryCFrame()
         if not targetCF then
@@ -419,13 +518,19 @@ local function autoLoop()
             continue
         end
         
-        local targetPos = targetCF.Position + Vector3.new(0, 5, 0)
+        local targetPos = targetCF.Position
         local startPos = veh.PrimaryPart.Position
-        local totalDist = (targetPos - startPos).Magnitude
+        
+        local flatTarget = Vector3.new(targetPos.X, 500, targetPos.Z)
+        local flatStart = Vector3.new(startPos.X, 500, startPos.Z)
+        
+        local totalDist = (flatTarget - flatStart).Magnitude
         
         if totalDist > 1 then
             local startTime = os.clock()
-            anchorVehicle(veh, true) -- Anchor once before starting interpolation
+            anchorVehicle(veh, true)
+            
+            local direction = (flatTarget - flatStart).Magnitude > 0.1 and (flatTarget - flatStart).Unit or Vector3.new(0,0,1)
             
             while AUTO_RUNNING do
                 local timePassed = os.clock() - startTime
@@ -433,20 +538,21 @@ local function autoLoop()
                 
                 if distTraveled >= totalDist then break end
                 
-                local direction = (targetPos - startPos).Magnitude > 0.1 and (targetPos - startPos).Unit or Vector3.new(0,0,1)
-                local newPos = startPos + direction * distTraveled
+                local newPos = flatStart + direction * distTraveled
                 
                 veh:PivotTo(CFrame.new(newPos, newPos + direction))
                 task.wait(0.01)
             end
             
-            anchorVehicle(veh, false) -- Always unanchor upon stop or arrival
+            anchorVehicle(veh, false)
             
             if not AUTO_RUNNING then break end
-            teleportVehicleOrCharacter(CFrame.new(targetPos, targetPos + targetCF.LookVector))
         end
         
-        -- Step 5: Complete job
+        -- FIX: Always teleport to delivery zone after tween (drops from Y=500 to actual delivery Y)
+        local finalPos = Vector3.new(targetPos.X, targetPos.Y, targetPos.Z)
+        teleportVehicleOrCharacter(CFrame.new(finalPos, finalPos + targetCF.LookVector))
+        
         statusLabel.Text = "Completing job..."
         task.wait(1)
         completeEvent:FireServer()
@@ -463,7 +569,6 @@ local function autoLoop()
     statusLabel.Text = "Auto stopped."
 end
 
--- Toggle Button Functionality
 local function toggleAuto(forceState)
     if forceState ~= nil then
         AUTO_RUNNING = forceState
@@ -488,7 +593,6 @@ autoToggleButton.MouseButton1Click:Connect(function()
     toggleAuto()
 end)
 
--- Background Status Handler
 task.spawn(function()
     while gui.Parent do
         if not AUTO_RUNNING then
@@ -504,11 +608,8 @@ task.spawn(function()
     end
 end)
 
--- ───────────────────────────────────────────────
---          Execution Auto-Start Trigger
--- ───────────────────────────────────────────────
 task.spawn(function()
-    task.wait(0.5) -- Small delay to ensure everything initialized perfectly
+    task.wait(0.5)
     toggleAuto(true)
 end)
 
