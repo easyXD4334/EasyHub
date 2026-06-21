@@ -1,0 +1,519 @@
+--[[
+	PhysicsSpeedBoostUI
+	-------------------
+	A physics-based walkspeed boost (uses BodyVelocity, NOT Humanoid.WalkSpeed)
+	with an in-game UI to adjust Speed and Max Force live, driven by direct
+	WASD keybind detection on PC and an on-screen D-pad on mobile/touch.
+
+	HOW TO USE:
+	1. Place this script in StarterPlayer > StarterPlayerScripts
+	2. Make sure it is a LOCALSCRIPT (rename/insert as LocalScript)
+	3. Play the game - a small panel appears on the left side of the screen
+	4. Drag the "Speed"/"Max Force" sliders OR type a number directly into
+	   the box next to each label (press Enter or click away to apply it -
+	   no upper limit, type anything), then press "Enable Boost"
+	5. Move with W/A/S/D on PC, or the on-screen D-pad on mobile (auto-shown
+	   on touch devices, bottom-right corner)
+
+	MOVEMENT INPUT:
+	- W/A/S/D key state is tracked directly via UserInputService, not
+	  Humanoid.MoveDirection, so the boost responds the instant a key/button
+	  is pressed.
+	- On foot, direction is ALWAYS relative to the camera's horizontal facing
+	  only - the camera's pitch (looking up/down) is ignored, so the boost
+	  never gets a vertical component and W always means "the way the
+	  camera is pointed, along the ground," exactly like normal Roblox
+	  movement. If no WASD/D-pad key is held, velocity is zero (no movement).
+	- On touch devices, a 4-button D-pad (W/A/S/D labels) appears bottom-right
+	  and feeds the exact same movement state as the keyboard.
+
+	VEHICLESEAT BEHAVIOR:
+	- Sitting in a VehicleSeat normally "eats" W/A/S/D for its own
+	  throttle/steer input, and the character's HumanoidRootPart gets welded
+	  into the seat, so boosting it directly does nothing useful.
+	- This script detects Humanoid.SeatPart every frame: while seated in a
+	  VehicleSeat, the BodyVelocity is retargeted onto the vehicle's
+	  PrimaryPart (or the seat itself if no PrimaryPart is set).
+	- Direction is camera-relative, exactly like on foot: turning the camera
+	  left and pressing the movement keys pushes the WHOLE VEHICLE left,
+	  regardless of which way the vehicle's chassis is currently facing.
+	  This intentionally overrides the seat's own steering rotation with a
+	  direct push - it's a boost/thruster, not a steering wheel.
+	- Walking on foot still works exactly as before; the script switches
+	  targets automatically the moment you sit down or get out.
+
+	WHY PHYSICS INSTEAD OF Humanoid.WalkSpeed:
+	- BodyVelocity directly drives the HumanoidRootPart's velocity using force,
+	  so it can push the character faster than WalkSpeed normally allows,
+	  interacts realistically with collisions/ramps, and "Max Force" controls
+	  how strongly it overrides momentum (low force = floaty/slidey,
+	  high force = snappy/rigid).
+	- The Y-axis of MaxForce is left at 0 so gravity and jumping are untouched.
+
+	NOTE: This is a client-side (LocalScript) implementation. Roblox gives a
+	player network ownership of their own character by default, so this works
+	out of the box. For a competitive/anti-exploit game, you'd mirror this
+	logic in a server script behind a RemoteEvent so the server validates and
+	owns the values instead of trusting the client. Ask if you'd like that
+	server-authoritative version too.
+]]
+
+local Players = game:GetService("Players")
+local RunService = game:GetService("RunService")
+local UserInputService = game:GetService("UserInputService")
+
+local player = Players.LocalPlayer
+
+-- ===================== CONFIG =====================
+local DEFAULT_SPEED = 450        -- studs/second
+local DEFAULT_MAXFORCE = 100000     -- how strongly velocity is enforced
+-- No upper/lower limit is enforced anymore - type any number you want.
+-- These two are only used to size the slider bar's visual range; typing
+-- a value outside this range still works and just pins the knob to an end.
+local SPEED_SLIDER_MAX = 666
+local FORCE_SLIDER_MAX = 666666
+
+-- ===================== STATE =====================
+local boostEnabled = false
+local currentSpeed = DEFAULT_SPEED
+local currentMaxForce = DEFAULT_MAXFORCE
+local bodyVelocity = nil
+local heartbeatConn = nil
+
+local startBoost  -- forward declarations
+local stopBoost
+
+-- WASD + on-screen mobile button state, all merged into one table.
+-- Movement direction is computed from this instead of Humanoid.MoveDirection
+-- so it responds the instant a key/button is pressed.
+local moveState = {
+	Forward = false,  -- W
+	Back = false,     -- S
+	Left = false,      -- A
+	Right = false,     -- D
+}
+
+local KEY_TO_MOVE = {
+	[Enum.KeyCode.W] = "Forward",
+	[Enum.KeyCode.S] = "Back",
+	[Enum.KeyCode.A] = "Left",
+	[Enum.KeyCode.D] = "Right",
+}
+
+-- ===================== GUI =====================
+local screenGui = Instance.new("ScreenGui")
+screenGui.Name = "PhysicsSpeedBoostGui"
+screenGui.ResetOnSpawn = false
+screenGui.Parent = player:WaitForChild("PlayerGui")
+
+-- ---- WASD keybind detection ----
+-- NOTE: gameProcessedEvent is true both when typing in a TextBox AND when
+-- sitting in a VehicleSeat (the seat's built-in drive script consumes WASD).
+-- We only want to ignore the former, so check TextBox focus explicitly
+-- instead of trusting gameProcessedEvent.
+local function isTypingInTextBox()
+	local focused = UserInputService:GetFocusedTextBox()
+	return focused ~= nil
+end
+
+UserInputService.InputBegan:Connect(function(input, _gameProcessedEvent)
+	if isTypingInTextBox() then return end
+	local moveKey = KEY_TO_MOVE[input.KeyCode]
+	if moveKey then
+		moveState[moveKey] = true
+	end
+end)
+
+UserInputService.InputEnded:Connect(function(input, _gameProcessedEvent)
+	local moveKey = KEY_TO_MOVE[input.KeyCode]
+	if moveKey then
+		-- always clear on release, so a key doesn't get stuck "held" if
+		-- focus changed mid-press (e.g. clicked into a textbox while holding W)
+		moveState[moveKey] = false
+	end
+end)
+
+local frame = Instance.new("Frame")
+frame.Name = "Panel"
+frame.Size = UDim2.new(0, 300, 0, 210)
+frame.Position = UDim2.new(0, 20, 0.5, -105)
+frame.BackgroundColor3 = Color3.fromRGB(30, 30, 30)
+frame.BorderSizePixel = 0
+frame.Parent = screenGui
+
+local frameCorner = Instance.new("UICorner")
+frameCorner.CornerRadius = UDim.new(0, 8)
+frameCorner.Parent = frame
+
+local title = Instance.new("TextLabel")
+title.Size = UDim2.new(1, 0, 0, 30)
+title.BackgroundTransparency = 1
+title.Text = "Physics Speed Boost"
+title.TextColor3 = Color3.new(1, 1, 1)
+title.Font = Enum.Font.GothamBold
+title.TextSize = 16
+title.Parent = frame
+
+-- ---- reusable slider builder (slider + synced typeable textbox) ----
+local function createSlider(yPos, labelText, minVal, maxVal, defaultVal)
+	local container = Instance.new("Frame")
+	container.Size = UDim2.new(1, -20, 0, 50)
+	container.Position = UDim2.new(0, 10, 0, yPos)
+	container.BackgroundTransparency = 1
+	container.Parent = frame
+
+	local label = Instance.new("TextLabel")
+	label.Size = UDim2.new(1, -60, 0, 20)
+	label.BackgroundTransparency = 1
+	label.Text = labelText
+	label.TextColor3 = Color3.new(1, 1, 1)
+	label.Font = Enum.Font.Gotham
+	label.TextSize = 14
+	label.TextXAlignment = Enum.TextXAlignment.Left
+	label.Parent = container
+
+	-- typeable value box, top-right of the slider
+	local inputBox = Instance.new("TextBox")
+	inputBox.Size = UDim2.new(0, 55, 0, 20)
+	inputBox.Position = UDim2.new(1, -55, 0, 0)
+	inputBox.BackgroundColor3 = Color3.fromRGB(45, 45, 45)
+	inputBox.TextColor3 = Color3.new(1, 1, 1)
+	inputBox.Font = Enum.Font.Gotham
+	inputBox.TextSize = 13
+	inputBox.Text = tostring(defaultVal)
+	inputBox.ClearTextOnFocus = false
+	inputBox.Parent = container
+
+	local inputBoxCorner = Instance.new("UICorner")
+	inputBoxCorner.CornerRadius = UDim.new(0, 4)
+	inputBoxCorner.Parent = inputBox
+
+	local sliderBack = Instance.new("Frame")
+	sliderBack.Size = UDim2.new(1, 0, 0, 8)
+	sliderBack.Position = UDim2.new(0, 0, 0, 28)
+	sliderBack.BackgroundColor3 = Color3.fromRGB(60, 60, 60)
+	sliderBack.BorderSizePixel = 0
+	sliderBack.Parent = container
+
+	local sliderBackCorner = Instance.new("UICorner")
+	sliderBackCorner.CornerRadius = UDim.new(1, 0)
+	sliderBackCorner.Parent = sliderBack
+
+	local pct = (defaultVal - minVal) / (maxVal - minVal)
+
+	local fill = Instance.new("Frame")
+	fill.Size = UDim2.new(pct, 0, 1, 0)
+	fill.BackgroundColor3 = Color3.fromRGB(0, 170, 255)
+	fill.BorderSizePixel = 0
+	fill.Parent = sliderBack
+
+	local fillCorner = Instance.new("UICorner")
+	fillCorner.CornerRadius = UDim.new(1, 0)
+	fillCorner.Parent = fill
+
+	local knob = Instance.new("Frame")
+	knob.Size = UDim2.new(0, 16, 0, 16)
+	knob.AnchorPoint = Vector2.new(0.5, 0.5)
+	knob.Position = UDim2.new(pct, 0, 0.5, 0)
+	knob.BackgroundColor3 = Color3.new(1, 1, 1)
+	knob.BorderSizePixel = 0
+	knob.ZIndex = 2
+	knob.Parent = sliderBack
+
+	local knobCorner = Instance.new("UICorner")
+	knobCorner.CornerRadius = UDim.new(1, 0)
+	knobCorner.Parent = knob
+
+	local dragging = false
+
+	-- single source of truth: sets fill/knob/textbox/attribute from a numeric value.
+	-- The VALUE itself is never clamped - only the knob/fill position is clamped
+	-- so the slider graphic doesn't break when you type something outside
+	-- the visual range (e.g. Speed = 5000).
+	local function setValue(value, fromTextBox)
+		local relX = math.clamp((value - minVal) / (maxVal - minVal), 0, 1)
+		fill.Size = UDim2.new(relX, 0, 1, 0)
+		knob.Position = UDim2.new(relX, 0, 0.5, 0)
+		if not fromTextBox then
+			inputBox.Text = tostring(value)
+		end
+		container:SetAttribute("Value", value)
+	end
+
+	local function updateFromDrag(input)
+		local relX = math.clamp(
+			(input.Position.X - sliderBack.AbsolutePosition.X) / sliderBack.AbsoluteSize.X,
+			0, 1
+		)
+		local value = math.floor(minVal + (maxVal - minVal) * relX)
+		setValue(value)
+	end
+
+	local function isPointer(input)
+		return input.UserInputType == Enum.UserInputType.MouseButton1
+			or input.UserInputType == Enum.UserInputType.Touch
+	end
+
+	knob.InputBegan:Connect(function(input)
+		if isPointer(input) then dragging = true end
+	end)
+
+	sliderBack.InputBegan:Connect(function(input)
+		if isPointer(input) then
+			dragging = true
+			updateFromDrag(input)
+		end
+	end)
+
+	UserInputService.InputChanged:Connect(function(input)
+		if dragging
+			and (input.UserInputType == Enum.UserInputType.MouseMovement
+				or input.UserInputType == Enum.UserInputType.Touch) then
+			updateFromDrag(input)
+		end
+	end)
+
+	UserInputService.InputEnded:Connect(function(input)
+		if isPointer(input) then dragging = false end
+	end)
+
+	-- typing support: commit on Enter or when the box loses focus
+	inputBox.FocusLost:Connect(function()
+		local typed = tonumber(inputBox.Text)
+		if typed then
+			setValue(math.floor(typed), true)
+			inputBox.Text = tostring(container:GetAttribute("Value"))
+		else
+			-- invalid input -> revert to current value
+			inputBox.Text = tostring(container:GetAttribute("Value"))
+		end
+	end)
+
+	container:SetAttribute("Value", defaultVal)
+	return container
+end
+
+local speedSlider = createSlider(40, "Speed", 0, SPEED_SLIDER_MAX, DEFAULT_SPEED)
+local forceSlider = createSlider(95, "Max Force", 0, FORCE_SLIDER_MAX, DEFAULT_MAXFORCE)
+
+local toggleButton = Instance.new("TextButton")
+toggleButton.Size = UDim2.new(1, -20, 0, 36)
+toggleButton.Position = UDim2.new(0, 10, 0, 155)
+toggleButton.BackgroundColor3 = Color3.fromRGB(0, 170, 90)
+toggleButton.Text = "Enable Boost"
+toggleButton.TextColor3 = Color3.new(1, 1, 1)
+toggleButton.Font = Enum.Font.GothamBold
+toggleButton.TextSize = 14
+toggleButton.AutoButtonColor = true
+toggleButton.Parent = frame
+
+local toggleCorner = Instance.new("UICorner")
+toggleCorner.CornerRadius = UDim.new(0, 6)
+toggleCorner.Parent = toggleButton
+
+-- ===================== MOBILE D-PAD (touch devices only) =====================
+if UserInputService.TouchEnabled then
+	local dpad = Instance.new("Frame")
+	dpad.Name = "MobileDPad"
+	dpad.Size = UDim2.new(0, 170, 0, 170)
+	dpad.Position = UDim2.new(1, -190, 1, -190)
+	dpad.AnchorPoint = Vector2.new(0, 0)
+	dpad.BackgroundTransparency = 1
+	dpad.Parent = screenGui
+
+	local function makeDPadButton(moveKey, text, posX, posY)
+		local btn = Instance.new("TextButton")
+		btn.Size = UDim2.new(0, 54, 0, 54)
+		btn.Position = UDim2.new(0, posX, 0, posY)
+		btn.BackgroundColor3 = Color3.fromRGB(40, 40, 40)
+		btn.BackgroundTransparency = 0.25
+		btn.Text = text
+		btn.TextColor3 = Color3.new(1, 1, 1)
+		btn.Font = Enum.Font.GothamBold
+		btn.TextSize = 20
+		btn.AutoButtonColor = false
+		btn.Parent = dpad
+
+		local btnCorner = Instance.new("UICorner")
+		btnCorner.CornerRadius = UDim.new(0, 10)
+		btnCorner.Parent = btn
+
+		-- works with multiple simultaneous touches (e.g. holding two buttons)
+		btn.InputBegan:Connect(function(input)
+			if input.UserInputType == Enum.UserInputType.Touch
+				or input.UserInputType == Enum.UserInputType.MouseButton1 then
+				moveState[moveKey] = true
+				btn.BackgroundTransparency = 0
+			end
+		end)
+
+		btn.InputEnded:Connect(function(input)
+			if input.UserInputType == Enum.UserInputType.Touch
+				or input.UserInputType == Enum.UserInputType.MouseButton1 then
+				moveState[moveKey] = false
+				btn.BackgroundTransparency = 0.25
+			end
+		end)
+
+		return btn
+	end
+
+	-- classic D-pad layout: W on top, A/S/D in a row underneath
+	makeDPadButton("Forward", "W", 58, 0)
+	makeDPadButton("Left", "A", 0, 58)
+	makeDPadButton("Back", "S", 58, 58)
+	makeDPadButton("Right", "D", 116, 58)
+end
+
+-- ===================== PHYSICS BOOST LOGIC =====================
+
+local Workspace = game:GetService("Workspace")
+
+local function getCharacterParts()
+	local character = player.Character
+	if not character then return nil end
+	local humanoid = character:FindFirstChildOfClass("Humanoid")
+	local rootPart = character:FindFirstChild("HumanoidRootPart")
+	if not humanoid or not rootPart then return nil end
+	return humanoid, rootPart
+end
+
+-- Returns the seat the humanoid is currently sitting in, if any, restricted
+-- to VehicleSeat (PVC/regular Seats are ignored - we only "drive" vehicles).
+local function getVehicleSeat(humanoid)
+	local seatPart = humanoid and humanoid.SeatPart
+	if seatPart and seatPart:IsA("VehicleSeat") then
+		return seatPart
+	end
+	return nil
+end
+
+-- Finds the part to actually push with BodyVelocity when driving a vehicle:
+-- prefer the assembly's PrimaryPart if the model has one set, otherwise the
+-- seat part itself (BodyVelocity affects the whole connected assembly via
+-- welds/joints regardless of which single part it's parented to).
+local function getVehicleDrivePart(seatPart)
+	local model = seatPart:FindFirstAncestorOfClass("Model")
+	if model and model.PrimaryPart then
+		return model.PrimaryPart
+	end
+	return seatPart
+end
+
+-- Builds a camera-relative move direction from the WASD / mobile D-pad state.
+-- Returns nil if nothing is held. Used for BOTH on-foot and in-vehicle
+-- movement, so "look left, move left" works identically in a vehicle.
+local function getKeyboardMoveDirection()
+	local x = 0
+	local z = 0
+	if moveState.Forward then z -= 1 end
+	if moveState.Back then z += 1 end
+	if moveState.Left then x -= 1 end
+	if moveState.Right then x += 1 end
+
+	if x == 0 and z == 0 then
+		return nil
+	end
+
+	local camera = Workspace.CurrentCamera
+	local camCF = camera and camera.CFrame or CFrame.new()
+	-- flatten camera look/right vectors onto the XZ plane so pitch doesn't matter
+	local lookFlat = Vector3.new(camCF.LookVector.X, 0, camCF.LookVector.Z)
+	local rightFlat = Vector3.new(camCF.RightVector.X, 0, camCF.RightVector.Z)
+	if lookFlat.Magnitude < 0.001 then
+		lookFlat = Vector3.new(0, 0, -1)
+	end
+	lookFlat = lookFlat.Unit
+	rightFlat = (rightFlat.Magnitude < 0.001) and Vector3.new(1, 0, 0) or rightFlat.Unit
+
+	local direction = (lookFlat * -z) + (rightFlat * x)
+	if direction.Magnitude < 0.001 then
+		return nil
+	end
+	return direction.Unit
+end
+
+startBoost = function()
+	local humanoid, rootPart = getCharacterParts()
+	if not humanoid or not rootPart then return end
+
+	if bodyVelocity then
+		bodyVelocity:Destroy()
+	end
+
+	bodyVelocity = Instance.new("BodyVelocity")
+	bodyVelocity.Name = "PhysicsSpeedBoost"
+	bodyVelocity.MaxForce = Vector3.new(currentMaxForce, 0, currentMaxForce)
+	bodyVelocity.Velocity = Vector3.new(0, 0, 0)
+	bodyVelocity.P = 1250
+	bodyVelocity.Parent = rootPart
+
+	local attachedTo = rootPart -- tracks whatever part bodyVelocity currently lives on
+
+	if heartbeatConn then
+		heartbeatConn:Disconnect()
+	end
+
+	heartbeatConn = RunService.Heartbeat:Connect(function()
+		local hum, root = getCharacterParts()
+		if not hum or not root or not bodyVelocity then
+			stopBoost()
+			return
+		end
+
+		local seatPart = getVehicleSeat(hum)
+		local targetPart = seatPart and getVehicleDrivePart(seatPart) or root
+
+		-- if the boost target changed (entered/exited a vehicle), move the
+		-- BodyVelocity to the new part instead of recreating it every frame
+		if targetPart ~= attachedTo then
+			bodyVelocity.Parent = targetPart
+			attachedTo = targetPart
+		end
+
+		bodyVelocity.MaxForce = Vector3.new(currentMaxForce, 0, currentMaxForce)
+
+		-- Same camera-relative direction whether walking or driving -
+		-- look left and the boost pushes left, in both cases.
+		local direction = getKeyboardMoveDirection()
+		bodyVelocity.Velocity = direction and (direction * currentSpeed) or Vector3.new(0, 0, 0)
+	end)
+end
+
+stopBoost = function()
+	if heartbeatConn then
+		heartbeatConn:Disconnect()
+		heartbeatConn = nil
+	end
+	if bodyVelocity then
+		bodyVelocity:Destroy()
+		bodyVelocity = nil
+	end
+end
+
+toggleButton.MouseButton1Click:Connect(function()
+	boostEnabled = not boostEnabled
+	if boostEnabled then
+		toggleButton.Text = "Disable Boost"
+		toggleButton.BackgroundColor3 = Color3.fromRGB(200, 60, 60)
+		startBoost()
+	else
+		toggleButton.Text = "Enable Boost"
+		toggleButton.BackgroundColor3 = Color3.fromRGB(0, 170, 90)
+		stopBoost()
+	end
+end)
+
+-- Pull live slider values every frame so dragging instantly affects the boost
+RunService.Heartbeat:Connect(function()
+	currentSpeed = speedSlider:GetAttribute("Value") or currentSpeed
+	currentMaxForce = forceSlider:GetAttribute("Value") or currentMaxForce
+end)
+
+-- Re-apply the boost after respawning, if it was left on
+player.CharacterAdded:Connect(function()
+	if boostEnabled then
+		task.wait(1)
+		startBoost()
+	end
+end)
