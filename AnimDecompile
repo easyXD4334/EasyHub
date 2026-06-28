@@ -1,205 +1,627 @@
---vers.1.4
+--[=[
+ d888b  db    db d888888b      .d888b.      db      db    db  .d8b.  
+88' Y8b 88    88   `88'        VP  `8D      88      88    88 d8' `8b 
+88      88    88    88            odD'      88      88    88 88ooo88 
+88  ooo 88    88    88          .88'        88      88    88 88~~~88 
+88. ~8~ 88b  d88   .88.        j88.         88booo. 88b  d88 88   88    @uniquadev
+ Y888P  ~Y8888P' Y888888P      888888D      Y88888P ~Y8888P' YP   YP  CONVERTER 
+]=]
 
--- Instances:
+-- Instances: 24 | Scripts: 1 | Modules: 0 | Tags: 0
+local G2L = {};
 
-local Converted = {
-	["_ScreenGui"] = Instance.new("ScreenGui");
-	["_Frame"] = Instance.new("Frame");
-	["_OutPut"] = Instance.new("TextBox");
-	["_ID"] = Instance.new("TextBox");
-	["_TextButton"] = Instance.new("TextButton");
-	["_LocalScript"] = Instance.new("LocalScript");
-}
-
--- Properties:
-
-Converted["_ScreenGui"].ZIndexBehavior = Enum.ZIndexBehavior.Sibling
-Converted["_ScreenGui"].Parent = game:GetService("CoreGui")
-
-Converted["_Frame"].BackgroundColor3 = Color3.fromRGB(0, 0, 0)
-Converted["_Frame"].BackgroundTransparency = 0.5
-Converted["_Frame"].BorderColor3 = Color3.fromRGB(0, 0, 0)
-Converted["_Frame"].BorderSizePixel = 0
-Converted["_Frame"].Position = UDim2.new(0.0970873833, 0, 0.168711647, 0)
-Converted["_Frame"].Size = UDim2.new(0, 230, 0, 188)
-Converted["_Frame"].Parent = Converted["_ScreenGui"]
-
-Converted["_OutPut"].ClearTextOnFocus = false
-Converted["_OutPut"].CursorPosition = -1
-Converted["_OutPut"].Font = Enum.Font.SourceSans
-Converted["_OutPut"].PlaceholderText = "Out put"
-Converted["_OutPut"].Text = ""
-Converted["_OutPut"].TextColor3 = Color3.fromRGB(255, 255, 255)
-Converted["_OutPut"].TextScaled = true
-Converted["_OutPut"].TextSize = 14
-Converted["_OutPut"].TextWrapped = true
-Converted["_OutPut"].BackgroundColor3 = Color3.fromRGB(0, 0, 0)
-Converted["_OutPut"].BackgroundTransparency = 0.5
-Converted["_OutPut"].BorderColor3 = Color3.fromRGB(0, 0, 0)
-Converted["_OutPut"].BorderSizePixel = 0
-Converted["_OutPut"].Position = UDim2.new(0.0643362328, 0, 0.364637822, 0)
-Converted["_OutPut"].Size = UDim2.new(0, 200, 0, 50)
-Converted["_OutPut"].Name = "OutPut"
-Converted["_OutPut"].Parent = Converted["_Frame"]
-
-Converted["_ID"].CursorPosition = -1
-Converted["_ID"].Font = Enum.Font.SourceSans
-Converted["_ID"].PlaceholderText = "Anim Id Here"
-Converted["_ID"].Text = ""
-Converted["_ID"].TextColor3 = Color3.fromRGB(255, 255, 255)
-Converted["_ID"].TextScaled = true
-Converted["_ID"].TextSize = 14
-Converted["_ID"].TextWrapped = true
-Converted["_ID"].BackgroundColor3 = Color3.fromRGB(0, 0, 0)
-Converted["_ID"].BackgroundTransparency = 0.5
-Converted["_ID"].BorderColor3 = Color3.fromRGB(0, 0, 0)
-Converted["_ID"].BorderSizePixel = 0
-Converted["_ID"].Position = UDim2.new(0.0643362328, 0, 0.0864245221, 0)
-Converted["_ID"].Size = UDim2.new(0, 200, 0, 50)
-Converted["_ID"].Name = "ID"
-Converted["_ID"].Parent = Converted["_Frame"]
-
-Converted["_TextButton"].Font = Enum.Font.SourceSans
-Converted["_TextButton"].Text = "Decompile"
-Converted["_TextButton"].TextColor3 = Color3.fromRGB(255, 255, 255)
-Converted["_TextButton"].TextScaled = true
-Converted["_TextButton"].TextSize = 14
-Converted["_TextButton"].TextWrapped = true
-Converted["_TextButton"].BackgroundColor3 = Color3.fromRGB(0, 0, 0)
-Converted["_TextButton"].BackgroundTransparency = 0.5
-Converted["_TextButton"].BorderColor3 = Color3.fromRGB(0, 0, 0)
-Converted["_TextButton"].BorderSizePixel = 0
-Converted["_TextButton"].Position = UDim2.new(0.0643362328, 0, 0.669020951, 0)
-Converted["_TextButton"].Size = UDim2.new(0, 200, 0, 50)
-Converted["_TextButton"].Parent = Converted["_Frame"]
-
--- Fake Module Scripts:
-
-local fake_module_scripts = {}
+-- StarterGui.AnimToScriptGui
+G2L["1"] = Instance.new("ScreenGui", game:GetService("Players").LocalPlayer:WaitForChild("PlayerGui"));
+G2L["1"]["IgnoreGuiInset"] = true;
+G2L["1"]["ScreenInsets"] = Enum.ScreenInsets.DeviceSafeInsets;
+G2L["1"]["Name"] = [[AnimToScriptGui]];
+G2L["1"]["ZIndexBehavior"] = Enum.ZIndexBehavior.Sibling;
+G2L["1"]["ResetOnSpawn"] = false;
 
 
--- Fake Local Scripts:
+-- StarterGui.AnimToScriptGui.MainFrame
+G2L["2"] = Instance.new("Frame", G2L["1"]);
+G2L["2"]["BorderSizePixel"] = 0;
+G2L["2"]["BackgroundColor3"] = Color3.fromRGB(16, 16, 23);
+G2L["2"]["Size"] = UDim2.new(0.75, 0, 0.88, 0);
+G2L["2"]["Position"] = UDim2.new(0.125, 0, 0.06, 0);
+G2L["2"]["Name"] = [[MainFrame]];
 
-local function KROGTJ_fake_script() -- Fake Script: StarterGui.ScreenGui.Frame.TextButton.LocalScript
-    local script = Instance.new("LocalScript")
-    script.Name = "LocalScript"
-    script.Parent = Converted["_TextButton"]
-    local req = require
-    local require = function(obj)
-        local fake = fake_module_scripts[obj]
-        if fake then
-            return fake()
-        end
-        return req(obj)
-    end
 
-script.Parent.MouseButton1Down:Connect(function()
-	local provider = game:GetService("KeyframeSequenceProvider")
+-- StarterGui.AnimToScriptGui.MainFrame.UICorner
+G2L["3"] = Instance.new("UICorner", G2L["2"]);
+G2L["3"]["CornerRadius"] = UDim.new(0, 16);
 
-	local keyframeSequence = provider:GetKeyframeSequenceAsync(tostring(script.Parent.Parent.ID.Text))
+
+-- StarterGui.AnimToScriptGui.MainFrame.UIStroke
+G2L["4"] = Instance.new("UIStroke", G2L["2"]);
+G2L["4"]["Transparency"] = 0.3;
+G2L["4"]["Thickness"] = 2;
+G2L["4"]["Color"] = Color3.fromRGB(101, 81, 221);
+
+
+-- StarterGui.AnimToScriptGui.MainFrame.GradientBar
+G2L["5"] = Instance.new("Frame", G2L["2"]);
+G2L["5"]["BorderSizePixel"] = 0;
+G2L["5"]["BackgroundColor3"] = Color3.fromRGB(131, 81, 255);
+G2L["5"]["Size"] = UDim2.new(1, 0, 0, 4);
+G2L["5"]["Name"] = [[GradientBar]];
+
+
+-- StarterGui.AnimToScriptGui.MainFrame.GradientBar.UICorner
+G2L["6"] = Instance.new("UICorner", G2L["5"]);
+G2L["6"]["CornerRadius"] = UDim.new(0, 16);
+
+
+-- StarterGui.AnimToScriptGui.MainFrame.GradientBar.UIGradient
+G2L["7"] = Instance.new("UIGradient", G2L["5"]);
+G2L["7"]["Color"] = ColorSequence.new{ColorSequenceKeypoint.new(0.000, Color3.fromRGB(131, 81, 255)),ColorSequenceKeypoint.new(1.000, Color3.fromRGB(81, 201, 255))};
+
+
+-- StarterGui.AnimToScriptGui.MainFrame.Title
+G2L["8"] = Instance.new("TextLabel", G2L["2"]);
+G2L["8"]["TextSize"] = 20;
+G2L["8"]["TextXAlignment"] = Enum.TextXAlignment.Left;
+G2L["8"]["FontFace"] = Font.new([[rbxasset://fonts/families/GothamSSm.json]], Enum.FontWeight.Bold, Enum.FontStyle.Normal);
+G2L["8"]["TextColor3"] = Color3.fromRGB(241, 241, 255);
+G2L["8"]["BackgroundTransparency"] = 1;
+G2L["8"]["Size"] = UDim2.new(1, -40, 0, 36);
+G2L["8"]["Text"] = [[Animation Asset to Lua Script Converter]];
+G2L["8"]["Name"] = [[Title]];
+G2L["8"]["Position"] = UDim2.new(0, 24, 0, 18);
+
+
+-- StarterGui.AnimToScriptGui.MainFrame.Subtitle
+G2L["9"] = Instance.new("TextLabel", G2L["2"]);
+G2L["9"]["TextSize"] = 13;
+G2L["9"]["TextXAlignment"] = Enum.TextXAlignment.Left;
+G2L["9"]["FontFace"] = Font.new([[rbxasset://fonts/families/GothamSSm.json]], Enum.FontWeight.Regular, Enum.FontStyle.Normal);
+G2L["9"]["TextColor3"] = Color3.fromRGB(131, 131, 161);
+G2L["9"]["BackgroundTransparency"] = 1;
+G2L["9"]["Size"] = UDim2.new(1, -40, 0, 20);
+G2L["9"]["Text"] = [[Convert animation assets into copyable KeyframeSequence Lua code]];
+G2L["9"]["Name"] = [[Subtitle]];
+G2L["9"]["Position"] = UDim2.new(0, 24, 0, 50);
+
+
+-- StarterGui.AnimToScriptGui.MainFrame.InputRow
+G2L["a"] = Instance.new("Frame", G2L["2"]);
+G2L["a"]["Size"] = UDim2.new(1, -48, 0, 44);
+G2L["a"]["Position"] = UDim2.new(0, 24, 0, 82);
+G2L["a"]["Name"] = [[InputRow]];
+G2L["a"]["BackgroundTransparency"] = 1;
+
+
+-- StarterGui.AnimToScriptGui.MainFrame.InputRow.AssetIdInput
+G2L["b"] = Instance.new("TextBox", G2L["a"]);
+G2L["b"]["Name"] = [[AssetIdInput]];
+G2L["b"]["PlaceholderColor3"] = Color3.fromRGB(91, 91, 121);
+G2L["b"]["BorderSizePixel"] = 0;
+G2L["b"]["TextSize"] = 15;
+G2L["b"]["TextColor3"] = Color3.fromRGB(221, 221, 241);
+G2L["b"]["BackgroundColor3"] = Color3.fromRGB(26, 26, 39);
+G2L["b"]["FontFace"] = Font.new([[rbxasset://fonts/families/GothamSSm.json]], Enum.FontWeight.Medium, Enum.FontStyle.Normal);
+G2L["b"]["ClearTextOnFocus"] = false;
+G2L["b"]["PlaceholderText"] = [[Enter Animation Asset ID (e.g. 1234567890)...]];
+G2L["b"]["Size"] = UDim2.new(1, -180, 1, 0);
+G2L["b"]["Text"] = [[]];
+
+
+-- StarterGui.AnimToScriptGui.MainFrame.InputRow.AssetIdInput.UICorner
+G2L["c"] = Instance.new("UICorner", G2L["b"]);
+G2L["c"]["CornerRadius"] = UDim.new(0, 10);
+
+
+-- StarterGui.AnimToScriptGui.MainFrame.InputRow.AssetIdInput.UIStroke
+G2L["d"] = Instance.new("UIStroke", G2L["b"]);
+G2L["d"]["Color"] = Color3.fromRGB(61, 61, 91);
+
+
+-- StarterGui.AnimToScriptGui.MainFrame.InputRow.AssetIdInput.UIPadding
+G2L["e"] = Instance.new("UIPadding", G2L["b"]);
+G2L["e"]["PaddingRight"] = UDim.new(0, 14);
+G2L["e"]["PaddingLeft"] = UDim.new(0, 14);
+
+
+-- StarterGui.AnimToScriptGui.MainFrame.InputRow.ConvertButton
+G2L["f"] = Instance.new("TextButton", G2L["a"]);
+G2L["f"]["BorderSizePixel"] = 0;
+G2L["f"]["TextSize"] = 15;
+G2L["f"]["TextColor3"] = Color3.fromRGB(255, 255, 255);
+G2L["f"]["BackgroundColor3"] = Color3.fromRGB(101, 71, 221);
+G2L["f"]["FontFace"] = Font.new([[rbxasset://fonts/families/GothamSSm.json]], Enum.FontWeight.Bold, Enum.FontStyle.Normal);
+G2L["f"]["Size"] = UDim2.new(0, 160, 1, 0);
+G2L["f"]["Text"] = [[Convert]];
+G2L["f"]["Name"] = [[ConvertButton]];
+G2L["f"]["Position"] = UDim2.new(1, -160, 0, 0);
+
+
+-- StarterGui.AnimToScriptGui.MainFrame.InputRow.ConvertButton.UICorner
+G2L["10"] = Instance.new("UICorner", G2L["f"]);
+G2L["10"]["CornerRadius"] = UDim.new(0, 10);
+
+
+-- StarterGui.AnimToScriptGui.MainFrame.InputRow.ConvertButton.UIGradient
+G2L["11"] = Instance.new("UIGradient", G2L["f"]);
+G2L["11"]["Rotation"] = 90;
+G2L["11"]["Color"] = ColorSequence.new{ColorSequenceKeypoint.new(0.000, Color3.fromRGB(111, 71, 241)),ColorSequenceKeypoint.new(1.000, Color3.fromRGB(71, 141, 255))};
+
+
+-- StarterGui.AnimToScriptGui.MainFrame.StatusLabel
+G2L["12"] = Instance.new("TextLabel", G2L["2"]);
+G2L["12"]["TextSize"] = 13;
+G2L["12"]["TextXAlignment"] = Enum.TextXAlignment.Left;
+G2L["12"]["FontFace"] = Font.new([[rbxasset://fonts/families/GothamSSm.json]], Enum.FontWeight.Regular, Enum.FontStyle.Normal);
+G2L["12"]["TextColor3"] = Color3.fromRGB(121, 121, 151);
+G2L["12"]["BackgroundTransparency"] = 1;
+G2L["12"]["Size"] = UDim2.new(1, -48, 0, 22);
+G2L["12"]["Text"] = [[Ready — enter an animation asset ID and click Convert]];
+G2L["12"]["Name"] = [[StatusLabel]];
+G2L["12"]["Position"] = UDim2.new(0, 24, 0, 134);
+
+
+-- StarterGui.AnimToScriptGui.MainFrame.OutputScrollFrame
+G2L["13"] = Instance.new("ScrollingFrame", G2L["2"]);
+G2L["13"]["BorderSizePixel"] = 0;
+G2L["13"]["CanvasSize"] = UDim2.new(0, 0, 0, 0);
+G2L["13"]["BackgroundColor3"] = Color3.fromRGB(11, 11, 17);
+G2L["13"]["Name"] = [[OutputScrollFrame]];
+G2L["13"]["AutomaticCanvasSize"] = Enum.AutomaticSize.Y;
+G2L["13"]["Size"] = UDim2.new(1, -48, 1, -175);
+G2L["13"]["ScrollBarImageColor3"] = Color3.fromRGB(101, 81, 221);
+G2L["13"]["Position"] = UDim2.new(0, 24, 0, 164);
+G2L["13"]["ScrollBarThickness"] = 6;
+
+
+-- StarterGui.AnimToScriptGui.MainFrame.OutputScrollFrame.UICorner
+G2L["14"] = Instance.new("UICorner", G2L["13"]);
+G2L["14"]["CornerRadius"] = UDim.new(0, 10);
+
+
+-- StarterGui.AnimToScriptGui.MainFrame.OutputScrollFrame.UIStroke
+G2L["15"] = Instance.new("UIStroke", G2L["13"]);
+G2L["15"]["Color"] = Color3.fromRGB(41, 41, 61);
+
+
+-- StarterGui.AnimToScriptGui.MainFrame.OutputScrollFrame.UIListLayout
+G2L["16"] = Instance.new("UIListLayout", G2L["13"]);
+G2L["16"]["Padding"] = UDim.new(0, 12);
+G2L["16"]["SortOrder"] = Enum.SortOrder.LayoutOrder;
+
+
+-- StarterGui.AnimToScriptGui.MainFrame.OutputScrollFrame.UIPadding
+G2L["17"] = Instance.new("UIPadding", G2L["13"]);
+G2L["17"]["PaddingTop"] = UDim.new(0, 12);
+G2L["17"]["PaddingRight"] = UDim.new(0, 12);
+G2L["17"]["PaddingLeft"] = UDim.new(0, 12);
+G2L["17"]["PaddingBottom"] = UDim.new(0, 12);
+
+
+-- StarterGui.AnimToScriptGui.AnimToScriptClient
+G2L["18"] = Instance.new("LocalScript", G2L["1"]);
+G2L["18"]["Name"] = [[AnimToScriptClient]];
+
+
+-- StarterGui.AnimToScriptGui.AnimToScriptClient
+local function C_18()
+local script = G2L["18"];
+	local Players = game:GetService('Players')
+	local TweenService = game:GetService('TweenService')
+	local UserInputService = game:GetService('UserInputService')
+	local RunService = game:GetService('RunService')
+	local KeyframeSequenceProvider = game:GetService('KeyframeSequenceProvider')
 	
+	local player = Players.LocalPlayer
+	local playerGui = player:WaitForChild('PlayerGui')
+	local gui = playerGui:WaitForChild('AnimToScriptGui')
+	local mainFrame = gui:WaitForChild('MainFrame')
 	
-local function indent(level)
-	return string.rep("    ", level)
-end
-
-local function serializeCFrame(cf)
-	local c = {cf:GetComponents()}
-	return "CFrame.new(" .. table.concat(c, ", ") .. ")"
-end
-
--- unique ID for pose variables
-local poseId = 0
-
-local function processPose(pose, parentVar, level)
-	local code = ""
-
-	poseId += 1
-	local varName = "p" .. poseId
-
-	code ..= indent(level) .. "do\n"
-	code ..= indent(level+1) .. "local " .. varName .. " = Instance.new(\"Pose\")\n"
-	code ..= indent(level+1) .. varName .. ".Name = \"" .. pose.Name .. "\"\n"
-	code ..= indent(level+1) .. varName .. ".CFrame = " .. serializeCFrame(pose.CFrame) .. "\n"
-	code ..= indent(level+1) .. varName .. ".Weight = " .. pose.Weight .. "\n"
-	code ..= indent(level+1) .. varName .. ".Parent = " .. parentVar .. "\n"
-
-	for _, child in ipairs(pose:GetChildren()) do
-		if child:IsA("Pose") then
-			code ..= processPose(child, varName, level + 1)
+	local assetInput = mainFrame.InputRow.AssetIdInput
+	local convertBtn = mainFrame.InputRow.ConvertButton
+	local statusLabel = mainFrame.StatusLabel
+	local scrollFrame = mainFrame.OutputScrollFrame
+	
+	local CHUNK_SIZE = 75000
+	local isConverting = false
+	
+	-- ==============================
+	-- Serialization helpers
+	-- ==============================
+	local function serializeCFrame(cf)
+		local comp = {cf:GetComponents()}
+		local parts = {}
+		for _, v in ipairs(comp) do
+			table.insert(parts, string.format('%.6f', v))
 		end
+		return 'CFrame.new(' .. table.concat(parts, ', ') .. ')'
 	end
-
-	code ..= indent(level) .. "end\n\n"
-
-	return code
-end
-
--- split output (fix TextBox / print limit)
-local MAX_LENGTH = 180000
-
-local function outputChunks(bigString)
-	local chunks = {}
-	local start = 1
-
-	while start <= #bigString do
-		table.insert(chunks, string.sub(bigString, start, start + MAX_LENGTH))
-		start += MAX_LENGTH
+	
+	local function escapeStr(s)
+		s = s:gsub('\\', '\\\\')
+		s = s:gsub('"', '\\"')
+		s = s:gsub("'", "\\'")
+		s = s:gsub('\n', '\\n')
+		s = s:gsub('\r', '\\r')
+		return s
 	end
-
-	return chunks
-end
-
-local function convert()
-	poseId = 0 -- reset counter
-
-	local code = ""
-
-	code ..= "local keyframeSequence = Instance.new(\"KeyframeSequence\")\n"
-	code ..= "keyframeSequence.Name = \"" .. keyframeSequence.Name .. "\"\n"
-	code ..= "keyframeSequence.Parent = workspace\n\n"
-
-	for _, keyframe in ipairs(keyframeSequence:GetKeyframes()) do
-		code ..= "do\n"
-		code ..= indent(1) .. "local kf = Instance.new(\"Keyframe\")\n"
-		code ..= indent(1) .. "kf.Time = " .. keyframe.Time .. "\n"
-		code ..= indent(1) .. "kf.Parent = keyframeSequence\n\n"
-
-		for _, pose in ipairs(keyframe:GetChildren()) do
-			if pose:IsA("Pose") then
-				code ..= processPose(pose, "kf", 2)
+	
+	local function getEnumName(enumVal)
+		local str = tostring(enumVal)
+		return str:match('%.([%w_]+)$') or str
+	end
+	
+	local function serializePoses(pose, lines, indent, parentVar)
+		local varName = 'pose_' .. tostring(#lines + 1)
+		local ind = string.rep('\t', indent)
+		table.insert(lines, ind .. 'do')
+		table.insert(lines, ind .. '\tlocal ' .. varName .. ' = Instance.new("Pose")')
+		table.insert(lines, ind .. '\t' .. varName .. '.Name = "' .. escapeStr(pose.Name) .. '"')
+		table.insert(lines, ind .. '\t' .. varName .. '.Weight = ' .. string.format('%.6f', pose.Weight))
+		table.insert(lines, ind .. '\t' .. varName .. '.CFrame = ' .. serializeCFrame(pose.CFrame))
+		table.insert(lines, ind .. '\t' .. varName .. '.EasingStyle = Enum.PoseEasingStyle.' .. getEnumName(pose.EasingStyle))
+		table.insert(lines, ind .. '\t' .. varName .. '.EasingDirection = Enum.PoseEasingDirection.' .. getEnumName(pose.EasingDirection))
+		for _, child in ipairs(pose:GetChildren()) do
+			if child:IsA('Pose') then
+				serializePoses(child, lines, indent + 1, varName)
 			end
 		end
-
-		code ..= "end\n\n"
+		table.insert(lines, ind .. '\t' .. varName .. '.Parent = ' .. parentVar)
+		table.insert(lines, ind .. 'end')
 	end
+	
+	local function convertAnimation(assetId)
+		local keyframeSeq = KeyframeSequenceProvider:GetKeyframeSequenceAsync('rbxassetid://' .. tostring(assetId))
+		local lines = {}
+		table.insert(lines, '-- ============================================')
+		table.insert(lines, '-- KeyframeSequence Lua Script')
+		table.insert(lines, '-- Generated from Animation Asset ID: ' .. tostring(assetId))
+		table.insert(lines, '-- ============================================')
+		table.insert(lines, '')
+		table.insert(lines, 'local keyframeSequence = Instance.new("KeyframeSequence")')
+		table.insert(lines, 'keyframeSequence.Name = "' .. escapeStr(keyframeSeq.Name) .. '"')
+		table.insert(lines, 'keyframeSequence.Loop = ' .. tostring(keyframeSeq.Loop))
+		table.insert(lines, 'keyframeSequence.Priority = Enum.AnimationPriority.' .. getEnumName(keyframeSeq.Priority))
+		table.insert(lines, '')
+		local keyframes = keyframeSeq:GetKeyframes()
+		table.insert(lines, '-- Total Keyframes: ' .. #keyframes)
+		table.insert(lines, '')
+		for i, keyframe in ipairs(keyframes) do
+			local kfVar = 'keyframe_' .. i
+			table.insert(lines, '-- Keyframe ' .. i .. ' / ' .. #keyframes)
+			table.insert(lines, 'do')
+			table.insert(lines, '\tlocal ' .. kfVar .. ' = Instance.new("Keyframe")')
+			table.insert(lines, '\t' .. kfVar .. '.Name = "' .. escapeStr(keyframe.Name) .. '"')
+			table.insert(lines, '\t' .. kfVar .. '.Time = ' .. string.format('%.6f', keyframe.Time))
+			table.insert(lines, '')
+			local poses = keyframe:GetPoses()
+			for _, pose in ipairs(poses) do
+				serializePoses(pose, lines, 1, kfVar)
+			end
+			table.insert(lines, '')
+			table.insert(lines, '\t' .. kfVar .. '.Parent = keyframeSequence')
+			table.insert(lines, 'end')
+			table.insert(lines, '')
+		end
+		table.insert(lines, '-- Place the KeyframeSequence')
+		table.insert(lines, 'keyframeSequence.Parent = workspace')
+		table.insert(lines, '')
+		table.insert(lines, 'print("KeyframeSequence created successfully with ' .. #keyframes .. ' keyframes!")')
+		return table.concat(lines, '\n')
+	end
+	
+	-- ==============================
+	-- Close Button
+	-- ==============================
+	local closeBtn = Instance.new('TextButton')
+	closeBtn.Name = 'CloseButton'
+	closeBtn.Size = UDim2.new(0, 32, 0, 32)
+	closeBtn.Position = UDim2.new(1, -44, 0, 10)
+	closeBtn.BackgroundColor3 = Color3.fromRGB(40, 30, 55)
+	closeBtn.TextColor3 = Color3.fromRGB(200, 170, 240)
+	closeBtn.Text = 'X'
+	closeBtn.TextSize = 16
+	closeBtn.Font = Enum.Font.GothamBold
+	closeBtn.BorderSizePixel = 0
+	closeBtn.AutoButtonColor = true
+	closeBtn.ZIndex = 10
+	closeBtn.Parent = mainFrame
+	
+	local closeCorner = Instance.new('UICorner')
+	closeCorner.CornerRadius = UDim.new(0, 8)
+	closeCorner.Parent = closeBtn
+	
+	local closeStroke = Instance.new('UIStroke')
+	closeStroke.Color = Color3.fromRGB(80, 60, 130)
+	closeStroke.Thickness = 1
+	closeStroke.Parent = closeBtn
+	
+	closeBtn.MouseEnter:Connect(function()
+		TweenService:Create(closeBtn, TweenInfo.new(0.15), {
+			BackgroundColor3 = Color3.fromRGB(180, 50, 60),
+			TextColor3 = Color3.fromRGB(255, 255, 255)
+		}):Play()
+		TweenService:Create(closeStroke, TweenInfo.new(0.15), {
+			Color = Color3.fromRGB(220, 70, 80)
+		}):Play()
+	end)
+	
+	closeBtn.MouseLeave:Connect(function()
+		TweenService:Create(closeBtn, TweenInfo.new(0.15), {
+			BackgroundColor3 = Color3.fromRGB(40, 30, 55),
+			TextColor3 = Color3.fromRGB(200, 170, 240)
+		}):Play()
+		TweenService:Create(closeStroke, TweenInfo.new(0.15), {
+			Color = Color3.fromRGB(80, 60, 130)
+		}):Play()
+	end)
+	
+	local guiVisible = true
+	
+	closeBtn.MouseButton1Click:Connect(function()
+		if not guiVisible then return end
+		guiVisible = false
+		local tweenOut = TweenService:Create(mainFrame, TweenInfo.new(0.4, Enum.EasingStyle.Back, Enum.EasingDirection.In), {
+			Position = UDim2.new(mainFrame.Position.X.Scale, mainFrame.Position.X.Offset, 1.2, 0)
+		})
+		tweenOut:Play()
+		tweenOut.Completed:Connect(function()
+			gui.Enabled = false
+		end)
+	end)
+	
+	UserInputService.InputBegan:Connect(function(input, gameProcessed)
+		if gameProcessed then return end
+		if input.KeyCode == Enum.KeyCode.P then
+			if not guiVisible then
+				gui.Enabled = true
+				guiVisible = true
+				mainFrame.Position = UDim2.new(0.125, 0, 1.2, 0)
+				targetPosition = UDim2.new(0.125, 0, 0.06, 0)
+				TweenService:Create(mainFrame, TweenInfo.new(0.5, Enum.EasingStyle.Back, Enum.EasingDirection.Out), {
+					Position = UDim2.new(0.125, 0, 0.06, 0)
+				}):Play()
+			end
+		end
+	end)
+	
+	-- ==============================
+	-- Smooth Dragging
+	-- ==============================
+	local dragging = false
+	local dragInput = nil
+	local dragStart = nil
+	local startPos = nil
+	local DRAG_LERP = 0.16
+	local targetPosition = UDim2.new(0.125, 0, 0.06, 0)
+	
+	local dragZone = Instance.new('Frame')
+	dragZone.Name = 'DragZone'
+	dragZone.Size = UDim2.new(1, 0, 0, 54)
+	dragZone.Position = UDim2.new(0, 0, 0, 0)
+	dragZone.BackgroundTransparency = 1
+	dragZone.ZIndex = 8
+	dragZone.Parent = mainFrame
+	
+	dragZone.InputBegan:Connect(function(input)
+		if input.UserInputType == Enum.UserInputType.MouseButton1 or input.UserInputType == Enum.UserInputType.Touch then
+			dragging = true
+			dragStart = input.Position
+			startPos = mainFrame.Position
+			input.Changed:Connect(function()
+				if input.UserInputState == Enum.UserInputState.End then
+					dragging = false
+				end
+			end)
+		end
+	end)
+	
+	dragZone.InputChanged:Connect(function(input)
+		if input.UserInputType == Enum.UserInputType.MouseMovement or input.UserInputType == Enum.UserInputType.Touch then
+			dragInput = input
+		end
+	end)
+	
+	UserInputService.InputChanged:Connect(function(input)
+		if input == dragInput and dragging then
+			local delta = input.Position - dragStart
+			targetPosition = UDim2.new(
+				startPos.X.Scale, startPos.X.Offset + delta.X,
+				startPos.Y.Scale, startPos.Y.Offset + delta.Y
+			)
+		end
+	end)
+	
+	RunService.RenderStepped:Connect(function()
+		local cur = mainFrame.Position
+		local dx = targetPosition.X.Offset - cur.X.Offset
+		local dy = targetPosition.Y.Offset - cur.Y.Offset
+		local dxs = targetPosition.X.Scale - cur.X.Scale
+		local dys = targetPosition.Y.Scale - cur.Y.Scale
+		if math.abs(dx) > 0.5 or math.abs(dy) > 0.5 or math.abs(dxs) > 0.0001 or math.abs(dys) > 0.0001 then
+			mainFrame.Position = UDim2.new(
+				cur.X.Scale + dxs * DRAG_LERP,
+				cur.X.Offset + dx * DRAG_LERP,
+				cur.Y.Scale + dys * DRAG_LERP,
+				cur.Y.Offset + dy * DRAG_LERP
+			)
+		end
+	end)
+	
+	-- ==============================
+	-- Entrance animation
+	-- ==============================
+	mainFrame.Position = UDim2.new(0.125, 0, 1.2, 0)
+	local tweenIn = TweenService:Create(mainFrame, TweenInfo.new(0.6, Enum.EasingStyle.Back, Enum.EasingDirection.Out), {
+		Position = UDim2.new(0.125, 0, 0.06, 0)
+	})
+	tweenIn:Play()
+	tweenIn.Completed:Connect(function()
+		targetPosition = mainFrame.Position
+	end)
+	
+	-- ==============================
+	-- Output helpers
+	-- ==============================
+	local function clearOutput()
+		for _, child in ipairs(scrollFrame:GetChildren()) do
+			if child:IsA('Frame') then
+				child:Destroy()
+			end
+		end
+	end
+	
+	local function setStatus(text, color)
+		statusLabel.Text = text
+		statusLabel.TextColor3 = color
+	end
+	
+	local function createChunkFrame(index, text, totalChunks)
+		local chunkFrame = Instance.new('Frame')
+		chunkFrame.Name = 'Chunk' .. index
+		chunkFrame.BackgroundColor3 = Color3.fromRGB(20, 20, 32)
+		chunkFrame.BorderSizePixel = 0
+		chunkFrame.LayoutOrder = index
+		chunkFrame.AutomaticSize = Enum.AutomaticSize.Y
+		chunkFrame.Size = UDim2.new(1, -6, 0, 0)
+		local fc = Instance.new('UICorner')
+		fc.CornerRadius = UDim.new(0, 8)
+		fc.Parent = chunkFrame
+		local fs = Instance.new('UIStroke')
+		fs.Color = Color3.fromRGB(55, 45, 100)
+		fs.Thickness = 1
+		fs.Transparency = 0.4
+		fs.Parent = chunkFrame
+		local header = Instance.new('Frame')
+		header.Name = 'Header'
+		header.Size = UDim2.new(1, 0, 0, 32)
+		header.BackgroundColor3 = Color3.fromRGB(28, 24, 50)
+		header.BorderSizePixel = 0
+		header.LayoutOrder = 1
+		header.Parent = chunkFrame
+		local hc = Instance.new('UICorner')
+		hc.CornerRadius = UDim.new(0, 8)
+		hc.Parent = header
+		local headerLabel = Instance.new('TextLabel')
+		headerLabel.Name = 'HeaderLabel'
+		headerLabel.Size = UDim2.new(1, -16, 1, 0)
+		headerLabel.Position = UDim2.new(0, 12, 0, 0)
+		headerLabel.BackgroundTransparency = 1
+		headerLabel.Text = string.format('Chunk %d / %d  |  %s characters', index, totalChunks, tostring(#text))
+		headerLabel.TextColor3 = Color3.fromRGB(150, 130, 240)
+		headerLabel.TextSize = 12
+		headerLabel.Font = Enum.Font.GothamBold
+		headerLabel.TextXAlignment = Enum.TextXAlignment.Left
+		headerLabel.Parent = header
+		local textBox = Instance.new('TextBox')
+		textBox.Name = 'CodeTextBox'
+		textBox.Size = UDim2.new(1, -16, 0, 0)
+		textBox.AutomaticSize = Enum.AutomaticSize.Y
+		textBox.BackgroundColor3 = Color3.fromRGB(12, 12, 20)
+		textBox.TextColor3 = Color3.fromRGB(170, 220, 170)
+		textBox.Text = text
+		textBox.TextSize = 11
+		textBox.Font = Enum.Font.Code
+		textBox.TextXAlignment = Enum.TextXAlignment.Left
+		textBox.TextYAlignment = Enum.TextYAlignment.Top
+		textBox.TextWrapped = true
+		textBox.MultiLine = true
+		textBox.ClearTextOnFocus = false
+		textBox.TextEditable = true
+		textBox.BorderSizePixel = 0
+		textBox.LayoutOrder = 2
+		textBox.Parent = chunkFrame
+		local tc = Instance.new('UICorner')
+		tc.CornerRadius = UDim.new(0, 6)
+		tc.Parent = textBox
+		local tp = Instance.new('UIPadding')
+		tp.PaddingTop = UDim.new(0, 8)
+		tp.PaddingBottom = UDim.new(0, 8)
+		tp.PaddingLeft = UDim.new(0, 10)
+		tp.PaddingRight = UDim.new(0, 10)
+		tp.Parent = textBox
+		local spacer = Instance.new('Frame')
+		spacer.Name = 'Spacer'
+		spacer.Size = UDim2.new(1, 0, 0, 8)
+		spacer.BackgroundTransparency = 1
+		spacer.LayoutOrder = 3
+		spacer.Parent = chunkFrame
+		local chunkLayout = Instance.new('UIListLayout')
+		chunkLayout.SortOrder = Enum.SortOrder.LayoutOrder
+		chunkLayout.Padding = UDim.new(0, 0)
+		chunkLayout.Parent = chunkFrame
+		chunkFrame.Parent = scrollFrame
+		chunkFrame.BackgroundTransparency = 1
+		TweenService:Create(chunkFrame, TweenInfo.new(0.3, Enum.EasingStyle.Quad), {BackgroundTransparency = 0}):Play()
+		return chunkFrame
+	end
+	
+	local function splitIntoChunks(text, chunkSize)
+		local chunks = {}
+		local len = #text
+		for i = 1, len, chunkSize do
+			table.insert(chunks, text:sub(i, math.min(i + chunkSize - 1, len)))
+		end
+		return chunks
+	end
+	
+	-- ==============================
+	-- Button hover effects
+	-- ==============================
+	convertBtn.MouseEnter:Connect(function()
+		if not isConverting then
+			TweenService:Create(convertBtn, TweenInfo.new(0.2), {Size = UDim2.new(0, 166, 1, 4)}):Play()
+		end
+	end)
+	convertBtn.MouseLeave:Connect(function()
+		TweenService:Create(convertBtn, TweenInfo.new(0.2), {Size = UDim2.new(0, 160, 1, 0)}):Play()
+	end)
+	assetInput.Focused:Connect(function()
+		local s = assetInput:FindFirstChildOfClass('UIStroke')
+		if s then TweenService:Create(s, TweenInfo.new(0.2), {Color = Color3.fromRGB(100, 80, 220)}):Play() end
+	end)
+	assetInput.FocusLost:Connect(function()
+		local s = assetInput:FindFirstChildOfClass('UIStroke')
+		if s then TweenService:Create(s, TweenInfo.new(0.2), {Color = Color3.fromRGB(60, 60, 90)}):Play() end
+	end)
+	
+	-- ==============================
+	-- Convert button logic (all client-side)
+	-- ==============================
+	convertBtn.MouseButton1Click:Connect(function()
+		if isConverting then return end
+		local rawText = assetInput.Text
+		local assetId = rawText:match('%d+')
+		if not assetId then
+			setStatus('Please enter a valid numeric Asset ID', Color3.fromRGB(255, 90, 90))
+			return
+		end
+		isConverting = true
+		clearOutput()
+		convertBtn.Text = 'Converting...'
+		TweenService:Create(convertBtn, TweenInfo.new(0.2), {BackgroundColor3 = Color3.fromRGB(50, 50, 70)}):Play()
+		setStatus('Fetching animation data for ID: ' .. assetId .. '...', Color3.fromRGB(255, 210, 80))
+		task.wait()
+		local success, result = pcall(function()
+			return convertAnimation(tonumber(assetId))
+		end)
+		if success then
+			local scriptText = result
+			local chunks = splitIntoChunks(scriptText, CHUNK_SIZE)
+			setStatus(string.format('Generated %s chars in %d chunk(s) - click textbox to select and copy', tostring(#scriptText), #chunks), Color3.fromRGB(100, 240, 150))
+			for i, chunk in ipairs(chunks) do
+				createChunkFrame(i, chunk, #chunks)
+				if i % 3 == 0 then task.wait() end
+			end
+		else
+			setStatus('Error: ' .. tostring(result), Color3.fromRGB(255, 90, 90))
+		end
+		convertBtn.Text = 'Convert'
+		TweenService:Create(convertBtn, TweenInfo.new(0.2), {BackgroundColor3 = Color3.fromRGB(100, 70, 220)}):Play()
+		isConverting = false
+	end)
+	
+	print('[AnimToScript] Client-only UI ready - press P to toggle visibility')
+end;
+task.spawn(C_18);
 
-	return outputChunks(code)
-end
-
--- 🔥 HOW TO USE OUTPUT
-local chunks = convert()
-
-
-local playerGui = game.Players.LocalPlayer:WaitForChild("PlayerGui")
-local screenGui = Instance.new("ScreenGui", playerGui)
-
-for i, chunk in ipairs(chunks) do
-	local box = Instance.new("TextBox")
-	box.Size = UDim2.new(0, 500, 0, 30)
-	box.Position = UDim2.new(0, 0, 0, (i - 1) * 31)
-	box.TextWrapped = false
-	box.TextXAlignment = Enum.TextXAlignment.Left
-	box.TextYAlignment = Enum.TextYAlignment.Top
-	box.ClearTextOnFocus = false
-	box.MultiLine = true
-	box.TextEditable = true
-	box.Text = chunk
-	box.Parent = screenGui
-end
-
-
-end)
-end
-
-coroutine.wrap(KROGTJ_fake_script)()
+return G2L["1"], require;
