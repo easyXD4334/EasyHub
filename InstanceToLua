@@ -1,0 +1,1642 @@
+--!nocheck
+--[[
+	Instance → Lua Converter v3
+	Converts any Roblox instance hierarchy into executable Lua code.
+	Supports every serialisable property type in the Roblox engine.
+	
+	Usage:
+	  1. Change ObjectToConvert below to any instance path.
+	  2. Run the game (or F5 in Studio).
+	  3. The output appears in the scrollable TextBox.
+	  4. Click "Copy" to copy to clipboard.
+]]
+
+-- ═══════════════════════════════════════════════════════════
+-- CONFIGURATION
+-- ═══════════════════════════════════════════════════════════
+local ObjectToConvert = game.Workspace
+local MAX_DEPTH       = 100
+local SKIP_SERVICES   = true   -- skip service-level children that can't be serialised
+
+-- ═══════════════════════════════════════════════════════════
+-- SERVICES
+-- ═══════════════════════════════════════════════════════════
+local Players          = game:GetService("Players")
+local StarterGui       = game:GetService("StarterGui")
+local TweenService     = game:GetService("TweenService")
+local UserInputService = game:GetService("UserInputService")
+
+local player = Players.LocalPlayer
+local playerGui = player:WaitForChild("PlayerGui")
+
+-- ═══════════════════════════════════════════════════════════
+-- TYPE SERIALISERS  (typeof → Lua literal string)
+-- ═══════════════════════════════════════════════════════════
+local serialiseValue  -- forward declaration
+
+local function round(n, dp)
+	dp = dp or 6
+	local mult = 10 ^ dp
+	return math.floor(n * mult + 0.5) / mult
+end
+
+local function numStr(n)
+	if n == math.huge then return "math.huge" end
+	if n == -math.huge then return "-math.huge" end
+	if n ~= n then return "0/0" end
+	local r = round(n)
+	if r == math.floor(r) then
+		return string.format("%g", r)
+	else
+		return string.format("%g", r)
+	end
+end
+
+serialiseValue = function(value)
+	local t = typeof(value)
+
+	if t == "string" then
+		return string.format("%q", value)
+
+	elseif t == "number" then
+		return numStr(value)
+
+	elseif t == "boolean" then
+		return tostring(value)
+
+	elseif t == "nil" then
+		return "nil"
+
+	elseif t == "Vector2" then
+		return string.format("Vector2.new(%s, %s)", numStr(value.X), numStr(value.Y))
+
+	elseif t == "Vector3" then
+		return string.format("Vector3.new(%s, %s, %s)", numStr(value.X), numStr(value.Y), numStr(value.Z))
+
+	elseif t == "Vector2int16" then
+		return string.format("Vector2int16.new(%d, %d)", value.X, value.Y)
+
+	elseif t == "Vector3int16" then
+		return string.format("Vector3int16.new(%d, %d, %d)", value.X, value.Y, value.Z)
+
+	elseif t == "CFrame" then
+		local c = {value:GetComponents()}
+		local parts = {}
+		for _, v in c do
+			table.insert(parts, numStr(v))
+		end
+		return string.format("CFrame.new(%s)", table.concat(parts, ", "))
+
+	elseif t == "Color3" then
+		return string.format("Color3.new(%s, %s, %s)", numStr(value.R), numStr(value.G), numStr(value.B))
+
+	elseif t == "BrickColor" then
+		return string.format("BrickColor.new(%q)", value.Name)
+
+	elseif t == "UDim" then
+		return string.format("UDim.new(%s, %s)", numStr(value.Scale), numStr(value.Offset))
+
+	elseif t == "UDim2" then
+		return string.format("UDim2.new(%s, %s, %s, %s)",
+			numStr(value.X.Scale), numStr(value.X.Offset),
+			numStr(value.Y.Scale), numStr(value.Y.Offset))
+
+	elseif t == "Rect" then
+		return string.format("Rect.new(%s, %s, %s, %s)",
+			numStr(value.Min.X), numStr(value.Min.Y),
+			numStr(value.Max.X), numStr(value.Max.Y))
+
+	elseif t == "NumberSequence" then
+		local kps = {}
+		for _, kp in value.Keypoints do
+			if kp.Envelope == 0 then
+				table.insert(kps, string.format("NumberSequenceKeypoint.new(%s, %s)", numStr(kp.Time), numStr(kp.Value)))
+			else
+				table.insert(kps, string.format("NumberSequenceKeypoint.new(%s, %s, %s)", numStr(kp.Time), numStr(kp.Value), numStr(kp.Envelope)))
+			end
+		end
+		return string.format("NumberSequence.new({%s})", table.concat(kps, ", "))
+
+	elseif t == "ColorSequence" then
+		local kps = {}
+		for _, kp in value.Keypoints do
+			table.insert(kps, string.format(
+				"ColorSequenceKeypoint.new(%s, Color3.new(%s, %s, %s))",
+				numStr(kp.Time), numStr(kp.Value.R), numStr(kp.Value.G), numStr(kp.Value.B)
+			))
+		end
+		return string.format("ColorSequence.new({%s})", table.concat(kps, ", "))
+
+	elseif t == "NumberRange" then
+		return string.format("NumberRange.new(%s, %s)", numStr(value.Min), numStr(value.Max))
+
+	elseif t == "Ray" then
+		return string.format("Ray.new(Vector3.new(%s, %s, %s), Vector3.new(%s, %s, %s))",
+			numStr(value.Origin.X), numStr(value.Origin.Y), numStr(value.Origin.Z),
+			numStr(value.Direction.X), numStr(value.Direction.Y), numStr(value.Direction.Z))
+
+	elseif t == "Faces" then
+		local f = {}
+		if value.Top then table.insert(f, "Enum.NormalId.Top") end
+		if value.Bottom then table.insert(f, "Enum.NormalId.Bottom") end
+		if value.Left then table.insert(f, "Enum.NormalId.Left") end
+		if value.Right then table.insert(f, "Enum.NormalId.Right") end
+		if value.Front then table.insert(f, "Enum.NormalId.Front") end
+		if value.Back then table.insert(f, "Enum.NormalId.Back") end
+		return string.format("Faces.new(%s)", table.concat(f, ", "))
+
+	elseif t == "Axes" then
+		local a = {}
+		if value.X then table.insert(a, "Enum.Axis.X") end
+		if value.Y then table.insert(a, "Enum.Axis.Y") end
+		if value.Z then table.insert(a, "Enum.Axis.Z") end
+		return string.format("Axes.new(%s)", table.concat(a, ", "))
+
+	elseif t == "PhysicalProperties" then
+		return string.format("PhysicalProperties.new(%s, %s, %s, %s, %s)",
+			numStr(value.Density), numStr(value.Friction), numStr(value.Elasticity),
+			numStr(value.FrictionWeight), numStr(value.ElasticityWeight))
+
+	elseif t == "Font" then
+		return string.format("Font.new(%q, Enum.FontWeight.%s, Enum.FontStyle.%s)",
+			tostring(value.Family), value.Weight.Name, value.Style.Name)
+
+	elseif t == "EnumItem" then
+		return string.format("Enum.%s.%s", tostring(value.EnumType), value.Name)
+
+	elseif t == "Instance" then
+		return "nil --[[ Instance ref: " .. value:GetFullName() .. " ]]"
+
+	elseif t == "Region3" then
+		return "nil --[[ Region3 (not constructable from properties) ]]"
+
+	elseif t == "Region3int16" then
+		return "nil --[[ Region3int16 ]]"
+
+	elseif t == "PathWaypoint" then
+		return string.format("PathWaypoint.new(Vector3.new(%s, %s, %s), Enum.PathWaypointAction.%s)",
+			numStr(value.Position.X), numStr(value.Position.Y), numStr(value.Position.Z),
+			value.Action.Name)
+
+	elseif t == "DateTime" then
+		return string.format("DateTime.fromUnixTimestamp(%d)", value.UnixTimestamp)
+
+	elseif t == "TweenInfo" then
+		return "nil --[[ TweenInfo (runtime only) ]]"
+
+	elseif t == "RaycastParams" then
+		return "nil --[[ RaycastParams (runtime only) ]]"
+
+	elseif t == "OverlapParams" then
+		return "nil --[[ OverlapParams (runtime only) ]]"
+
+	elseif t == "FloatCurveKey" then
+		return string.format("FloatCurveKey.new(%s, %s, Enum.KeyInterpolationMode.%s)",
+			numStr(value.Time), numStr(value.Value), value.Interpolation.Name)
+
+	elseif t == "RotationCurveKey" then
+		local cf = value.Value
+		local c = {cf:GetComponents()}
+		local parts = {}
+		for _, v in c do table.insert(parts, numStr(v)) end
+		return string.format("RotationCurveKey.new(%s, CFrame.new(%s), Enum.KeyInterpolationMode.%s)",
+			numStr(value.Time), table.concat(parts, ", "), value.Interpolation.Name)
+
+	elseif t == "SharedTable" then
+		return "nil --[[ SharedTable ]]"
+
+	elseif t == "Content" then
+		local s = tostring(value)
+		if s == "" then return '""' end
+		return string.format("%q", s)
+
+	elseif t == "Secret" then
+		return "nil --[[ Secret ]]"
+
+	else
+		local ok, str = pcall(tostring, value)
+		if ok then
+			return string.format("%q --[[ %s ]]", str, t)
+		else
+			return string.format("nil --[[ unserializable: %s ]]", t)
+		end
+	end
+end
+
+-- ═══════════════════════════════════════════════════════════
+-- COMPREHENSIVE PROPERTY DATABASE
+-- Organised by class hierarchy.  Child classes inherit.
+-- ═══════════════════════════════════════════════════════════
+local PROP_DB = {}
+
+-- Helper: define props for a class
+local function defProps(className, props)
+	PROP_DB[className] = props
+end
+
+-- ── Core ──
+defProps("Instance", {"Name"})
+
+-- ── Parts ──
+defProps("BasePart", {
+	"Anchored", "BrickColor", "CFrame", "CanCollide", "CanQuery", "CanTouch",
+	"CastShadow", "CollisionGroup", "Color", "CustomPhysicalProperties",
+	"EnableFluidForces", "FrontSurface", "BackSurface", "BottomSurface",
+	"TopSurface", "LeftSurface", "RightSurface", "Locked", "Massless",
+	"Material", "MaterialVariant", "PivotOffset", "Reflectance",
+	"RootPriority", "Size", "Transparency"
+})
+defProps("Part", {"Shape"})
+defProps("WedgePart", {})
+defProps("CornerWedgePart", {})
+defProps("TrussPart", {"Style"})
+defProps("MeshPart", {"MeshId", "TextureID", "CollisionFidelity", "RenderFidelity", "DoubleSided"})
+defProps("UnionOperation", {"UsePartColor", "CollisionFidelity", "RenderFidelity", "SmoothingAngle"})
+defProps("NegateOperation", {"UsePartColor"})
+defProps("IntersectOperation", {"UsePartColor", "CollisionFidelity", "RenderFidelity", "SmoothingAngle"})
+defProps("SpawnLocation", {"AllowTeamChangeOnTouch", "Duration", "Enabled", "Neutral", "TeamColor"})
+defProps("Seat", {"Disabled"})
+defProps("SkateboardPlatform", {"Steer", "StickyWheels", "Throttle"})
+defProps("VehicleSeat", {"Disabled", "MaxSpeed", "Steer", "SteerFloat", "Throttle", "ThrottleFloat", "Torque", "TurnSpeed"})
+defProps("Terrain", {"WaterColor", "WaterReflectance", "WaterTransparency", "WaterWaveSize", "WaterWaveSpeed", "Decoration"})
+
+-- ── Models / Assemblies ──
+defProps("Model", {"LevelOfDetail", "ModelStreamingMode", "WorldPivot"})
+defProps("Actor", {})
+defProps("Accessory", {"AccessoryType", "AttachmentPoint"})
+defProps("Tool", {"CanBeDropped", "Enabled", "Grip", "GripForward", "GripPos", "GripRight", "GripUp", "ManualActivationOnly", "RequiresHandle", "ToolTip"})
+defProps("BackpackItem", {})
+defProps("Flag", {"TeamColor"})
+defProps("FlagStand", {"TeamColor"})
+
+-- ── Humanoid ──
+defProps("Humanoid", {
+	"AutoJumpEnabled", "AutoRotate", "AutomaticScalingEnabled",
+	"BreakJointsOnDeath", "DisplayDistanceType", "DisplayName",
+	"EvaluateStateMachine", "HealthDisplayDistance",
+	"HealthDisplayType", "HipHeight", "JumpHeight", "JumpPower",
+	"MaxHealth", "Health", "MaxSlopeAngle", "NameDisplayDistance",
+	"NameOcclusion", "RequiresNeck", "RigType",
+	"UseJumpPower", "WalkSpeed"
+})
+defProps("HumanoidDescription", {
+	"BackAccessory", "BodyTypeScale", "ClimbAnimation", "DepthScale",
+	"Face", "FaceAccessory", "FallAnimation", "FrontAccessory",
+	"GraphicTShirt", "HairAccessory", "HatAccessory", "Head",
+	"HeadColor", "HeadScale", "HeightScale", "IdleAnimation",
+	"JumpAnimation", "LeftArm", "LeftArmColor", "LeftLeg",
+	"LeftLegColor", "MoodAnimation", "NeckAccessory", "Pants",
+	"ProportionScale", "RightArm", "RightArmColor", "RightLeg",
+	"RightLegColor", "RunAnimation", "Shirt", "ShouldersAccessory",
+	"SwimAnimation", "Torso", "TorsoColor", "WaistAccessory",
+	"WalkAnimation", "WidthScale"
+})
+
+-- ── Camera ──
+defProps("Camera", {"CFrame", "CameraType", "DiagonalFieldOfView", "FieldOfView", "FieldOfViewMode", "Focus", "HeadLocked", "HeadScale", "NearPlaneZ", "VRTiltAndRollEnabled"})
+
+-- ── Lighting ──
+defProps("Lighting", {
+	"Ambient", "Brightness", "ClockTime", "ColorShiftBottom", "ColorShiftTop",
+	"EnvironmentDiffuseScale", "EnvironmentSpecularScale", "ExposureCompensation",
+	"FogColor", "FogEnd", "FogStart", "GeographicLatitude", "GlobalShadows",
+	"OutdoorAmbient", "ShadowSoftness", "Technology", "TimeOfDay"
+})
+
+-- ── Post-process effects ──
+defProps("BloomEffect", {"Enabled", "Intensity", "Size", "Threshold"})
+defProps("BlurEffect", {"Enabled", "Size"})
+defProps("ColorCorrectionEffect", {"Brightness", "Contrast", "Enabled", "Saturation", "TintColor"})
+defProps("DepthOfFieldEffect", {"Enabled", "FarIntensity", "FocusDistance", "InFocusRadius", "NearIntensity"})
+defProps("SunRaysEffect", {"Enabled", "Intensity", "Spread"})
+defProps("Atmosphere", {"Color", "Decay", "Density", "Glare", "Haze", "Offset"})
+defProps("Sky", {"CelestialBodiesShown", "MoonAngularSize", "MoonTextureId", "SkyboxBk", "SkyboxDn", "SkyboxFt", "SkyboxLf", "SkyboxRt", "SkyboxUp", "StarCount", "SunAngularSize", "SunTextureId"})
+defProps("Clouds", {"Color", "Cover", "Density", "Enabled"})
+
+-- ── GUI: ScreenGui / BillboardGui / SurfaceGui ──
+defProps("LayerCollector", {"Enabled", "ResetOnSpawn", "ZIndexBehavior"})
+defProps("ScreenGui", {"DisplayOrder", "IgnoreGuiInset", "ScreenInsets", "ClipToDeviceSafeArea", "SafeAreaCompatibility"})
+defProps("SurfaceGui", {"Active", "Adornee", "AlwaysOnTop", "Brightness", "CanvasSize", "ClipsDescendants", "Face", "LightInfluence", "MaxDistance", "PixelsPerStud", "SizingMode", "ToolPunchThroughDistance", "ZOffset"})
+defProps("BillboardGui", {"Active", "Adornee", "AlwaysOnTop", "Brightness", "ClipsDescendants", "DistanceLowerLimit", "DistanceStep", "DistanceUpperLimit", "ExtentsOffset", "ExtentsOffsetWorldSpace", "LightInfluence", "MaxDistance", "Size", "SizeOffset", "StudsOffset", "StudsOffsetWorldSpace", "ZOffset"})
+
+-- ── GUI: GuiObject base ──
+defProps("GuiObject", {
+	"Active", "AnchorPoint", "AutomaticSize", "BackgroundColor3",
+	"BackgroundTransparency", "BorderColor3", "BorderMode", "BorderSizePixel",
+	"ClipsDescendants", "Interactable", "LayoutOrder", "Position",
+	"Rotation", "Selectable", "SelectionOrder", "Size",
+	"SizeConstraint", "Visible", "ZIndex"
+})
+
+defProps("Frame", {})
+defProps("CanvasGroup", {"GroupColor3", "GroupTransparency"})
+
+-- ── GUI: Text ──
+defProps("TextLabel", {
+	"Font", "FontFace", "LineHeight", "MaxVisibleGraphemes", "RichText",
+	"Text", "TextColor3", "TextDirection", "TextScaled", "TextSize",
+	"TextStrokeColor3", "TextStrokeTransparency", "TextTransparency",
+	"TextTruncate", "TextWrapped", "TextXAlignment", "TextYAlignment"
+})
+defProps("TextButton", {
+	"Font", "FontFace", "LineHeight", "MaxVisibleGraphemes", "RichText",
+	"Text", "TextColor3", "TextDirection", "TextScaled", "TextSize",
+	"TextStrokeColor3", "TextStrokeTransparency", "TextTransparency",
+	"TextTruncate", "TextWrapped", "TextXAlignment", "TextYAlignment",
+	"AutoButtonColor", "Modal", "Selected", "Style"
+})
+defProps("TextBox", {
+	"ClearTextOnFocus", "CursorPosition", "MultiLine",
+	"PlaceholderColor3", "PlaceholderText", "SelectionStart",
+	"ShowNativeInput", "TextEditable",
+	"Font", "FontFace", "LineHeight", "MaxVisibleGraphemes", "RichText",
+	"Text", "TextColor3", "TextDirection", "TextScaled", "TextSize",
+	"TextStrokeColor3", "TextStrokeTransparency", "TextTransparency",
+	"TextTruncate", "TextWrapped", "TextXAlignment", "TextYAlignment"
+})
+
+-- ── GUI: Image ──
+defProps("ImageLabel", {
+	"Image", "ImageColor3", "ImageRectOffset", "ImageRectSize",
+	"ImageTransparency", "ResampleMode", "ScaleType", "SliceCenter",
+	"SliceScale", "TileSize"
+})
+defProps("ImageButton", {
+	"Image", "ImageColor3", "ImageRectOffset", "ImageRectSize",
+	"ImageTransparency", "ResampleMode", "ScaleType", "SliceCenter",
+	"SliceScale", "TileSize",
+	"AutoButtonColor", "HoverImage", "PressedImage", "Modal", "Selected", "Style"
+})
+
+-- ── GUI: ScrollingFrame ──
+defProps("ScrollingFrame", {
+	"AutomaticCanvasSize", "BottomImage", "CanvasPosition", "CanvasSize",
+	"ElasticBehavior", "HorizontalScrollBarInset", "MidImage",
+	"ScrollBarImageColor3", "ScrollBarImageTransparency",
+	"ScrollBarThickness", "ScrollingDirection", "ScrollingEnabled",
+	"TopImage", "VerticalScrollBarInset", "VerticalScrollBarPosition"
+})
+
+-- ── GUI: ViewportFrame ──
+defProps("ViewportFrame", {"Ambient", "ImageColor3", "ImageTransparency", "LightColor", "LightDirection"})
+
+-- ── GUI: VideoFrame ──
+defProps("VideoFrame", {"Looped", "Playing", "TimePosition", "Video", "Volume"})
+
+-- ── UI Layout / Constraint ──
+defProps("UIListLayout", {"FillDirection", "HorizontalAlignment", "HorizontalFlex", "ItemLineAlignment", "Padding", "SortOrder", "VerticalAlignment", "VerticalFlex", "Wraps"})
+defProps("UIGridLayout", {"CellPadding", "CellSize", "FillDirection", "FillDirectionMaxCells", "HorizontalAlignment", "SortOrder", "StartCorner", "VerticalAlignment"})
+defProps("UITableLayout", {"FillDirection", "FillEmptySpaceColumns", "FillEmptySpaceRows", "HorizontalAlignment", "MajorAxis", "Padding", "SortOrder", "VerticalAlignment"})
+defProps("UIPageLayout", {"Animated", "Circular", "EasingDirection", "EasingStyle", "FillDirection", "GamepadInputEnabled", "HorizontalAlignment", "Padding", "ScrollWheelInputEnabled", "SortOrder", "TouchInputEnabled", "TweenTime", "VerticalAlignment"})
+defProps("UIPadding", {"PaddingBottom", "PaddingLeft", "PaddingRight", "PaddingTop"})
+defProps("UICorner", {"CornerRadius"})
+defProps("UIStroke", {"ApplyStrokeMode", "Color", "Enabled", "LineJoinMode", "Thickness", "Transparency"})
+defProps("UIGradient", {"Color", "Enabled", "Offset", "Rotation", "Transparency"})
+defProps("UIAspectRatioConstraint", {"AspectRatio", "AspectType", "DominantAxis"})
+defProps("UISizeConstraint", {"MaxSize", "MinSize"})
+defProps("UITextSizeConstraint", {"MaxTextSize", "MinTextSize"})
+defProps("UIScale", {"Scale"})
+defProps("UIFlexItem", {"FlexMode", "GrowRatio", "ItemLineAlignment", "ShrinkRatio"})
+
+-- ── Lights ──
+defProps("PointLight", {"Brightness", "Color", "Enabled", "Range", "Shadows"})
+defProps("SpotLight", {"Angle", "Brightness", "Color", "Enabled", "Face", "Range", "Shadows"})
+defProps("SurfaceLight", {"Angle", "Brightness", "Color", "Enabled", "Face", "Range", "Shadows"})
+
+-- ── Sound ──
+defProps("Sound", {"EmitterSize", "Looped", "PlayOnRemove", "PlaybackRegion", "PlaybackRegionsEnabled", "PlaybackSpeed", "RollOffMaxDistance", "RollOffMinDistance", "RollOffMode", "SoundId", "TimePosition", "Volume"})
+defProps("SoundGroup", {"Volume"})
+
+-- ── Sound effects ──
+defProps("ChorusSoundEffect", {"Depth", "Enabled", "Mix", "Priority", "Rate"})
+defProps("CompressorSoundEffect", {"Attack", "Enabled", "GainMakeup", "Priority", "Ratio", "Release", "SideChain", "Threshold"})
+defProps("DistortionSoundEffect", {"Enabled", "Level", "Priority"})
+defProps("EchoSoundEffect", {"Delay", "DryLevel", "Enabled", "Feedback", "Priority", "WetLevel"})
+defProps("EqualizerSoundEffect", {"Enabled", "HighGain", "LowGain", "MidGain", "MidRange", "Priority"})
+defProps("FlangeSoundEffect", {"Depth", "Enabled", "Mix", "Priority", "Rate"})
+defProps("PitchShiftSoundEffect", {"Enabled", "Octave", "Priority"})
+defProps("ReverbSoundEffect", {"DecayTime", "Density", "Diffusion", "DryLevel", "Enabled", "Priority", "WetLevel"})
+defProps("TremoloSoundEffect", {"Depth", "Duty", "Enabled", "Frequency", "Priority"})
+
+-- ── Particles / Effects ──
+defProps("ParticleEmitter", {
+	"Acceleration", "Brightness", "Color", "Drag", "EmissionDirection",
+	"Enabled", "FlipbookFramerate", "FlipbookLayout", "FlipbookMode",
+	"FlipbookStartRandom", "Lifetime", "LightEmission", "LightInfluence",
+	"LockedToPart", "Orientation", "Rate", "RotSpeed", "Rotation",
+	"Shape", "ShapeInOut", "ShapePartial", "ShapeStyle", "Size", "Speed",
+	"SpreadAngle", "Squash", "Texture", "TimeScale", "Transparency",
+	"VelocityInheritance", "WindAffectsDrag", "ZOffset"
+})
+defProps("Beam", {
+	"Brightness", "Color", "CurveSize0", "CurveSize1", "Enabled",
+	"FaceCamera", "LightEmission", "LightInfluence", "Segments",
+	"Texture", "TextureLength", "TextureMode", "TextureSpeed",
+	"Transparency", "Width0", "Width1", "ZOffset"
+})
+defProps("Trail", {
+	"Brightness", "Color", "Enabled", "FaceCamera", "Lifetime",
+	"LightEmission", "LightInfluence", "MaxWidth", "MinLength",
+	"Texture", "TextureLength", "TextureMode", "Transparency",
+	"WidthScale"
+})
+defProps("Fire", {"Color", "Enabled", "Heat", "SecondaryColor", "Size", "TimeScale"})
+defProps("Smoke", {"Color", "Enabled", "Opacity", "RiseVelocity", "Size", "TimeScale"})
+defProps("Sparkles", {"Color", "Enabled", "SparkleColor", "TimeScale"})
+defProps("Explosion", {"BlastPressure", "BlastRadius", "DestroyJointRadiusPercent", "ExplosionType", "Position", "Visible"})
+defProps("Highlight", {"Adornee", "DepthMode", "Enabled", "FillColor", "FillTransparency", "OutlineColor", "OutlineTransparency"})
+
+-- ── Attachments / Constraints ──
+defProps("Attachment", {"CFrame", "Visible"})
+defProps("Bone", {"CFrame", "Visible"})
+
+defProps("WeldConstraint", {"Enabled"})
+defProps("Weld", {"C0", "C1", "Enabled"})
+defProps("Motor6D", {"C0", "C1", "Enabled", "MaxVelocity", "DesiredAngle"})
+defProps("Motor", {"C0", "C1", "Enabled", "MaxVelocity", "DesiredAngle"})
+defProps("ManualWeld", {"C0", "C1", "Enabled"})
+defProps("ManualGlue", {"C0", "C1", "Enabled"})
+
+defProps("RigidConstraint", {"Enabled"})
+defProps("RopeConstraint", {"Color", "Enabled", "FreeLength", "Length", "Restitution", "Thickness", "Visible", "WinchEnabled", "WinchForce", "WinchResponsiveness", "WinchSpeed", "WinchTarget"})
+defProps("RodConstraint", {"Color", "Enabled", "Length", "LimitAngle0", "LimitAngle1", "LimitsEnabled", "Thickness", "Visible"})
+defProps("SpringConstraint", {"Color", "Coils", "Damping", "Enabled", "FreeLength", "LimitsEnabled", "MaxForce", "MaxLength", "MinLength", "Radius", "Stiffness", "Thickness", "Visible"})
+defProps("HingeConstraint", {"ActuatorType", "AngularResponsiveness", "AngularSpeed", "AngularVelocity", "Enabled", "LimitsEnabled", "LowerAngle", "MotorMaxAcceleration", "MotorMaxTorque", "Radius", "Restitution", "ServoMaxTorque", "SoftlockServoUponReachingTarget", "TargetAngle", "UpperAngle"})
+defProps("CylindricalConstraint", {"AngularActuatorType", "AngularLimitsEnabled", "AngularResponsiveness", "AngularRestitution", "AngularSpeed", "AngularVelocity", "Enabled", "InclinationAngle", "LimitsEnabled", "LowerAngle", "LowerLimit", "MotorMaxAcceleration", "MotorMaxAngularAcceleration", "MotorMaxForce", "MotorMaxTorque", "Restitution", "RotationAxisVisible", "ServoMaxForce", "ServoMaxTorque", "Size", "SoftlockServoUponReachingTarget", "Speed", "TargetAngle", "TargetPosition", "UpperAngle", "UpperLimit", "Velocity"})
+defProps("PrismaticConstraint", {"ActuatorType", "Enabled", "LimitsEnabled", "LowerLimit", "MotorMaxAcceleration", "MotorMaxForce", "Restitution", "ServoMaxForce", "Size", "SoftlockServoUponReachingTarget", "Speed", "TargetPosition", "UpperLimit", "Velocity"})
+defProps("BallSocketConstraint", {"Enabled", "LimitsEnabled", "MaxFrictionTorque", "Radius", "Restitution", "TwistLimitsEnabled", "TwistLowerAngle", "TwistUpperAngle", "UpperAngle"})
+defProps("UniversalConstraint", {"Enabled", "LimitsEnabled", "MaxAngle", "Radius", "Restitution"})
+defProps("PlaneConstraint", {"Enabled"})
+defProps("NoCollisionConstraint", {"Enabled"})
+defProps("AlignOrientation", {"AlignType", "CFrame", "Enabled", "MaxAngularVelocity", "MaxTorque", "Mode", "PrimaryAxisOnly", "ReactionTorqueEnabled", "Responsiveness", "RigidityEnabled"})
+defProps("AlignPosition", {"ApplyAtCenterOfMass", "Enabled", "ForceLimitMode", "ForceRelativeTo", "MaxAxesForce", "MaxForce", "MaxVelocity", "Mode", "Position", "ReactionForceEnabled", "Responsiveness", "RigidityEnabled"})
+defProps("VectorForce", {"ApplyAtCenterOfMass", "Enabled", "Force", "RelativeTo"})
+defProps("Torque", {"Enabled", "RelativeTo", "Torque"})
+defProps("LinearVelocity", {"Enabled", "ForceLimitMode", "ForceLimitsEnabled", "LineDirection", "LineVelocity", "MaxAxesForce", "MaxForce", "MaxPlanarAxesForce", "PlaneVelocity", "PrimaryTangentAxis", "RelativeTo", "SecondaryTangentAxis", "VectorVelocity", "VelocityConstraintMode"})
+defProps("AngularVelocity", {"AngularVelocity", "Enabled", "MaxTorque", "ReactionTorqueEnabled", "RelativeTo"})
+defProps("LineForce", {"ApplyAtCenterOfMass", "Enabled", "InverseSquareLaw", "Magnitude", "MaxForce", "ReactionForceEnabled"})
+
+-- ── Legacy BodyMovers ──
+defProps("BodyForce", {"Force"})
+defProps("BodyGyro", {"CFrame", "D", "MaxTorque", "P"})
+defProps("BodyPosition", {"D", "MaxForce", "P", "Position"})
+defProps("BodyVelocity", {"MaxForce", "P", "Velocity"})
+defProps("BodyAngularVelocity", {"AngularVelocity", "MaxTorque", "P"})
+defProps("BodyThrust", {"Force", "Location"})
+defProps("RocketPropulsion", {"CartoonFactor", "MaxSpeed", "MaxThrust", "MaxTorque", "TargetOffset", "TargetRadius", "ThrustD", "ThrustP", "TurnD", "TurnP"})
+
+-- ── Decals / Textures / Meshes ──
+defProps("Decal", {"Color3", "Face", "Texture", "Transparency", "ZIndex"})
+defProps("Texture", {"Face", "OffsetStudsU", "OffsetStudsV", "StudsPerTileU", "StudsPerTileV"})
+defProps("SpecialMesh", {"MeshId", "MeshType", "Offset", "Scale", "TextureId", "VertexColor"})
+defProps("BlockMesh", {"Offset", "Scale", "VertexColor"})
+defProps("CylinderMesh", {"Offset", "Scale", "VertexColor"})
+defProps("FileMesh", {"MeshId", "Offset", "Scale", "TextureId", "VertexColor"})
+defProps("SurfaceAppearance", {"AlphaMode", "ColorMap", "MetalnessMap", "NormalMap", "RoughnessMap", "TexturePack"})
+
+-- ── Value Objects ──
+defProps("BoolValue", {"Value"})
+defProps("BrickColorValue", {"Value"})
+defProps("CFrameValue", {"Value"})
+defProps("Color3Value", {"Value"})
+defProps("IntValue", {"Value"})
+defProps("IntConstrainedValue", {"MaxValue", "MinValue", "Value"})
+defProps("DoubleConstrainedValue", {"MaxValue", "MinValue", "Value"})
+defProps("NumberValue", {"Value"})
+defProps("ObjectValue", {"Value"})
+defProps("RayValue", {"Value"})
+defProps("StringValue", {"Value"})
+defProps("Vector3Value", {"Value"})
+
+-- ── Scripts ──
+defProps("Script", {"Disabled", "RunContext"})
+defProps("LocalScript", {"Disabled"})
+defProps("ModuleScript", {})
+
+-- ── Folders / Config ──
+defProps("Folder", {})
+defProps("Configuration", {})
+
+-- ── Remote / Bindable ──
+defProps("RemoteEvent", {})
+defProps("RemoteFunction", {})
+defProps("BindableEvent", {})
+defProps("BindableFunction", {})
+defProps("UnreliableRemoteEvent", {})
+
+-- ── Data containers ──
+defProps("Animation", {"AnimationId"})
+defProps("AnimationController", {})
+defProps("Animator", {})
+defProps("ProximityPrompt", {
+	"ActionText", "AutoLocalize", "ClickablePrompt", "Enabled",
+	"ExclusivityDistance", "GamepadKeyCode", "HoldDuration",
+	"KeyboardKeyCode", "MaxActivationDistance", "ObjectText",
+	"RequiresLineOfSight", "Style", "UIOffset"
+})
+defProps("ClickDetector", {"CursorIcon", "MaxActivationDistance"})
+defProps("Dialog", {"BehaviorType", "ConversationDistance", "GoodbyeChoiceActive", "GoodbyeDialog", "InUse", "InitialPrompt", "Purpose", "Tone", "TriggerDistance", "TriggerOffset"})
+defProps("DialogChoice", {"GoodbyeChoiceActive", "GoodbyeDialog", "ResponseDialog", "UserDialog"})
+
+-- ── Clothing / Appearance ──
+defProps("Shirt", {"ShirtTemplate", "Color3"})
+defProps("Pants", {"PantsTemplate", "Color3"})
+defProps("ShirtGraphic", {"Color3", "Graphic"})
+defProps("CharacterMesh", {"BaseTextureId", "BodyPart", "MeshId", "OverlayTextureId"})
+defProps("WrapTarget", {"CageMeshId", "CageOrigin", "Color", "Stiffness"})
+defProps("WrapLayer", {"AutoSkin", "BindOffset", "CageMeshContent", "CageOrigin", "Color", "Enabled", "HSRAssetId", "Order", "Puffiness", "ReferenceMeshId", "ReferenceOrigin", "ShrinkFactor"})
+
+-- ── Misc ──
+defProps("ForceField", {"Visible"})
+defProps("SelectionBox", {"Adornee", "Color3", "LineThickness", "SurfaceColor3", "SurfaceTransparency", "Transparency", "Visible"})
+defProps("SelectionSphere", {"Adornee", "Color3", "SurfaceColor3", "SurfaceTransparency", "Transparency", "Visible"})
+defProps("ArcHandles", {"Axes", "Color3", "Visible"})
+defProps("Handles", {"Color3", "Faces", "Style", "Visible"})
+defProps("SurfaceSelection", {"Adornee", "TargetSurface", "Visible"})
+defProps("BoolConstrainedValue", {"Value"})
+defProps("Message", {"Text"})
+defProps("Hint", {"Text"})
+
+-- ── Drag detector ──
+defProps("DragDetector", {"ActivatedCursorIcon", "ApplyAtCenterOfMass", "CursorIcon", "DragStyle", "Enabled", "GamepadModeSwitchKeyCode", "KeyboardModeSwitchKeyCode", "MaxDragAngle", "MaxDragTranslation", "MaxForce", "MaxTorque", "MinDragAngle", "MinDragTranslation", "Orientation", "PermissionPolicy", "ResponseStyle", "Responsiveness", "RunLocally", "SecondaryAxis"})
+
+-- ── WorldModel ──
+defProps("WorldModel", {})
+
+-- ═══════════════════════════════════════════════════════════
+-- CLASS HIERARCHY (for property inheritance)
+-- ═══════════════════════════════════════════════════════════
+local CLASS_PARENTS = {
+	Part = "BasePart", WedgePart = "BasePart", CornerWedgePart = "BasePart",
+	TrussPart = "BasePart", MeshPart = "BasePart", SpawnLocation = "BasePart",
+	Seat = "BasePart", VehicleSeat = "BasePart", SkateboardPlatform = "BasePart",
+	UnionOperation = "BasePart", NegateOperation = "BasePart",
+	IntersectOperation = "BasePart", Terrain = "BasePart",
+	BasePart = "PVInstance", PVInstance = "Instance",
+
+	Model = "PVInstance", Actor = "Model",
+	Accessory = "Instance", Tool = "Instance", BackpackItem = "Instance",
+
+	Humanoid = "Instance", HumanoidDescription = "Instance",
+	Camera = "Instance", Lighting = "Instance",
+
+	ScreenGui = "LayerCollector", SurfaceGui = "LayerCollector",
+	BillboardGui = "LayerCollector", LayerCollector = "Instance",
+
+	Frame = "GuiObject", CanvasGroup = "GuiObject",
+	TextLabel = "GuiObject", TextButton = "GuiObject", TextBox = "GuiObject",
+	ImageLabel = "GuiObject", ImageButton = "GuiObject",
+	ScrollingFrame = "GuiObject", ViewportFrame = "GuiObject",
+	VideoFrame = "GuiObject", GuiObject = "Instance",
+
+	UIListLayout = "Instance", UIGridLayout = "Instance", UITableLayout = "Instance",
+	UIPageLayout = "Instance", UIPadding = "Instance", UICorner = "Instance",
+	UIStroke = "Instance", UIGradient = "Instance",
+	UIAspectRatioConstraint = "Instance", UISizeConstraint = "Instance",
+	UITextSizeConstraint = "Instance", UIScale = "Instance",
+	UIFlexItem = "Instance",
+
+	PointLight = "Instance", SpotLight = "Instance", SurfaceLight = "Instance",
+
+	Sound = "Instance", SoundGroup = "Instance",
+	ChorusSoundEffect = "Instance", CompressorSoundEffect = "Instance",
+	DistortionSoundEffect = "Instance", EchoSoundEffect = "Instance",
+	EqualizerSoundEffect = "Instance", FlangeSoundEffect = "Instance",
+	PitchShiftSoundEffect = "Instance", ReverbSoundEffect = "Instance",
+	TremoloSoundEffect = "Instance",
+
+	ParticleEmitter = "Instance", Beam = "Instance", Trail = "Instance",
+	Fire = "Instance", Smoke = "Instance", Sparkles = "Instance",
+	Explosion = "Instance", Highlight = "Instance",
+
+	Attachment = "Instance", Bone = "Attachment",
+	WeldConstraint = "Instance", Weld = "Instance", Motor6D = "Instance",
+	Motor = "Instance", ManualWeld = "Instance", ManualGlue = "Instance",
+
+	RigidConstraint = "Instance", RopeConstraint = "Instance",
+	RodConstraint = "Instance", SpringConstraint = "Instance",
+	HingeConstraint = "Instance", CylindricalConstraint = "Instance",
+	PrismaticConstraint = "Instance", BallSocketConstraint = "Instance",
+	UniversalConstraint = "Instance", PlaneConstraint = "Instance",
+	NoCollisionConstraint = "Instance",
+	AlignOrientation = "Instance", AlignPosition = "Instance",
+	VectorForce = "Instance", Torque = "Instance",
+	LinearVelocity = "Instance", AngularVelocity = "Instance",
+	LineForce = "Instance",
+
+	BodyForce = "Instance", BodyGyro = "Instance", BodyPosition = "Instance",
+	BodyVelocity = "Instance", BodyAngularVelocity = "Instance",
+	BodyThrust = "Instance", RocketPropulsion = "Instance",
+
+	Decal = "Instance", Texture = "Decal",
+	SpecialMesh = "Instance", BlockMesh = "Instance",
+	CylinderMesh = "Instance", FileMesh = "Instance",
+	SurfaceAppearance = "Instance",
+
+	BoolValue = "Instance", BrickColorValue = "Instance",
+	CFrameValue = "Instance", Color3Value = "Instance",
+	IntValue = "Instance", IntConstrainedValue = "Instance",
+	DoubleConstrainedValue = "Instance", NumberValue = "Instance",
+	ObjectValue = "Instance", RayValue = "Instance",
+	StringValue = "Instance", Vector3Value = "Instance",
+
+	Script = "Instance", LocalScript = "Instance", ModuleScript = "Instance",
+	Folder = "Instance", Configuration = "Instance",
+
+	RemoteEvent = "Instance", RemoteFunction = "Instance",
+	BindableEvent = "Instance", BindableFunction = "Instance",
+	UnreliableRemoteEvent = "Instance",
+
+	Animation = "Instance", AnimationController = "Instance", Animator = "Instance",
+	ProximityPrompt = "Instance", ClickDetector = "Instance",
+	Dialog = "Instance", DialogChoice = "Instance",
+
+	Shirt = "Instance", Pants = "Instance", ShirtGraphic = "Instance",
+	CharacterMesh = "Instance", WrapTarget = "Instance", WrapLayer = "Instance",
+
+	ForceField = "Instance", SelectionBox = "Instance", SelectionSphere = "Instance",
+	ArcHandles = "Instance", Handles = "Instance", SurfaceSelection = "Instance",
+
+	BloomEffect = "Instance", BlurEffect = "Instance",
+	ColorCorrectionEffect = "Instance", DepthOfFieldEffect = "Instance",
+	SunRaysEffect = "Instance", Atmosphere = "Instance",
+	Sky = "Instance", Clouds = "Instance",
+
+	DragDetector = "Instance",
+	WorldModel = "Instance",
+	Message = "Instance", Hint = "Instance",
+	BoolConstrainedValue = "Instance",
+	Flag = "Instance", FlagStand = "Instance",
+}
+
+-- ═══════════════════════════════════════════════════════════
+-- COLLECT ALL PROPERTIES FOR A CLASS (walking hierarchy)
+-- ═══════════════════════════════════════════════════════════
+local propCache = {}
+
+local function getClassProps(className: string): {string}
+	if propCache[className] then return propCache[className] end
+
+	local collected = {}
+	local seen = {}
+
+	local cur = className
+	while cur do
+		local list = PROP_DB[cur]
+		if list then
+			for _, prop in list do
+				if not seen[prop] then
+					seen[prop] = true
+					table.insert(collected, prop)
+				end
+			end
+		end
+		cur = CLASS_PARENTS[cur]
+	end
+
+	-- Always ensure "Name" is present
+	if not seen["Name"] then
+		table.insert(collected, 1, "Name")
+	end
+
+	propCache[className] = collected
+	return collected
+end
+
+-- ═══════════════════════════════════════════════════════════
+-- DEFAULT VALUE COMPARISON
+-- ═══════════════════════════════════════════════════════════
+local defaultCache = {}
+
+local CANNOT_CREATE = {
+	Terrain = true, Workspace = true, Camera = true, Lighting = true,
+	Players = true, StarterGui = true, StarterPack = true, StarterPlayer = true,
+	ReplicatedFirst = true, ReplicatedStorage = true, ServerScriptService = true,
+	ServerStorage = true, Teams = true, TestService = true,
+	SoundService = true, Chat = true, TextChatService = true,
+	LocalizationService = true, MaterialService = true,
+}
+
+local function getDefault(className: string, propName: string): any
+	if CANNOT_CREATE[className] then return nil end
+
+	if not defaultCache[className] then
+		local ok, inst = pcall(Instance.new, className)
+		if ok and inst then
+			defaultCache[className] = inst
+		else
+			defaultCache[className] = false
+			return nil
+		end
+	end
+
+	local def = defaultCache[className]
+	if not def then return nil end
+
+	local ok, val = pcall(function() return (def :: any)[propName] end)
+	if ok then return val end
+	return nil
+end
+
+local function valuesEqual(a: any, b: any): boolean
+	if typeof(a) ~= typeof(b) then return false end
+	local t = typeof(a)
+
+	if t == "CFrame" then
+		local ca, cb = {a:GetComponents()}, {b:GetComponents()}
+		for i = 1, #ca do
+			if math.abs(ca[i] - cb[i]) > 1e-4 then return false end
+		end
+		return true
+	elseif t == "Vector3" or t == "Vector2" then
+		return (a - b).Magnitude < 1e-4
+	elseif t == "Color3" then
+		return math.abs(a.R - b.R) < 0.002 and math.abs(a.G - b.G) < 0.002 and math.abs(a.B - b.B) < 0.002
+	elseif t == "UDim2" then
+		return a.X.Scale == b.X.Scale and a.X.Offset == b.X.Offset
+			and a.Y.Scale == b.Y.Scale and a.Y.Offset == b.Y.Offset
+	elseif t == "UDim" then
+		return a.Scale == b.Scale and a.Offset == b.Offset
+	elseif t == "NumberSequence" or t == "ColorSequence" then
+		local ka, kb = a.Keypoints, b.Keypoints
+		if #ka ~= #kb then return false end
+		for i = 1, #ka do
+			if ka[i].Time ~= kb[i].Time then return false end
+			if t == "NumberSequence" then
+				if ka[i].Value ~= kb[i].Value or ka[i].Envelope ~= kb[i].Envelope then return false end
+			else
+				local va, vb = ka[i].Value, kb[i].Value
+				if math.abs(va.R - vb.R) > 0.002 or math.abs(va.G - vb.G) > 0.002 or math.abs(va.B - vb.B) > 0.002 then return false end
+			end
+		end
+		return true
+	elseif t == "Rect" then
+		return a.Min.X == b.Min.X and a.Min.Y == b.Min.Y and a.Max.X == b.Max.X and a.Max.Y == b.Max.Y
+	elseif t == "NumberRange" then
+		return a.Min == b.Min and a.Max == b.Max
+	elseif t == "Font" then
+		return tostring(a.Family) == tostring(b.Family) and a.Weight == b.Weight and a.Style == b.Style
+	elseif t == "EnumItem" then
+		return a == b
+	elseif t == "PhysicalProperties" then
+		return a.Density == b.Density and a.Friction == b.Friction and a.Elasticity == b.Elasticity
+	else
+		return a == b
+	end
+end
+
+-- ═══════════════════════════════════════════════════════════
+-- SKIP RULES
+-- ═══════════════════════════════════════════════════════════
+local SKIP_PROPS = {
+	Parent = true, Archivable = true, ClassName = true, DataCost = true,
+	RobloxLocked = true, SourceAssetId = true, UniqueId = true,
+	HistoryId = true, Tags = true,
+}
+
+local SKIP_CLASSES = {
+	Player = true, Animator = true,
+	PlayerScripts = true, PlayerGui = true, Backpack = true,
+	StarCloudCollection = true, PackageLink = true,
+}
+
+-- ═══════════════════════════════════════════════════════════
+-- SERIALISER
+-- ═══════════════════════════════════════════════════════════
+local output = {}
+local varCounter = 0
+local statusCallback = nil
+local totalProcessed = 0
+
+local function getVarName(instance: Instance): string
+	varCounter += 1
+	local safeName = instance.Name:gsub("%W", "_")
+	if safeName == "" then safeName = "obj" end
+	if safeName:match("^%d") then safeName = "_" .. safeName end
+	return safeName .. "_" .. varCounter
+end
+
+local function emit(line: string)
+	table.insert(output, line)
+end
+
+local function serialiseInstance(instance: Instance, parentVar: string, depth: number)
+	if depth > MAX_DEPTH then return end
+	if SKIP_CLASSES[instance.ClassName] then return end
+
+	totalProcessed += 1
+	if statusCallback and totalProcessed % 50 == 0 then
+		statusCallback("Processing... (" .. totalProcessed .. " objects)")
+		task.wait()
+	end
+
+	local varName = getVarName(instance)
+	local className = instance.ClassName
+
+	-- Create instance
+	emit("")
+	emit("local " .. varName .. " = Instance.new(" .. string.format("%q", className) .. ")")
+
+	-- Gather properties
+	local props = getClassProps(className)
+	local propsToWrite = {}
+
+	for _, propName in props do
+		if SKIP_PROPS[propName] then continue end
+		if propName == "Name" then
+			if instance.Name ~= className and instance.Name ~= "" then
+				table.insert(propsToWrite, {propName, instance.Name})
+			end
+			continue
+		end
+
+		local ok, val = pcall(function() return (instance :: any)[propName] end)
+		if not ok then continue end
+		if val == nil then continue end
+
+		-- Skip Instance references (Part0/Part1/Adornee, etc.)
+		if typeof(val) == "Instance" then continue end
+
+		-- Compare against default
+		local defVal = getDefault(className, propName)
+		if defVal ~= nil and valuesEqual(val, defVal) then continue end
+
+		table.insert(propsToWrite, {propName, val})
+	end
+
+	-- Also serialise Attributes
+	local attributes = {}
+	local ok2, attrs = pcall(function() return instance:GetAttributes() end)
+	if ok2 and attrs then
+		for attrName, attrVal in attrs do
+			table.insert(attributes, {attrName, attrVal})
+		end
+	end
+
+	-- Also serialise Tags
+	local tags = {}
+	local ok3, tagList = pcall(function() return instance:GetTags() end)
+	if ok3 and tagList then
+		for _, tag in tagList do
+			table.insert(tags, tag)
+		end
+	end
+
+	-- Write properties
+	for _, entry in propsToWrite do
+		local propName, val = entry[1], entry[2]
+		local serialised = serialiseValue(val)
+		emit(varName .. "." .. propName .. " = " .. serialised)
+	end
+
+	-- Write attributes
+	for _, entry in attributes do
+		local attrName, attrVal = entry[1], entry[2]
+		local serialised = serialiseValue(attrVal)
+		emit(varName .. ":SetAttribute(" .. string.format("%q", attrName) .. ", " .. serialised .. ")")
+	end
+
+	-- Write tags
+	for _, tag in tags do
+		emit(varName .. ":AddTag(" .. string.format("%q", tag) .. ")")
+	end
+
+	-- Set parent
+	emit(varName .. ".Parent = " .. parentVar)
+
+	-- Recurse children
+	local children = instance:GetChildren()
+	for _, child in children do
+		serialiseInstance(child, varName, depth + 1)
+	end
+end
+
+local function serialiseRoot(root: Instance): string
+	output = {}
+	varCounter = 0
+	totalProcessed = 0
+
+	emit("-- ═══════════════════════════════════════════")
+	emit("-- Auto-generated Lua from Instance hierarchy")
+	emit("-- Source: " .. root:GetFullName())
+	emit("-- Generated: " .. os.date("%Y-%m-%d %H:%M:%S"))
+	emit("-- ═══════════════════════════════════════════")
+	emit("")
+
+	-- If the root itself is a service / workspace, serialise its children directly
+	local isService = root == game.Workspace or root:IsA("DataModel")
+		or root:IsA("StarterGui") or root:IsA("ReplicatedStorage")
+		or root:IsA("ServerStorage") or root:IsA("ServerScriptService")
+		or root:IsA("Lighting") or root:IsA("ReplicatedFirst")
+		or root:IsA("StarterPack") or root:IsA("StarterPlayer")
+		or root:IsA("SoundService") or root:IsA("Teams")
+
+	local rootVar
+	if isService then
+		rootVar = root:GetFullName():gsub("%.", "_"):gsub("%s", "_")
+		if rootVar == "game" then rootVar = "game" end
+		if root:IsA("Workspace") then
+			emit('local targetParent = game:GetService("Workspace")')
+			rootVar = "targetParent"
+		elseif root:IsA("DataModel") then
+			emit("-- DataModel children:")
+			rootVar = "game"
+		else
+			local serviceName = root.ClassName
+			emit('local targetParent = game:GetService("' .. serviceName .. '")')
+			rootVar = "targetParent"
+		end
+
+		for _, child in root:GetChildren() do
+			serialiseInstance(child, rootVar, 1)
+		end
+	else
+		-- Need a parent reference for the root
+		emit('local targetParent = workspace')
+		rootVar = "targetParent"
+		serialiseInstance(root, rootVar, 0)
+	end
+
+	return table.concat(output, "\n")
+end
+
+-- ═══════════════════════════════════════════════════════════
+-- UI CREATION
+-- ═══════════════════════════════════════════════════════════
+local function createUI()
+	-- Remove old UI if it exists
+	local existing = playerGui:FindFirstChild("InstanceConverterGui")
+	if existing then existing:Destroy() end
+
+	local screenGui = Instance.new("ScreenGui")
+	screenGui.Name = "InstanceConverterGui"
+	screenGui.DisplayOrder = 999
+	screenGui.IgnoreGuiInset = true
+	screenGui.ResetOnSpawn = false
+	screenGui.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
+
+	-- ── Main container ──
+	local mainFrame = Instance.new("Frame")
+	mainFrame.Name = "MainFrame"
+	mainFrame.AnchorPoint = Vector2.new(0.5, 0.5)
+	mainFrame.Position = UDim2.new(0.5, 0, 0.5, 0)
+	mainFrame.Size = UDim2.new(0.8, 0, 0.85, 0)
+	mainFrame.BackgroundColor3 = Color3.fromRGB(15, 15, 20)
+	mainFrame.BorderSizePixel = 0
+	mainFrame.Parent = screenGui
+
+	local mainCorner = Instance.new("UICorner")
+	mainCorner.CornerRadius = UDim.new(0, 12)
+	mainCorner.Parent = mainFrame
+
+	local mainStroke = Instance.new("UIStroke")
+	mainStroke.Color = Color3.fromRGB(60, 60, 80)
+	mainStroke.Thickness = 1.5
+	mainStroke.Parent = mainFrame
+
+	-- ── Title bar ──
+	local titleBar = Instance.new("Frame")
+	titleBar.Name = "TitleBar"
+	titleBar.Size = UDim2.new(1, 0, 0, 48)
+	titleBar.BackgroundColor3 = Color3.fromRGB(22, 22, 30)
+	titleBar.BorderSizePixel = 0
+	titleBar.Parent = mainFrame
+
+	local titleCorner = Instance.new("UICorner")
+	titleCorner.CornerRadius = UDim.new(0, 12)
+	titleCorner.Parent = titleBar
+
+	-- small cover so bottom of title bar is square
+	local titleFill = Instance.new("Frame")
+	titleFill.Size = UDim2.new(1, 0, 0, 14)
+	titleFill.Position = UDim2.new(0, 0, 1, -14)
+	titleFill.BackgroundColor3 = Color3.fromRGB(22, 22, 30)
+	titleFill.BorderSizePixel = 0
+	titleFill.Parent = titleBar
+
+	local titleLabel = Instance.new("TextLabel")
+	titleLabel.Name = "Title"
+	titleLabel.Size = UDim2.new(1, -120, 1, 0)
+	titleLabel.Position = UDim2.new(0, 16, 0, 0)
+	titleLabel.BackgroundTransparency = 1
+	titleLabel.Font = Enum.Font.GothamBold
+	titleLabel.Text = "Instance → Lua Converter"
+	titleLabel.TextColor3 = Color3.fromRGB(220, 220, 240)
+	titleLabel.TextSize = 17
+	titleLabel.TextXAlignment = Enum.TextXAlignment.Left
+	titleLabel.Parent = titleBar
+
+	-- Close button
+	local closeBtn = Instance.new("TextButton")
+	closeBtn.Name = "CloseBtn"
+	closeBtn.AnchorPoint = Vector2.new(1, 0.5)
+	closeBtn.Position = UDim2.new(1, -10, 0.5, 0)
+	closeBtn.Size = UDim2.new(0, 32, 0, 32)
+	closeBtn.BackgroundColor3 = Color3.fromRGB(180, 50, 50)
+	closeBtn.Font = Enum.Font.GothamBold
+	closeBtn.Text = "✕"
+	closeBtn.TextColor3 = Color3.fromRGB(255, 255, 255)
+	closeBtn.TextSize = 16
+	closeBtn.AutoButtonColor = true
+	closeBtn.BorderSizePixel = 0
+	closeBtn.Parent = titleBar
+
+	local closeBtnCorner = Instance.new("UICorner")
+	closeBtnCorner.CornerRadius = UDim.new(0, 8)
+	closeBtnCorner.Parent = closeBtn
+
+	-- ── Controls row ──
+	local controlsFrame = Instance.new("Frame")
+	controlsFrame.Name = "Controls"
+	controlsFrame.Size = UDim2.new(1, -32, 0, 44)
+	controlsFrame.Position = UDim2.new(0, 16, 0, 58)
+	controlsFrame.BackgroundTransparency = 1
+	controlsFrame.Parent = mainFrame
+
+	-- Path label
+	local pathLabel = Instance.new("TextLabel")
+	pathLabel.Name = "PathLabel"
+	pathLabel.Size = UDim2.new(0, 60, 1, 0)
+	pathLabel.BackgroundTransparency = 1
+	pathLabel.Font = Enum.Font.GothamMedium
+	pathLabel.Text = "Path:"
+	pathLabel.TextColor3 = Color3.fromRGB(150, 150, 175)
+	pathLabel.TextSize = 14
+	pathLabel.TextXAlignment = Enum.TextXAlignment.Left
+	pathLabel.Parent = controlsFrame
+
+	-- Path input
+	local pathInput = Instance.new("TextBox")
+	pathInput.Name = "PathInput"
+	pathInput.Size = UDim2.new(1, -290, 1, 0)
+	pathInput.Position = UDim2.new(0, 60, 0, 0)
+	pathInput.BackgroundColor3 = Color3.fromRGB(28, 28, 38)
+	pathInput.BorderSizePixel = 0
+	pathInput.Font = Enum.Font.Code
+	pathInput.PlaceholderText = "game.Workspace"
+	pathInput.Text = "game.Workspace"
+	pathInput.TextColor3 = Color3.fromRGB(130, 220, 255)
+	pathInput.PlaceholderColor3 = Color3.fromRGB(80, 80, 100)
+	pathInput.TextSize = 14
+	pathInput.TextXAlignment = Enum.TextXAlignment.Left
+	pathInput.ClearTextOnFocus = false
+	pathInput.Parent = controlsFrame
+
+	local pathCorner = Instance.new("UICorner")
+	pathCorner.CornerRadius = UDim.new(0, 8)
+	pathCorner.Parent = pathInput
+
+	local pathStroke = Instance.new("UIStroke")
+	pathStroke.Color = Color3.fromRGB(50, 50, 70)
+	pathStroke.Thickness = 1
+	pathStroke.Parent = pathInput
+
+	local pathPadding = Instance.new("UIPadding")
+	pathPadding.PaddingLeft = UDim.new(0, 10)
+	pathPadding.PaddingRight = UDim.new(0, 10)
+	pathPadding.Parent = pathInput
+
+	-- Convert button
+	local convertBtn = Instance.new("TextButton")
+	convertBtn.Name = "ConvertBtn"
+	convertBtn.AnchorPoint = Vector2.new(1, 0)
+	convertBtn.Position = UDim2.new(1, -110, 0, 0)
+	convertBtn.Size = UDim2.new(0, 100, 1, 0)
+	convertBtn.BackgroundColor3 = Color3.fromRGB(40, 140, 255)
+	convertBtn.Font = Enum.Font.GothamBold
+	convertBtn.Text = "▶ Convert"
+	convertBtn.TextColor3 = Color3.fromRGB(255, 255, 255)
+	convertBtn.TextSize = 14
+	convertBtn.AutoButtonColor = true
+	convertBtn.BorderSizePixel = 0
+	convertBtn.Parent = controlsFrame
+
+	local convertCorner = Instance.new("UICorner")
+	convertCorner.CornerRadius = UDim.new(0, 8)
+	convertCorner.Parent = convertBtn
+
+	-- Copy button
+	local copyBtn = Instance.new("TextButton")
+	copyBtn.Name = "CopyBtn"
+	copyBtn.AnchorPoint = Vector2.new(1, 0)
+	copyBtn.Position = UDim2.new(1, 0, 0, 0)
+	copyBtn.Size = UDim2.new(0, 100, 1, 0)
+	copyBtn.BackgroundColor3 = Color3.fromRGB(50, 180, 80)
+	copyBtn.Font = Enum.Font.GothamBold
+	copyBtn.Text = "📋 Copy"
+	copyBtn.TextColor3 = Color3.fromRGB(255, 255, 255)
+	copyBtn.TextSize = 14
+	copyBtn.AutoButtonColor = true
+	copyBtn.BorderSizePixel = 0
+	copyBtn.Parent = controlsFrame
+
+	local copyCorner = Instance.new("UICorner")
+	copyCorner.CornerRadius = UDim.new(0, 8)
+	copyCorner.Parent = copyBtn
+
+
+	-- ── Sidebar container ──
+	local sidebar = Instance.new("Frame")
+	sidebar.Name = "Sidebar"
+	sidebar.Position = UDim2.new(1, -256, 0, 112)
+	sidebar.Size = UDim2.new(0, 240, 1, -128)
+	sidebar.BackgroundColor3 = Color3.fromRGB(20, 20, 28)
+	sidebar.BorderSizePixel = 0
+	sidebar.Parent = mainFrame
+
+	local sidebarCorner = Instance.new("UICorner")
+	sidebarCorner.CornerRadius = UDim.new(0, 8)
+	sidebarCorner.Parent = sidebar
+
+	local sidebarStroke = Instance.new("UIStroke")
+	sidebarStroke.Color = Color3.fromRGB(40, 40, 55)
+	sidebarStroke.Thickness = 1
+	sidebarStroke.Parent = sidebar
+
+	-- Auto-detect toggle button
+	local autoDetectBtn = Instance.new("TextButton")
+	autoDetectBtn.Name = "AutoDetectBtn"
+	autoDetectBtn.Size = UDim2.new(1, -16, 0, 32)
+	autoDetectBtn.Position = UDim2.new(0, 8, 0, 8)
+	autoDetectBtn.BackgroundColor3 = Color3.fromRGB(35, 35, 50)
+	autoDetectBtn.BorderSizePixel = 0
+	autoDetectBtn.Font = Enum.Font.GothamBold
+	autoDetectBtn.Text = "  \u{26aa}  Auto-Detect: OFF"
+	autoDetectBtn.TextColor3 = Color3.fromRGB(150, 150, 175)
+	autoDetectBtn.TextSize = 11
+	autoDetectBtn.TextXAlignment = Enum.TextXAlignment.Center
+	autoDetectBtn.AutoButtonColor = true
+	autoDetectBtn.Parent = sidebar
+
+	local autoDetectCorner = Instance.new("UICorner")
+	autoDetectCorner.CornerRadius = UDim.new(0, 6)
+	autoDetectCorner.Parent = autoDetectBtn
+
+	local autoDetectStroke = Instance.new("UIStroke")
+	autoDetectStroke.Color = Color3.fromRGB(50, 50, 70)
+	autoDetectStroke.Thickness = 1
+	autoDetectStroke.Parent = autoDetectBtn
+
+	-- List Header
+	local listHeader = Instance.new("TextLabel")
+	listHeader.Name = "ListHeader"
+	listHeader.Size = UDim2.new(1, -16, 0, 20)
+	listHeader.Position = UDim2.new(0, 8, 0, 48)
+	listHeader.BackgroundTransparency = 1
+	listHeader.Font = Enum.Font.GothamBold
+	listHeader.Text = "DETECTED ITEMS"
+	listHeader.TextColor3 = Color3.fromRGB(120, 120, 140)
+	listHeader.TextSize = 10
+	listHeader.TextXAlignment = Enum.TextXAlignment.Left
+	listHeader.Parent = sidebar
+
+	-- Clear Button
+	local clearBtn = Instance.new("TextButton")
+	clearBtn.Name = "ClearBtn"
+	clearBtn.Size = UDim2.new(0, 50, 0, 20)
+	clearBtn.Position = UDim2.new(1, -58, 0, 48)
+	clearBtn.BackgroundColor3 = Color3.fromRGB(35, 30, 30)
+	clearBtn.BorderSizePixel = 0
+	clearBtn.Font = Enum.Font.GothamBold
+	clearBtn.Text = "Clear"
+	clearBtn.TextColor3 = Color3.fromRGB(180, 100, 100)
+	clearBtn.TextSize = 10
+	clearBtn.AutoButtonColor = true
+	clearBtn.Parent = sidebar
+
+	local clearCorner = Instance.new("UICorner")
+	clearCorner.CornerRadius = UDim.new(0, 4)
+	clearCorner.Parent = clearBtn
+
+	local clearStroke = Instance.new("UIStroke")
+	clearStroke.Color = Color3.fromRGB(70, 40, 40)
+	clearStroke.Thickness = 0.5
+	clearStroke.Parent = clearBtn
+
+	-- Scroll list of detected items
+	local detectedScroll = Instance.new("ScrollingFrame")
+	detectedScroll.Name = "DetectedScroll"
+	detectedScroll.Size = UDim2.new(1, -16, 1, -80)
+	detectedScroll.Position = UDim2.new(0, 8, 0, 72)
+	detectedScroll.BackgroundTransparency = 1
+	detectedScroll.BorderSizePixel = 0
+	detectedScroll.ScrollBarThickness = 6
+	detectedScroll.ScrollBarImageColor3 = Color3.fromRGB(50, 50, 70)
+	detectedScroll.AutomaticCanvasSize = Enum.AutomaticSize.Y
+	detectedScroll.CanvasSize = UDim2.new(0, 0, 0, 0)
+	detectedScroll.Parent = sidebar
+
+	local listLayout = Instance.new("UIListLayout")
+	listLayout.Padding = UDim.new(0, 4)
+	listLayout.SortOrder = Enum.SortOrder.LayoutOrder
+	listLayout.Parent = detectedScroll
+
+	-- ── Detected Items List Logic ──
+	local detectedObjects = {}
+	local activeRowButton = nil
+
+	local function getEmojiForClass(className)
+		if className == "Model" or className == "Actor" then
+			return "📦 "
+		elseif className:find("Part") or className == "UnionOperation" or className == "NegateOperation" or className == "IntersectOperation" then
+			return "🧱 "
+		elseif className == "Folder" then
+			return "📁 "
+		elseif className == "Tool" or className == "Accessory" then
+			return "🛠️ "
+		elseif className:find("Script") then
+			return "📜 "
+		else
+			return "⚙️ "
+		end
+	end
+
+	local performConversionFor -- forward declaration
+
+	-- Function to update the list view UI
+	local function updateDetectedListUI()
+		for _, child in detectedScroll:GetChildren() do
+			if child:IsA("TextButton") then
+				child:Destroy()
+			end
+		end
+
+		activeRowButton = nil
+
+		for index, obj in ipairs(detectedObjects) do
+			if not obj or not obj.Parent then continue end
+
+			local rowBtn = Instance.new("TextButton")
+			rowBtn.Name = "RowBtn_" .. tostring(index)
+			rowBtn.Size = UDim2.new(1, -4, 0, 28)
+			rowBtn.BackgroundColor3 = Color3.fromRGB(25, 25, 35)
+			rowBtn.BorderSizePixel = 0
+			rowBtn.Font = Enum.Font.GothamMedium
+			rowBtn.Text = getEmojiForClass(obj.ClassName) .. obj.Name
+			rowBtn.TextColor3 = Color3.fromRGB(180, 180, 200)
+			rowBtn.TextSize = 11
+			rowBtn.TextXAlignment = Enum.TextXAlignment.Left
+			rowBtn.AutoButtonColor = true
+			rowBtn.LayoutOrder = index
+			rowBtn.Parent = detectedScroll
+
+			local rowCorner = Instance.new("UICorner")
+			rowCorner.CornerRadius = UDim.new(0, 4)
+			rowCorner.Parent = rowBtn
+
+			local rowStroke = Instance.new("UIStroke")
+			rowStroke.Color = Color3.fromRGB(40, 40, 55)
+			rowStroke.Thickness = 0.5
+			rowStroke.Parent = rowBtn
+
+			local rowPadding = Instance.new("UIPadding")
+			rowPadding.PaddingLeft = UDim.new(0, 6)
+			rowPadding.Parent = rowBtn
+
+			rowBtn.MouseButton1Click:Connect(function()
+				if activeRowButton and activeRowButton.Parent then
+					activeRowButton.BackgroundColor3 = Color3.fromRGB(25, 25, 35)
+					local stroke = activeRowButton:FindFirstChildOfClass("UIStroke")
+					if stroke then stroke.Color = Color3.fromRGB(40, 40, 55) end
+				end
+
+				activeRowButton = rowBtn
+				rowBtn.BackgroundColor3 = Color3.fromRGB(30, 80, 160)
+				rowStroke.Color = Color3.fromRGB(60, 130, 240)
+
+				pathInput.Text = obj:GetFullName()
+				performConversionFor(obj)
+			end)
+		end
+	end
+
+	clearBtn.MouseButton1Click:Connect(function()
+		detectedObjects = {}
+		updateDetectedListUI()
+		statusLabel.Text = "Cleared detected objects list."
+		statusLabel.TextColor3 = Color3.fromRGB(120, 120, 140)
+	end)
+
+	-- ── Status bar ──
+	local statusLabel = Instance.new("TextLabel")
+	statusLabel.Name = "Status"
+	statusLabel.Size = UDim2.new(1, -288, 0, 20)
+	statusLabel.Position = UDim2.new(0, 16, 0, 112)
+	statusLabel.BackgroundTransparency = 1
+	statusLabel.Font = Enum.Font.GothamMedium
+	statusLabel.Text = "Ready. Enter a path and click Convert."
+	statusLabel.TextColor3 = Color3.fromRGB(100, 100, 130)
+	statusLabel.TextSize = 12
+	statusLabel.TextXAlignment = Enum.TextXAlignment.Left
+	statusLabel.Parent = mainFrame
+
+	-- ── Output area ──
+	-- ── Output area ──
+	local outputScroll = Instance.new("ScrollingFrame")
+	outputScroll.Name = "OutputScroll"
+	outputScroll.Size = UDim2.new(1, -288, 1, -152)
+	outputScroll.Position = UDim2.new(0, 16, 0, 136)
+	outputScroll.BackgroundColor3 = Color3.fromRGB(24, 24, 32)
+	outputScroll.BorderSizePixel = 0
+	outputScroll.ScrollBarThickness = 8
+	outputScroll.ScrollBarImageColor3 = Color3.fromRGB(60, 60, 80)
+	outputScroll.AutomaticCanvasSize = Enum.AutomaticSize.Y
+	outputScroll.CanvasSize = UDim2.new(0, 0, 0, 0)
+	outputScroll.Parent = mainFrame
+	local outputCorner = Instance.new("UICorner")
+	outputCorner.CornerRadius = UDim.new(0, 8)
+	outputCorner.Parent = outputScroll
+
+	local outputStroke = Instance.new("UIStroke")
+	outputStroke.Color = Color3.fromRGB(40, 40, 55)
+	outputStroke.Thickness = 1
+	outputStroke.Parent = outputScroll
+
+	local outputBox = Instance.new("TextBox")
+	outputBox.Name = "OutputBox"
+	outputBox.Size = UDim2.new(1, -16, 1, 0)
+	outputBox.Position = UDim2.new(0, 8, 0, 0)
+	outputBox.BackgroundTransparency = 1
+	outputBox.Font = Enum.Font.Code
+	outputBox.Text = "-- Output will appear here\n-- Enter a path and click Convert"
+	outputBox.TextColor3 = Color3.fromRGB(180, 220, 170)
+	outputBox.TextSize = 13
+	outputBox.TextXAlignment = Enum.TextXAlignment.Left
+	outputBox.TextYAlignment = Enum.TextYAlignment.Top
+	outputBox.TextWrapped = true
+	outputBox.MultiLine = true
+	outputBox.ClearTextOnFocus = false
+	outputBox.TextEditable = false
+	outputBox.AutomaticSize = Enum.AutomaticSize.Y
+	outputBox.Parent = outputScroll
+
+	screenGui.Parent = playerGui
+
+	-- ═══════════════════════════════════════════
+	-- EVENT HANDLERS
+	-- ═══════════════════════════════════════════
+
+	-- Resolve a path string like "game.Workspace.Model" to an instance
+	local function resolvePath(pathStr: string): Instance?
+		local parts = pathStr:split(".")
+		if #parts == 0 then return nil end
+
+		local current: any = nil
+		if parts[1] == "game" then
+			current = game
+		elseif parts[1] == "workspace" or parts[1] == "Workspace" then
+			current = game.Workspace
+		else
+			return nil
+		end
+
+		for i = 2, #parts do
+			local name = parts[i]
+			if current == game then
+				-- Try GetService first
+				local ok, svc = pcall(function() return game:GetService(name) end)
+				if ok and svc then
+					current = svc
+				else
+					local child = current:FindFirstChild(name)
+					if child then
+						current = child
+					else
+						return nil
+					end
+				end
+			else
+				local child = current:FindFirstChild(name)
+				if child then
+					current = child
+				else
+					return nil
+				end
+			end
+		end
+
+		return current
+	end
+
+	-- Drag functionality for the window
+	local dragging = false
+	local dragStart, startPos
+
+	titleBar.InputBegan:Connect(function(inp)
+		if inp.UserInputType == Enum.UserInputType.MouseButton1
+			or inp.UserInputType == Enum.UserInputType.Touch then
+			dragging = true
+			dragStart = inp.Position
+			startPos = mainFrame.Position
+			inp.Changed:Connect(function()
+				if inp.UserInputState == Enum.UserInputState.End then
+					dragging = false
+				end
+			end)
+		end
+	end)
+
+	UserInputService.InputChanged:Connect(function(inp)
+		if dragging and (inp.UserInputType == Enum.UserInputType.MouseMovement
+			or inp.UserInputType == Enum.UserInputType.Touch) then
+			local delta = inp.Position - dragStart
+			mainFrame.Position = UDim2.new(
+				startPos.X.Scale, startPos.X.Offset + delta.X,
+				startPos.Y.Scale, startPos.Y.Offset + delta.Y
+			)
+		end
+	end)
+
+	-- Close
+	closeBtn.MouseButton1Click:Connect(function()
+		screenGui.Enabled = not screenGui.Enabled
+	end)
+
+	-- Status callback
+	statusCallback = function(msg: string)
+		statusLabel.Text = msg
+	end
+
+	-- Convert helper
+	performConversionFor = function(target: Instance)
+		if not target or not target.Parent then
+			statusLabel.Text = "❌ Instance no longer exists."
+			statusLabel.TextColor3 = Color3.fromRGB(230, 70, 70)
+			return
+		end
+
+		statusLabel.Text = "⏳ Converting..."
+		statusLabel.TextColor3 = Color3.fromRGB(130, 180, 255)
+		outputBox.Text = "-- Converting..."
+		task.wait()
+
+		local startTime = os.clock()
+
+		-- Clean up old default cache
+		for className, inst in defaultCache do
+			if inst and typeof(inst) == "Instance" then
+				pcall(function() inst:Destroy() end)
+			end
+		end
+		defaultCache = {}
+		propCache = {}
+
+		local ok, result = pcall(function()
+			return serialiseRoot(target)
+		end)
+
+		-- Clean up default instances
+		for className, inst in defaultCache do
+			if inst and typeof(inst) == "Instance" then
+				pcall(function() inst:Destroy() end)
+			end
+		end
+		defaultCache = {}
+
+		local elapsed = os.clock() - startTime
+
+		if ok then
+			outputBox.Text = result
+			local lineCount = 0
+			for _ in result:gmatch("\n") do lineCount += 1 end
+			lineCount += 1
+
+			statusLabel.Text = string.format(
+				"✅ Done! %d objects → %d lines  (%.2fs)",
+				totalProcessed, lineCount, elapsed
+			)
+			statusLabel.TextColor3 = Color3.fromRGB(80, 220, 120)
+		else
+			outputBox.Text = "-- ERROR:\n-- " .. tostring(result)
+			statusLabel.Text = "❌ Error: " .. tostring(result):sub(1, 100)
+			statusLabel.TextColor3 = Color3.fromRGB(230, 70, 70)
+		end
+	end
+
+	-- Convert Button Click
+	convertBtn.MouseButton1Click:Connect(function()
+		local pathStr = pathInput.Text:gsub("^%s+", ""):gsub("%s+$", "")
+		if pathStr == "" then
+			statusLabel.Text = "⚠ Enter a valid path."
+			statusLabel.TextColor3 = Color3.fromRGB(230, 160, 50)
+			return
+		end
+
+		local target = resolvePath(pathStr)
+		if not target then
+			statusLabel.Text = "❌ Could not resolve path: " .. pathStr
+			statusLabel.TextColor3 = Color3.fromRGB(230, 70, 70)
+			return
+		end
+
+		performConversionFor(target)
+	end)
+
+	-- Copy to clipboard
+	copyBtn.MouseButton1Click:Connect(function()
+		local text = outputBox.Text
+		if text == "" or text:sub(1, 12) == "-- Output wi" then
+			statusLabel.Text = "⚠ Nothing to copy."
+			statusLabel.TextColor3 = Color3.fromRGB(230, 160, 50)
+			return
+		end
+
+		if setclipboard then
+			setclipboard(text)
+			statusLabel.Text = "📋 Copied to clipboard!"
+			statusLabel.TextColor3 = Color3.fromRGB(80, 220, 120)
+		elseif toclipboard then
+			toclipboard(text)
+			statusLabel.Text = "📋 Copied to clipboard!"
+			statusLabel.TextColor3 = Color3.fromRGB(80, 220, 120)
+		else
+			-- Fallback: select all text
+			outputBox.TextEditable = true
+			outputBox:CaptureFocus()
+			outputBox.SelectionStart = 1
+			outputBox.CursorPosition = #text + 1
+			statusLabel.Text = "📋 Text selected — press Ctrl+C to copy."
+			statusLabel.TextColor3 = Color3.fromRGB(130, 180, 255)
+			task.delay(0.5, function()
+				outputBox.TextEditable = false
+			end)
+		end
+	end)
+
+
+	-- ═══════════════════════════════════════════════
+	-- AUTO-DETECT: Watch Workspace for new Parts/Models
+	-- ═══════════════════════════════════════════════
+	local autoDetectEnabled = false
+	local autoDetectConnection = nil
+
+	local function runAutoConvert(child: Instance)
+		-- Wait a brief moment for the instance to initialize (e.g. set its Name)
+		task.wait(0.3)
+		if not child.Parent then return end
+
+		-- Check if already exists in the list
+		for _, obj in detectedObjects do
+			if obj == child then return end
+		end
+
+		-- Insert at the top of the list
+		table.insert(detectedObjects, 1, child)
+
+		-- Limit list size
+		if #detectedObjects > 25 then
+			table.remove(detectedObjects, #detectedObjects)
+		end
+
+		updateDetectedListUI()
+
+		statusLabel.Text = "✨ Added to list: " .. child.Name
+		statusLabel.TextColor3 = Color3.fromRGB(255, 200, 60)
+	end
+
+	local function toggleAutoDetect()
+		autoDetectEnabled = not autoDetectEnabled
+
+		if autoDetectEnabled then
+			autoDetectBtn.Text = "  \u{1f7e2}  Auto-Detect: ON"
+			autoDetectBtn.TextColor3 = Color3.fromRGB(80, 220, 120)
+			autoDetectBtn.BackgroundColor3 = Color3.fromRGB(25, 50, 35)
+			autoDetectStroke.Color = Color3.fromRGB(60, 150, 80)
+
+			statusLabel.Text = "\u{1f441}\u{fe0f} Watching Workspace... add a Part or Model to populate list."
+			statusLabel.TextColor3 = Color3.fromRGB(130, 180, 255)
+
+			autoDetectConnection = game.Workspace.ChildAdded:Connect(function(child)
+				if not autoDetectEnabled then return end
+				-- Detect Parts (any BasePart) and Models, Folders, etc.
+				if child:IsA("BasePart") or child:IsA("Model") or child:IsA("Folder") or child:IsA("Accessory") or child:IsA("Tool") then
+					task.spawn(function()
+						runAutoConvert(child)
+					end)
+				end
+			end)
+		else
+			autoDetectBtn.Text = "  \u{26aa}  Auto-Detect: OFF"
+			autoDetectBtn.TextColor3 = Color3.fromRGB(150, 150, 175)
+			autoDetectBtn.BackgroundColor3 = Color3.fromRGB(35, 35, 50)
+			autoDetectStroke.Color = Color3.fromRGB(50, 50, 70)
+
+			statusLabel.Text = "Auto-detect disabled."
+			statusLabel.TextColor3 = Color3.fromRGB(100, 100, 130)
+
+			if autoDetectConnection then
+				autoDetectConnection:Disconnect()
+				autoDetectConnection = nil
+			end
+		end
+	end
+
+	autoDetectBtn.MouseButton1Click:Connect(toggleAutoDetect)
+
+	return screenGui
+end
+
+-- ═══════════════════════════════════════════════════════════
+-- INIT
+-- ═══════════════════════════════════════════════════════════
+createUI()
