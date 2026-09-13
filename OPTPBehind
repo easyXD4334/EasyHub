@@ -1,0 +1,449 @@
+local UserInputService = game:GetService("UserInputService")
+local RunService = game:GetService("RunService")
+local Players = game:GetService("Players")
+
+local player = Players.LocalPlayer
+local DISTANCE = 4
+
+local isHoldingZ = false
+local lockedPlayer = nil
+local isLocked = false
+local nearestPlayer = nil
+local selectedPlayer = nil
+local isToggleMode = false
+local tpButtonHeld = false -- Tracks physical press state of mobile TP button
+
+local isTouchDevice = UserInputService.TouchEnabled
+
+-- ==========================================
+-- UI SETUP
+-- ==========================================
+local screenGui = Instance.new("ScreenGui")
+screenGui.Name = "PlayerTPGui"
+screenGui.ResetOnSpawn = false
+screenGui.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
+screenGui.Parent = player:WaitForChild("PlayerGui")
+
+-- Responsive sizing: smaller frame on mobile
+local frameWidth = isTouchDevice and 180 or 220
+local frameHeight = isTouchDevice and 310 or 360
+local fontSize = isTouchDevice and 12 or 14
+local smallFontSize = isTouchDevice and 11 or 13
+
+local mainFrame = Instance.new("Frame")
+mainFrame.Size = UDim2.new(0, frameWidth, 0, frameHeight)
+mainFrame.Position = isTouchDevice
+	and UDim2.new(0, 10, 0.5, -frameHeight / 2)
+	or UDim2.new(0.8, -240, 0.5, -180)
+mainFrame.BackgroundColor3 = Color3.fromRGB(30, 30, 30)
+mainFrame.BorderSizePixel = 0
+mainFrame.Parent = screenGui
+
+local mainCorner = Instance.new("UICorner")
+mainCorner.CornerRadius = UDim.new(0, 8)
+mainCorner.Parent = mainFrame
+
+local mainStroke = Instance.new("UIStroke")
+mainStroke.Color = Color3.fromRGB(60, 60, 60)
+mainStroke.Parent = mainFrame
+
+-- Title Bar (Draggable Area)
+local titleBar = Instance.new("Frame")
+titleBar.Size = UDim2.new(1, 0, 0, 30)
+titleBar.BackgroundColor3 = Color3.fromRGB(45, 45, 45)
+titleBar.BorderSizePixel = 0
+titleBar.Parent = mainFrame
+
+local titleCorner = Instance.new("UICorner")
+titleCorner.CornerRadius = UDim.new(0, 8)
+titleCorner.Parent = titleBar
+
+local titleFix = Instance.new("Frame")
+titleFix.Size = UDim2.new(1, 0, 0, 8)
+titleFix.Position = UDim2.new(0, 0, 1, -8)
+titleFix.BackgroundColor3 = titleBar.BackgroundColor3
+titleFix.BorderSizePixel = 0
+titleFix.Parent = titleBar
+
+local titleText = Instance.new("TextLabel")
+titleText.Size = UDim2.new(1, 0, 1, 0)
+titleText.BackgroundTransparency = 1
+titleText.Text = "TP Menu (Drag here)"
+titleText.TextColor3 = Color3.new(1, 1, 1)
+titleText.Font = Enum.Font.GothamBold
+titleText.TextSize = fontSize
+titleText.Parent = titleBar
+
+-- Mode Toggle Button
+local modeButton = Instance.new("TextButton")
+modeButton.Size = UDim2.new(1, -20, 0, 28)
+modeButton.Position = UDim2.new(0, 10, 0, 35)
+modeButton.BackgroundColor3 = Color3.fromRGB(70, 70, 150)
+modeButton.Text = "Mode: Hold"
+modeButton.TextColor3 = Color3.new(1, 1, 1)
+modeButton.Font = Enum.Font.GothamBold
+modeButton.TextSize = smallFontSize
+modeButton.Parent = mainFrame
+
+local modeCorner = Instance.new("UICorner")
+modeCorner.CornerRadius = UDim.new(0, 6)
+modeCorner.Parent = modeButton
+
+-- Lock Button
+local lockButton = Instance.new("TextButton")
+lockButton.Size = UDim2.new(1, -20, 0, 36)
+lockButton.Position = UDim2.new(0, 10, 0, 68)
+lockButton.BackgroundColor3 = Color3.fromRGB(100, 100, 100)
+lockButton.Text = "Finding Players..."
+lockButton.TextColor3 = Color3.new(1, 1, 1)
+lockButton.Font = Enum.Font.GothamBold
+lockButton.TextSize = fontSize
+lockButton.Parent = mainFrame
+
+local lockCorner = Instance.new("UICorner")
+lockCorner.CornerRadius = UDim.new(0, 6)
+lockCorner.Parent = lockButton
+
+-- Player List
+local listLabel = Instance.new("TextLabel")
+listLabel.Size = UDim2.new(1, -20, 0, 18)
+listLabel.Position = UDim2.new(0, 10, 0, 108)
+listLabel.BackgroundTransparency = 1
+listLabel.Text = "Player List:"
+listLabel.TextColor3 = Color3.fromRGB(160, 160, 160)
+listLabel.Font = Enum.Font.GothamBold
+listLabel.TextSize = 12
+listLabel.TextXAlignment = Enum.TextXAlignment.Left
+listLabel.Parent = mainFrame
+
+local scrollFrame = Instance.new("ScrollingFrame")
+scrollFrame.Size = UDim2.new(1, -20, 1, -132)
+scrollFrame.Position = UDim2.new(0, 10, 0, 126)
+scrollFrame.BackgroundColor3 = Color3.fromRGB(20, 20, 20)
+scrollFrame.BorderSizePixel = 0
+scrollFrame.ScrollBarThickness = 4
+scrollFrame.CanvasSize = UDim2.new(0, 0, 0, 0)
+scrollFrame.AutomaticCanvasSize = Enum.AutomaticSize.Y
+scrollFrame.Parent = mainFrame
+
+local scrollCorner = Instance.new("UICorner")
+scrollCorner.CornerRadius = UDim.new(0, 6)
+scrollCorner.Parent = scrollFrame
+
+local listLayout = Instance.new("UIListLayout")
+listLayout.SortOrder = Enum.SortOrder.LayoutOrder
+listLayout.Padding = UDim.new(0, 3)
+listLayout.Parent = scrollFrame
+
+local listPadding = Instance.new("UIPadding")
+listPadding.PaddingTop = UDim.new(0, 4)
+listPadding.PaddingBottom = UDim.new(0, 4)
+listPadding.PaddingLeft = UDim.new(0, 4)
+listPadding.PaddingRight = UDim.new(0, 4)
+listPadding.Parent = scrollFrame
+
+-- ==========================================
+-- MOBILE TP BUTTON
+-- ==========================================
+local TP_BUTTON_SIZE = 70
+local TP_BUTTON_ACTIVE_COLOR = Color3.fromRGB(50, 180, 50)
+local TP_BUTTON_INACTIVE_COLOR = Color3.fromRGB(180, 50, 50)
+
+local tpButton = Instance.new("TextButton")
+tpButton.Name = "MobileTPButton"
+tpButton.Size = UDim2.new(0, TP_BUTTON_SIZE, 0, TP_BUTTON_SIZE)
+-- Positioned bottom-right, above the jump button zone
+tpButton.Position = UDim2.new(1, -(TP_BUTTON_SIZE + 20), 1, -(TP_BUTTON_SIZE + 100))
+tpButton.AnchorPoint = Vector2.new(0, 0)
+tpButton.BackgroundColor3 = TP_BUTTON_INACTIVE_COLOR
+tpButton.BackgroundTransparency = 0.15
+tpButton.Text = "TP"
+tpButton.TextColor3 = Color3.new(1, 1, 1)
+tpButton.Font = Enum.Font.GothamBold
+tpButton.TextSize = 22
+tpButton.AutoButtonColor = false -- We handle color manually
+tpButton.Visible = isTouchDevice
+tpButton.Parent = screenGui
+
+local tpButtonCorner = Instance.new("UICorner")
+tpButtonCorner.CornerRadius = UDim.new(1, 0) -- Fully circular
+tpButtonCorner.Parent = tpButton
+
+local tpButtonStroke = Instance.new("UIStroke")
+tpButtonStroke.Color = Color3.new(1, 1, 1)
+tpButtonStroke.Transparency = 0.5
+tpButtonStroke.Thickness = 2
+tpButtonStroke.Parent = tpButton
+
+-- ==========================================
+-- UI UPDATE FUNCTIONS
+-- ==========================================
+local function updateModeButton()
+	if isToggleMode then
+		modeButton.Text = "Mode: Toggle"
+		modeButton.BackgroundColor3 = Color3.fromRGB(150, 70, 70)
+	else
+		modeButton.Text = "Mode: Hold"
+		modeButton.BackgroundColor3 = Color3.fromRGB(70, 70, 150)
+	end
+end
+
+local function updateTPButtonVisual()
+	if not tpButton.Visible then return end
+	if isHoldingZ then
+		tpButton.BackgroundColor3 = TP_BUTTON_ACTIVE_COLOR
+		tpButton.Text = "TP ON"
+	else
+		tpButton.BackgroundColor3 = TP_BUTTON_INACTIVE_COLOR
+		tpButton.Text = "TP"
+	end
+end
+
+local playerButtons = {}
+
+local function updatePlayerListColors()
+	for plr, btn in pairs(playerButtons) do
+		if plr == selectedPlayer then
+			btn.BackgroundColor3 = Color3.fromRGB(50, 150, 50)
+			btn.Text = ">> " .. plr.Name
+		else
+			btn.BackgroundColor3 = Color3.fromRGB(50, 50, 50)
+			btn.Text = plr.Name
+		end
+	end
+end
+
+local function updatePlayerList()
+	for _, btn in pairs(playerButtons) do
+		btn:Destroy()
+	end
+	playerButtons = {}
+
+	local order = 1
+	for _, plr in ipairs(Players:GetPlayers()) do
+		if plr ~= player then
+			local btn = Instance.new("TextButton")
+			btn.Size = UDim2.new(1, -8, 0, 24)
+			btn.BackgroundColor3 = Color3.fromRGB(50, 50, 50)
+			btn.Text = plr.Name
+			btn.TextColor3 = Color3.new(1, 1, 1)
+			btn.Font = Enum.Font.Gotham
+			btn.TextSize = smallFontSize
+			btn.TextTruncate = Enum.TextTruncate.AtEnd
+			btn.LayoutOrder = order
+			btn.Parent = scrollFrame
+
+			local btnCorner = Instance.new("UICorner")
+			btnCorner.CornerRadius = UDim.new(0, 4)
+			btnCorner.Parent = btn
+
+			playerButtons[plr] = btn
+			order = order + 1
+
+			btn.MouseButton1Click:Connect(function()
+				if selectedPlayer == plr then
+					selectedPlayer = nil
+				else
+					selectedPlayer = plr
+				end
+				updatePlayerListColors()
+			end)
+		end
+	end
+	updatePlayerListColors()
+end
+
+updateModeButton()
+updatePlayerList()
+
+Players.PlayerAdded:Connect(function()
+	task.wait(0.1)
+	updatePlayerList()
+end)
+
+-- ==========================================
+-- DRAGGING LOGIC
+-- ==========================================
+local dragging, dragInput, dragStart, startPos
+
+titleBar.InputBegan:Connect(function(input)
+	if input.UserInputType == Enum.UserInputType.MouseButton1 or input.UserInputType == Enum.UserInputType.Touch then
+		dragging = true
+		dragStart = input.Position
+		startPos = mainFrame.Position
+	end
+end)
+
+titleBar.InputEnded:Connect(function(input)
+	if input.UserInputType == Enum.UserInputType.MouseButton1 or input.UserInputType == Enum.UserInputType.Touch then
+		dragging = false
+	end
+end)
+
+UserInputService.InputChanged:Connect(function(input)
+	if dragging and (input.UserInputType == Enum.UserInputType.MouseMovement or input.UserInputType == Enum.UserInputType.Touch) then
+		local delta = input.Position - dragStart
+		mainFrame.Position = UDim2.new(startPos.X.Scale, startPos.X.Offset + delta.X, startPos.Y.Scale, startPos.Y.Offset + delta.Y)
+	end
+end)
+
+-- ==========================================
+-- MODE BUTTON CLICK
+-- ==========================================
+modeButton.MouseButton1Click:Connect(function()
+	isToggleMode = not isToggleMode
+	if not isToggleMode then
+		isHoldingZ = false
+	end
+	updateModeButton()
+	updateTPButtonVisual()
+end)
+
+-- ==========================================
+-- LOCK BUTTON CLICK
+-- ==========================================
+lockButton.MouseButton1Click:Connect(function()
+	if isLocked then
+		isLocked = false
+		lockedPlayer = nil
+	else
+		if nearestPlayer then
+			lockedPlayer = nearestPlayer
+			isLocked = true
+		end
+	end
+end)
+
+Players.PlayerRemoving:Connect(function(plr)
+	if lockedPlayer == plr then
+		lockedPlayer = nil
+		isLocked = false
+	end
+	if selectedPlayer == plr then
+		selectedPlayer = nil
+	end
+	updatePlayerList()
+end)
+
+-- ==========================================
+-- MOBILE TP BUTTON INPUT
+-- ==========================================
+-- Hold mode: press activates, release deactivates
+-- Toggle mode: tap toggles on/off
+tpButton.MouseButton1Down:Connect(function()
+	if isToggleMode then
+		isHoldingZ = not isHoldingZ
+	else
+		isHoldingZ = true
+		tpButtonHeld = true
+	end
+	updateTPButtonVisual()
+end)
+
+tpButton.MouseButton1Up:Connect(function()
+	if not isToggleMode then
+		isHoldingZ = false
+		tpButtonHeld = false
+	end
+	updateTPButtonVisual()
+end)
+
+-- Global touch release safety net: if finger slides off the button
+-- in hold mode, we still deactivate when they lift their finger
+UserInputService.InputEnded:Connect(function(input)
+	if input.UserInputType == Enum.UserInputType.Touch and tpButtonHeld then
+		if not isToggleMode then
+			isHoldingZ = false
+			tpButtonHeld = false
+			updateTPButtonVisual()
+		end
+	end
+end)
+
+-- ==========================================
+-- KEYBOARD INPUT (Desktop)
+-- ==========================================
+UserInputService.InputBegan:Connect(function(input, gameProcessedEvent)
+	if gameProcessedEvent then return end
+	if input.KeyCode == Enum.KeyCode.Z then
+		if isToggleMode then
+			isHoldingZ = not isHoldingZ
+		else
+			isHoldingZ = true
+		end
+		updateTPButtonVisual()
+	end
+end)
+
+UserInputService.InputEnded:Connect(function(input, gameProcessedEvent)
+	if input.KeyCode == Enum.KeyCode.Z then
+		if not isToggleMode then
+			isHoldingZ = false
+			updateTPButtonVisual()
+		end
+	end
+end)
+
+-- ==========================================
+-- MAIN LOOP
+-- ==========================================
+RunService.Heartbeat:Connect(function()
+	local character = player.Character
+	local currentNearest = nil
+	local shortestDistance = math.huge
+
+	if character and character.PrimaryPart then
+		for _, otherPlayer in ipairs(Players:GetPlayers()) do
+			if otherPlayer ~= player and otherPlayer.Character and otherPlayer.Character.PrimaryPart then
+				local distance = (otherPlayer.Character.PrimaryPart.Position - character.PrimaryPart.Position).Magnitude
+				if distance < shortestDistance then
+					shortestDistance = distance
+					currentNearest = otherPlayer
+				end
+			end
+		end
+	end
+	nearestPlayer = currentNearest
+
+	-- Update Lock Button UI
+	local newText = ""
+	local newColor = Color3.new(1, 1, 1)
+
+	if isLocked and lockedPlayer and lockedPlayer.Parent then
+		newText = "Unlock: " .. lockedPlayer.Name
+		newColor = Color3.fromRGB(50, 150, 50)
+	elseif nearestPlayer then
+		newText = "Lock: " .. nearestPlayer.Name
+		newColor = Color3.fromRGB(200, 50, 50)
+	else
+		newText = "No Players Nearby"
+		newColor = Color3.fromRGB(100, 100, 100)
+	end
+
+	if lockButton.Text ~= newText then
+		lockButton.Text = newText
+		lockButton.BackgroundColor3 = newColor
+	end
+
+	-- Execute Teleportation
+	if isHoldingZ and character and character.PrimaryPart then
+		local targetPlayer = nil
+
+		if selectedPlayer and selectedPlayer.Parent and selectedPlayer.Character and selectedPlayer.Character.PrimaryPart then
+			targetPlayer = selectedPlayer
+		elseif isLocked and lockedPlayer and lockedPlayer.Parent then
+			targetPlayer = lockedPlayer
+		elseif nearestPlayer then
+			targetPlayer = nearestPlayer
+		end
+
+		if targetPlayer and targetPlayer.Character and targetPlayer.Character.PrimaryPart then
+			local targetRoot = targetPlayer.Character.PrimaryPart
+			local look = targetRoot.CFrame.LookVector
+			local flatLook = Vector3.new(look.X, 0, look.Z)
+			local offset = flatLook.Magnitude > 0 and flatLook.Unit * DISTANCE or Vector3.new(0, 0, DISTANCE)
+
+			character:PivotTo(targetRoot.CFrame - offset)
+		end
+	end
+end)
